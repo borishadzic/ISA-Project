@@ -5,8 +5,8 @@ namespace ISofA.WebAPI
 {
     using System;
     using System.Web;
-    using ISofA.DAL.Core.Repositories;
-    using ISofA.DAL.Persistence.Repositories;
+    using ISofA.DAL.Core.Pantries;
+    using ISofA.DAL.Persistence.Pantries;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -63,7 +63,7 @@ namespace ISofA.WebAPI
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IUserPantry>().To<UserPantry>();
         }        
     }
 }

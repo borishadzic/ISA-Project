@@ -1,14 +1,11 @@
 ﻿using ISofA.DAL.Core.Domain;
-using ISofA.DAL.Core.Repositories;
-using System;
+using ISofA.DAL.Core.Pantries;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ISofA.DAL.Persistence.Repositories
+namespace ISofA.DAL.Persistence.Pantries
 {
-    public class UserRepository : IUserRepository
+    public class UserPantry : IUserPantry
     {
         public IEnumerable<ISofAUser> Get()
         {

@@ -54,14 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Domain\ISofAUser.cs" />
-    <Compile Include="Core\Repositories\IUserRepository.cs" />
+    <Compile Include="Core\Pantries\IUserPantry.cs" />
     <Compile Include="Migrations\201802011556467_Init.cs" />
     <Compile Include="Migrations\201802011556467_Init.Designer.cs">
       <DependentUpon>201802011556467_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
-    <Compile Include="Persistence\Repositories\UserRepository.cs" />
+    <Compile Include="Persistence\Pantries\UserPantry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

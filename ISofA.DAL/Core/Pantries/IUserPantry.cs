@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISofA.DAL.Core.Repositories
+namespace ISofA.DAL.Core.Pantries
 {
-    public interface IUserRepository
+    public interface IUserPantry
     {
         IEnumerable<ISofAUser> Get();
     }

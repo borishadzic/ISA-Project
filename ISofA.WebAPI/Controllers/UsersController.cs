@@ -1,5 +1,5 @@
 ﻿using ISofA.DAL.Core.Domain;
-using ISofA.DAL.Core.Repositories;
+using ISofA.DAL.Core.Pantries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,16 @@ namespace ISofA.WebAPI.Controllers
 {
     public class UsersController : ApiController
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserPantry _userPantry;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserPantry userPantry)
         {
-            _userRepository = userRepository;        
+            _userPantry = userPantry;
         }
 
         public IEnumerable<ISofAUser> Get()
         {
-            return _userRepository.Get();
+            return _userPantry.Get();
         }
     }
 }
