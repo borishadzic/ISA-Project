@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using ISofA.WebAPI.Models;
+using ISofA.DAL.Core.Domain;
 
 namespace ISofA.WebAPI.Providers
 {
@@ -31,7 +32,7 @@ namespace ISofA.WebAPI.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            ISofAUser user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
