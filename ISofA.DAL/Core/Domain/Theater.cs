@@ -10,9 +10,10 @@ namespace ISofA.DAL.Core.Domain
     public class Theater
     {
         [Key]
-        public int ThaterId { get; set; }
-
+        public int TheaterId { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<ISofAUser> FanZoneAdministrators { get; set; }
+
+        public virtual ICollection<ISofAUser> FanZoneAdmins { get; set; }
+        public virtual ICollection<ISofAUser> TheaterAdmins { get; set; }
     }
 }

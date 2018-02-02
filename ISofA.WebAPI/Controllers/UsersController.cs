@@ -1,5 +1,6 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
+using ISofA.WebAPI.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,16 @@ namespace ISofA.WebAPI.Controllers
         {
             _userPantry = userPantry;
         }
-
+        
         public IEnumerable<ISofAUser> Get()
         {
             return _userPantry.Get();
         }
+
+        public ISofAUser Get(string userId)
+        {
+            return _userPantry.Get(userId);
+        }
+
     }
 }

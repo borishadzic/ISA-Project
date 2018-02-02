@@ -18,6 +18,17 @@ namespace ISofA.DAL.Persistence.Pantries
             }
         }
 
+        public Theater Get(int theaterId)
+        {
+            using (var context = new ISofADbContext())
+            {
+                Theater t = context.Theaters.AsNoTracking().Where(x => x.TheaterId == theaterId).FirstOrDefault();
+                if (t != null)
+                    return new Theater() { TheaterId = t.TheaterId, Name = t.Name };
+                return null;
+            }
+        }
+
         public Theater Add(Theater theater)
         {
             using (var context = new ISofADbContext())

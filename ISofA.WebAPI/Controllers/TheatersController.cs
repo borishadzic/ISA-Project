@@ -1,6 +1,7 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
 using ISofA.DAL.Persistence.Pantries;
+using ISofA.WebAPI.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,12 @@ namespace ISofA.WebAPI.Controllers
         public IEnumerable<Theater> GetAll()
         {
             return _theaterPantry.GetAll();
+        }
+
+        [FanZoneAdmin]
+        public Theater Get(int id)
+        {
+            return _theaterPantry.Get(id);
         }
 
         public Theater Post(Theater theater)

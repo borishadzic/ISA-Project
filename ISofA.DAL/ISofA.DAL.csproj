@@ -55,16 +55,31 @@
   <ItemGroup>
     <Compile Include="Core\Domain\ISofAUser.cs" />
     <Compile Include="Core\Domain\Theater.cs" />
+    <Compile Include="Core\IDbContext.cs" />
+    <Compile Include="Core\IISofADbContext.cs" />
+    <Compile Include="Core\IIdentityDbContext.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Pantries\ITheaterPantry.cs" />
     <Compile Include="Core\Pantries\IUserPantry.cs" />
+    <Compile Include="Migrations\201802020734317_Init.cs" />
+    <Compile Include="Migrations\201802020734317_Init.Designer.cs">
+      <DependentUpon>201802020734317_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
     <Compile Include="Persistence\Pantries\TheaterPantry.cs" />
     <Compile Include="Persistence\Pantries\UserPantry.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802020734317_Init.resx">
+      <DependentUpon>201802020734317_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

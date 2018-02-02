@@ -40,7 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\AuthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAuthService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ISofA.DAL\ISofA.DAL.csproj">
+      <Project>{1B26256E-1C35-476C-98E7-8384A3D8BB8A}</Project>
+      <Name>ISofA.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

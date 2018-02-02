@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -10,6 +11,9 @@ namespace ISofA.DAL.Core.Domain
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public virtual ICollection<Theater> FanZoneTheaters { get; set; }
+        public virtual ICollection<Theater> AdminTheaters { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ISofAUser> manager, string authenticationType)
         {

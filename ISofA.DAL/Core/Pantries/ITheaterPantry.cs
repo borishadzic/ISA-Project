@@ -10,6 +10,7 @@ namespace ISofA.DAL.Core.Pantries
     public interface ITheaterPantry
     {
         IEnumerable<Theater> GetAll();
+        Theater Get(int theaterId);
         Theater Add(Theater theater);
     }
 }
