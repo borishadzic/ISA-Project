@@ -8,27 +8,71 @@ namespace ISofA.DAL.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.AspNetRoles",
+                "dbo.Plays",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
+                        TheaterId = c.Int(nullable: false),
+                        PlayId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Actors = c.String(),
+                        Genre = c.String(),
+                        Director = c.String(),
+                        DurationMins = c.Int(nullable: false),
+                        PosterUrl = c.String(),
+                        TrailerUrl = c.String(),
+                        Description = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+                .PrimaryKey(t => new { t.TheaterId, t.PlayId })
+                .ForeignKey("dbo.Theaters", t => t.TheaterId)
+                .Index(t => t.TheaterId);
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.Projections",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        TheaterId = c.Int(nullable: false),
+                        PlayId = c.Int(nullable: false),
+                        StageId = c.Int(nullable: false),
+                        ProjectionId = c.Int(nullable: false, identity: true),
+                        StartTime = c.DateTime(nullable: false),
+                        Price = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
+                .PrimaryKey(t => new { t.TheaterId, t.PlayId, t.StageId, t.ProjectionId })
+                .ForeignKey("dbo.Stages", t => new { t.TheaterId, t.StageId })
+                .ForeignKey("dbo.Theaters", t => t.TheaterId)
+                .ForeignKey("dbo.Plays", t => new { t.TheaterId, t.PlayId })
+                .Index(t => new { t.TheaterId, t.StageId })
+                .Index(t => new { t.TheaterId, t.PlayId });
+            
+            CreateTable(
+                "dbo.Seats",
+                c => new
+                    {
+                        TheaterId = c.Int(nullable: false),
+                        PlayId = c.Int(nullable: false),
+                        StageId = c.Int(nullable: false),
+                        ProjectionId = c.Int(nullable: false),
+                        SeatRow = c.Int(nullable: false),
+                        SeatColumn = c.Int(nullable: false),
+                        State = c.Int(nullable: false),
+                        Discount = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.TheaterId, t.PlayId, t.StageId, t.ProjectionId, t.SeatRow, t.SeatColumn })
+                .ForeignKey("dbo.Projections", t => new { t.TheaterId, t.PlayId, t.StageId, t.ProjectionId }, cascadeDelete: true)
+                .Index(t => new { t.TheaterId, t.PlayId, t.StageId, t.ProjectionId });
+            
+            CreateTable(
+                "dbo.Stages",
+                c => new
+                    {
+                        TheaterId = c.Int(nullable: false),
+                        StageId = c.Int(nullable: false, identity: true),
+                        SeatRows = c.Int(nullable: false),
+                        SeatColumns = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.TheaterId, t.StageId })
+                .ForeignKey("dbo.Theaters", t => t.TheaterId)
+                .Index(t => t.TheaterId);
             
             CreateTable(
                 "dbo.Theaters",
@@ -87,6 +131,29 @@ namespace ISofA.DAL.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
                 "dbo.FanZoneAdmins",
                 c => new
                     {
@@ -116,32 +183,47 @@ namespace ISofA.DAL.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Projections", new[] { "TheaterId", "PlayId" }, "dbo.Plays");
             DropForeignKey("dbo.TheaterAdmins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.TheaterAdmins", "TheaterId", "dbo.Theaters");
+            DropForeignKey("dbo.Stages", "TheaterId", "dbo.Theaters");
+            DropForeignKey("dbo.Plays", "TheaterId", "dbo.Theaters");
+            DropForeignKey("dbo.Projections", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.FanZoneAdmins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.FanZoneAdmins", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Projections", new[] { "TheaterId", "StageId" }, "dbo.Stages");
+            DropForeignKey("dbo.Seats", new[] { "TheaterId", "PlayId", "StageId", "ProjectionId" }, "dbo.Projections");
             DropIndex("dbo.TheaterAdmins", new[] { "UserId" });
             DropIndex("dbo.TheaterAdmins", new[] { "TheaterId" });
             DropIndex("dbo.FanZoneAdmins", new[] { "UserId" });
             DropIndex("dbo.FanZoneAdmins", new[] { "TheaterId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Stages", new[] { "TheaterId" });
+            DropIndex("dbo.Seats", new[] { "TheaterId", "PlayId", "StageId", "ProjectionId" });
+            DropIndex("dbo.Projections", new[] { "TheaterId", "PlayId" });
+            DropIndex("dbo.Projections", new[] { "TheaterId", "StageId" });
+            DropIndex("dbo.Plays", new[] { "TheaterId" });
             DropTable("dbo.TheaterAdmins");
             DropTable("dbo.FanZoneAdmins");
+            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Theaters");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Stages");
+            DropTable("dbo.Seats");
+            DropTable("dbo.Projections");
+            DropTable("dbo.Plays");
         }
     }
 }

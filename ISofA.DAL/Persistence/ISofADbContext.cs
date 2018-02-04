@@ -18,6 +18,11 @@ namespace ISofA.DAL.Persistence
         }
 
         public DbSet<Theater> Theaters { get; set; }
+        public DbSet<Stage> Stages { get; set; }
+        public DbSet<Play> Plays { get; set; }
+        public DbSet<Projection> Projections { get; set; }
+        public DbSet<Seat> Seats { get; set; }
+
 
         public override int SaveChanges()
         {
@@ -44,7 +49,32 @@ namespace ISofA.DAL.Persistence
                     cs.MapLeftKey("TheaterId");
                     cs.MapRightKey("UserId");
                     cs.ToTable("TheaterAdmins");
-            });
+                });
+
+            modelBuilder.Entity<Theater>()
+                .HasMany(x => x.Stages)
+                .WithRequired(x => x.Theater)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Theater>()
+                .HasMany(x => x.Repertoire)
+                .WithRequired(x => x.Theater)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Theater>()
+                .HasMany(x => x.Projections)
+                .WithRequired(x => x.Theater)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Stage>()
+                .HasMany(x => x.Projections)
+                .WithRequired(x => x.Stage)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Play>()
+                .HasMany(x => x.Projections)
+                .WithRequired(x => x.Play)
+                .WillCascadeOnDelete(false);
 
         }
 

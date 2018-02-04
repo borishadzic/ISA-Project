@@ -40,9 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\StageDTO.cs" />
+    <Compile Include="DTO\SeatDTO.cs" />
+    <Compile Include="DTO\ProjectionDTO.cs" />
+    <Compile Include="DTO\PlayDTO.cs" />
+    <Compile Include="DTO\TheaterDTO.cs" />
     <Compile Include="Implementations\AuthService.cs" />
+    <Compile Include="Implementations\CRUDService.cs" />
+    <Compile Include="Implementations\PlayService.cs" />
+    <Compile Include="Implementations\SeatService.cs" />
+    <Compile Include="Implementations\ProjectionService.cs" />
+    <Compile Include="Implementations\Service.cs" />
+    <Compile Include="Implementations\StageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAuthService.cs" />
+    <Compile Include="Services\ICRUDService.cs" />
+    <Compile Include="Services\ISeatService.cs" />
+    <Compile Include="Services\IProjectionService.cs" />
+    <Compile Include="Services\IStageService.cs" />
+    <Compile Include="Services\IPlayService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISofA.DAL\ISofA.DAL.csproj">

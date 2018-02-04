@@ -15,6 +15,7 @@ using System;
 using System.Data.Entity;
 using Unity;
 using Unity.Injection;
+using Unity.Lifetime;
 
 namespace ISofA.WebAPI
 {
@@ -68,7 +69,7 @@ namespace ISofA.WebAPI
             //container.RegisterType<ApplicationUserManager>();
             //container.RegisterType<AccountController>(new InjectionConstructor());
 
-            container.RegisterType<IISofADbContext, ISofADbContext>();
+            container.RegisterType<IISofADbContext, ISofADbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             RegisterPantries(container);
             RegisterServices(container);
@@ -78,11 +79,20 @@ namespace ISofA.WebAPI
         {
             container.RegisterType<IUserPantry, UserPantry>();
             container.RegisterType<ITheaterPantry, TheaterPantry>();
+            container.RegisterType<IPlayPantry, PlayPantry>();
+            container.RegisterType<IProjectionPantry, ProjectionPantry>();
+            container.RegisterType<ISeatPantry, SeatPantry>();
+            container.RegisterType<IStagePantry, StagePantry>();
         }
 
         private static void RegisterServices(IUnityContainer container)
         {
             container.RegisterType<IAuthService, AuthService>();
+            container.RegisterType<IPlayService, PlayService>();
+            container.RegisterType<IStageService, StageService>();
+            container.RegisterType<ISeatService, SeatService>();
+            container.RegisterType<IProjectionService, ProjectionService>();
+
         }
     }
 }

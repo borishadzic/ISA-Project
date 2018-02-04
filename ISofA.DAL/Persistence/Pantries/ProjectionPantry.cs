@@ -1,14 +1,17 @@
 ﻿using ISofA.DAL.Core;
 using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ISofA.DAL.Persistence.Pantries
 {
-    public class UserPantry : Pantry<ISofAUser>, IUserPantry
+    public class ProjectionPantry : Pantry<Projection>, IProjectionPantry
     {
-        public UserPantry(IISofADbContext context) : base(context)
+        public ProjectionPantry(IISofADbContext context) : base(context)
         {
         }
     }

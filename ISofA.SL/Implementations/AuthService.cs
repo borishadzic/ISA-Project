@@ -20,14 +20,14 @@ namespace ISofA.SL.Implementations
 
         public bool IsFanZoneAdmin(string userId, int theaterId)
         {
-            return _unitOfWork.UserPantry.Get(userId)
+            return _unitOfWork.Pantry<ISofAUser>().Get(userId)
                 .FanZoneTheaters
                 .Where(t => t.TheaterId == theaterId).FirstOrDefault() != null;
         }
 
         public bool IsTheaterAdmin(string userId, int theaterId)
         {
-            return _unitOfWork.UserPantry.Get(userId)
+            return _unitOfWork.Pantry<ISofAUser>().Get(userId)
                 .AdminTheaters
                 .Where(t => t.TheaterId == theaterId).First() != null;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ISofA.DAL.Core.Pantries
 {
-    public interface IUserPantry : IPantry<ISofAUser>
-    {        
+    public interface IProjectionPantry : IPantry<Projection>
+    {
     }
 }

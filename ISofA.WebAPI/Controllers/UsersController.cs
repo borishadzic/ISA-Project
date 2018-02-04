@@ -21,7 +21,7 @@ namespace ISofA.WebAPI.Controllers
         
         public IEnumerable<ISofAUser> Get()
         {
-            return _userPantry.Get();
+            return _userPantry.GetAll();
         }
 
         public ISofAUser Get(string userId)

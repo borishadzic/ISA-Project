@@ -22,10 +22,7 @@ namespace ISofA.DAL.Persistence.Pantries
         {
             using (var context = new ISofADbContext())
             {
-                Theater t = context.Theaters.AsNoTracking().Where(x => x.TheaterId == theaterId).FirstOrDefault();
-                if (t != null)
-                    return new Theater() { TheaterId = t.TheaterId, Name = t.Name };
-                return null;
+                return context.Theaters.Find(theaterId); ;
             }
         }
 
