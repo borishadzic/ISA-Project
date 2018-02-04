@@ -245,6 +245,7 @@
     <Compile Include="Authorization\FanZoneAdminAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VisitsController.cs" />
     <Compile Include="Controllers\SeatsController.cs" />
     <Compile Include="Controllers\ProjectionsController.cs" />
     <Compile Include="Controllers\StagesController.cs" />

@@ -17,130 +17,113 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public SeatDTO ReserveSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat)
-        {
-            // TODO: ERROR Row and Col in range
-            seat.TheaterId = theaterId;
-            seat.PlayId = playId;
-            seat.StageId = stageId;
-            seat.ProjectionId = projectionId;
-            seat.Discount = 0;
-            seat.State = SeatState.Reserved;
-            seat = UnitOfWork.Pantry<Seat>().Add(seat);
-            UnitOfWork.SaveChanges();
-
-            return new SeatDTO(seat);
-        }
 
         public IEnumerable<SeatDTO> GetProjectionSeats(int theaterId, int playId, int stageId, int projectionId)
         {
-            return UnitOfWork.Pantry<Seat>().Find(x => x.TheaterId == theaterId && x.PlayId == playId && x.StageId == stageId && x.ProjectionId == projectionId)
+            return UnitOfWork.Pantry<Seat>()
+                .Find(x => x.TheaterId == theaterId && x.PlayId == playId && x.StageId == stageId && x.ProjectionId == projectionId)
                 .Select(x => new SeatDTO(x));
-        }        
+        }
 
-        public SeatDTO SetSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat)
+        public IEnumerable<SpeedSeatListElementDTO> GetSpeedSeats(int theaterId)
         {
+            return UnitOfWork.Pantry<Seat>()
+                .Find(x => x.TheaterId == theaterId && x.State == SeatState.Speed)
+                .Select(x => new SpeedSeatListElementDTO(x));
+        }
+
+        public SeatDTO AddReservation(int theaterId, int playId, int stageId, int projectionId, string userId, Seat seat)
+        {
+            Seat speedSeat = UnitOfWork.Pantry<Seat>().Get(theaterId, playId, stageId, projectionId, seat.SeatRow, seat.SeatColumn);
+            if (speedSeat == null)
+            {
+                seat.TheaterId = theaterId;
+                seat.PlayId = playId;
+                seat.StageId = stageId;
+                seat.ProjectionId = projectionId;
+                seat.UserId = userId;
+                seat.Discount = 0;
+                seat.State = SeatState.Reserved;
+                seat = UnitOfWork.Pantry<Seat>().Add(seat);
+                UnitOfWork.SaveChanges();
+                return new SeatDTO(seat);
+            }
+            else if (speedSeat.UserId == null && speedSeat.State == SeatState.Speed)
+            {
+                speedSeat.UserId = userId;
+                speedSeat.State = SeatState.Reserved;
+                UnitOfWork.Modified(speedSeat);
+                UnitOfWork.SaveChanges();
+                return new SeatDTO(speedSeat);
+            }
+            else
+            {
+                // TODO: Throw errors
+            }
+            return null;
+        }
+
+        public SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat)
+        {
+            if (UnitOfWork.Pantry<Seat>().Get(theaterId, playId, stageId, projectionId, seat.SeatRow, seat.SeatColumn) != null)
+                return null; // TODO: ERROR Throw             
             seat.TheaterId = theaterId;
             seat.PlayId = playId;
             seat.StageId = stageId;
             seat.ProjectionId = projectionId;
+            seat.UserId = null;
             seat.State = SeatState.Speed;
             seat = UnitOfWork.Pantry<Seat>().Add(seat);
             UnitOfWork.SaveChanges();
-
             return new SeatDTO(seat);
         }
 
-        public SeatDTO SetVIPSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn)
+        public SeatDTO AddVIPSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat)
         {
-            // TODO: ERROR Throw if seat reserved
-            Seat seat = new Seat()
-            {
-                TheaterId = theaterId,
-                PlayId = playId,
-                StageId = stageId,
-                ProjectionId = projectionId,
-                SeatRow = seatRow,
-                SeatColumn = seatColumn,
-                State = SeatState.VIP
-            };
-
+            if (UnitOfWork.Pantry<Seat>().Get(theaterId, playId, stageId, projectionId, seat.SeatRow, seat.SeatColumn) != null)
+                return null; // TODO: ERROR Throw             
+            seat.TheaterId = theaterId;
+            seat.PlayId = playId;
+            seat.StageId = stageId;
+            seat.ProjectionId = projectionId;
+            seat.UserId = null;
+            seat.State = SeatState.Speed;
             seat = UnitOfWork.Pantry<Seat>().Add(seat);
             UnitOfWork.SaveChanges();
-
             return new SeatDTO(seat);
         }
 
-        public SeatDTO SetReservedSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn)
+        public void CancelReservation(int theaterId, int playId, int stageId, int projectionId, string userId, int seatRow, int seatColumn)
         {
             Seat seat = UnitOfWork.Pantry<Seat>().Get(theaterId, playId, stageId, projectionId, seatRow, seatColumn);
             if (seat == null)
-            {
-                seat = new Seat()
-                {
-                    TheaterId = theaterId,
-                    PlayId = playId,
-                    StageId = stageId,
-                    ProjectionId = projectionId,
-                    SeatRow = seatRow,
-                    SeatColumn = seatColumn,
-                    State = SeatState.Reserved
-                };
-
-                seat = UnitOfWork.Pantry<Seat>().Add(seat);
-                UnitOfWork.SaveChanges();
-            }
-
-            if (seat.State == SeatState.Speed)
-            {
-                seat.State = SeatState.SpeedReserved;
+                return; // TODO: ERROR Throw
+            if (seat.UserId == null || !seat.UserId.Equals(userId))
+                return; // TODO: ERROR Throw
+            if (seat.State == SeatState.Bought)
+                return; // TODO: ERROR Throw
+            if (seat.Discount > 0)
+            { // TODO: LOW Should return to speed state?
+                seat.State = SeatState.Speed;
+                seat.UserId = null;
                 UnitOfWork.Modified(seat);
-                UnitOfWork.SaveChanges();
             }
             else
             {
-                // TODO: ERROR invalid seat state
-            }
-
-            return new SeatDTO(seat);
-        }
-
-        public void CancelReservation(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn)
-        {
-            Seat seat = UnitOfWork.Pantry<Seat>().Get(theaterId, playId, stageId, projectionId, seatRow, seatColumn);
-
-            if (seat == null)
-                return; // TODO: ERROR Throw Not Found
-
-            if (seat.State == SeatState.SpeedReserved) // TODO: LOW Can unreserve speed seat?
-            {
-                seat.State = SeatState.Speed;
-                UnitOfWork.Modified(seat);
-                UnitOfWork.SaveChanges();
-            } else if (seat.State == SeatState.Reserved) // TODO: LOW Can delete speed seat?
-            {
                 UnitOfWork.Pantry<Seat>().Remove(seat);
-                UnitOfWork.SaveChanges();
-            }            
-
-            // TODO: ERROR wrong seat
+            }
+            UnitOfWork.SaveChanges();
         }
 
         public void RemoveSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn)
         {
             Seat seat = UnitOfWork.Pantry<Seat>().Get(theaterId, playId, stageId, projectionId, seatRow, seatColumn);
-
             if (seat == null)
-                return; // TODO: ERROR Throw Not Found
-
-            
-            if (seat.State == SeatState.VIP || seat.State == SeatState.Speed) // TODO: LOW Can delete speed seat?
-            {
-                UnitOfWork.Pantry<Seat>().Remove(seat);
-                UnitOfWork.SaveChanges();
-            }
-
-            // TODO: ERROR wrong seat
+                return; // TODO: ERROR Throw
+            if (seat.UserId != null)
+                return; // TODO: ERROR Throw
+            UnitOfWork.Pantry<Seat>().Remove(seat);
+            UnitOfWork.SaveChanges();
         }
     }
 }

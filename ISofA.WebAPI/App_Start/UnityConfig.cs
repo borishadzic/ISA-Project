@@ -92,7 +92,7 @@ namespace ISofA.WebAPI
             container.RegisterType<IStageService, StageService>();
             container.RegisterType<ISeatService, SeatService>();
             container.RegisterType<IProjectionService, ProjectionService>();
-
+            container.RegisterType<IVisitService, VisitService>();
         }
     }
 }

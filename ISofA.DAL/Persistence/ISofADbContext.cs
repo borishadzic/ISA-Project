@@ -76,6 +76,11 @@ namespace ISofA.DAL.Persistence
                 .WithRequired(x => x.Play)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<ISofAUser>()
+                .HasMany(x => x.Reservations)
+                .WithRequired(x => x.User)
+                .WillCascadeOnDelete(false);
+
         }
 
         public static ISofADbContext Create()

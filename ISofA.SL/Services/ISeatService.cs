@@ -11,11 +11,13 @@ namespace ISofA.SL.Services
     public interface ISeatService
     {
         IEnumerable<SeatDTO> GetProjectionSeats(int theaterId, int playId, int stageId, int projectionId);
-        SeatDTO SetSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat);
-        SeatDTO SetVIPSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn);
-        SeatDTO SetReservedSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn);
-        void CancelReservation(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn);
-        void RemoveSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn);
+        IEnumerable<SpeedSeatListElementDTO> GetSpeedSeats(int theaterId);
 
+        SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat);
+        SeatDTO AddVIPSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat);
+        SeatDTO AddReservation(int theaterId, int playId, int stageId, int projectionId, string userId, Seat seat);
+
+        void CancelReservation(int theaterId, int playId, int stageId, int projectionId, string userId, int seatRow, int seatColumn);        
+        void RemoveSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn);        
     }
 }

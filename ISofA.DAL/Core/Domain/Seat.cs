@@ -10,7 +10,7 @@ namespace ISofA.DAL.Core.Domain
 {
     public enum SeatState
     {
-        Reserved, VIP, Speed, SpeedReserved
+        Reserved, VIP, Speed, Bought
     }
 
     public class Seat
@@ -26,7 +26,7 @@ namespace ISofA.DAL.Core.Domain
         public int StageId { get; set; }
         [Key]
         [Column(Order = 4)]
-        public int ProjectionId { get; set; }
+        public int ProjectionId { get; set; }        
         [Key]
         [Column(Order = 5)]
         public int SeatRow { get; set; }
@@ -34,10 +34,13 @@ namespace ISofA.DAL.Core.Domain
         [Column(Order = 6)]
         public int SeatColumn { get; set; }
 
+        public string UserId { get; set; }
         public SeatState State { get; set; }
         public int Discount { get; set; }
 
         [ForeignKey("TheaterId, PlayId, StageId, ProjectionId")]
         public virtual Projection Projection { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ISofAUser User { get; set; }
     }
 }
