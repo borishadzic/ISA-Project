@@ -10,7 +10,12 @@ namespace ISofA.DAL.Core
 {
     public interface IUnitOfWork
     {
-        IPantry<TEntity> Pantry<TEntity>() where TEntity : class;
+        ITheaterPantry Theaters { get; }
+        IUserPantry Users { get; }
+        IPlayPantry Plays { get; }
+        IProjectionPantry Projections { get; }
+        ISeatPantry Seats { get; }
+        IStagePantry Stages { get; }
 
         void Modified<TEntity>(TEntity entity) where TEntity : class;
 

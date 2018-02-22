@@ -11,7 +11,7 @@ namespace ISofA.DAL.Persistence.Pantries
 {
     public class StagePantry : Pantry<Stage>, IStagePantry
     {
-        public StagePantry(IISofADbContext context) : base(context)
+        public StagePantry(ISofADbContext context) : base(context)
         {
         }
     }

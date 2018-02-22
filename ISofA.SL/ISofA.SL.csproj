@@ -58,6 +58,7 @@
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\ICRUDService.cs" />
     <Compile Include="Services\ISeatService.cs" />
+    <Compile Include="Services\ITheaterService.cs" />
     <Compile Include="Services\IVisitService.cs" />
     <Compile Include="Services\IProjectionService.cs" />
     <Compile Include="Services\IStageService.cs" />

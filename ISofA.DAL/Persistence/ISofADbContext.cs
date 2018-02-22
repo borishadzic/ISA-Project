@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ISofA.DAL.Persistence
 {
-    public class ISofADbContext : IdentityDbContext<ISofAUser>, IISofADbContext
+    public class ISofADbContext : IdentityDbContext<ISofAUser>
     {
         public ISofADbContext()
             : base("ISofADb", throwIfV1Schema: false)
@@ -22,7 +22,6 @@ namespace ISofA.DAL.Persistence
         public DbSet<Play> Plays { get; set; }
         public DbSet<Projection> Projections { get; set; }
         public DbSet<Seat> Seats { get; set; }
-
 
         public override int SaveChanges()
         {
@@ -80,7 +79,6 @@ namespace ISofA.DAL.Persistence
                 .HasMany(x => x.Reservations)
                 .WithRequired(x => x.User)
                 .WillCascadeOnDelete(false);
-
         }
 
         public static ISofADbContext Create()

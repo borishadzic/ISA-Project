@@ -11,7 +11,7 @@ namespace ISofA.DAL.Persistence.Pantries
 {
     public class PlayPantry : Pantry<Play>, IPlayPantry
     {
-        public PlayPantry(IISofADbContext context) : base(context)
+        public PlayPantry(ISofADbContext context) : base(context)
         {
         }
     }

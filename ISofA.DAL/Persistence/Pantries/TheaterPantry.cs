@@ -8,32 +8,11 @@ using System.Threading.Tasks;
 
 namespace ISofA.DAL.Persistence.Pantries
 {
-    public class TheaterPantry : ITheaterPantry
+    public class TheaterPantry : Pantry<Theater>, ITheaterPantry
     {
-        public IEnumerable<Theater> GetAll()
+        public TheaterPantry(ISofADbContext context) : base(context)
         {
-            using(var context = new ISofADbContext())
-            {
-                return context.Theaters.ToList();
-            }
-        }
 
-        public Theater Get(int theaterId)
-        {
-            using (var context = new ISofADbContext())
-            {
-                return context.Theaters.Find(theaterId); ;
-            }
-        }
-
-        public Theater Add(Theater theater)
-        {
-            using (var context = new ISofADbContext())
-            {
-                var addedTheater = context.Theaters.Add(theater);
-                context.SaveChanges();
-                return addedTheater;
-            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ISofA.DAL.Persistence.Pantries
 {
     public class SeatPantry : Pantry<Seat>, ISeatPantry
     {
-        public SeatPantry(IISofADbContext context) : base(context)
+        public SeatPantry(ISofADbContext context) : base(context)
         {
         }
     }

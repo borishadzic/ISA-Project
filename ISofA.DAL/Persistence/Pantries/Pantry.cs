@@ -11,9 +11,9 @@ namespace ISofA.DAL.Persistence.Pantries
 {
     public class Pantry<TEntity> : IPantry<TEntity> where TEntity : class
     {
-        protected IISofADbContext Context { get; }
+        protected ISofADbContext Context { get; }
 
-        public Pantry(IISofADbContext context)
+        public Pantry(ISofADbContext context)
         {
             Context = context;
         }

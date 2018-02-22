@@ -8,7 +8,7 @@ namespace ISofA.DAL.Persistence.Pantries
 {
     public class UserPantry : Pantry<ISofAUser>, IUserPantry
     {
-        public UserPantry(IISofADbContext context) : base(context)
+        public UserPantry(ISofADbContext context) : base(context)
         {
         }
     }

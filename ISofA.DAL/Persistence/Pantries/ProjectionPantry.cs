@@ -11,7 +11,7 @@ namespace ISofA.DAL.Persistence.Pantries
 {
     public class ProjectionPantry : Pantry<Projection>, IProjectionPantry
     {
-        public ProjectionPantry(IISofADbContext context) : base(context)
+        public ProjectionPantry(ISofADbContext context) : base(context)
         {
         }
     }

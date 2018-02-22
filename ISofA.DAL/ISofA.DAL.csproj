@@ -59,9 +59,6 @@
     <Compile Include="Core\Domain\Seat.cs" />
     <Compile Include="Core\Domain\Stage.cs" />
     <Compile Include="Core\Domain\Theater.cs" />
-    <Compile Include="Core\IDbContext.cs" />
-    <Compile Include="Core\IISofADbContext.cs" />
-    <Compile Include="Core\IIdentityDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Pantries\IPantry.cs" />
     <Compile Include="Core\Pantries\IStagePantry.cs" />
