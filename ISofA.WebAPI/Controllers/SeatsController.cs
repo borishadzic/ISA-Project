@@ -35,7 +35,7 @@ namespace ISofA.WebAPI.Controllers
         [Route("api/Theaters/{theaterId}/Visits")]
         public IEnumerable<SpeedSeatListElementDTO> GetUserVisits(int theaterId)
         {
-
+            return null;
         }
 
         [HttpGet]

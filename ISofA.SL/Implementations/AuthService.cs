@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ISofA.SL.Implementations
 {
-    public class AuthService :  IAuthService
+    public class AuthService : IAuthService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -20,14 +20,14 @@ namespace ISofA.SL.Implementations
 
         public bool IsFanZoneAdmin(string userId, int theaterId)
         {
-            return _unitOfWork.Pantry<ISofAUser>().Get(userId)
+            return _unitOfWork.Users.Get(userId)
                 .FanZoneTheaters
                 .Where(t => t.TheaterId == theaterId).FirstOrDefault() != null;
         }
 
         public bool IsTheaterAdmin(string userId, int theaterId)
         {
-            return _unitOfWork.Pantry<ISofAUser>().Get(userId)
+            return _unitOfWork.Users.Get(userId)
                 .AdminTheaters
                 .Where(t => t.TheaterId == theaterId).First() != null;
         }

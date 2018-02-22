@@ -19,7 +19,7 @@ namespace ISofA.SL.Implementations
 
         public IEnumerable<object> GetUserVisits(int theaterId, string userId)
         {
-            return UnitOfWork.Pantry<Seat>()
+            return UnitOfWork.Seats
                 .Find(x => x.TheaterId == theaterId && x.UserId.Equals(userId)
                 && x.Projection.StartTime.AddMinutes(x.Projection.Play.DurationMins) <= DateTime.UtcNow)
                 .Select(x => new SpeedSeatListElementDTO(x)); ;

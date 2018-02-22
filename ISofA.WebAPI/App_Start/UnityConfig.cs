@@ -69,7 +69,6 @@ namespace ISofA.WebAPI
             //container.RegisterType<ApplicationUserManager>();
             //container.RegisterType<AccountController>(new InjectionConstructor());
 
-            container.RegisterType<IISofADbContext, ISofADbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             RegisterPantries(container);
             RegisterServices(container);

@@ -21,7 +21,7 @@ namespace ISofA.SL.Implementations
         public PlayDTO Add(int theaterId, Play play)
         {
             play.TheaterId = theaterId;
-            play = UnitOfWork.Pantry<Play>().Add(play);
+            play = UnitOfWork.Plays.Add(play);
             UnitOfWork.SaveChanges();
 
             return new PlayDTO(play);
@@ -29,26 +29,26 @@ namespace ISofA.SL.Implementations
 
         IEnumerable<PlayDTO> IPlayService.Get(int theaterId)
         {
-            return UnitOfWork.Pantry<Play>().Find(x => x.TheaterId == theaterId)
+            return UnitOfWork.Plays.Find(x => x.TheaterId == theaterId)
                 .Select(x => new PlayDTO(x));
         }
 
         public PlayDTO Get(int theaterId, int playId)
         {
-            Play play = UnitOfWork.Pantry<Play>().Get(theaterId, playId);
+            Play play = UnitOfWork.Plays.Get(theaterId, playId);
             return new PlayDTO(play);
         }
 
         public void Remove(int theaterId, int playId)
         {
-            IPlayPantry pantry = (IPlayPantry)UnitOfWork.Pantry<Play>();
+            IPlayPantry pantry = (IPlayPantry)UnitOfWork.Plays;
             pantry.Remove(pantry.Get(theaterId, playId));
             UnitOfWork.SaveChanges();
         }
 
         public PlayDTO Update(int theaterId, int playId, Play play)
         {
-            Play modified = UnitOfWork.Pantry<Play>().Get(theaterId, playId);
+            Play modified = UnitOfWork.Plays.Get(theaterId, playId);
             modified.Name = play.Name;
             modified.Actors = play.Actors;
             modified.Genre = play.Genre;
@@ -60,6 +60,6 @@ namespace ISofA.SL.Implementations
             UnitOfWork.Modified(modified);
             UnitOfWork.SaveChanges();
             return new PlayDTO(modified);
-        }        
+        }
     }
 }
