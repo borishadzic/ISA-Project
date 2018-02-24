@@ -13,7 +13,7 @@ namespace ISofA.DAL.Persistence
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private ISofADbContext _context;
+        private ISofADbContext _context = new ISofADbContext();
 
         private ITheaterPantry _theaters;
         public ITheaterPantry Theaters { get { return _theaters ?? new TheaterPantry(_context); } }

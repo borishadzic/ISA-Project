@@ -1,39 +1,78 @@
 ﻿using ISofA.DAL.Core.Domain;
-using ISofA.DAL.Core.Pantries;
-using ISofA.DAL.Persistence.Pantries;
-using ISofA.WebAPI.Authorization;
-using System;
+using ISofA.SL.DTO;
+using ISofA.SL.Services;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
 {
     public class TheatersController : ApiController
     {
-        private readonly ITheaterPantry _theaterPantry;
+        // TODO: Dodaj ogranicenje da samo admini mogu da dodaju, menjaju i brisu theatre
+        private readonly ITheaterService _theaterService;
 
-        public TheatersController(ITheaterPantry theaterPantry)
+        public TheatersController(ITheaterService theaterService)
         {
-            _theaterPantry = theaterPantry;
-        }
-    
-        public IEnumerable<Theater> GetAll()
-        {
-            return _theaterPantry.GetAll();
+            _theaterService = theaterService;
         }
 
-        [FanZoneAdmin]
-        public Theater Get(int id)
+        // api/theaters/?type=cinemas
+        public IHttpActionResult Get(string type = "all")
         {
-            return _theaterPantry.Get(id);
+            if (type == "all")
+            {
+                return Ok(_theaterService.GetAll());
+            }
+            else if (type == "cinemas")
+            {
+                return Ok(_theaterService.GetAllCinemas());
+            }
+            else if (type == "plays")
+            {
+                return Ok(_theaterService.GetAllPlayTheaters());
+            } 
+            else
+            {
+                return BadRequest();
+            }   
         }
 
-        public Theater Post(Theater theater)
+        public IHttpActionResult Get(int id)
         {
-            return _theaterPantry.Add(theater);
+            var theater = _theaterService.Get(id);
+
+            if (theater != null)
+            {
+                return Ok(theater);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        public TheaterDTO Post(Theater theater)
+        {
+            return _theaterService.Add(theater);
+        }
+
+        public IHttpActionResult Put(int id, Theater theater)
+        {
+            var updatedTheater = _theaterService.Update(id, theater);
+
+            if (updatedTheater == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(updatedTheater);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            _theaterService.Remove(id);
         }
     }
 }

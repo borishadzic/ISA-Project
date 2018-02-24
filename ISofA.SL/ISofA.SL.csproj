@@ -48,6 +48,7 @@
     <Compile Include="DTO\TheaterDTO.cs" />
     <Compile Include="Implementations\AuthService.cs" />
     <Compile Include="Implementations\PlayService.cs" />
+    <Compile Include="Implementations\TheaterService.cs" />
     <Compile Include="Implementations\VisitService.cs" />
     <Compile Include="Implementations\SeatService.cs" />
     <Compile Include="Implementations\ProjectionService.cs" />

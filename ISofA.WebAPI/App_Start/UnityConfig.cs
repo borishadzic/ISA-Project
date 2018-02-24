@@ -92,6 +92,7 @@ namespace ISofA.WebAPI
             container.RegisterType<ISeatService, SeatService>();
             container.RegisterType<IProjectionService, ProjectionService>();
             container.RegisterType<IVisitService, VisitService>();
+            container.RegisterType<ITheaterService, TheaterService>();
         }
     }
 }

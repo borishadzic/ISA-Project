@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201802040627468_Init.Designer.cs">
       <DependentUpon>201802040627468_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802222035354_TheaterModification.cs" />
+    <Compile Include="Migrations\201802222035354_TheaterModification.Designer.cs">
+      <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
     <Compile Include="Persistence\Pantries\Pantry.cs" />
@@ -90,6 +94,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802040627468_Init.resx">
       <DependentUpon>201802040627468_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802222035354_TheaterModification.resx">
+      <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
