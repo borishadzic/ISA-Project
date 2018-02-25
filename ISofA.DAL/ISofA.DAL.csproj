@@ -54,12 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Domain\ISofAUser.cs" />
+    <Compile Include="Core\Domain\Item.cs" />
     <Compile Include="Core\Domain\Play.cs" />
     <Compile Include="Core\Domain\Projection.cs" />
     <Compile Include="Core\Domain\Seat.cs" />
     <Compile Include="Core\Domain\Stage.cs" />
     <Compile Include="Core\Domain\Theater.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Pantries\IItemPantry.cs" />
     <Compile Include="Core\Pantries\IPantry.cs" />
     <Compile Include="Core\Pantries\IStagePantry.cs" />
     <Compile Include="Core\Pantries\ISeatPantry.cs" />
@@ -75,8 +77,13 @@
     <Compile Include="Migrations\201802222035354_TheaterModification.Designer.cs">
       <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802251421163_Item.cs" />
+    <Compile Include="Migrations\201802251421163_Item.Designer.cs">
+      <DependentUpon>201802251421163_Item.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
+    <Compile Include="Persistence\Pantries\ItemPantry.cs" />
     <Compile Include="Persistence\Pantries\Pantry.cs" />
     <Compile Include="Persistence\Pantries\PlayPantry.cs" />
     <Compile Include="Persistence\Pantries\ProjectionPantry.cs" />
@@ -97,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802222035354_TheaterModification.resx">
       <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802251421163_Item.resx">
+      <DependentUpon>201802251421163_Item.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

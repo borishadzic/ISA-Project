@@ -79,6 +79,19 @@ namespace ISofA.DAL.Persistence
                 .HasMany(x => x.Reservations)
                 .WithRequired(x => x.User)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ISofAUser>()
+                .HasMany(x => x.BoughtItems)
+                .WithOptional(x => x.Buyer)
+                .WillCascadeOnDelete(false);
+
+            // Nisam siguran da li treba i ovde... 
+            // Dodao sam anotaciju i na sam properti u modelu
+            // Nasao sam nesto tako na netu... Ako ne valja obrisi
+            modelBuilder.Entity<Item>()
+                .Property(x => x.BoughtDate)
+                .HasColumnType("datetime2")
+                .HasPrecision(0);
         }
 
         public static ISofADbContext Create()

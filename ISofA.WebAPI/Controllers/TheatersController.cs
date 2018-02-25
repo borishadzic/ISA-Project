@@ -23,7 +23,7 @@ namespace ISofA.WebAPI.Controllers
             {
                 return Ok(_theaterService.GetAll());
             }
-            else if (type == "cinemas")
+            else if (type == "cinemas") 
             {
                 return Ok(_theaterService.GetAllCinemas());
             }

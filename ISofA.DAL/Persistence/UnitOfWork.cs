@@ -33,6 +33,9 @@ namespace ISofA.DAL.Persistence
         private IProjectionPantry _projections;
         public IProjectionPantry Projections { get { return _projections ?? new ProjectionPantry(_context); } }
 
+        private IItemPantry _items;
+        public IItemPantry Items { get { return _items ?? new ItemPantry(_context); } }
+
         public void Modified<TEntity>(TEntity entity) where TEntity : class
         {
             _context.Entry(entity).State = System.Data.Entity.EntityState.Modified;

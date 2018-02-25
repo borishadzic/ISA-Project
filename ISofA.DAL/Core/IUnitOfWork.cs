@@ -16,6 +16,7 @@ namespace ISofA.DAL.Core
         IProjectionPantry Projections { get; }
         ISeatPantry Seats { get; }
         IStagePantry Stages { get; }
+        IItemPantry Items { get; }
 
         void Modified<TEntity>(TEntity entity) where TEntity : class;
 

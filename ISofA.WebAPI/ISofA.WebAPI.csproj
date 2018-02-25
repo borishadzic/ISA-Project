@@ -245,6 +245,7 @@
     <Compile Include="Authorization\FanZoneAdminAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\VisitsController.cs" />
     <Compile Include="Controllers\SeatsController.cs" />
     <Compile Include="Controllers\ProjectionsController.cs" />
@@ -270,6 +271,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\default.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

@@ -82,6 +82,7 @@ namespace ISofA.WebAPI
             container.RegisterType<IProjectionPantry, ProjectionPantry>();
             container.RegisterType<ISeatPantry, SeatPantry>();
             container.RegisterType<IStagePantry, StagePantry>();
+            container.RegisterType<IItemPantry, ItemPantry>();
         }
 
         private static void RegisterServices(IUnityContainer container)
@@ -93,6 +94,7 @@ namespace ISofA.WebAPI
             container.RegisterType<IProjectionService, ProjectionService>();
             container.RegisterType<IVisitService, VisitService>();
             container.RegisterType<ITheaterService, TheaterService>();
+            container.RegisterType<IItemService, ItemService>();
         }
     }
 }
