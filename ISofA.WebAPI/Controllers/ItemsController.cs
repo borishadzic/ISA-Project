@@ -25,21 +25,21 @@ namespace ISofA.WebAPI.Controllers
             _itemService = itemService;
         }
 
-        [Route("api/theaters/{theaterId}/items")]
+        [Route("api/Theaters/{theaterId}/Items")]
         public IEnumerable<ItemDTO> Get(int theaterId)
         {
             return _itemService.GetItemsForTheater(theaterId);
         }
 
         [HttpGet]
-        [Route("api/theaters/{theaterId}/items/bought")]
-        public IEnumerable<ItemDTO> GetBoght(int theaterId)
+        [Route("api/Theaters/{theaterId}/Items/Bought")]
+        public IEnumerable<ItemDTO> GetBought(int theaterId)
         {
             return _itemService.GetBoughtItemsForTheater(theaterId);
         }
 
-        [Route("api/theaters/{theaterId}/items")]
-        public async Task<ItemDTO> PostAsync(int theaterId)
+        [Route("api/Theaters/{theaterId}/Items")]
+        public async Task<ItemDTO> Post(int theaterId)
         {
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
@@ -72,7 +72,7 @@ namespace ISofA.WebAPI.Controllers
             return $"{rootUrl}/Images/{fileName ?? "default.png"}";
         }
 
-        [Route("api/items/{itemId}")]
+        [Route("api/Items/{itemId}")]
         public ItemDTO Get(Guid itemId)
         {
             return _itemService.GetItem(itemId);
@@ -80,7 +80,7 @@ namespace ISofA.WebAPI.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("api/items/{itemId}/buy")]
+        [Route("api/Items/{itemId}/Buy")]
         public IHttpActionResult BuyItem(Guid itemId)
         {
             var success = _itemService.BuyItem(itemId, User.Identity.GetUserId());
@@ -95,13 +95,13 @@ namespace ISofA.WebAPI.Controllers
             }
         }
 
-        [Route("api/items/{itemId}")]
+        [Route("api/Items/{itemId}")]
         public ItemDTO Put(Guid itemId, Item item)
         {
             return _itemService.UpdateItem(itemId, item);
         }
 
-        [Route("api/items/{itemId}")]
+        [Route("api/Items/{itemId}")]
         public void Delete(Guid itemId)
         {
             _itemService.RemoveItem(itemId);

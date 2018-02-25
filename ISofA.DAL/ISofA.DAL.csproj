@@ -77,9 +77,9 @@
     <Compile Include="Migrations\201802222035354_TheaterModification.Designer.cs">
       <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802251421163_Item.cs" />
-    <Compile Include="Migrations\201802251421163_Item.Designer.cs">
-      <DependentUpon>201802251421163_Item.cs</DependentUpon>
+    <Compile Include="Migrations\201802252130409_Item.cs" />
+    <Compile Include="Migrations\201802252130409_Item.Designer.cs">
+      <DependentUpon>201802252130409_Item.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
@@ -105,8 +105,8 @@
     <EmbeddedResource Include="Migrations\201802222035354_TheaterModification.resx">
       <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802251421163_Item.resx">
-      <DependentUpon>201802251421163_Item.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802252130409_Item.resx">
+      <DependentUpon>201802252130409_Item.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

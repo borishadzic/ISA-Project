@@ -1,10 +1,8 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISofA.DAL.Persistence.Pantries
 {
@@ -12,7 +10,40 @@ namespace ISofA.DAL.Persistence.Pantries
     {
         public TheaterPantry(ISofADbContext context) : base(context)
         {
+        }
 
+        public IEnumerable<ISofAUser> GetTheaterAdmins(int theaterId)
+        {
+            return Context.Theaters
+                .Where(t => t.TheaterId == theaterId)
+                .Include(t => t.TheaterAdmins)
+                .SelectMany(t => t.TheaterAdmins)
+                .ToList();
+        }
+
+        public IEnumerable<ISofAUser> GetTheaterFanZoneAdmins(int theaterId)
+        {
+            return Context.Theaters
+                .Where(t => t.TheaterId == theaterId)
+                .Include(t => t.FanZoneAdmins)
+                .SelectMany(t => t.FanZoneAdmins)
+                .ToList();
+        }
+
+        public Theater GetTheaterWithAdmins(int theaterId)
+        {
+            return Context.Theaters
+                .Where(t => t.TheaterId == theaterId)
+                .Include(t => t.TheaterAdmins)
+                .FirstOrDefault();
+        }
+
+        public Theater GetTheaterWithFanZoneAdmins(int theaterId)
+        {
+            return Context.Theaters
+                .Where(t => t.TheaterId == theaterId)
+                .Include(t => t.FanZoneAdmins)
+                .FirstOrDefault();
         }
     }
 }

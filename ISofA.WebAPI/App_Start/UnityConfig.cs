@@ -95,6 +95,8 @@ namespace ISofA.WebAPI
             container.RegisterType<IVisitService, VisitService>();
             container.RegisterType<ITheaterService, TheaterService>();
             container.RegisterType<IItemService, ItemService>();
+            container.RegisterType<IFanZoneAdminService, FanZoneAdminService>();
+            container.RegisterType<ITheaterAdminService, TheaterAdminService>();
         }
     }
 }

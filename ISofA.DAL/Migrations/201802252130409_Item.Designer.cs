@@ -13,7 +13,7 @@ namespace ISofA.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201802251421163_Item"; }
+            get { return "201802252130409_Item"; }
         }
         
         string IMigrationMetadata.Source
