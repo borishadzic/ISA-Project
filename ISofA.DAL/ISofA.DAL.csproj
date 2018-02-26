@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Domain\FriendRequest.cs" />
     <Compile Include="Core\Domain\ISofAUser.cs" />
     <Compile Include="Core\Domain\Item.cs" />
     <Compile Include="Core\Domain\Play.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Core\Domain\Stage.cs" />
     <Compile Include="Core\Domain\Theater.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Pantries\IFriendRequestPantry.cs" />
     <Compile Include="Core\Pantries\IItemPantry.cs" />
     <Compile Include="Core\Pantries\IPantry.cs" />
     <Compile Include="Core\Pantries\IStagePantry.cs" />
@@ -81,8 +83,17 @@
     <Compile Include="Migrations\201802252130409_Item.Designer.cs">
       <DependentUpon>201802252130409_Item.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802252337192_FriendRequestSystem.cs" />
+    <Compile Include="Migrations\201802252337192_FriendRequestSystem.Designer.cs">
+      <DependentUpon>201802252337192_FriendRequestSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802260028529_Friends.cs" />
+    <Compile Include="Migrations\201802260028529_Friends.Designer.cs">
+      <DependentUpon>201802260028529_Friends.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
+    <Compile Include="Persistence\Pantries\FriendRequestPantry.cs" />
     <Compile Include="Persistence\Pantries\ItemPantry.cs" />
     <Compile Include="Persistence\Pantries\Pantry.cs" />
     <Compile Include="Persistence\Pantries\PlayPantry.cs" />
@@ -107,6 +118,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802252130409_Item.resx">
       <DependentUpon>201802252130409_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802252337192_FriendRequestSystem.resx">
+      <DependentUpon>201802252337192_FriendRequestSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802260028529_Friends.resx">
+      <DependentUpon>201802260028529_Friends.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

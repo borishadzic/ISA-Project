@@ -15,6 +15,7 @@ namespace ISofA.DAL.Persistence
         public ISofADbContext()
             : base("ISofADb", throwIfV1Schema: false)
         {
+			Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Theater> Theaters { get; set; }
@@ -22,6 +23,7 @@ namespace ISofA.DAL.Persistence
         public DbSet<Play> Plays { get; set; }
         public DbSet<Projection> Projections { get; set; }
         public DbSet<Seat> Seats { get; set; }
+		public DbSet<FriendRequest> FriendRequests { get; set; }
 
         public override int SaveChanges()
         {
@@ -75,6 +77,16 @@ namespace ISofA.DAL.Persistence
                 .WithRequired(x => x.Play)
                 .WillCascadeOnDelete(false);
 
+			modelBuilder.Entity<ISofAUser>()
+				.HasMany(x => x.Friends)
+				.WithMany()
+				.Map(m =>
+				{
+					m.MapLeftKey("Id");
+					m.MapRightKey("FriendId");
+					m.ToTable("Friends");
+				});
+
             modelBuilder.Entity<ISofAUser>()
                 .HasMany(x => x.Reservations)
                 .WithRequired(x => x.User)
@@ -85,10 +97,25 @@ namespace ISofA.DAL.Persistence
                 .WithOptional(x => x.Buyer)
                 .WillCascadeOnDelete(false);
 
-            // Nisam siguran da li treba i ovde... 
-            // Dodao sam anotaciju i na sam properti u modelu
-            // Nasao sam nesto tako na netu... Ako ne valja obrisi
-            modelBuilder.Entity<Item>()
+			modelBuilder.Entity<FriendRequest>()
+				.HasRequired(x => x.Reciever)
+				.WithMany(x => x.FriendRequestsRecieved)
+				.HasForeignKey(x => x.RecieverId)
+				.WillCascadeOnDelete(false);
+
+			modelBuilder.Entity<FriendRequest>()
+				.HasRequired(x => x.Sender)
+				.WithMany(x => x.FriendRequestsSent)
+				.HasForeignKey(x => x.SenderId)
+				.WillCascadeOnDelete(false);
+
+			
+
+
+			// Nisam siguran da li treba i ovde... 
+			// Dodao sam anotaciju i na sam properti u modelu
+			// Nasao sam nesto tako na netu... Ako ne valja obrisi
+			modelBuilder.Entity<Item>()
                 .Property(x => x.BoughtDate)
                 .HasColumnType("datetime2")
                 .HasPrecision(0);

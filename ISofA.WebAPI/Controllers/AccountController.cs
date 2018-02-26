@@ -329,9 +329,10 @@ namespace ISofA.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ISofAUser() { UserName = model.Email, Email = model.Email};
+			var user = new ISofAUser() { UserName = model.Email, Email = model.Email, Name = model.Name, Surname = model.Surname, City = model.City, PhoneNumber = model.PhoneNumber };
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+			IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {

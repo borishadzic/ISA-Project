@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 
 namespace ISofA.DAL.Core.Pantries
 {
-    public interface IUserPantry : IPantry<ISofAUser>
+    public interface IFriendRequestPantry:IPantry<FriendRequest>
     {
-		ISofAUser GetUserWithFriendRequests(string UserId);
-
-		ISofAUser GetUserWithFriends(string UserId);
-
-	}
+    }
 }

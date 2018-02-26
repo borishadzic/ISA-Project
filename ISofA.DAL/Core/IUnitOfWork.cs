@@ -17,6 +17,7 @@ namespace ISofA.DAL.Core
         ISeatPantry Seats { get; }
         IStagePantry Stages { get; }
         IItemPantry Items { get; }
+		IFriendRequestPantry FriendRequests { get; }
 
         void Modified<TEntity>(TEntity entity) where TEntity : class;
 

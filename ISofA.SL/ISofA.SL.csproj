@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\ISofAUserDTO.cs" />
     <Compile Include="DTO\ItemDTO.cs" />
     <Compile Include="DTO\SpeedSeatListElementDTO.cs" />
     <Compile Include="DTO\StageDTO.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="DTO\TheaterDTO.cs" />
     <Compile Include="Implementations\AuthService.cs" />
     <Compile Include="Implementations\FanZoneAdminService.cs" />
+    <Compile Include="Implementations\FriendRequestService.cs" />
     <Compile Include="Implementations\ItemService.cs" />
     <Compile Include="Implementations\PlayService.cs" />
     <Compile Include="Implementations\TheaterAdminService.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\ICRUDService.cs" />
     <Compile Include="Services\IFanZoneAdminService.cs" />
+    <Compile Include="Services\IFriendRequestService.cs" />
     <Compile Include="Services\ISeatService.cs" />
     <Compile Include="Services\IItemService.cs" />
     <Compile Include="Services\ITheaterAdminService.cs" />

@@ -48,7 +48,21 @@ namespace ISofA.WebAPI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-    }
+
+		[Required]
+		[Display(Name = "Name")]
+		public string Name { get; set; }
+
+		[Required]
+		[Display(Name = "Surname")]
+		public string Surname { get; set; }
+
+		[Display(Name = "City")]
+		public string City { get; set; }
+
+		[Display(Name = "PhoneNumber")]
+		public string PhoneNumber { get; set; }
+	}
 
     public class RegisterExternalBindingModel
     {

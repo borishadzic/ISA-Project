@@ -9,10 +9,14 @@ namespace ISofA.DAL.Core.Domain
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ISofAUser : IdentityUser
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public virtual ICollection<Theater> FanZoneTheaters { get; set; }
+		
+		public string Name { get; set; }
+		public string Surname { get; set; }
+		public string City { get; set; }
+		public virtual ICollection<ISofAUser> Friends { get; set; }
+		public virtual ICollection<FriendRequest> FriendRequestsSent { get; set; }
+		public virtual ICollection<FriendRequest> FriendRequestsRecieved { get; set; }
+		public virtual ICollection<Theater> FanZoneTheaters { get; set; }
         public virtual ICollection<Theater> AdminTheaters { get; set; }
         public virtual ICollection<Seat> Reservations { get; set; }
         public virtual ICollection<Item> BoughtItems { get; set; }
