@@ -15,7 +15,6 @@ namespace ISofA.DAL.Persistence
         public ISofADbContext()
             : base("ISofADb", throwIfV1Schema: false)
         {
-			Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Theater> Theaters { get; set; }

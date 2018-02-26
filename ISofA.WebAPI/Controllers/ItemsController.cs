@@ -39,7 +39,7 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("api/Theaters/{theaterId}/Items")]
-        public async Task<ItemDTO> Post(int theaterId)
+        public async Task<IHttpActionResult> PostAsync(int theaterId)
         {
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
@@ -49,27 +49,43 @@ namespace ISofA.WebAPI.Controllers
             var provider = new CustomMultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath("~/Images"));
             var result = await Request.Content.ReadAsMultipartAsync(provider);
 
-            // TODO: Validacija za prosledjene vredosti
-            var item = new Item()
+            var formDataKeys = result.FormData.AllKeys;
+
+            if (!formDataKeys.Contains("Name") ||
+                !formDataKeys.Contains("Description") ||
+                !formDataKeys.Contains("Price"))
             {
-                Name = result.FormData.Get("Name"),
-                Description = result.FormData.Get("Description"),
-                Price = float.Parse(result.FormData.Get("Price"))
-            };
+                return BadRequest("Name, description and price are required values!");
+            }
+
+            var name = result.FormData.Get("Name");
+            var description = result.FormData.Get("Description");
+            var success = float.TryParse(result.FormData.Get("Price"), out float price);
+
+            if (!success || name.Length < 3 || description.Length < 3)
+            {
+                return BadRequest("Invalid form data.");
+            }
+
+            var item = new Item() { Name = name, Description = description, Price = price };
 
             if (result.FileData.Count > 0)
             {
                 var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
                 item.ImageUrl = GetImageUrl(uploadedFileInfo.Name);
             }
+            else
+            {
+                item.ImageUrl = GetImageUrl();
+            }
 
-            return _itemService.AddItem(theaterId, item);
+            return Ok(_itemService.AddItem(theaterId, item));
         }
 
-        private string GetImageUrl(String fileName)
+        private string GetImageUrl(String fileName = null)
         {
-            string rootUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-            return $"{rootUrl}/Images/{fileName ?? "default.png"}";
+            //string rootUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+            return $"{ Url.Content("~/") }Images/{ fileName ?? "default.png" }";
         }
 
         [Route("api/Items/{itemId}")]

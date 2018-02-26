@@ -1,4 +1,5 @@
-﻿using ISofA.SL.Services;
+﻿using ISofA.SL.DTO;
+using ISofA.SL.Services;
 using ISofA.WebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,9 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("Admins")]
-        public IEnumerable<dynamic> Get(int theaterId)
+        public IEnumerable<ISofAUserDTO> Get(int theaterId)
         {
-            return _theaterAdminService.GetTheaterAdmins(theaterId).Select(x => new
-            {
-                x.Email,
-                x.Id
-            });
+            return _theaterAdminService.GetTheaterAdmins(theaterId);
         }
 
         [Route("Admins")]
@@ -37,11 +34,7 @@ namespace ISofA.WebAPI.Controllers
 
             if (admin != null)
             {
-                return Ok(new
-                {
-                    admin.Email,
-                    admin.Id
-                });
+                return Ok(admin);
             }
 
             return BadRequest();

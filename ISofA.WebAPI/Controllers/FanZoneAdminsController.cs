@@ -23,13 +23,9 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("FanZoneAdmins")]
-        public IEnumerable<dynamic> Get(int theaterId)
+        public IEnumerable<ISofAUserDTO> Get(int theaterId)
         {
-            return _fanZoneAdminService.GetFanZoneAdmins(theaterId).Select(x => new
-            {
-                x.Email,
-                x.Id
-            });
+            return _fanZoneAdminService.GetFanZoneAdmins(theaterId);
         }
 
         [Route("FanZoneAdmins")]
@@ -39,11 +35,7 @@ namespace ISofA.WebAPI.Controllers
 
             if (admin != null)
             {
-                return Ok(new
-                {
-                    admin.Email,
-                    admin.Id
-                });
+                return Ok(admin);
             }
 
             return BadRequest();

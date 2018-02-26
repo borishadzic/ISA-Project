@@ -16,7 +16,7 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public ISofAUser AddFanZoneAdmin(int theaterId, string userId)
+        public ISofAUserDTO AddFanZoneAdmin(int theaterId, string userId)
         {
             var theater = UnitOfWork.Theaters.GetTheaterWithFanZoneAdmins(theaterId);
             var user = UnitOfWork.Users.Get(userId);
@@ -25,15 +25,15 @@ namespace ISofA.SL.Implementations
             {
                 theater.FanZoneAdmins.Add(user);
                 UnitOfWork.SaveChanges();
-                return user;
+                return new ISofAUserDTO(user);
             }
 
             return null;
         }
 
-        public IEnumerable<ISofAUser> GetFanZoneAdmins(int theaterId)
+        public IEnumerable<ISofAUserDTO> GetFanZoneAdmins(int theaterId)
         {
-            return UnitOfWork.Theaters.GetTheaterFanZoneAdmins(theaterId);
+            return UnitOfWork.Theaters.GetTheaterFanZoneAdmins(theaterId).Select(x => new ISofAUserDTO(x));
         }
 
         public void RemoveFanZoneAdmin(int theaterId, string faznZoneAdminId)

@@ -2,6 +2,7 @@
 using System.Linq;
 using ISofA.DAL.Core;
 using ISofA.DAL.Core.Domain;
+using ISofA.SL.DTO;
 using ISofA.SL.Services;
 
 namespace ISofA.SL.Implementations
@@ -12,7 +13,7 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public ISofAUser AddTheaterAdmin(int theaterId, string userId)
+        public ISofAUserDTO AddTheaterAdmin(int theaterId, string userId)
         {
             var user = UnitOfWork.Users.Get(userId);
             var theater = UnitOfWork.Theaters.Get(theaterId);
@@ -21,15 +22,15 @@ namespace ISofA.SL.Implementations
             {
                 theater.TheaterAdmins.Add(user);
                 UnitOfWork.SaveChanges();
-                return user;
+                return new ISofAUserDTO(user);
             }
 
             return null;
         }
 
-        public IEnumerable<ISofAUser> GetTheaterAdmins(int theaterId)
+        public IEnumerable<ISofAUserDTO> GetTheaterAdmins(int theaterId)
         {
-            return UnitOfWork.Theaters.GetTheaterAdmins(theaterId);
+            return UnitOfWork.Theaters.GetTheaterAdmins(theaterId).Select(x => new ISofAUserDTO(x));
         }
 
         public void RemoveTheaterAdmin(int theaterId, string theaterAdminId)
