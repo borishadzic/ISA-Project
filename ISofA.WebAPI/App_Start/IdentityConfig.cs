@@ -6,6 +6,8 @@ using Microsoft.Owin;
 using ISofA.WebAPI.Models;
 using ISofA.DAL.Persistence;
 using ISofA.DAL.Core.Domain;
+using ISofA.WebAPI.Services;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace ISofA.WebAPI
 {
@@ -16,6 +18,9 @@ namespace ISofA.WebAPI
         public ApplicationUserManager(IUserStore<ISofAUser> store)
             : base(store)
         {
+            //var provider = new DpapiDataProtectionProvider("Sample");
+            //UserTokenProvider = new DataProtectorTokenProvider<ISofAUser>(provider.Create("EmailConfirmation"));
+
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
@@ -36,6 +41,7 @@ namespace ISofA.WebAPI
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
+            manager.EmailService = new EmailService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

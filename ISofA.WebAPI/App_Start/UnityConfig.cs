@@ -57,15 +57,15 @@ namespace ISofA.WebAPI
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IUserStore<ISofAUser>, UserStore<ISofAUser>>();
-            container.RegisterType<UserManager<ISofAUser>>();
+            //container.RegisterType<IUserStore<ISofAUser>, UserStore<ISofAUser>>();
+            //container.RegisterType<UserManager<ISofAUser>>();
             container.RegisterType<DbContext, ISofADbContext>();
-            container.RegisterType(typeof(ISecureDataFormat<>), typeof(SecureDataFormat<>));
-            container.RegisterType<ISecureDataFormat<AuthenticationTicket>, SecureDataFormat<AuthenticationTicket>>();
-            container.RegisterType<ISecureDataFormat<AuthenticationTicket>, TicketDataFormat>();
-            container.RegisterType<IDataSerializer<AuthenticationTicket>, TicketSerializer>();
-            container.RegisterType<IDataProtector>(
-                new InjectionFactory(c => new DpapiDataProtectionProvider().Create("ASP.NET Identity")));
+            //container.RegisterType(typeof(ISecureDataFormat<>), typeof(SecureDataFormat<>));
+            //container.RegisterType<ISecureDataFormat<AuthenticationTicket>, SecureDataFormat<AuthenticationTicket>>();
+            //container.RegisterType<ISecureDataFormat<AuthenticationTicket>, TicketDataFormat>();
+            //container.RegisterType<IDataSerializer<AuthenticationTicket>, TicketSerializer>();
+            //container.RegisterType<IDataProtector>(
+            //new InjectionFactory(c => new DpapiDataProtectionProvider().Create("ASP.NET Identity")));
             //container.RegisterType<ApplicationUserManager>();
             //container.RegisterType<AccountController>(new InjectionConstructor());
 

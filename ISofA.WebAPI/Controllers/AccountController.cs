@@ -17,6 +17,7 @@ using ISofA.WebAPI.Models;
 using ISofA.WebAPI.Providers;
 using ISofA.WebAPI.Results;
 using ISofA.DAL.Core.Domain;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace ISofA.WebAPI.Controllers
 {
@@ -338,8 +339,25 @@ namespace ISofA.WebAPI.Controllers
             {
                 return GetErrorResult(result);
             }
-
+            //TODO Kad budes hteo email verifikaciju, odkomentarisi linije ispod
+            //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            //string callbackUrl = Url.Link("DefaultApi",new { controller = "Account/ConfirmEmail",userId=user.Id,code});
+            //await UserManager.SendEmailAsync(user.Id, "Confirm your account", $"<p>Please confirm god damnit by smashing the link here! <a href=\" {callbackUrl}\">here</a></p>");
+            
             return Ok();
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ConfirmEmail")]
+        public async Task<IHttpActionResult> ConfirmEmail(string userId, string code)
+        {
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            if (result.Succeeded)
+                return Redirect(Url.Content("~/"));
+            else
+                return BadRequest();
         }
 
         // POST api/Account/RegisterExternal
