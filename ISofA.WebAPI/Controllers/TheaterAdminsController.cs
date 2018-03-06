@@ -1,6 +1,6 @@
-﻿using ISofA.SL.DTO;
+﻿using ISofA.DAL.Core.Domain;
+using ISofA.SL.DTO;
 using ISofA.SL.Services;
-using ISofA.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
 {
-    [RoutePrefix("api/Theaters/{theaterId}")]
+    [RoutePrefix("api/Theaters/{theaterId}/Admins")]
     public class TheaterAdminsController : ApiController
     {
         // TODO: Dodaj ogranicenje da samo administratori sistema mogu da dodaju nove admine theatra
@@ -21,14 +21,14 @@ namespace ISofA.WebAPI.Controllers
             _theaterAdminService = theaterAdminService;
         }
 
-        [Route("Admins")]
+        [Route("")]
         public IEnumerable<ISofAUserDTO> Get(int theaterId)
         {
             return _theaterAdminService.GetTheaterAdmins(theaterId);
         }
 
-        [Route("Admins")]
-        public IHttpActionResult Post(int theaterId, AdminModel theaterAdmin)
+        [Route("")]
+        public IHttpActionResult Post(int theaterId, ISofAUser theaterAdmin)
         {
             var admin = _theaterAdminService.AddTheaterAdmin(theaterId, theaterAdmin.Id);
 
@@ -40,7 +40,7 @@ namespace ISofA.WebAPI.Controllers
             return BadRequest();
         }
 
-        [Route("Admins/{theaterAdminId}")]
+        [Route("{theaterAdminId}")]
         public void Delete(int theaterId, string theaterAdminId)
         {
             _theaterAdminService.RemoveTheaterAdmin(theaterId, theaterAdminId);

@@ -23,17 +23,33 @@ namespace ISofA.SL.Implementations
             return new ItemDTO(item);
         }
 
-        public bool BuyItem(Guid itemId, string userId)
+        public bool BuyItems(IEnumerable<Item> items, string userId)
         {
-            var item = UnitOfWork.Items.Get(itemId);
-
-            if (item.BuyerId != null)
+            if (items == null || items.Count() == 0)
             {
                 return false;
             }
 
-            item.BuyerId = userId;
-            item.BoughtDate = DateTime.Now;
+            // find items from db that are contained in sent item list
+            // and don't haven't been bought yet.
+            var filteredItems = UnitOfWork.Items.GetAll()
+                .Where(x => x.BuyerId == null && items.Any(i => i.ItemId == x.ItemId));
+
+            // if sizes don't match that means user is trying to buy
+            // something that doesn't exist or has been bought previously
+            if (items.Count() != filteredItems.Count())
+            {
+                return false;
+            }
+
+            // Update item
+            DateTime boughtDate = DateTime.Now;
+            foreach (var item in filteredItems)
+            {
+                item.BuyerId = userId;
+                item.BoughtDate = boughtDate;
+            }
+
             UnitOfWork.SaveChanges();
 
             return true;
@@ -53,12 +69,16 @@ namespace ISofA.SL.Implementations
 
         public IEnumerable<ItemDTO> GetItemsForTheater(int theaterId)
         {
-            return UnitOfWork.Items.Find(i => i.TheaterId == theaterId && i.BuyerId == null).Select(i => new ItemDTO(i));
+            return UnitOfWork.Items
+                .Find(i => i.TheaterId == theaterId && i.BuyerId == null)
+                .Select(i => new ItemDTO(i));
         }
 
         public IEnumerable<ItemDTO> GetBoughtItemsForTheater(int theaterId)
         {
-            return UnitOfWork.Items.Find(i => i.TheaterId == theaterId && i.BuyerId != null).Select(i => new ItemDTO(i));
+            return UnitOfWork.Items
+                .Find(i => i.TheaterId == theaterId && i.BuyerId != null)
+                .Select(i => new ItemDTO(i));
         }
 
         public void RemoveItem(Guid itemId)
@@ -76,15 +96,17 @@ namespace ISofA.SL.Implementations
         {
             var item = UnitOfWork.Items.Get(itemId);
 
-            if (item != null)
+            if (item == null)
             {
-                item.Name = update.Name;
-                item.Description = update.Description;
-
-                return new ItemDTO(item);
+                return null;
             }
 
-            return null;
+            item.Name = update.Name;
+            item.Description = update.Description;
+            item.Price = update.Price;
+            UnitOfWork.SaveChanges();
+
+            return new ItemDTO(item);
         }
     }
 }

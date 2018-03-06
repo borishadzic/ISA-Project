@@ -12,7 +12,7 @@ namespace ISofA.SL.Services
         ItemDTO GetItem(Guid itemId);
         ItemDTO AddItem(int theaterId, Item item);
         ItemDTO UpdateItem(Guid itemId, Item update);
-        bool BuyItem(Guid itemId, string userId);
+        bool BuyItems(IEnumerable<Item> items, string userId);
         void RemoveItem(Guid itemId);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
-using ISofA.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
 {
-    [RoutePrefix("api/Theaters/{theaterId}")]
+    [RoutePrefix("api/Theaters/{theaterId}/FanZoneAdmins")]
     public class FanZoneAdminsController : ApiController
     {
         // TODO: Dodaj ogranicenje da samo administratori sistema mogu da dodaju nove admine fan zone
@@ -22,14 +21,14 @@ namespace ISofA.WebAPI.Controllers
             _fanZoneAdminService = fanZoneAdminService;
         }
 
-        [Route("FanZoneAdmins")]
+        [Route("")]
         public IEnumerable<ISofAUserDTO> Get(int theaterId)
         {
             return _fanZoneAdminService.GetFanZoneAdmins(theaterId);
         }
 
-        [Route("FanZoneAdmins")]
-        public IHttpActionResult Post(int theaterId, AdminModel fanZoneAdmin)
+        [Route("")]
+        public IHttpActionResult Post(int theaterId, ISofAUser fanZoneAdmin)
         {
             var admin = _fanZoneAdminService.AddFanZoneAdmin(theaterId, fanZoneAdmin.Id);
 
@@ -41,7 +40,7 @@ namespace ISofA.WebAPI.Controllers
             return BadRequest();
         }
 
-        [Route("FanZoneAdmins/{fanZoneAdminId}")]
+        [Route("{fanZoneAdminId}")]
         public void Delete(int theaterId, string fanZoneAdminId)
         {
             _fanZoneAdminService.RemoveFanZoneAdmin(theaterId, fanZoneAdminId);

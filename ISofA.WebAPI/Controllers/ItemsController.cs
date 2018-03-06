@@ -96,10 +96,10 @@ namespace ISofA.WebAPI.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("api/Items/{itemId}/Buy")]
-        public IHttpActionResult BuyItem(Guid itemId)
+        [Route("api/Items/Buy")]
+        public IHttpActionResult BuyItems(IEnumerable<Item> items)
         {
-            var success = _itemService.BuyItem(itemId, User.Identity.GetUserId());
+            var success = _itemService.BuyItems(items, User.Identity.GetUserId());
 
             if (success)
             {
