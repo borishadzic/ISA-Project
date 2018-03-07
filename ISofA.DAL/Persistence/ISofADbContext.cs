@@ -108,16 +108,41 @@ namespace ISofA.DAL.Persistence
 				.HasForeignKey(x => x.SenderId)
 				.WillCascadeOnDelete(false);
 
-			
+            modelBuilder.Entity<Theater>()
+                .HasMany(x => x.Items)
+                .WithRequired(x => x.Theater)
+                .HasForeignKey(x => x.TheaterId)
+                .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Theater>()
+                .HasMany(x => x.UserItems)
+                .WithRequired(x => x.Theater)
+                .HasForeignKey(x => x.TheaterId)
+                .WillCascadeOnDelete(false);
 
-			// Nisam siguran da li treba i ovde... 
-			// Dodao sam anotaciju i na sam properti u modelu
-			// Nasao sam nesto tako na netu... Ako ne valja obrisi
-			modelBuilder.Entity<Item>()
-                .Property(x => x.BoughtDate)
-                .HasColumnType("datetime2")
-                .HasPrecision(0);
+            modelBuilder.Entity<ISofAUser>()
+                .HasMany(x => x.UserItems)
+                .WithRequired(x => x.ISofaUser)
+                .HasForeignKey(x => x.ISofAUserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ISofAUser>()
+                .HasMany(x => x.UserBids)
+                .WithRequired(x => x.Bidder)
+                .HasForeignKey(x => x.BidderId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserItem>()
+                .HasMany(x => x.Bids)
+                .WithRequired(x => x.UserItem)
+                .HasForeignKey(x => x.UserItemId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserItem>()
+                .HasOptional(x => x.HighestBidder)
+                .WithMany()
+                .HasForeignKey(x => x.HighestBidderId)
+                .WillCascadeOnDelete(false);
         }
 
         public static ISofADbContext Create()

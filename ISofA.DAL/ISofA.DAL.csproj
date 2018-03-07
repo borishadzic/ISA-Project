@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Domain\Bid.cs" />
     <Compile Include="Core\Domain\FriendRequest.cs" />
     <Compile Include="Core\Domain\ISofAUser.cs" />
     <Compile Include="Core\Domain\Item.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Core\Domain\Seat.cs" />
     <Compile Include="Core\Domain\Stage.cs" />
     <Compile Include="Core\Domain\Theater.cs" />
+    <Compile Include="Core\Domain\UserItem.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Pantries\IFriendRequestPantry.cs" />
     <Compile Include="Core\Pantries\IItemPantry.cs" />
@@ -90,6 +92,10 @@
     <Compile Include="Migrations\201802260028529_Friends.cs" />
     <Compile Include="Migrations\201802260028529_Friends.Designer.cs">
       <DependentUpon>201802260028529_Friends.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803071732508_UserItemAndBid.cs" />
+    <Compile Include="Migrations\201803071732508_UserItemAndBid.Designer.cs">
+      <DependentUpon>201803071732508_UserItemAndBid.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802260028529_Friends.resx">
       <DependentUpon>201802260028529_Friends.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803071732508_UserItemAndBid.resx">
+      <DependentUpon>201803071732508_UserItemAndBid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

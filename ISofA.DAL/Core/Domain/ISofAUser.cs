@@ -20,6 +20,8 @@ namespace ISofA.DAL.Core.Domain
         public virtual ICollection<Theater> AdminTheaters { get; set; }
         public virtual ICollection<Seat> Reservations { get; set; }
         public virtual ICollection<Item> BoughtItems { get; set; }
+        public virtual ICollection<UserItem> UserItems { get; set; }
+        public virtual ICollection<Bid> UserBids { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ISofAUser> manager, string authenticationType)
         {
