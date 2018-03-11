@@ -14,5 +14,7 @@ namespace ISofA.SL.Services
         bool AcceptFriendRequest(string RecieverId, string SenderId);
         bool DeclineFriendRequest(string RecieverId, string SenderId);
         bool SendFriendRequest(string RecieverId, string SenderId);
-    }
+		IEnumerable<ISofAUserDTO> GetFriends(string UserId);
+		bool RemoveFriend(string UserId, string FriendId);
+	}
 }

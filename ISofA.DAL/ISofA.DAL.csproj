@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201803071732508_UserItemAndBid.Designer.cs">
       <DependentUpon>201803071732508_UserItemAndBid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803112220363_ListAndRemoveFriends.cs" />
+    <Compile Include="Migrations\201803112220363_ListAndRemoveFriends.Designer.cs">
+      <DependentUpon>201803112220363_ListAndRemoveFriends.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
     <Compile Include="Persistence\Pantries\FriendRequestPantry.cs" />
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803071732508_UserItemAndBid.resx">
       <DependentUpon>201803071732508_UserItemAndBid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803112220363_ListAndRemoveFriends.resx">
+      <DependentUpon>201803112220363_ListAndRemoveFriends.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

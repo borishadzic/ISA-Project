@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 namespace ISofA.DAL.Core.Domain
 {
 
-    public class FriendRequest
-    {
+	public class FriendRequest
+	{
+		public bool? Accepted { get; set; }
         [Key]
         [Column(Order = 0)]
         public string SenderId { get; set; }

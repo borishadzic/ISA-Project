@@ -1,0 +1,5 @@
+﻿Restoring NuGet packages...
+To prevent NuGet from restoring packages during build, open the Visual Studio Options dialog, click on the Package Manager node and uncheck 'Allow NuGet to download missing packages during build.'
+1>------ Build started: Project: ISofA.DAL, Configuration: Debug Any CPU ------
+2>------ Build started: Project: ISofA.Client, Configuration: Debug Any CPU ------
+2>Validating Web Site

@@ -58,5 +58,20 @@ namespace ISofA.WebAPI.Controllers
                 return BadRequest();
         }
 
-    }
+		[HttpGet]
+		[Route("api/Friends")]
+		public IEnumerable<ISofAUserDTO> GetFriends()
+		{
+			return _friendRequestService.GetFriends(User.Identity.GetUserId());
+		}
+
+		[HttpPost]
+		[Route("api/Friends/{UserId}/remove")]
+		public bool RemoveFriend(string UserId)
+		{
+			return _friendRequestService.RemoveFriend(User.Identity.GetUserId(), UserId);
+
+		}
+
+	}
 }
