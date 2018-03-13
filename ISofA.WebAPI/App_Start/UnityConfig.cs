@@ -99,6 +99,8 @@ namespace ISofA.WebAPI
             container.RegisterType<IFanZoneAdminService, FanZoneAdminService>();
             container.RegisterType<ITheaterAdminService, TheaterAdminService>();
 			container.RegisterType<IFriendRequestService, FriendRequestService>();
+            container.RegisterType<IUserItemService, UserItemService>();
+            container.RegisterType<IBidService, BidService>();
         }
     }
 }

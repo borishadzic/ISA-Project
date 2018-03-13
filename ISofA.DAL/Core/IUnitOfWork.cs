@@ -18,6 +18,8 @@ namespace ISofA.DAL.Core
         IStagePantry Stages { get; }
         IItemPantry Items { get; }
 		IFriendRequestPantry FriendRequests { get; }
+        IUserItemPantry UserItems { get; }
+        IBidPantry Bids { get; }
 
         void Modified<TEntity>(TEntity entity) where TEntity : class;
 

@@ -245,11 +245,13 @@
     <Compile Include="Authorization\TheaterAdminAttribute.cs" />
     <Compile Include="Authorization\FanZoneAdminAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BidsController.cs" />
     <Compile Include="Controllers\FanZoneAdminsController.cs" />
     <Compile Include="Controllers\FriendRequestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\TheaterAdminsController.cs" />
+    <Compile Include="Controllers\UserItemsController.cs" />
     <Compile Include="Controllers\VisitsController.cs" />
     <Compile Include="Controllers\SeatsController.cs" />
     <Compile Include="Controllers\ProjectionsController.cs" />
@@ -263,6 +265,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\UserItemBindingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -367,7 +370,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49459</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

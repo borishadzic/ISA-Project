@@ -64,6 +64,7 @@
     <Compile Include="Core\Domain\Theater.cs" />
     <Compile Include="Core\Domain\UserItem.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Pantries\IBidPantry.cs" />
     <Compile Include="Core\Pantries\IFriendRequestPantry.cs" />
     <Compile Include="Core\Pantries\IItemPantry.cs" />
     <Compile Include="Core\Pantries\IPantry.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Core\Pantries\IProjectionPantry.cs" />
     <Compile Include="Core\Pantries\IPlayPantry.cs" />
     <Compile Include="Core\Pantries\ITheaterPantry.cs" />
+    <Compile Include="Core\Pantries\IUserItemPantry.cs" />
     <Compile Include="Core\Pantries\IUserPantry.cs" />
     <Compile Include="Migrations\201802040627468_Init.cs" />
     <Compile Include="Migrations\201802040627468_Init.Designer.cs">
@@ -101,8 +103,13 @@
     <Compile Include="Migrations\201803112220363_ListAndRemoveFriends.Designer.cs">
       <DependentUpon>201803112220363_ListAndRemoveFriends.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803131237476_UserItemAndBidModification.cs" />
+    <Compile Include="Migrations\201803131237476_UserItemAndBidModification.Designer.cs">
+      <DependentUpon>201803131237476_UserItemAndBidModification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
+    <Compile Include="Persistence\Pantries\BidPantry.cs" />
     <Compile Include="Persistence\Pantries\FriendRequestPantry.cs" />
     <Compile Include="Persistence\Pantries\ItemPantry.cs" />
     <Compile Include="Persistence\Pantries\Pantry.cs" />
@@ -111,6 +118,7 @@
     <Compile Include="Persistence\Pantries\SeatPantry.cs" />
     <Compile Include="Persistence\Pantries\StagePantry.cs" />
     <Compile Include="Persistence\Pantries\TheaterPantry.cs" />
+    <Compile Include="Persistence\Pantries\UserItemPantry.cs" />
     <Compile Include="Persistence\Pantries\UserPantry.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803112220363_ListAndRemoveFriends.resx">
       <DependentUpon>201803112220363_ListAndRemoveFriends.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131237476_UserItemAndBidModification.resx">
+      <DependentUpon>201803131237476_UserItemAndBidModification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

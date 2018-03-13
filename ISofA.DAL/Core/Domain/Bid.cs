@@ -10,14 +10,12 @@ namespace ISofA.DAL.Core.Domain
 {
     public class Bid
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid BidId { get; set; }
-        public DateTime BidDate { get; set; }
-        public string BidderId { get; set; }
+        [Key, Column(Order = 0)]
         public Guid UserItemId { get; set; }
+        [Key, Column(Order = 1)]
+        public string BidderId { get; set; }
+        public DateTime BidDate { get; set; }
         public float BidAmount { get; set; }
-        public bool Won { get; set; }
             
         [ForeignKey("BidderId")]
         public virtual ISofAUser Bidder { get; set; }

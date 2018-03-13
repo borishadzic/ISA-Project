@@ -20,14 +20,13 @@ namespace ISofA.DAL.Core.Domain
         public string ImageUrl { get; set; }
         public DateTime ExpirationDate { get; set; }
         public bool? Approved { get; set; }
-        public bool? Sold { get; set; }
+        [ConcurrencyCheck]
+        public bool Sold { get; set; }
+        [ConcurrencyCheck]
         public float? HighestBid { get; set; }
-        public string HighestBidderId { get; set; }
 
         [ForeignKey("ISofAUserId")]
         public virtual ISofAUser ISofaUser { get; set; }
-        [ForeignKey("HighestBidderId")]
-        public virtual ISofAUser HighestBidder { get; set; }
         public virtual ICollection<Bid> Bids { get; set; }
         [ForeignKey("TheaterId")]
         public virtual Theater Theater { get; set; }

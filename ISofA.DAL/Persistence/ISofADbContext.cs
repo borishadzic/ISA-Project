@@ -23,6 +23,8 @@ namespace ISofA.DAL.Persistence
         public DbSet<Projection> Projections { get; set; }
         public DbSet<Seat> Seats { get; set; }
 		public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<UserItem> UserItems { get; set; }
+        public DbSet<Bid> Bids { get; set; }
 
         public override int SaveChanges()
         {
@@ -136,12 +138,6 @@ namespace ISofA.DAL.Persistence
                 .HasMany(x => x.Bids)
                 .WithRequired(x => x.UserItem)
                 .HasForeignKey(x => x.UserItemId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<UserItem>()
-                .HasOptional(x => x.HighestBidder)
-                .WithMany()
-                .HasForeignKey(x => x.HighestBidderId)
                 .WillCascadeOnDelete(false);
         }
 

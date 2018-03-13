@@ -39,8 +39,13 @@ namespace ISofA.DAL.Persistence
 		private IFriendRequestPantry _friendRequests;
 		public IFriendRequestPantry FriendRequests { get { return _friendRequests ?? new FriendRequestPantry(_context); } }
 
+        private IUserItemPantry _userItems;
+        public IUserItemPantry UserItems { get { return _userItems ?? new UserItemPantry(_context); } }
 
-		public void Modified<TEntity>(TEntity entity) where TEntity : class
+        private IBidPantry _bids;
+        public IBidPantry Bids { get { return _bids ?? new BidPantry(_context); } }
+
+        public void Modified<TEntity>(TEntity entity) where TEntity : class
         {
             _context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }

@@ -16,11 +16,14 @@ namespace ISofA.DAL.Core.Domain
         public float Price { get; set; }
         public string ImageUrl { get; set; }
         public string BuyerId { get; set; }
+        
+        [ConcurrencyCheck]
         [Column(TypeName = "datetime2")]
         public DateTime? BoughtDate { get; set; }
 
         [ForeignKey("TheaterId")]
         public virtual Theater Theater { get; set; }
+
         [ForeignKey("BuyerId")]
         public virtual ISofAUser Buyer { get; set; }
     }
