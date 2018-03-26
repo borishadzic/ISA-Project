@@ -1,6 +1,8 @@
 <div style="width:70%; padding: 0 0 0 30%"  >
-  <form  [formGroup]="form" (ngSubmit)="onRegister()">
-      <div class="row">
+  <form class="form-signin" [formGroup]="form" (ngSubmit)="onRegister()">
+    <img style="width:100%;" class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 style="width:100%; align-content:center;" class="h3 mb-3 font-weight-normal">Don't have an accout? Register</h1>  
+    <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
       <input type="text" name="first_name" id="name" formControlName = "name" class="form-control input-sm floatlabel" placeholder="First Name">

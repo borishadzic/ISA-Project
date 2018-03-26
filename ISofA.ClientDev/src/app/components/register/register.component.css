@@ -13,3 +13,9 @@ label.label-floatlabel {
     color: #46b8da;
     font-size: 11px;
 }
+.form-signin {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    margin: 0 auto;
+  }
