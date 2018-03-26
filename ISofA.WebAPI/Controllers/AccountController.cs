@@ -340,10 +340,10 @@ namespace ISofA.WebAPI.Controllers
                 return GetErrorResult(result);
             }
             //TODO Kad budes hteo email verifikaciju, odkomentarisi linije ispod
-            //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            //string callbackUrl = Url.Link("DefaultApi",new { controller = "Account/ConfirmEmail",userId=user.Id,code});
-            //await UserManager.SendEmailAsync(user.Id, "Confirm your account", $"<p>Please confirm god damnit by smashing the link here! <a href=\" {callbackUrl}\">here</a></p>");
-            
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            string callbackUrl = Url.Link("DefaultApi", new { controller = "Account/ConfirmEmail", userId = user.Id, code });
+            await UserManager.SendEmailAsync(user.Id, "Confirm your account", $"<p>Please confirm god damnit by smashing the link here! <a href=\" {callbackUrl}\">here</a></p>");
+
             return Ok();
         }
 

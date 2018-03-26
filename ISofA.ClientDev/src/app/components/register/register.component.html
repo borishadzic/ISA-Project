@@ -1,41 +1,53 @@
-<form [formGroup]="form" (ngSubmit)="onRegister()">
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email" formControlName = "email">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd" formControlName = "password">
-  </div>
-  <div class="form-group">
-      <label for="cpwd">Confirm Password:</label>
-      <input type="password" class="form-control" id="cpwd" formControlName = "confirmPassword">
-  </div>
-  <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" formControlName = "name">
-  </div>
-  <div class="form-group">
-      <label for="surname">Surname:</label>
-      <input type="text" class="form-control" id="surname" formControlName = "surname">
-  </div>
-  <div class="form-group">
-      <label for="city">City:</label>
-      <input type="text" class="form-control" id="city" formControlName = "city">
-  </div>
-  <div class="form-group">
-      <label for="pn">Phone number:</label>
-      <input type="text" class="form-control" id="pn" formControlName = "phoneNumber">
-  </div>
-<!--     
-  <div class="form-check">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox"> Remember me
-    </label>
-  </div> -->
-  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
-</form>
+<div style="width:70%; padding: 0 0 0 30%"  >
+  <form  [formGroup]="form" (ngSubmit)="onRegister()">
+      <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+      <input type="text" name="first_name" id="name" formControlName = "name" class="form-control input-sm floatlabel" placeholder="First Name">
+              </div>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                  <input type="text" name="last_name" id="surname" formControlName = "surname" class="form-control input-sm" placeholder="Last Name">
+              </div>
+          </div>
+      </div>
 
+      <div class="form-group">
+          <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" formControlName = "email">
+      </div>
+
+      <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                  <input type="password" name="password" id="pwd" formControlName = "password" class="form-control input-sm" placeholder="Password">
+              </div>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                  <input type="password" name="password_confirmation" id="cpwd" formControlName = "confirmPassword" class="form-control input-sm" placeholder="Confirm Password">
+              </div>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                      <input type="text" name="city" id="city" formControlName = "city" class="form-control input-sm" placeholder="City">
+                  </div>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                      <input type="text" name="phoneNumber" id="pn" formControlName = "phoneNumber" class="form-control input-sm" placeholder="Phone Number">
+                  </div>
+          </div>
+      </div>
+  <!--     
+    <div class="form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox"> Remember me
+      </label>
+    </div> -->
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Register</button>
+  </form>
+</div>
 <div *ngIf="fail">
   <p>Neuspesno</p>
 </div>
