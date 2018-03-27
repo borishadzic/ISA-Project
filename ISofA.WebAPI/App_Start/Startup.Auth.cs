@@ -48,24 +48,24 @@ namespace ISofA.WebAPI
             app.UseOAuthBearerTokens(OAuthOptions);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+			// Uncomment the following lines to enable logging in with third party login providers
+			//app.UseMicrosoftAccountAuthentication(
+			//    clientId: "",
+			//    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //    consumerKey: "",
-            //    consumerSecret: "");
+			//app.UseTwitterAuthentication(
+			//    consumerKey: "",
+			//    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
+			//app.UseFacebookAuthentication(
+			//    appId: "",
+			//    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
-        }
+			app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+			{
+				ClientId = "657371249885-l4d9v68fd2qitkplrjhdukcfqrlj4rjv.apps.googleusercontent.com",
+				ClientSecret = "2J_II4n4xpy1zUvBSaPosZP_"
+			});
+		}
     }
 }

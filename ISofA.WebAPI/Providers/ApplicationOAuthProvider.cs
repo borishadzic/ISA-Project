@@ -78,8 +78,8 @@ namespace ISofA.WebAPI.Providers
         {
             if (context.ClientId == _publicClientId)
             {
-                Uri expectedRootUri = new Uri(context.Request.Uri, "/");
-
+                //Uri expectedRootUri = new Uri(context.Request.Uri, "/login");
+				Uri expectedRootUri = new Uri("http://localhost:4200/login");
                 if (expectedRootUri.AbsoluteUri == context.RedirectUri)
                 {
                     context.Validated();
