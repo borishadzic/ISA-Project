@@ -22,5 +22,12 @@ namespace ISofA.DAL.Persistence.Pantries
                 .Include(x => x.UserItem)
                 .FirstOrDefault();
         }
+
+        public void SaveOrUpdateBid(Bid bid)
+        {
+            bool exists = Context.Bids.Any(x => x.UserItemId == bid.UserItemId && x.BidderId == bid.BidderId);
+
+            Context.Entry<Bid>(bid).State = exists ? EntityState.Modified : EntityState.Added;
+        }
     }
 }

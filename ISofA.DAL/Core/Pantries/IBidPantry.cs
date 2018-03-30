@@ -10,5 +10,6 @@ namespace ISofA.DAL.Core.Pantries
     public interface IBidPantry : IPantry<Bid>
     {
         Bid GetBidWithUserItem(Guid userItemId, string bidderId);
+        void SaveOrUpdateBid(Bid bid);
     }
 }

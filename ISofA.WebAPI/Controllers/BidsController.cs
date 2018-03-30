@@ -1,4 +1,5 @@
 ﻿using ISofA.DAL.Core.Domain;
+using ISofA.SL.DTO;
 using ISofA.SL.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -21,13 +22,13 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("")]
-        public IEnumerable<Bid> Get(Guid userItemId)
+        public IEnumerable<BidDTO> Get(Guid userItemId)
         {
             return _bidService.GetAll(userItemId);
         }
 
         [Route("{bidderId}")]
-        public Bid Get(Guid userItemId, string bidderId)
+        public BidDTO Get(Guid userItemId, string bidderId)
         {
             var bid = _bidService.Get(userItemId, bidderId);
 
@@ -40,7 +41,7 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("")]
-        public Bid Post(Guid userItemId, Bid bid)
+        public BidDTO Post(Guid userItemId, Bid bid)
         {
             var adddedBid = _bidService.AddBid(userItemId, User.Identity.GetUserId(), bid);
 

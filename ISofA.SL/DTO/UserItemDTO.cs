@@ -16,6 +16,7 @@ namespace ISofA.SL.DTO
             Description = userItem.Description;
             ImageUrl = userItem.ImageUrl;
             Approved = userItem.Approved != null ? userItem.Approved : false;
+            Bids = userItem.Bids.Select(x => new BidDTO(x));
         }
 
         public Guid UserItemId { get; set; }
@@ -23,5 +24,6 @@ namespace ISofA.SL.DTO
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public bool? Approved { get; set; }
+        public IEnumerable<BidDTO> Bids { get; set; }
     }
 }
