@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import {Router} from '@angular/router'
 
 import { RegisterModel } from '../models/register-model';
 
@@ -10,12 +11,14 @@ export class AuthService {
   private token :string;
   public logedInEvent = new Subject<boolean>();
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private router:Router) { 
     if(sessionStorage.getItem('accessToken'))
       this.token=sessionStorage.getItem('accessToken');
     else if (localStorage.getItem('accessToken'))
       this.token=localStorage.getItem('accessToken');
   }
+
+  
 
   isLogedIn(): boolean {
     return this.token!=null;
@@ -35,9 +38,27 @@ export class AuthService {
         'Authorization':'Bearer ' + token
       }
     }).subscribe(response=>{
-      this.token=token;
-      sessionStorage.setItem('accessToken',token);
-      sessionStorage.setItem('Email',(<any>response).Email);
+      if ((<any>response).HasRegistered){
+        this.token=token;
+        sessionStorage.setItem('accessToken',token);
+        sessionStorage.setItem('Email',(<any>response).Email);
+        
+      } else{
+        this.http.post('http://localhost:49459/api/Account/RegisterExternal',{
+          'email':(<any>response).email
+        },{
+          headers:{
+            'Authorization':'Bearer ' + token
+          }
+        }).subscribe(()=>{
+          window.location.href='http://localhost:49459/api/Account/ExternalLogin?provider=Google&response_type=token&approval_prompt=force&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&state=XlwxCG0_Q1WtPZX3iOoc9uaiDRrzzmuPD7tzVhXcPXM1';
+
+        },()=>{
+          alert('Ne valja, boki je kriv')
+        })
+        console.log('Access-token= '+ token);
+        //window.location.href = 'http://localhost:4200/register';
+      }
     })
   }
 

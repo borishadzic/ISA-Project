@@ -25,12 +25,12 @@ import { TokenInterceptor } from './services/token.interceptor';
     AppRoutingModule
   ],
   providers: [
-    AuthService,
-    [{
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }]
+    AuthService
+    // [{
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // }]
   ],
   bootstrap: [AppComponent]
 })

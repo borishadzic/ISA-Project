@@ -360,26 +360,52 @@ namespace ISofA.WebAPI.Controllers
                 return BadRequest();
         }
 
-        // POST api/Account/RegisterExternal
-        [OverrideAuthentication]
+
+		private async Task<ExternalLoginInfo> AuthenticationManager_GetExternalLoginInfoAsync_WithExternalBearer()
+		{
+			ExternalLoginInfo loginInfo = null;
+
+			var result = await Authentication.AuthenticateAsync(DefaultAuthenticationTypes.ExternalBearer);
+
+			if (result != null && result.Identity != null)
+			{
+				var idClaim = result.Identity.FindFirst(ClaimTypes.NameIdentifier);
+				if (idClaim != null)
+				{
+					loginInfo = new ExternalLoginInfo()
+					{
+						DefaultUserName = result.Identity.Name == null ? "" : result.Identity.Name.Replace(" ", ""),
+						Login = new UserLoginInfo(idClaim.Issuer, idClaim.Value)
+					};
+				}
+			}
+			return loginInfo;
+		}
+
+
+		// POST api/Account/RegisterExternal
+		[OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
-        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+        public async Task<IHttpActionResult> RegisterExternal()
         {
-            if (!ModelState.IsValid)
+			//if (!ModelState.IsValid)
+			//{
+			//	return BadRequest(ModelState);
+			//}
+
+			//var info = await Authentication.GetExternalLoginInfoAsync();
+			var info = await AuthenticationManager_GetExternalLoginInfoAsync_WithExternalBearer();
+			if (info == null)
             {
-                return BadRequest(ModelState);
+				//return InternalServerError();
+				return BadRequest();
             }
 
-            var info = await Authentication.GetExternalLoginInfoAsync();
-            if (info == null)
-            {
-                return InternalServerError();
-            }
+            var user = new ISofAUser() { UserName = info.Email, Email = info.Email };
 
-            var user = new ISofAUser() { UserName = model.Email, Email = model.Email };
 
-            IdentityResult result = await UserManager.CreateAsync(user);
+			IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);

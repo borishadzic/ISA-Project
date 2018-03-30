@@ -61,11 +61,16 @@ namespace ISofA.WebAPI
 			//    appId: "",
 			//    appSecret: "");
 
-			app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+			
+			var google = new GoogleOAuth2AuthenticationOptions()
 			{
 				ClientId = "657371249885-l4d9v68fd2qitkplrjhdukcfqrlj4rjv.apps.googleusercontent.com",
-				ClientSecret = "2J_II4n4xpy1zUvBSaPosZP_"
-			});
+				ClientSecret = "2J_II4n4xpy1zUvBSaPosZP_",
+				Provider = new GoogleOAuth2AuthenticationProvider()
+			};
+
+			google.Scope.Add("email");
+			app.UseGoogleAuthentication(google);
 		}
     }
 }

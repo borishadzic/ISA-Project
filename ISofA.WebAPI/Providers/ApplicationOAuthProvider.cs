@@ -38,7 +38,11 @@ namespace ISofA.WebAPI.Providers
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
-            }
+            } else if (user.EmailConfirmed == false)
+			{
+				context.SetError("email_not_verified", "Haven't verified account yet");
+				return;
+			}
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
