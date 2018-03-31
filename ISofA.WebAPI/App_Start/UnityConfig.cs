@@ -101,6 +101,7 @@ namespace ISofA.WebAPI
 			container.RegisterType<IFriendRequestService, FriendRequestService>();
             container.RegisterType<IUserItemService, UserItemService>();
             container.RegisterType<IBidService, BidService>();
+            container.RegisterType<IUploadService, UploadService>();
         }
     }
 }

@@ -5,14 +5,19 @@ using ISofA.SL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace ISofA.SL.Implementations
 {
     public class ItemService : Service, IItemService
     {
+        private readonly IUploadService _uploadService;
+
         // TODO: Vrati samo one iteme koji nisu prodati
-        public ItemService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public ItemService(IUnitOfWork unitOfWork, IUploadService uploadService) : base(unitOfWork)
         {
+            _uploadService = uploadService;
         }
 
         public ItemDTO AddItem(int theaterId, Item item)
@@ -105,6 +110,20 @@ namespace ISofA.SL.Implementations
             item.Description = update.Description;
             item.Price = update.Price;
             UnitOfWork.SaveChanges();
+
+            return new ItemDTO(item);
+        }
+
+        public async Task<ItemDTO> SetImageAsync(Guid itemId, HttpPostedFile image)
+        {
+            var item = UnitOfWork.Items.Get(itemId);
+
+            if (item == null)
+            {
+                return null;
+            }
+
+            item.ImageUrl = await _uploadService.UploadImageAsync(image);
 
             return new ItemDTO(item);
         }

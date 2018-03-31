@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -52,7 +53,7 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("~/api/UserItems/{userItemId:guid}")]
-        [ResponseType(typeof(UserItemDTO))]
+        [ResponseType(typeof(UserItemDetailDTO))]
         public IHttpActionResult Get(Guid userItemId)
         {
             var userItem = _userItemService.GetItem(userItemId);
@@ -67,14 +68,14 @@ namespace ISofA.WebAPI.Controllers
 
         [HttpPost]
         [Route("~/api/UserItems/{userItemId:guid}")]
-        public UserItemDTO UploadImage(Guid userItemId)
+        public async Task<UserItemDTO> UploadImageAsync(Guid userItemId)
         {
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            var userItem = _userItemService.SetImage(User.Identity.GetUserId(), userItemId, HttpContext.Current.Request.Files["image"]);
+            var userItem = await _userItemService.SetImageAsync(User.Identity.GetUserId(), userItemId, HttpContext.Current.Request.Files["image"]);
 
             if (userItem == null)
             {
@@ -98,7 +99,8 @@ namespace ISofA.WebAPI.Controllers
             {
                 Name = bindingModel.Name,
                 Description = bindingModel.Description,
-                ExpirationDate = bindingModel.ExpirationDate
+                ExpirationDate = bindingModel.ExpirationDate,
+                ImageUrl = $"{ Url.Content("~/") }Images/default.png"
             };
 
             var addedItem = _userItemService.AddItem(theaterId, User.Identity.GetUserId(), userItem);

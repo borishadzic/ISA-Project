@@ -14,8 +14,11 @@ namespace ISofA.SL.Implementations
 {
     public class UserItemService : Service, IUserItemService
     {
-        public UserItemService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IUploadService _uploadService;
+
+        public UserItemService(IUnitOfWork unitOfWork, IUploadService uploadService) : base(unitOfWork)
         {
+            _uploadService = uploadService;
         }
 
         public UserItemDTO AddItem(int theaterId, string userId, UserItem userItem)
@@ -42,7 +45,7 @@ namespace ISofA.SL.Implementations
                 .Select(x => new UserItemDTO(x));
         }
 
-        public UserItemDTO GetItem(Guid userItemId)
+        public UserItemDetailDTO GetItem(Guid userItemId)
         {
             var userItem = UnitOfWork.UserItems.Get(userItemId);
 
@@ -51,7 +54,7 @@ namespace ISofA.SL.Implementations
                 return null;
             }
 
-            return new UserItemDTO(userItem);
+            return new UserItemDetailDTO(userItem);
         }
 
         public IEnumerable<UserItemDTO> GetItemsForTheater(int theaterId)
@@ -97,7 +100,7 @@ namespace ISofA.SL.Implementations
             return new UserItemDTO(item);
         }
 
-        public UserItemDTO SetImage(string userId, Guid userItemId, HttpPostedFile file)
+        public async Task<UserItemDTO> SetImageAsync(string userId, Guid userItemId, HttpPostedFile file)
         {
             if (file == null || !file.ContentType.Contains("image"))
             {
@@ -114,8 +117,8 @@ namespace ISofA.SL.Implementations
             }
 
             // TODO: Uploadovanje slike
-            // userItem.ImageUrl = ...
-            // UnitOfWork.SaveChanges();
+            userItem.ImageUrl = await _uploadService.UploadImageAsync(file);
+            UnitOfWork.SaveChanges();
 
             return new UserItemDTO(userItem);
         }

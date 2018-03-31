@@ -31,6 +31,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.9.1.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -51,6 +63,7 @@
     <Compile Include="DTO\ProjectionDTO.cs" />
     <Compile Include="DTO\PlayDTO.cs" />
     <Compile Include="DTO\TheaterDTO.cs" />
+    <Compile Include="DTO\UserItemDetailDTO.cs" />
     <Compile Include="DTO\UserItemDTO.cs" />
     <Compile Include="Implementations\AuthService.cs" />
     <Compile Include="Implementations\BidService.cs" />
@@ -60,6 +73,7 @@
     <Compile Include="Implementations\PlayService.cs" />
     <Compile Include="Implementations\TheaterAdminService.cs" />
     <Compile Include="Implementations\TheaterService.cs" />
+    <Compile Include="Implementations\UploadService.cs" />
     <Compile Include="Implementations\UserItemService.cs" />
     <Compile Include="Implementations\VisitService.cs" />
     <Compile Include="Implementations\SeatService.cs" />
@@ -76,6 +90,7 @@
     <Compile Include="Services\IItemService.cs" />
     <Compile Include="Services\ITheaterAdminService.cs" />
     <Compile Include="Services\ITheaterService.cs" />
+    <Compile Include="Services\IUploadService.cs" />
     <Compile Include="Services\IUserItemService.cs" />
     <Compile Include="Services\IVisitService.cs" />
     <Compile Include="Services\IProjectionService.cs" />
@@ -87,6 +102,9 @@
       <Project>{1B26256E-1C35-476C-98E7-8384A3D8BB8A}</Project>
       <Name>ISofA.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

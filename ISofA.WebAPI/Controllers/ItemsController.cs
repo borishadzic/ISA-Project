@@ -39,54 +39,42 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("api/Theaters/{theaterId}/Items")]
-        public async Task<IHttpActionResult> PostAsync(int theaterId)
+        public  IHttpActionResult Post(int theaterId, Item item)
+        {
+            var newItem = _itemService.AddItem(theaterId, item);
+
+            if (newItem == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(newItem);
+        }
+
+        [HttpPost]
+        [Route("~/api/Items/{itemId}")]
+        public async Task<ItemDTO> UploadImageAsync(Guid itemId)
         {
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            var provider = new CustomMultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath("~/Images"));
-            var result = await Request.Content.ReadAsMultipartAsync(provider);
+            var item = await _itemService.SetImageAsync(itemId, HttpContext.Current.Request.Files["image"]);
 
-            var formDataKeys = result.FormData.AllKeys;
-
-            if (!formDataKeys.Contains("Name") ||
-                !formDataKeys.Contains("Description") ||
-                !formDataKeys.Contains("Price"))
+            if (item == null)
             {
-                return BadRequest("Name, description and price are required values!");
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            var name = result.FormData.Get("Name");
-            var description = result.FormData.Get("Description");
-            var success = float.TryParse(result.FormData.Get("Price"), out float price);
-
-            if (!success || name.Length < 3 || description.Length < 3)
-            {
-                return BadRequest("Invalid form data.");
-            }
-
-            var item = new Item() { Name = name, Description = description, Price = price };
-
-            if (result.FileData.Count > 0)
-            {
-                var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
-                item.ImageUrl = GetImageUrl(uploadedFileInfo.Name);
-            }
-            else
-            {
-                item.ImageUrl = GetImageUrl();
-            }
-
-            return Ok(_itemService.AddItem(theaterId, item));
+            return item;
         }
 
-        private string GetImageUrl(String fileName = null)
-        {
-            //string rootUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-            return $"{ Url.Content("~/") }Images/{ fileName ?? "default.png" }";
-        }
+        //private string GetImageUrl(String fileName = null)
+        //{
+        //    //string rootUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+        //    return $"{ Url.Content("~/") }Images/{ fileName ?? "default.png" }";
+        //}
 
         [Route("api/Items/{itemId}")]
         public ItemDTO Get(Guid itemId)
@@ -125,14 +113,14 @@ namespace ISofA.WebAPI.Controllers
     }
 
     // TODO: Privremeno sam stavio klasu ovde. Ne znam gde drugde da je stavim. Premesti je ako zelis
-    public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
-    {
-        public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
+    //public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
+    //{
+    //    public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
 
-        public override string GetLocalFileName(HttpContentHeaders headers)
-        {
-            string file = headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-            return (Guid.NewGuid().ToString() + Path.GetExtension(file)).Replace("-", "_");
-        }
-    }
+    //    public override string GetLocalFileName(HttpContentHeaders headers)
+    //    {
+    //        string file = headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+    //        return (Guid.NewGuid().ToString() + Path.GetExtension(file)).Replace("-", "_");
+    //    }
+    //}
 }

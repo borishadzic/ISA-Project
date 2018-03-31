@@ -2,6 +2,8 @@
 using ISofA.SL.DTO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace ISofA.SL.Services
 {
@@ -11,6 +13,7 @@ namespace ISofA.SL.Services
         IEnumerable<ItemDTO> GetBoughtItemsForTheater(int theaterId);
         ItemDTO GetItem(Guid itemId);
         ItemDTO AddItem(int theaterId, Item item);
+        Task<ItemDTO> SetImageAsync(Guid itemId, HttpPostedFile image);
         ItemDTO UpdateItem(Guid itemId, Item update);
         bool BuyItems(IEnumerable<Item> items, string userId);
         void RemoveItem(Guid itemId);
