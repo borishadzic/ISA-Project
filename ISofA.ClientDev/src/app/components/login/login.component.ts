@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
   loginForm: FormGroup;
-  googleAuth='http://localhost:49459/api/Account/ExternalLogin?provider=Google&response_type=token&approval_prompt=force&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&state=XlwxCG0_Q1WtPZX3iOoc9uaiDRrzzmuPD7tzVhXcPXM1';
+  googleAuth='http://localhost:49459/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&state=XlwxCG0_Q1WtPZX3iOoc9uaiDRrzzmuPD7tzVhXcPXM1';
 
   constructor(private fb: FormBuilder, private authService: AuthService,private route:ActivatedRoute) { }
 

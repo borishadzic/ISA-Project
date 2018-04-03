@@ -33,32 +33,42 @@ export class AuthService {
   }
 
   loginGoogle(token: string){
+    
+    console.log('usao u loginGoogle')
     this.http.get('http://localhost:49459/api/Account/UserInfo',{
       headers:{
         'Authorization':'Bearer ' + token
       }
     }).subscribe(response=>{
+      console.log('odgovor od userinfoa')
       if ((<any>response).HasRegistered){
+        
+      console.log('registrovan korisnik')
         this.token=token;
         sessionStorage.setItem('accessToken',token);
         sessionStorage.setItem('Email',(<any>response).Email);
-        
+        //window.location.href= "index.html"
       } else{
-        this.http.post('http://localhost:49459/api/Account/RegisterExternal',{
-          'email':(<any>response).email
-        },{
+          
+        console.log('neregistrovan korisnik')
+        this.http.post('http://localhost:49459/api/Account/RegisterExternal',null,{
           headers:{
             'Authorization':'Bearer ' + token
           }
         }).subscribe(()=>{
+              
+          console.log('preusmerenje za login')
           window.location.href='http://localhost:49459/api/Account/ExternalLogin?provider=Google&response_type=token&approval_prompt=force&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&state=XlwxCG0_Q1WtPZX3iOoc9uaiDRrzzmuPD7tzVhXcPXM1';
-
+          //window.location.href='http://localhost:4200/login'
+          
         },()=>{
           alert('Ne valja, boki je kriv')
         })
         console.log('Access-token= '+ token);
         //window.location.href = 'http://localhost:4200/register';
       }
+      
+      console.log('dosao sam ovde!')
     })
   }
 
