@@ -5,6 +5,8 @@ import { Subject } from 'rxjs/Subject';
 import {Router} from '@angular/router'
 
 import { RegisterModel } from '../models/register-model';
+import { ExternalLoginModel } from '../models/external-login-model';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -70,6 +72,11 @@ export class AuthService {
       
       console.log('dosao sam ovde!')
     })
+  }
+
+  getExtrenalLogins(): Observable<ExternalLoginModel[]>{
+    return this.http.get<ExternalLoginModel[]>(environment.hostUrl+ 
+      '/api/Account/ExternalLogins?returnUrl=http%3a%2f%2flocalhost%3a4200%2flogin&generateState=true')
   }
 
   login(username: string, password: string, remember: boolean) {

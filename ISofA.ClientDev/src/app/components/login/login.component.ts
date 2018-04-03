@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
-
+import { ExternalLoginModel } from '../../models/external-login-model';
+import { environment } from '../../../environments/environment.prod';
 
 
 
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   loginForm: FormGroup;
   googleAuth='http://localhost:49459/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&state=XlwxCG0_Q1WtPZX3iOoc9uaiDRrzzmuPD7tzVhXcPXM1';
-
+  externalLogins :ExternalLoginModel[];
   constructor(private fb: FormBuilder, private authService: AuthService,private route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.authService.loginGoogle(param.split('access_token=')[1].split('&')[0]);
           
     });
+    this.authService.getExtrenalLogins().subscribe(x=>{this.externalLogins = x;});
   }
 
   ngOnDestroy() {
