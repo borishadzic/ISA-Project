@@ -1,15 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { TheaterModule } from './modules/theater/theater.module';
+import { AgmCoreModule } from '@agm/core';
+
+import { TokenInterceptor } from './services/token.interceptor';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { AuthService } from './services/auth.service';
-import { RegisterComponent } from './components/register/register.component';
-import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TokenInterceptor } from './services/token.interceptor';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,15 @@ import { TokenInterceptor } from './services/token.interceptor';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBNuMGHVcGEkYjEoZQWiHZGJA03GS647Jw',
+      libraries: ['places']
+    }),
+    TheaterModule
   ],
   providers: [
-    AuthService
     // [{
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: TokenInterceptor,
