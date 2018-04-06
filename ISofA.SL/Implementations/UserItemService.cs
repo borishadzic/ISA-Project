@@ -80,10 +80,11 @@ namespace ISofA.SL.Implementations
             if (userItem != null)
             {
                 UnitOfWork.UserItems.Remove(userItem);
+                UnitOfWork.SaveChanges();
             }
         }
 
-        public UserItemDTO ApproveItem(int theaterId, Guid userItemId, UserItem userItem)
+        public UserItemDTO ApproveItem(int theaterId, Guid userItemId)
         {
             var item = UnitOfWork.UserItems
                 .Find(x => x.TheaterId == theaterId && x.UserItemId == userItemId)
@@ -94,7 +95,7 @@ namespace ISofA.SL.Implementations
                 return null;
             }
 
-            item.Approved = userItem.Approved;
+            item.Approved = true;
             UnitOfWork.SaveChanges();
 
             return new UserItemDTO(item);

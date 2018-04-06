@@ -32,8 +32,8 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/Theaters/{theaterId}/Items/Bought")]
-        public IEnumerable<ItemDTO> GetBought(int theaterId)
+        [Route("api/Theaters/{theaterId}/Items")]
+        public IEnumerable<ItemDTO> GetBought(int theaterId, [FromUri] bool sold)
         {
             return _itemService.GetBoughtItemsForTheater(theaterId);
         }

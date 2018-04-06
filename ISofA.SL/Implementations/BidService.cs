@@ -16,11 +16,16 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public BidDTO AddBid(Guid userItemId, string userId, Bid bid)
+        public UserItemDetailDTO AddBid(Guid userItemId, string userId, Bid bid)
         {
             var userItem = UnitOfWork.UserItems.Get(userItemId);
 
-            if (userItem == null || userItem.HighestBid < bid.BidAmount || !CheckCondition(userItem))
+            if (userItem == null || !CheckCondition(userItem))
+            {
+                return null;
+            }
+
+            if (userItem.HighestBid != null && userItem.HighestBid + 10 > bid.BidAmount)
             {
                 return null;
             }
@@ -33,7 +38,7 @@ namespace ISofA.SL.Implementations
             userItem.HighestBid = bid.BidAmount;
             UnitOfWork.SaveChanges();
 
-            return new BidDTO(bid);
+            return new UserItemDetailDTO(userItem);
         }
 
         public BidDTO Get(Guid userItemId, string userId)
@@ -57,7 +62,7 @@ namespace ISofA.SL.Implementations
         {
             return userItem.Approved == true
                 && userItem.Sold == false
-                && userItem.ExpirationDate < DateTime.Now;
+                && DateTime.Compare(userItem.ExpirationDate, DateTime.Now) > 0;
         }
     }
 }

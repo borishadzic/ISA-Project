@@ -9,6 +9,6 @@ namespace ISofA.SL.Services
     {
         IEnumerable<BidDTO> GetAll(Guid userItemId);
         BidDTO Get(Guid userItemId, string userId);
-        BidDTO AddBid(Guid userItemId, string userId, Bid bid);
+        UserItemDetailDTO AddBid(Guid userItemId, string userId, Bid bid);
     }
 }

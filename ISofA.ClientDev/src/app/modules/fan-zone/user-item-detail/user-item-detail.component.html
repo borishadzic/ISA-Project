@@ -1,0 +1,34 @@
+<ng-container *ngIf="userItem">
+  <div class="card text-center">
+    <div class="card-body">
+      <img [src]="userItem.ImageUrl" height="250" class="rounded">
+      <h5 class="card-title">{{ userItem.Name }}</h5>
+      <p class="card-text">{{ userItem.Description }}</p>
+    </div>
+  </div>      
+  
+  <div style="margin: 2em 0; text-align: center;">
+    <form [formGroup]="form" class="form-inline" (ngSubmit)="onBid()">
+        <input type="number" 
+          id="formBid" 
+          formControlName="BidAmount" 
+          class="form-control mb-2 mr-sm-2"
+          placeholder="Bid ammount"
+        >
+        <button type="submit" class="btn btn-primary mb-2" [disabled]="!form.valid">Bid</button>
+    </form>
+  </div>
+
+  <h2 *ngIf="userItem.Bids.length != 0; else template">Bids</h2>
+  <ul class="list-group">
+    <li *ngFor="let bid of userItem.Bids" class="list-group-item" 
+      [class.bg-success]="bid.BidAmount == userItem.HighestBid">
+      {{ bid.BidAmount + '$' }} Date {{ bid.BidDate | date}}
+    </li>
+  </ul>
+
+  <ng-template #template>
+    <h2>No bids currently</h2>
+  </ng-template>
+  <div style="margin-top: 5em;"></div>
+</ng-container>

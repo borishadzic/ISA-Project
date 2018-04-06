@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { ItemService } from '../item.service';
+import { Item } from '../model/item';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-item-list',
@@ -7,9 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemListComponent implements OnInit {
 
-  constructor() { }
+  items: Observable<Item[]>;
+
+  constructor(private itemService: ItemService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.items = this.itemService.getItems(params['id']);
+    });
   }
 
 }

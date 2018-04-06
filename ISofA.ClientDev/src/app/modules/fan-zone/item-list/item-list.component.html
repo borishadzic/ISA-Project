@@ -1,3 +1,12 @@
-<p>
-  item-list works!
-</p>
+<h2>Official items</h2>
+<div class="card-columns">
+  <div *ngFor="let item of (items | async)" class="card" style="width: 18rem;">
+      <img class="card-img-top" [src]="item.ImageUrl" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.Name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ item.Price }} $</h6>
+        <p class="card-text">{{ item.Description }}</p>
+        <button class="btn btn-primary" [disabled]="true">Add to cart</button>
+      </div>
+  </div>
+</div>

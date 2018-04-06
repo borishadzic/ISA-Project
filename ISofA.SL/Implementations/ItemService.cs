@@ -124,6 +124,7 @@ namespace ISofA.SL.Implementations
             }
 
             item.ImageUrl = await _uploadService.UploadImageAsync(image);
+            UnitOfWork.SaveChanges();
 
             return new ItemDTO(item);
         }

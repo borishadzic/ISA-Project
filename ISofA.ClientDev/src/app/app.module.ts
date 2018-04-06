@@ -5,6 +5,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { TheaterModule } from './modules/theater/theater.module';
+import { FanZoneModule } from './modules/fan-zone/fan-zone.module';
 import { AgmCoreModule } from '@agm/core';
 
 import { TokenInterceptor } from './services/token.interceptor';
@@ -29,14 +30,15 @@ import { RegisterComponent } from './components/register/register.component';
       apiKey: 'AIzaSyBNuMGHVcGEkYjEoZQWiHZGJA03GS647Jw',
       libraries: ['places']
     }),
-    TheaterModule
+    TheaterModule,
+    FanZoneModule
   ],
   providers: [
-    // [{
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TokenInterceptor,
-    //   multi: true
-    // }]
+    [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }]
   ],
   bootstrap: [AppComponent]
 })

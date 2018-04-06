@@ -41,16 +41,16 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("")]
-        public BidDTO Post(Guid userItemId, Bid bid)
+        public UserItemDetailDTO Post(Guid userItemId, Bid bid)
         {
-            var adddedBid = _bidService.AddBid(userItemId, User.Identity.GetUserId(), bid);
+            var userItem = _bidService.AddBid(userItemId, User.Identity.GetUserId(), bid);
 
-            if (adddedBid == null)
+            if (userItem == null)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            return adddedBid;
+            return userItem;
         }
     }
 }

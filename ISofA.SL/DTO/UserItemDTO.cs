@@ -15,13 +15,15 @@ namespace ISofA.SL.DTO
             Name = userItem.Name;
             Description = userItem.Description;
             ImageUrl = userItem.ImageUrl;
-            Approved = userItem.Approved != null ? userItem.Approved : false;
+            HighestBid = userItem.HighestBid;
+            //Approved = userItem.Approved != null ? userItem.Approved : false;
         }
 
         public Guid UserItemId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public bool? Approved { get; set; }
+        public float? HighestBid { get; set; }
+        //public bool? Approved { get; set; }
     }
 }

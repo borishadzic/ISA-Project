@@ -17,7 +17,7 @@ namespace ISofA.SL.Services
         UserItemDetailDTO GetItem(Guid userItemId);
         UserItemDTO AddItem(int theaterId, string userId, UserItem userItem);
         Task<UserItemDTO> SetImageAsync(string userId, Guid userItemId, HttpPostedFile file);
-        UserItemDTO ApproveItem(int theaterId, Guid userItemId, UserItem userItem);
+        UserItemDTO ApproveItem(int theaterId, Guid userItemId);
         UserItemDTO SellItem(string userId, Guid userItemId, Bid bid);
         void RemoveItem(int theaterId, Guid userItemId);
     }

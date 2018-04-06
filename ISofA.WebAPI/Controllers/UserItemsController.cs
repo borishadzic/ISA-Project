@@ -63,7 +63,7 @@ namespace ISofA.WebAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(userItemId);
+            return Ok(userItem);
         }
 
         [HttpPost]
@@ -115,9 +115,9 @@ namespace ISofA.WebAPI.Controllers
         // Administrator fan zone
         [Route("{userItemId:guid}")]
         [ResponseType(typeof(UserItemDTO))]
-        public IHttpActionResult Put(int theaterId, Guid userItemId, UserItem userItem)
+        public IHttpActionResult Put(int theaterId, Guid userItemId)
         {
-            var updateItem = _userItemService.ApproveItem(theaterId, userItemId, userItem);
+            var updateItem = _userItemService.ApproveItem(theaterId, userItemId);
 
             if (updateItem == null)
             {
@@ -143,9 +143,9 @@ namespace ISofA.WebAPI.Controllers
 
         // Administrator fan zone
         [Route("{userItemId:guid}")]
-        public void Delete(int theatreId, Guid userItemId)
+        public void Delete(int theaterId, Guid userItemId)
         {
-            _userItemService.RemoveItem(theatreId, userItemId);
+            _userItemService.RemoveItem(theaterId, userItemId);
         }
     }
 }
