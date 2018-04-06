@@ -18,37 +18,39 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public PlayDTO Add(int theaterId, Play play)
+        public PlayDTO Add(Play play)
         {
-            play.TheaterId = theaterId;
+            // todo exists theaterid? authorize
             play = UnitOfWork.Plays.Add(play);
             UnitOfWork.SaveChanges();
 
             return new PlayDTO(play);
         }
 
-        IEnumerable<PlayDTO> IPlayService.Get(int theaterId)
+        public IEnumerable<PlayDTO> GetRepertoire(int theaterId)
         {
             return UnitOfWork.Plays.Find(x => x.TheaterId == theaterId)
                 .Select(x => new PlayDTO(x));
         }
 
-        public PlayDTO Get(int theaterId, int playId)
+        public PlayDTO Get(int playId)
         {
-            Play play = UnitOfWork.Plays.Get(theaterId, playId);
+            Play play = UnitOfWork.Plays.Get(playId);
             return new PlayDTO(play);
         }
 
-        public void Remove(int theaterId, int playId)
+        public void Remove(int playId)
         {
             IPlayPantry pantry = (IPlayPantry)UnitOfWork.Plays;
-            pantry.Remove(pantry.Get(theaterId, playId));
+            pantry.Remove(pantry.Get(playId));
             UnitOfWork.SaveChanges();
         }
 
-        public PlayDTO Update(int theaterId, int playId, Play play)
+        public PlayDTO Update(int playId, Play play)
         {
-            Play modified = UnitOfWork.Plays.Get(theaterId, playId);
+            // todo authorized theaterId
+
+            Play modified = UnitOfWork.Plays.Get(playId);
             modified.Name = play.Name;
             modified.Actors = play.Actors;
             modified.Genre = play.Genre;

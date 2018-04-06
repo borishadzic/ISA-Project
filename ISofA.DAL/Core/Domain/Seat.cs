@@ -18,28 +18,26 @@ namespace ISofA.DAL.Core.Domain
         [Key]
         [Column(Order = 1)]
         public int TheaterId { get; set; }
+
+        public int PlayId { get; set; }
+
+        public int StageId { get; set; } // Properties no longer reflect reality
+        
+        public int ProjectionId { get; set; }
         [Key]
         [Column(Order = 2)]
-        public int PlayId { get; set; }
-        [Key]
-        [Column(Order = 3)]
-        public int StageId { get; set; }
-        [Key]
-        [Column(Order = 4)]
-        public int ProjectionId { get; set; }        
-        [Key]
-        [Column(Order = 5)]
         public int SeatRow { get; set; }
         [Key]
-        [Column(Order = 6)]
+        [Column(Order = 3)]
         public int SeatColumn { get; set; }
 
         public string UserId { get; set; }
         public SeatState State { get; set; }
         public int Discount { get; set; }
 
-        [ForeignKey("TheaterId, PlayId, StageId, ProjectionId")]
-        public virtual Projection Projection { get; set; }
+        [ForeignKey("TheaterId")]
+        public virtual Theater Theater { get; set; }
+
         [ForeignKey("UserId")]
         public virtual ISofAUser User { get; set; }
     }

@@ -12,8 +12,12 @@ namespace ISofA.DAL.Persistence
 {
     public class ISofADbContext : IdentityDbContext<ISofAUser>
     {
-        public ISofADbContext()
-            : base("ISofADb", throwIfV1Schema: false)
+        public ISofADbContext() : base("ISofaDb", throwIfV1Schema: false)
+        {
+        }
+
+        public ISofADbContext(string nameOrConnectionString)
+            : base(nameOrConnectionString, throwIfV1Schema: false)
         {
         }
 
@@ -22,7 +26,7 @@ namespace ISofA.DAL.Persistence
         public DbSet<Play> Plays { get; set; }
         public DbSet<Projection> Projections { get; set; }
         public DbSet<Seat> Seats { get; set; }
-		public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<UserItem> UserItems { get; set; }
         public DbSet<Bid> Bids { get; set; }
 
@@ -63,11 +67,6 @@ namespace ISofA.DAL.Persistence
                 .WithRequired(x => x.Theater)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Theater>()
-                .HasMany(x => x.Projections)
-                .WithRequired(x => x.Theater)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Stage>()
                 .HasMany(x => x.Projections)
                 .WithRequired(x => x.Stage)
@@ -78,15 +77,15 @@ namespace ISofA.DAL.Persistence
                 .WithRequired(x => x.Play)
                 .WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<ISofAUser>()
-				.HasMany(x => x.Friends)
-				.WithMany()
-				.Map(m =>
-				{
-					m.MapLeftKey("Id");
-					m.MapRightKey("FriendId");
-					m.ToTable("Friends");
-				});
+            modelBuilder.Entity<ISofAUser>()
+                .HasMany(x => x.Friends)
+                .WithMany()
+                .Map(m =>
+                {
+                    m.MapLeftKey("Id");
+                    m.MapRightKey("FriendId");
+                    m.ToTable("Friends");
+                });
 
             modelBuilder.Entity<ISofAUser>()
                 .HasMany(x => x.Reservations)
@@ -98,17 +97,17 @@ namespace ISofA.DAL.Persistence
                 .WithOptional(x => x.Buyer)
                 .WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<FriendRequest>()
-				.HasRequired(x => x.Reciever)
-				.WithMany(x => x.FriendRequestsRecieved)
-				.HasForeignKey(x => x.RecieverId)
-				.WillCascadeOnDelete(false);
+            modelBuilder.Entity<FriendRequest>()
+                .HasRequired(x => x.Reciever)
+                .WithMany(x => x.FriendRequestsRecieved)
+                .HasForeignKey(x => x.RecieverId)
+                .WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<FriendRequest>()
-				.HasRequired(x => x.Sender)
-				.WithMany(x => x.FriendRequestsSent)
-				.HasForeignKey(x => x.SenderId)
-				.WillCascadeOnDelete(false);
+            modelBuilder.Entity<FriendRequest>()
+                .HasRequired(x => x.Sender)
+                .WithMany(x => x.FriendRequestsSent)
+                .HasForeignKey(x => x.SenderId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Theater>()
                 .HasMany(x => x.Items)
@@ -143,7 +142,7 @@ namespace ISofA.DAL.Persistence
 
         public static ISofADbContext Create()
         {
-            return new ISofADbContext();
+            return new ISofADbContext("ISofADb");
         }
     }
 }

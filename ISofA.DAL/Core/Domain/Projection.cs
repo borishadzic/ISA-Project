@@ -12,30 +12,19 @@ namespace ISofA.DAL.Core.Domain
     {
         [Key]
         [Column(Order = 1)]
-        public int TheaterId { get; set; }
-        [Key]
-        [Column(Order = 2)]
-        public int PlayId { get; set; }
-        [Key]
-        [Column(Order = 3)]
-        public int StageId { get; set; }
-        [Key]
-        [Column(Order = 4)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProjectionId { get; set; }
 
         public DateTime StartTime { get; set; }
         public int Price { get; set; }
 
-        [ForeignKey("TheaterId")]
-        public virtual Theater Theater { get; set; }
+        public int PlayId { get; set; }
+        public int StageId { get; set; }
 
-        [ForeignKey("TheaterId, PlayId")]
-        public virtual Play Play{ get; set; }
-
-        [ForeignKey("TheaterId, StageId")]
-        public virtual Stage Stage { get; set; }
-
-        public virtual ICollection<Seat> Seats { get; set; }
+        [ForeignKey(nameof(PlayId))]
+        public virtual Play Play { get; set; }
+        
+        [ForeignKey(nameof(StageId))]
+        public virtual Stage Stage { get; set; }        
     }
 }

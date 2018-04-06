@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 namespace ISofA.DAL.Core.Domain
 {
     public class Stage
-    {
+    {        
         [Key]
         [Column(Order = 1)]
-        public int TheaterId { get; set; }
-        [Key]
-        [Column(Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StageId { get; set; }
+
         public int SeatRows { get; set; }
         public int SeatColumns { get; set; }
+
+        public int TheaterId { get; set; }
 
         [ForeignKey("TheaterId")]
         public virtual Theater Theater { get; set; }

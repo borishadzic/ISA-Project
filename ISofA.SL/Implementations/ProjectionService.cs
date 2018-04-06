@@ -17,42 +17,40 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public ProjectionDTO Add(int theaterId, int playId, int stageId, Projection projection)
+        public ProjectionDTO Add(Projection projection)
         {
-            projection.TheaterId = theaterId;
-            projection.PlayId = playId;
-            projection.StageId = stageId;
+            // Todo: play Id does not belong to theater with stageId
             projection = UnitOfWork.Projections.Add(projection);
             UnitOfWork.SaveChanges();
 
             return new ProjectionDTO(projection);
         }
 
-        public IEnumerable<ProjectionDTO> GetProjectionsForPlay(int theaterId, int playId, DateTime dateStart)
+        public IEnumerable<ProjectionDTO> GetProjectionsForPlay(int playId, DateTime dateStart)
         {
             dateStart = dateStart.Date;
             DateTime dateEnd = dateStart.AddDays(1);
             return UnitOfWork.Projections
-                .Find(x => x.TheaterId == theaterId && x.PlayId == playId && x.StartTime >= dateStart && x.StartTime <= dateStart.AddDays(1))
+                .Find(x => x.PlayId == playId && x.StartTime >= dateStart && x.StartTime <= dateStart.AddDays(1))
                 .Select(x => new ProjectionDTO(x));
         }
 
-        public ProjectionDTO GetProjectionDetail(int theaterId, int playId, int stageId, int projectionId)
+        public ProjectionDTO GetProjectionDetail(int projectionId)
         {
-            Projection projection = UnitOfWork.Projections.Get(theaterId, playId, stageId, projectionId);
+            Projection projection = UnitOfWork.Projections.Get(projectionId);
             return new ProjectionDTO(projection);
         }
 
-        public void Remove(int theaterId, int playId, int stageId, int projectionId)
+        public void Remove(int projectionId)
         {
-            IProjectionPantry pantry = (IProjectionPantry)UnitOfWork.Projections;
-            pantry.Remove(pantry.Get(theaterId, playId, stageId, projectionId));
+            IProjectionPantry pantry = UnitOfWork.Projections;
+            pantry.Remove(pantry.Get(projectionId));
             UnitOfWork.SaveChanges();
         }
 
-        public ProjectionDTO Update(int theaterId, int playId, int stageId, int projectionId, Projection projection)
+        public ProjectionDTO Update(int projectionId, Projection projection)
         {
-            Projection modified = UnitOfWork.Projections.Get(theaterId, playId, stageId, projectionId);
+            Projection modified = UnitOfWork.Projections.Get(projectionId);
             UnitOfWork.Modified(modified);
             modified.StartTime = projection.StartTime;
             modified.Price = projection.Price;

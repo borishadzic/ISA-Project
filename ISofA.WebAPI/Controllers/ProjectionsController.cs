@@ -20,34 +20,34 @@ namespace ISofA.WebAPI.Controllers
             _projectionService = projectionService;
         }
 
-        [Route("api/Theaters/{theaterId}/Projections")]
-        public IEnumerable<ProjectionDTO> GetProjectionsForPlay(int theaterId, int playId, DateTime dateStart)
+        [Route("api/Projections")]
+        public IEnumerable<ProjectionDTO> GetProjectionsForPlay(int playId, DateTime dateStart)
         {
-            return _projectionService.GetProjectionsForPlay(theaterId, playId, dateStart.ToUniversalTime());
+            return _projectionService.GetProjectionsForPlay(playId, dateStart.ToUniversalTime());
         }
 
-        [Route("api/Theaters/{theaterId}/Projections/{projectionId}")]
-        public ProjectionDTO Get(int theaterId, int playId, int stageId, int projectionId)
+        [Route("api/Projections/{projectionId}")]
+        public ProjectionDTO Get(int projectionId)
         {
-            return _projectionService.GetProjectionDetail(theaterId, playId, stageId, projectionId);
+            return _projectionService.GetProjectionDetail(projectionId);
         }
 
-        [Route("api/Theaters/{theaterId}/Projections")]
-        public ProjectionDTO Post(int theaterId, int playId, int stageId, [FromBody]Projection projection)
+        [Route("api/Projections")]
+        public ProjectionDTO Post([FromBody]Projection projection)
         {
-            return _projectionService.Add(theaterId, playId, stageId, projection);
+            return _projectionService.Add(projection);
         }
 
-        [Route("api/Theaters/{theaterId}/Projections/{projectionId}")]
-        public ProjectionDTO Put(int theaterId, int playId, int stageId, int projectionId, [FromBody]Projection projection)
+        [Route("api/Projections/{projectionId}")]
+        public ProjectionDTO Put(int projectionId, [FromBody]Projection projection)
         {
-            return _projectionService.Update(theaterId, playId, stageId, projectionId, projection);
+            return _projectionService.Update(projectionId, projection);
         }
 
-        [Route("api/Theaters/{theaterId}/Projections/{projectionId}")]
-        public void Delete(int theaterId, int playId, int stageId, int projectionId)
+        [Route("api/Projections/{projectionId}")]
+        public void Delete(int projectionId)
         {
-            _projectionService.Remove(theaterId, playId, stageId, projectionId);
+            _projectionService.Remove(projectionId);
         }
     }
 }

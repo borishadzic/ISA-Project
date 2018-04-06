@@ -15,12 +15,10 @@ namespace ISofA.SL.DTO
             SeatRow = x.SeatRow;
             SeatColumn = x.SeatColumn;
             Discount = x.Discount;
-            Projection = new ProjectionDTO(x.Projection);
         }
 
         public int Discount { get;  }
         public int SeatRow { get; }
         public int SeatColumn { get; }
-        public ProjectionDTO Projection { get; }
     }
 }

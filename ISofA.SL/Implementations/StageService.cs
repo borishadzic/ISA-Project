@@ -17,38 +17,39 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public StageDTO Add(int theaterId, Stage stage)
+        public StageDTO Add(Stage stage)
         {
-            stage.TheaterId = theaterId;
+            // todo theaterId exists? authorize
             UnitOfWork.Stages.Add(stage);
             UnitOfWork.SaveChanges();
             return new StageDTO(stage);
         }
 
-        public IEnumerable<StageDTO> Get(int theaterId)
+        public IEnumerable<StageDTO> GetAll(int theaterId)
         {
             return UnitOfWork.Stages.Find(x => x.TheaterId == theaterId)
                 .Select(x => new StageDTO(x));
         }
 
-        public StageDTO Get(int theaterId, int stageId)
+        public StageDTO Get(int stageId)
         {
-            Stage stage = UnitOfWork.Stages.Get(theaterId, stageId);
+            Stage stage = UnitOfWork.Stages.Get(stageId);
             return new StageDTO(stage);
         }
 
-        public void Remove(int theaterId, int stageId)
+        public void Remove(int stageId)
         {
             IStagePantry pantry = (IStagePantry)UnitOfWork.Stages;
-            pantry.Remove(pantry.Get(theaterId, stageId));
+            pantry.Remove(pantry.Get(stageId));
             UnitOfWork.SaveChanges();
 
         }
 
-        public StageDTO Update(int theaterId, int stageId, Stage stage)
+        public StageDTO Update(int stageId, Stage stage)
         {
             // TODO: Throw exception when projections exist for given stage
-            Stage modified = UnitOfWork.Stages.Get(theaterId, stageId);
+            // maybe uneditable?
+            Stage modified = UnitOfWork.Stages.Get(stageId);
             modified.SeatRows = stage.SeatRows;
             modified.SeatColumns = stage.SeatColumns;
             return new StageDTO(modified);

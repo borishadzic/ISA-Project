@@ -20,35 +20,35 @@ namespace ISofA.WebAPI.Controllers
             _playService = playService;
         }
         
-        [Route("api/Theaters/{theaterId}/Plays")]
-        public IEnumerable<PlayDTO> Get(int theaterId)
+        [Route("api/Plays")]
+        public IEnumerable<PlayDTO> GetRepertoire(int theaterId)
         {
-            return _playService.Get(theaterId);
+            return _playService.GetRepertoire(theaterId);
         }
 
-        [Route("api/Theaters/{theaterId}/Plays/{playId}")]
-        public PlayDTO Get(int theaterId, int playId)
+        [Route("api/Plays/{playId}")]
+        public PlayDTO Get(int playId)
         {
-            return _playService.Get(theaterId, playId);
+            return _playService.Get(playId);
         }
 
-        [Route("api/Theaters/{theaterId}/Plays")]
-        public PlayDTO Post(int theaterId, [FromBody]Play play)
+        [Route("api/Plays")]
+        public PlayDTO Post([FromBody]Play play)
         {
-            return _playService.Add(theaterId, play);
+            return _playService.Add(play);
         }
 
         // PUT api/values/5
-        [Route("api/Theaters/{theaterId}/Plays/{playId}")]
-        public PlayDTO Put(int theaterId, int playId, [FromBody]Play play)
+        [Route("api/Plays/{playId}")]
+        public PlayDTO Put(int playId, [FromBody]Play play)
         {
-            return _playService.Update(theaterId, playId, play);
+            return _playService.Update(playId, play);
         }
 
-        [Route("api/Theaters/{theaterId}/Plays/{playId}")]
-        public void Delete(int theaterId, int playId)
+        [Route("api/Plays/{playId}")]
+        public void Delete(int playId)
         {
-            _playService.Remove(theaterId, playId);
+            _playService.Remove(playId);
         }
     }
 }

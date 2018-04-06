@@ -12,7 +12,6 @@ namespace ISofA.SL.DTO
 
         public ProjectionDTO(Projection projection)
         {
-            TheaterId = projection.TheaterId;
             PlayId = projection.PlayId;
             StageId = projection.StageId;
             ProjectionId = projection.ProjectionId;
@@ -20,7 +19,6 @@ namespace ISofA.SL.DTO
             Price = projection.Price;
         }
 
-        public int TheaterId { get; set; }
         public int PlayId { get; set; }
         public int StageId { get; set; }
         public int ProjectionId { get; set; }

@@ -75,37 +75,9 @@
     <Compile Include="Core\Pantries\ITheaterPantry.cs" />
     <Compile Include="Core\Pantries\IUserItemPantry.cs" />
     <Compile Include="Core\Pantries\IUserPantry.cs" />
-    <Compile Include="Migrations\201802040627468_Init.cs" />
-    <Compile Include="Migrations\201802040627468_Init.Designer.cs">
-      <DependentUpon>201802040627468_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802222035354_TheaterModification.cs" />
-    <Compile Include="Migrations\201802222035354_TheaterModification.Designer.cs">
-      <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802252130409_Item.cs" />
-    <Compile Include="Migrations\201802252130409_Item.Designer.cs">
-      <DependentUpon>201802252130409_Item.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802252337192_FriendRequestSystem.cs" />
-    <Compile Include="Migrations\201802252337192_FriendRequestSystem.Designer.cs">
-      <DependentUpon>201802252337192_FriendRequestSystem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802260028529_Friends.cs" />
-    <Compile Include="Migrations\201802260028529_Friends.Designer.cs">
-      <DependentUpon>201802260028529_Friends.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803071732508_UserItemAndBid.cs" />
-    <Compile Include="Migrations\201803071732508_UserItemAndBid.Designer.cs">
-      <DependentUpon>201803071732508_UserItemAndBid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803112220363_ListAndRemoveFriends.cs" />
-    <Compile Include="Migrations\201803112220363_ListAndRemoveFriends.Designer.cs">
-      <DependentUpon>201803112220363_ListAndRemoveFriends.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803131237476_UserItemAndBidModification.cs" />
-    <Compile Include="Migrations\201803131237476_UserItemAndBidModification.Designer.cs">
-      <DependentUpon>201803131237476_UserItemAndBidModification.cs</DependentUpon>
+    <Compile Include="Migrations\201804062342576_Initial.cs" />
+    <Compile Include="Migrations\201804062342576_Initial.Designer.cs">
+      <DependentUpon>201804062342576_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
@@ -128,29 +100,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802040627468_Init.resx">
-      <DependentUpon>201802040627468_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802222035354_TheaterModification.resx">
-      <DependentUpon>201802222035354_TheaterModification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802252130409_Item.resx">
-      <DependentUpon>201802252130409_Item.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802252337192_FriendRequestSystem.resx">
-      <DependentUpon>201802252337192_FriendRequestSystem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802260028529_Friends.resx">
-      <DependentUpon>201802260028529_Friends.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803071732508_UserItemAndBid.resx">
-      <DependentUpon>201803071732508_UserItemAndBid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803112220363_ListAndRemoveFriends.resx">
-      <DependentUpon>201803112220363_ListAndRemoveFriends.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803131237476_UserItemAndBidModification.resx">
-      <DependentUpon>201803131237476_UserItemAndBidModification.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804062342576_Initial.resx">
+      <DependentUpon>201804062342576_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

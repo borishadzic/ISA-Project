@@ -1,19 +1,18 @@
 ﻿using ISofA.DAL.Core;
-using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
+using ISofA.DAL.Persistence;
 using ISofA.DAL.Persistence.Pantries;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISofA.DAL.Persistence
+namespace ISofA.Tests.Persistence
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class TestUnitOfWork : ITestUnitOfWork, IDisposable
     {
-        private ISofADbContext _context = new ISofADbContext("ISofADb");
+        private ISofATestDbContext _context = new ISofATestDbContext("ISofATestDb");
 
         private ITheaterPantry _theaters;
         public ITheaterPantry Theaters { get { return _theaters ?? new TheaterPantry(_context); } }
@@ -36,8 +35,8 @@ namespace ISofA.DAL.Persistence
         private IItemPantry _items;
         public IItemPantry Items { get { return _items ?? new ItemPantry(_context); } }
 
-		private IFriendRequestPantry _friendRequests;
-		public IFriendRequestPantry FriendRequests { get { return _friendRequests ?? new FriendRequestPantry(_context); } }
+        private IFriendRequestPantry _friendRequests;
+        public IFriendRequestPantry FriendRequests { get { return _friendRequests ?? new FriendRequestPantry(_context); } }
 
         private IUserItemPantry _userItems;
         public IUserItemPantry UserItems { get { return _userItems ?? new UserItemPantry(_context); } }
@@ -73,6 +72,11 @@ namespace ISofA.DAL.Persistence
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public void NukeDatabase()
+        {
+            _context.NukeDatabase();
         }
     }
 }

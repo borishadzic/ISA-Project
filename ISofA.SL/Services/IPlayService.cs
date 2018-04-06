@@ -10,12 +10,10 @@ namespace ISofA.SL.Services
 {
     public interface IPlayService
     {
-        IEnumerable<PlayDTO> Get(int theaterId);
-        PlayDTO Get(int theaterId, int playId);
-        PlayDTO Add(int theaterId, Play play);
-        PlayDTO Update(int theaterId, int playId, Play play);
-        void Remove(int theaterId, int playId);
-
-
+        IEnumerable<PlayDTO> GetRepertoire(int theaterId);
+        PlayDTO Get(int playId);
+        PlayDTO Add(Play play);
+        PlayDTO Update(int playId, Play play);
+        void Remove(int playId);
     }
 }

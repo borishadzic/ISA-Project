@@ -20,34 +20,34 @@ namespace ISofA.WebAPI.Controllers
             _stageService = stageService;
         }
         
-        [Route("api/Theaters/{theaterId}/Stages")]
-        public IEnumerable<StageDTO> Get(int theaterId) // TODO: LOW Da li je potrebno get sve?
+        [Route("api/Stages")]
+        public IEnumerable<StageDTO> GetAll(int theaterId) // TODO: LOW Da li je potrebno get sve?
         {
-            return _stageService.Get(theaterId);
+            return _stageService.GetAll(theaterId);
         }
 
-        [Route("api/Theaters/{theaterId}/Stages/{stageId}")]
-        public StageDTO Get(int theaterId, int stageId) // TODO: LOW Da li je potrebno get?
+        [Route("api/Stages/{stageId}")]
+        public StageDTO Get(int stageId) // TODO: LOW Da li je potrebno get?
         {
-            return _stageService.Get(theaterId, stageId);
+            return _stageService.Get(stageId);
         }
 
-        [Route("api/Theaters/{theaterId}/Stages")]
-        public StageDTO Post(int theaterId, [FromBody]Stage stage)
+        [Route("api/Stages")]
+        public StageDTO Post([FromBody]Stage stage)
         {
-            return _stageService.Add(theaterId, stage);
+            return _stageService.Add(stage);
         }
 
-        [Route("api/Theaters/{theaterId}/Stages/{stageId}")]
-        public StageDTO Put(int theaterId, int stageId, [FromBody]Stage stage)
+        [Route("api/Stages/{stageId}")]
+        public StageDTO Put(int stageId, [FromBody]Stage stage)
         {
-            return _stageService.Update(theaterId, stageId, stage);
+            return _stageService.Update(stageId, stage);
         }
 
-        [Route("api/Theaters/{theaterId}/Stages/{stageId}")]
-        public void Delete(int theaterId, int stageId)
+        [Route("api/Stages/{stageId}")]
+        public void Delete(int stageId)
         {
-            _stageService.Remove(theaterId, stageId);
+            _stageService.Remove(stageId);
         }
     }
 }

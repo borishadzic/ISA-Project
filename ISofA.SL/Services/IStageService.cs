@@ -10,11 +10,11 @@ namespace ISofA.SL.Services
 {
     public interface IStageService
     {
-        IEnumerable<StageDTO> Get(int theaterId);
-        StageDTO Get(int theaterId, int stageId);
-        StageDTO Add(int theaterId, Stage stage);
-        StageDTO Update(int theaterId, int stageId, Stage stage);
-        void Remove(int theaterId, int stageId);
+        IEnumerable<StageDTO> GetAll(int theaterId);
+        StageDTO Get(int stageId);
+        StageDTO Add(Stage stage);
+        StageDTO Update(int stageId, Stage stage);
+        void Remove(int stageId);
 
 
     }

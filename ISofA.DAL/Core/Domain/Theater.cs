@@ -25,7 +25,6 @@ namespace ISofA.DAL.Core.Domain
         public virtual ICollection<ISofAUser> FanZoneAdmins { get; set; }
         public virtual ICollection<ISofAUser> TheaterAdmins { get; set; }
 
-        public virtual ICollection<Projection> Projections { get; set; }
         public virtual ICollection<Play> Repertoire { get; set; }
         public virtual ICollection<Stage> Stages { get; set; }
         public virtual ICollection<Item> Items { get; set; }

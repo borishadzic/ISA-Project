@@ -12,9 +12,6 @@ namespace ISofA.DAL.Core.Domain
     {
         [Key]
         [Column(Order = 1)]
-        public int TheaterId { get; set; }
-        [Key]
-        [Column(Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PlayId { get; set; }
 
@@ -26,6 +23,8 @@ namespace ISofA.DAL.Core.Domain
         public string PosterUrl { get; set; }
         public string TrailerUrl { get; set; }
         public string Description { get; set; }
+
+        public int TheaterId { get; set; }
 
         [ForeignKey("TheaterId")]
         public virtual Theater Theater { get; set; }

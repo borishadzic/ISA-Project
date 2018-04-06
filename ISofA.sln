@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISofA.DAL", "ISofA.DAL\ISof
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISofA.SL", "ISofA.SL\ISofA.SL.csproj", "{D0A9D8A4-D7D5-4831-959B-9EBE248CC3EF}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ISofA.Client(2)", "ISofA.Client\", "{2F1ED0D9-375D-4A6D-8902-EF7A6B464B8A}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ISofA.Client", "ISofA.Client\", "{2F1ED0D9-375D-4A6D-8902-EF7A6B464B8A}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_1113"
@@ -30,6 +30,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ISofA.Client(2)", "ISofA.Cl
 		SlnRelativePath = "ISofA.Client\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISofA.Tests", "ISofA.Tests\ISofA.Tests.csproj", "{C0026354-2463-4EC6-AAC4-8AF5EB594D59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{2F1ED0D9-375D-4A6D-8902-EF7A6B464B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F1ED0D9-375D-4A6D-8902-EF7A6B464B8A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F1ED0D9-375D-4A6D-8902-EF7A6B464B8A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{C0026354-2463-4EC6-AAC4-8AF5EB594D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0026354-2463-4EC6-AAC4-8AF5EB594D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0026354-2463-4EC6-AAC4-8AF5EB594D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0026354-2463-4EC6-AAC4-8AF5EB594D59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
