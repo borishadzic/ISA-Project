@@ -12,7 +12,7 @@ namespace ISofA.SL.Services
     {
         IEnumerable<PlayDTO> GetRepertoire(int theaterId);
         PlayDTO Get(int playId);
-        PlayDTO Add(Play play);
+        PlayDTO Add(int theaterId, Play play);
         PlayDTO Update(int playId, Play play);
         void Remove(int playId);
     }

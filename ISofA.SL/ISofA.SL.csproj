@@ -44,6 +44,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -54,7 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Claims\ClaimsIdentityExtensions.cs" />
     <Compile Include="DTO\BidDTO.cs" />
     <Compile Include="DTO\ISofAUserDTO.cs" />
     <Compile Include="DTO\ItemDTO.cs" />
@@ -69,7 +69,6 @@
     <Compile Include="Exceptions\UnauthorizedRequestException.cs" />
     <Compile Include="Exceptions\PlayNotFoundException.cs" />
     <Compile Include="Implementations\BidService.cs" />
-    <Compile Include="Implementations\IdentityService.cs" />
     <Compile Include="Implementations\FanZoneAdminService.cs" />
     <Compile Include="Implementations\FriendRequestService.cs" />
     <Compile Include="Implementations\ItemService.cs" />
@@ -99,6 +98,7 @@
     <Compile Include="Services\IProjectionService.cs" />
     <Compile Include="Services\IStageService.cs" />
     <Compile Include="Services\IPlayService.cs" />
+    <Compile Include="Validation\ModelStateValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISofA.DAL\ISofA.DAL.csproj">

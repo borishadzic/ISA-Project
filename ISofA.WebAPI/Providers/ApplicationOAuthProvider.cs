@@ -43,7 +43,7 @@ namespace ISofA.WebAPI.Providers
 				context.SetError("email_not_verified", "Haven't verified account yet");
 				return;
 			}
-
+            
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,

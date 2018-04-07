@@ -50,7 +50,6 @@ namespace ISofA.Tests.DI
         /// </remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-            container.RegisterType<IIdentity>(new InjectionFactory(u => new ClaimsIdentity("TestAuthentication")));
 
             container.RegisterType<DbContext, ISofATestDbContext>();
 

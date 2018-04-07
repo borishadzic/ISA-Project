@@ -8,7 +8,7 @@ using Unity;
 
 namespace ISofA.Tests.Unit.Student_3.PlayService
 {
-    public class PlayServiceTest : IdentityServiceTest
+    public class PlayServiceTest : ServiceTest
     {
         protected IPlayService _playService;
 

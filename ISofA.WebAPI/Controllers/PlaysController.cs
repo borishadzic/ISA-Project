@@ -1,6 +1,8 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using ISofA.WebAPI.Filters;
+using ISofA.WebAPI.Models;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -27,21 +29,21 @@ namespace ISofA.WebAPI.Controllers
             return _playService.Get(playId);
         }
 
-        [Route("api/Plays")]
-        public PlayDTO Post([FromBody]Play play)
+        [Route("api/Theaters/{theaterId}/Plays")]
+        public PlayDTO Post(int theaterId, [FromBody]Play play)
         {
-            return _playService.Add(play);
+            return _playService.Add(theaterId, play);
         }
 
         // PUT api/values/5
-        [Route("api/Plays/{playId}")]
-        public PlayDTO Put(int playId, [FromBody]Play play)
+        [Route("api/Theaters/{theaterId}/Plays/{playId}")]
+        public PlayDTO Put(int theaterId, int playId, [FromBody]Play play)
         {
             return _playService.Update(playId, play);
         }
 
-        [Route("api/Plays/{playId}")]
-        public void Delete(int playId)
+        [Route("api/Theaters/{theaterId}/Plays/{playId}")]
+        public void Delete(int theaterId, int playId)
         {
             _playService.Remove(playId);
         }

@@ -454,11 +454,15 @@
     <Compile Include="Controllers\TheatersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Filters\ISofAAuthorizationAttribute.cs" />
+    <Compile Include="Filters\ISofAExceptionFilterAttribute.cs" />
+    <Compile Include="Filters\ValidModelActionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\TestItemBindingModel.cs" />
     <Compile Include="Models\UserItemBindingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
