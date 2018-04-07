@@ -38,8 +38,6 @@ namespace ISofA.Tests.DI
         public static IUnityContainer Container => container.Value;
         #endregion
 
-        public static ClaimsIdentity Identity;
-
         /// <summary>
         /// Registers the type mappings with the Unity container.
         /// </summary>
@@ -52,9 +50,7 @@ namespace ISofA.Tests.DI
         /// </remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-            Identity = new ClaimsIdentity("TestAuthentication");
-
-            container.RegisterType<IIdentity>(new InjectionFactory(u => Identity));
+            container.RegisterType<IIdentity>(new InjectionFactory(u => new ClaimsIdentity("TestAuthentication")));
 
             container.RegisterType<DbContext, ISofATestDbContext>();
 

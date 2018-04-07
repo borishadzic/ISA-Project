@@ -50,10 +50,9 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
         public void PlayService_Get_Repertoire_TheaterNotFound()
         {
             // Arrange
-            // Act   
-            var ex = Assert.ThrowsException<TheaterNotFoundException>(() => _playService.GetRepertoire(0));
-            // Assert            
-            Assert.AreEqual(nameof(Theater), "Theater");
+            // Act               
+            // Assert
+            Assert.ThrowsException<TheaterNotFoundException>(() => _playService.GetRepertoire(0));
         }
 
         [TestMethod]
@@ -78,10 +77,9 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
             _unitOfWork.SaveChanges();
-            // Act   
+            // Act               
+            // Assert
             var ex = Assert.ThrowsException<PlayNotFoundException>(() => _playService.Get(0));
-            // Assert            
-            Assert.AreEqual(nameof(Play), "Play");
         }
     }
 }

@@ -21,8 +21,6 @@ namespace ISofA.Tests.Unit
             _diResolver = UnityConfig.Container;
             _unitOfWork = _diResolver.Resolve<ITestUnitOfWork>();
             _unitOfWork.NukeDatabase();
-            UnityConfig.Identity.ClearClaims();
-            UnityConfig.Identity.AddISofAUserRoleClaims(ISofAUserRole.SysAdmin, null);
         }
     }
 }
