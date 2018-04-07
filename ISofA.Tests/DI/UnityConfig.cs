@@ -9,9 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
+using Unity.Injection;
 
 namespace ISofA.Tests.DI
 {
@@ -35,6 +38,8 @@ namespace ISofA.Tests.DI
         public static IUnityContainer Container => container.Value;
         #endregion
 
+        public static ClaimsIdentity Identity;
+
         /// <summary>
         /// Registers the type mappings with the Unity container.
         /// </summary>
@@ -47,6 +52,10 @@ namespace ISofA.Tests.DI
         /// </remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
+            Identity = new ClaimsIdentity("TestAuthentication");
+
+            container.RegisterType<IIdentity>(new InjectionFactory(u => Identity));
+
             container.RegisterType<DbContext, ISofATestDbContext>();
 
             container.RegisterType<ITestUnitOfWork, TestUnitOfWork>();
@@ -69,7 +78,6 @@ namespace ISofA.Tests.DI
 
         private static void RegisterServices(IUnityContainer container)
         {
-            container.RegisterType<IAuthService, AuthService>();
             container.RegisterType<IPlayService, PlayService>();
             container.RegisterType<IStageService, StageService>();
             container.RegisterType<ISeatService, SeatService>();

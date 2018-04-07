@@ -85,6 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Claims\ClaimsIdentityExtensions.cs" />
     <Compile Include="DI\UnityConfig.cs" />
     <Compile Include="Persistence\ISofATestDbContext.cs" />
     <Compile Include="Persistence\ITestUnitOfWork.cs" />

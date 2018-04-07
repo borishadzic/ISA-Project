@@ -1,12 +1,7 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
-using ISofA.WebAPI.Authorization;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers

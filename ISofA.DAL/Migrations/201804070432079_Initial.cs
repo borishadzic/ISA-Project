@@ -30,6 +30,7 @@ namespace ISofA.DAL.Migrations
                         Name = c.String(),
                         Surname = c.String(),
                         City = c.String(),
+                        ISofAUserRole = c.Int(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -41,9 +42,12 @@ namespace ISofA.DAL.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        AdminOfTheater_TheaterId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+                .ForeignKey("dbo.Theaters", t => t.AdminOfTheater_TheaterId)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
+                .Index(t => t.AdminOfTheater_TheaterId);
             
             CreateTable(
                 "dbo.Theaters",
@@ -294,6 +298,7 @@ namespace ISofA.DAL.Migrations
             DropForeignKey("dbo.Items", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.FanZoneAdmins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.FanZoneAdmins", "TheaterId", "dbo.Theaters");
+            DropForeignKey("dbo.AspNetUsers", "AdminOfTheater_TheaterId", "dbo.Theaters");
             DropIndex("dbo.Friends", new[] { "FriendId" });
             DropIndex("dbo.Friends", new[] { "Id" });
             DropIndex("dbo.TheaterAdmins", new[] { "UserId" });
@@ -317,6 +322,7 @@ namespace ISofA.DAL.Migrations
             DropIndex("dbo.Plays", new[] { "TheaterId" });
             DropIndex("dbo.Items", new[] { "BuyerId" });
             DropIndex("dbo.Items", new[] { "TheaterId" });
+            DropIndex("dbo.AspNetUsers", new[] { "AdminOfTheater_TheaterId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Bids", new[] { "BidderId" });
             DropIndex("dbo.Bids", new[] { "UserItemId" });

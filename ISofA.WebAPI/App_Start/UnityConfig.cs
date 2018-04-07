@@ -13,6 +13,8 @@ using Microsoft.Owin.Security.DataHandler.Serializer;
 using Microsoft.Owin.Security.DataProtection;
 using System;
 using System.Data.Entity;
+using System.Security.Principal;
+using System.Web;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
@@ -69,7 +71,9 @@ namespace ISofA.WebAPI
             //container.RegisterType<ApplicationUserManager>();
             //container.RegisterType<AccountController>(new InjectionConstructor());
 
-            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<IIdentity>(new InjectionFactory(u => HttpContext.Current.User.Identity));
+
+            container.RegisterType<IUnitOfWork, UnitOfWork>();            
             RegisterPantries(container);
             RegisterServices(container);
         }
@@ -88,7 +92,6 @@ namespace ISofA.WebAPI
 
         private static void RegisterServices(IUnityContainer container)
         {
-            container.RegisterType<IAuthService, AuthService>();
             container.RegisterType<IPlayService, PlayService>();
             container.RegisterType<IStageService, StageService>();
             container.RegisterType<ISeatService, SeatService>();

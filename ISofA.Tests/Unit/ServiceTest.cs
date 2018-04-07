@@ -1,4 +1,6 @@
-﻿using ISofA.Tests.DI;
+﻿using ISofA.DAL.Core.Domain;
+using ISofA.Tests.Claims;
+using ISofA.Tests.DI;
 using ISofA.Tests.Persistence;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,8 @@ namespace ISofA.Tests.Unit
             _diResolver = UnityConfig.Container;
             _unitOfWork = _diResolver.Resolve<ITestUnitOfWork>();
             _unitOfWork.NukeDatabase();
+            UnityConfig.Identity.ClearClaims();
+            UnityConfig.Identity.AddISofAUserRoleClaims(ISofAUserRole.SysAdmin, null);
         }
     }
 }

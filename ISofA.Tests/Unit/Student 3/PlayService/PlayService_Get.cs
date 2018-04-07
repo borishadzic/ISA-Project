@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using ISofA.DAL.Core.Domain;
+using ISofA.SL.Exceptions;
+using ISofA.Tests.DI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ISofA.Tests.Unit.Student_3.PlayService
@@ -16,7 +18,7 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
         }
 
         [TestMethod]
-        public void PlayService_Get_All_0()
+        public void PlayService_Get_Repertoire_0()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
@@ -30,7 +32,7 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
         }
 
         [TestMethod]
-        public void PlayService_Get_All_1()
+        public void PlayService_Get_Repertoire_1()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
@@ -45,11 +47,11 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
         }
 
         [TestMethod]
-        public void PlayService_Get_All_TheaterNotFound()
+        public void PlayService_Get_Repertoire_TheaterNotFound()
         {
             // Arrange
             // Act   
-            var ex = Assert.ThrowsException<Exception>(() => _playService.GetRepertoire(0));
+            var ex = Assert.ThrowsException<TheaterNotFoundException>(() => _playService.GetRepertoire(0));
             // Assert            
             Assert.AreEqual(nameof(Theater), "Theater");
         }
@@ -63,22 +65,12 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
             _unitOfWork.SaveChanges();
 
             // Act
-            var play = _playService.Get(theater.TheaterId, play1.PlayId);
+            var play = _playService.Get(play1.PlayId);
 
             // Assert
             Assert.AreEqual(play1.Name, play.Name);
             Assert.AreEqual(play1.TheaterId, play.TheaterId);
-        }
-
-        [TestMethod]
-        public void PlayService_Get_1_TheaterNotFound()
-        {
-            // Arrange
-            // Act   
-            var ex = Assert.ThrowsException<Exception>(() => _playService.Get(0, 0));
-            // Assert            
-            Assert.AreEqual(nameof(Theater), "Theater");
-        }
+        }        
 
         [TestMethod]
         public void PlayService_Get_1_PlayNotFound()
@@ -87,7 +79,7 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
             _unitOfWork.SaveChanges();
             // Act   
-            var ex = Assert.ThrowsException<Exception>(() => _playService.Get(theater.TheaterId, 0));
+            var ex = Assert.ThrowsException<PlayNotFoundException>(() => _playService.Get(0));
             // Assert            
             Assert.AreEqual(nameof(Play), "Play");
         }

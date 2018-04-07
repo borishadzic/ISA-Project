@@ -29,5 +29,7 @@ namespace ISofA.DAL.Core.Domain
         public virtual ICollection<Stage> Stages { get; set; }
         public virtual ICollection<Item> Items { get; set; }
         public virtual ICollection<UserItem> UserItems { get; set; }
+
+        public virtual ICollection<ISofAUser> AdminsOfTheater { get; set; }
     }
 }
