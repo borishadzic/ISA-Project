@@ -17,8 +17,9 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public ProjectionDTO Add(Projection projection)
+        public ProjectionDTO Add(int theaterId, Projection projection)
         {
+            // theaterId exists?
             // Todo: play Id does not belong to theater with stageId
             projection = UnitOfWork.Projections.Add(projection);
             UnitOfWork.SaveChanges();

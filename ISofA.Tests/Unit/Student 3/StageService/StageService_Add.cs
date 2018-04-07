@@ -1,12 +1,16 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ISofA.Tests.Unit.Student_3.PlayService
+namespace ISofA.Tests.Unit.Student_3.StageService
 {
     [TestClass]
-    public class PlayService_Add : PlayServiceTest
+    public class StageService_Add : StageServiceTest
     {
 
         [TestInitialize]
@@ -16,28 +20,27 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
         }
 
         [TestMethod]
-        public void PlayService_Add_Ok()
+        public void StageService_Add_Ok()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
             _unitOfWork.SaveChanges();
 
             // Act            
-            var play = new Play() { Name = "Movie 1" };
-            _playService.Add(theater.TheaterId, play);
-            var plays = _playService.GetAll(theater.TheaterId);
+            var stage = new Stage() { Name = "A1" };
+            _stageService.Add(theater.TheaterId, stage);
+            var stages = _stageService.GetAll(theater.TheaterId);
             // Assert
-            Assert.AreEqual(play.Active, true);
-            Assert.AreEqual(plays.Count(), 1);
+            Assert.AreEqual(stages.Count(), 1);
         }
 
         [TestMethod]
-        public void PlayService_Add_TheaterNotFound()
+        public void StageService_Add_TheaterNotFound()
         {
             // Arrange
             // Act                        
             // Assert
-            Assert.ThrowsException<TheaterNotFoundException>(() => _playService.Add(1, new Play() { Name = "Movie 1" }));
+            Assert.ThrowsException<TheaterNotFoundException>(() => _stageService.Add(1, new Stage() { Name = "A1" }));
         }
     }
 }

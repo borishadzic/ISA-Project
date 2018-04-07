@@ -1,6 +1,6 @@
-﻿using ISofA.DAL.Core.Domain;
-using ISofA.SL.DTO;
+﻿using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using ISofA.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -28,20 +28,20 @@ namespace ISofA.WebAPI.Controllers
             return _projectionService.GetProjectionDetail(projectionId);
         }
 
-        [Route("api/Projections")]
-        public ProjectionDTO Post([FromBody]Projection projection)
+        [Route("api/Theaters/{theaterId}/Projections")]
+        public ProjectionDTO Post(int theaterId, [FromBody]ProjectionBindingModel projection)
         {
-            return _projectionService.Add(projection);
+            return _projectionService.Add(theaterId, projection);
         }
 
-        [Route("api/Projections/{projectionId}")]
-        public ProjectionDTO Put(int projectionId, [FromBody]Projection projection)
+        [Route("api/Theaters/{theaterId}/Projections/{projectionId}")]
+        public ProjectionDTO Put(int theaterId, int projectionId, [FromBody]ProjectionBindingModel projection)
         {
             return _projectionService.Update(projectionId, projection);
         }
 
-        [Route("api/Projections/{projectionId}")]
-        public void Delete(int projectionId)
+        [Route("api/Theaters/{theaterId}/Projections/{projectionId}")]
+        public void Delete(int theaterId, int projectionId)
         {
             _projectionService.Remove(projectionId);
         }

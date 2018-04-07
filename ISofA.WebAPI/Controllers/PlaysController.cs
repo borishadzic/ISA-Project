@@ -4,6 +4,7 @@ using ISofA.SL.Services;
 using ISofA.WebAPI.Filters;
 using ISofA.WebAPI.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
@@ -20,7 +21,7 @@ namespace ISofA.WebAPI.Controllers
         [Route("api/Plays")]
         public IEnumerable<PlayDTO> GetRepertoire(int theaterId)
         {
-            return _playService.GetRepertoire(theaterId);
+            return _playService.GetAll(theaterId);
         }
 
         [Route("api/Plays/{playId}")]
@@ -30,14 +31,14 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("api/Theaters/{theaterId}/Plays")]
-        public PlayDTO Post(int theaterId, [FromBody]Play play)
+        public PlayDTO Post(int theaterId, [FromBody]PlayBindingModel play)
         {
             return _playService.Add(theaterId, play);
         }
 
         // PUT api/values/5
         [Route("api/Theaters/{theaterId}/Plays/{playId}")]
-        public PlayDTO Put(int theaterId, int playId, [FromBody]Play play)
+        public PlayDTO Put(int theaterId, int playId, [FromBody]PlayBindingModel play)
         {
             return _playService.Update(playId, play);
         }

@@ -12,27 +12,27 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
     {
         
         [TestInitialize]
-        public void PlayService_Get_Initialize()
+        public void Initialize()
         {
             Init();
         }
 
         [TestMethod]
-        public void PlayService_Get_Repertoire_0()
+        public void PlayService_Get_All_0()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
             _unitOfWork.SaveChanges();
 
             // Act
-            var plays = _playService.GetRepertoire(theater.TheaterId);
+            var plays = _playService.GetAll(theater.TheaterId);
 
             // Assert
             Assert.AreEqual(0, plays.Count());
         }
 
         [TestMethod]
-        public void PlayService_Get_Repertoire_1()
+        public void PlayService_Get_All_1()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
@@ -40,19 +40,19 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
             _unitOfWork.SaveChanges();
 
             // Act
-            var plays = _playService.GetRepertoire(theater.TheaterId);
+            var plays = _playService.GetAll(theater.TheaterId);
 
             // Assert
             Assert.AreEqual(1, plays.Count());
         }
 
         [TestMethod]
-        public void PlayService_Get_Repertoire_TheaterNotFound()
+        public void PlayService_Get_All_TheaterNotFound()
         {
             // Arrange
             // Act               
             // Assert
-            Assert.ThrowsException<TheaterNotFoundException>(() => _playService.GetRepertoire(0));
+            Assert.ThrowsException<TheaterNotFoundException>(() => _playService.GetAll(0));
         }
 
         [TestMethod]

@@ -12,7 +12,7 @@ namespace ISofA.SL.Services
     {
         IEnumerable<ProjectionDTO> GetProjectionsForPlay(int playId, DateTime dateStart);
         ProjectionDTO GetProjectionDetail(int projectionId);
-        ProjectionDTO Add(Projection projection);
+        ProjectionDTO Add(int theaterId, Projection projection);
         ProjectionDTO Update(int projectionId, Projection projection);
         void Remove(int projectionId);        
     }

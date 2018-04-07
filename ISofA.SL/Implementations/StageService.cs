@@ -17,7 +17,7 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public StageDTO Add(Stage stage)
+        public StageDTO Add(int theaterId, Stage stage)
         {
             // todo theaterId exists? authorize
             UnitOfWork.Stages.Add(stage);

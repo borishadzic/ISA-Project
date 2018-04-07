@@ -22,17 +22,16 @@ namespace ISofA.SL.Implementations
             play = UnitOfWork.Plays.Add(play);
             UnitOfWork.SaveChanges();
 
-            return new PlayDTO(play);
+            return play;
         }
 
-        public IEnumerable<PlayDTO> GetRepertoire(int theaterId)
+        public IEnumerable<PlayDTO> GetAll(int theaterId)
         {
             var theater = UnitOfWork.Theaters.Get(theaterId);
             if (theater == null)
                 throw new TheaterNotFoundException(theaterId);
 
-            return UnitOfWork.Plays.Find(x => x.TheaterId == theaterId)
-                .Select(x => new PlayDTO(x));
+            return UnitOfWork.Plays.Find(x => x.TheaterId == theaterId).Select<Play, PlayDTO>(x => x);
         }
 
         public PlayDTO Get(int playId)
@@ -42,7 +41,7 @@ namespace ISofA.SL.Implementations
             if (play == null)
                 throw new PlayNotFoundException(playId);
 
-            return new PlayDTO(play);
+            return play;
         }
 
         public void Remove(int playId)
@@ -67,7 +66,7 @@ namespace ISofA.SL.Implementations
             modified.Description = play.Description;
             UnitOfWork.Modified(modified);
             UnitOfWork.SaveChanges();
-            return new PlayDTO(modified);
+            return modified;
         }
     }
 }
