@@ -1,14 +1,15 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using ISofA.WebAPI.Filters;
 using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
 {
     public class TheatersController : ApiController
     {
-        // TODO: Dodaj ogranicenje da samo admini mogu da dodaju, menjaju i brisu theatre
         private readonly ITheaterService _theaterService;
 
         public TheatersController(ITheaterService theaterService)
@@ -16,24 +17,24 @@ namespace ISofA.WebAPI.Controllers
             _theaterService = theaterService;
         }
 
-        // api/theaters/?type=cinemas
-        public IHttpActionResult Get(string type = "all")
+        // api/theaters?type=cinemas
+        public IEnumerable<TheaterDTO> Get(string type = "")
         {
-            if (type == "all")
+            if (string.IsNullOrEmpty(type))
             {
-                return Ok(_theaterService.GetAll());
+                return _theaterService.GetAll();
             }
             else if (type == "cinemas") 
             {
-                return Ok(_theaterService.GetAllCinemas());
+                return _theaterService.GetAllCinemas();
             }
             else if (type == "plays")
             {
-                return Ok(_theaterService.GetAllPlayTheaters());
+                return _theaterService.GetAllPlayTheaters();
             } 
             else
             {
-                return BadRequest();
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }   
         }
 
@@ -51,11 +52,13 @@ namespace ISofA.WebAPI.Controllers
             }
         }
 
+        [ISofAAuthorization(Role = ISofAUserRole.SysAdmin)]
         public TheaterDTO Post(Theater theater)
         {
             return _theaterService.Add(theater);
         }
 
+        [ISofAAuthorization(Role = ISofAUserRole.SysAdmin)]
         public IHttpActionResult Put(int id, Theater theater)
         {
             var updatedTheater = _theaterService.Update(id, theater);
@@ -70,6 +73,7 @@ namespace ISofA.WebAPI.Controllers
             }
         }
 
+        [ISofAAuthorization(Role = ISofAUserRole.SysAdmin)]
         public void Delete(int id)
         {
             _theaterService.Remove(id);

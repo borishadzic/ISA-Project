@@ -28,5 +28,15 @@ namespace ISofA.DAL.Persistence.Pantries
 				.Include(t=>t.Friends)
 				.FirstOrDefault();
 		}
-	}
+
+        public void UpdateUser(ISofAUser user)
+        {
+            bool exists = Context.Users.Any(x => x.Id == user.Id);
+
+            if (exists)
+            {
+                Context.Entry<ISofAUser>(user).State = EntityState.Modified;
+            }
+        }
+    }
 }

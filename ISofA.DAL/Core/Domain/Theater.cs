@@ -9,8 +9,7 @@ namespace ISofA.DAL.Core.Domain
 {
     public enum TheaterType
     {
-        Cinema,
-        Play
+        Cinema = 0, Play = 1
     }
 
     public class Theater
@@ -22,14 +21,10 @@ namespace ISofA.DAL.Core.Domain
         public float Longitude { get; set; }
         public TheaterType Type { get; set; }
 
-        public virtual ICollection<ISofAUser> FanZoneAdmins { get; set; }
-        public virtual ICollection<ISofAUser> TheaterAdmins { get; set; }
-
+        public virtual ICollection<ISofAUser> Admins { get; set; }
         public virtual ICollection<Play> Repertoire { get; set; }
         public virtual ICollection<Stage> Stages { get; set; }
         public virtual ICollection<Item> Items { get; set; }
         public virtual ICollection<UserItem> UserItems { get; set; }
-
-        public virtual ICollection<ISofAUser> AdminsOfTheater { get; set; }
     }
 }

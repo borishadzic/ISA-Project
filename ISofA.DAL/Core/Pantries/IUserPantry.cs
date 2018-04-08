@@ -10,8 +10,7 @@ namespace ISofA.DAL.Core.Pantries
     public interface IUserPantry : IPantry<ISofAUser>
     {
 		ISofAUser GetUserWithFriendRequests(string UserId);
-
 		ISofAUser GetUserWithFriends(string UserId);
-
+        void UpdateUser(ISofAUser user);
 	}
 }

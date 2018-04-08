@@ -13,4 +13,8 @@ export class TheaterService {
     return this.http.post<any>(environment.hostUrl + '/api/theaters', theater);
   }
 
+  public addTheaterAdmin(theaterId, user): Observable<any> {
+    return this.http.post<any>(environment.hostUrl + '/api/theaters/' + theaterId + '/admins', user);
+  }
+
 }

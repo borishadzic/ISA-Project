@@ -1,5 +1,7 @@
 import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 
@@ -12,6 +14,7 @@ import { TheaterService } from '../theater.service';
 })
 export class TheaterNewComponent implements OnInit {
 
+  public theaterType: any[] = [{ display: 'Cinema', value: 0}, { display: 'Play', value: 1}];
   public form: FormGroup;
   public latitude: number;
   public longitude: number;
@@ -24,14 +27,15 @@ export class TheaterNewComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
-              private theaterService: TheaterService) { }
+              private theaterService: TheaterService,
+              private router: Router) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      'Name' : ['', Validators.required],
-      'Latitude' : [null, Validators.required],
-      'Longitude': [null, Validators.required],
-      'TheaterType': [0, Validators.required]
+      Name: ['', Validators.required],
+      Latitude: [null, Validators.required],
+      Longitude: [null, Validators.required],
+      Type: [0, Validators.required]
     });
 
     // set google maps defaults
@@ -86,9 +90,8 @@ export class TheaterNewComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.theaterService.addTheater(this.form.value).subscribe(res => {
-        console.log('Theater added');
-        console.log(res);
+      this.theaterService.addTheater(this.form.value).subscribe(theater => {
+        this.router.navigate(['/theaters', theater.TheaterId, 'register']);
       });
     }
   }

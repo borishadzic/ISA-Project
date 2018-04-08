@@ -40,22 +40,9 @@ namespace ISofA.DAL.Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Theater>()
-                .HasMany(u => u.FanZoneAdmins)
-                .WithMany(t => t.FanZoneTheaters).Map(cs =>
-            {
-                cs.MapLeftKey("TheaterId");
-                cs.MapRightKey("UserId");
-                cs.ToTable("FanZoneAdmins");
-            });
-
-            modelBuilder.Entity<Theater>()
-                .HasMany(u => u.TheaterAdmins)
-                .WithMany(t => t.AdminTheaters).Map(cs =>
-                {
-                    cs.MapLeftKey("TheaterId");
-                    cs.MapRightKey("UserId");
-                    cs.ToTable("TheaterAdmins");
-                });
+                .HasMany(u => u.Admins)
+                .WithOptional(t => t.AdminOfTheater)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Theater>()
                 .HasMany(x => x.Stages)

@@ -1,49 +1,42 @@
 <div class="container">
   <h1>Theater registration</h1>
 
-  <div class="row">
-    <div class="col-sm">
-      <div class="form-group">
-        <input
-          placeholder="search for location"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="off"
-          type="text"
-          class="form-control"
-          #search
-          [formControl]="searchControl">
-          <small class="form-text text-muted">Click on map to select theater location.</small>
-      </div>
-      <agm-map
-        [latitude]="latitude"
-        [longitude]="longitude"
-        [scrollwheel]="true"
-        [zoom]="zoom"
-        [fullscreenControl]="true"
-        [mapTypeControl]="true"
-        [clickableIcons]="true"
-        (mapClick)="onLocationSelected($event)"
-        >
-        <agm-marker [latitude]="form.controls['Latitude'].value" [longitude]="form.controls['Longitude'].value"></agm-marker>
-      </agm-map>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="theaterInputName">Name</label>
+      <input type="text" class="form-control" id="theaterInputName" formControlName="Name">
     </div>
-    <div class="col-sm">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="theaterInputName">Name</label>
-          <input type="text" class="form-control" id="theaterInputName" formControlName="Name">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Select theater type</label>
-          <select class="form-control" id="exampleFormControlSelect1" formControlName="TheaterType">
-            <option value="0">Theater</option>
-            <option value="1">Cinema</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Create</button>
-      </form>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Select theater type</label>
+      <select class="form-control" id="exampleFormControlSelect1" formControlName="Type">
+        <option *ngFor="let type of theaterType" [ngValue]="type.value">{{ type.display }}</option>
+      </select>
     </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Create</button>
+  </form>
+
+  <div class="form-group">
+    <input
+      placeholder="search for location"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="off"
+      type="text"
+      class="form-control"
+      #search
+      [formControl]="searchControl">
+      <small class="form-text text-muted">Click on map to select theater location.</small>
   </div>
-  
+  <agm-map
+    [latitude]="latitude"
+    [longitude]="longitude"
+    [scrollwheel]="true"
+    [zoom]="zoom"
+    [fullscreenControl]="true"
+    [mapTypeControl]="true"
+    [clickableIcons]="true"
+    (mapClick)="onLocationSelected($event)"
+    >
+    <agm-marker [latitude]="form.controls['Latitude'].value" [longitude]="form.controls['Longitude'].value"></agm-marker>
+  </agm-map>
 </div>

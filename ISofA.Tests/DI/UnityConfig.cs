@@ -80,8 +80,7 @@ namespace ISofA.Tests.DI
             container.RegisterType<IVisitService, VisitService>();
             container.RegisterType<ITheaterService, TheaterService>();
             container.RegisterType<IItemService, ItemService>();
-            container.RegisterType<IFanZoneAdminService, FanZoneAdminService>();
-            container.RegisterType<ITheaterAdminService, TheaterAdminService>();
+            container.RegisterType<IAdminService, AdminService>();
             container.RegisterType<IFriendRequestService, FriendRequestService>();
             container.RegisterType<IUserItemService, UserItemService>();
             container.RegisterType<IBidService, BidService>();

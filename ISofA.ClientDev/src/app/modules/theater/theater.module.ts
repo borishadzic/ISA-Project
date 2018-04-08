@@ -5,6 +5,7 @@ import { AgmCoreModule } from '@agm/core';
 import { TheaterRoutingModule } from './theater-routing.module';
 import { TheaterNewComponent } from './theater-new/theater-new.component';
 import { TheaterService } from './theater.service';
+import { AdminRegistrationComponent } from './admin-registration/admin-registration.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { TheaterService } from './theater.service';
     TheaterRoutingModule
   ],
   declarations: [
-    TheaterNewComponent
+    TheaterNewComponent,
+    AdminRegistrationComponent
   ],
   providers: [
     TheaterService
