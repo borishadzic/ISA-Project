@@ -2,6 +2,7 @@
 using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
 using ISofA.SL.DTO;
+using ISofA.SL.Exceptions;
 using ISofA.SL.Services;
 using System;
 using System.Collections.Generic;
@@ -19,39 +20,63 @@ namespace ISofA.SL.Implementations
 
         public StageDTO Add(int theaterId, Stage stage)
         {
-            // todo theaterId exists? authorize
+            if (stage == null)
+                throw new BadRequestException("Bad Request");
+
+            var theater = UnitOfWork.Theaters.Get(theaterId);
+
+            if (theater == null)
+                throw new TheaterNotFoundException(theaterId);
+
+            stage.TheaterId = theaterId;
+
             UnitOfWork.Stages.Add(stage);
             UnitOfWork.SaveChanges();
             return new StageDTO(stage);
         }
 
         public IEnumerable<StageDTO> GetAll(int theaterId)
-        {
+        {            
+            if (UnitOfWork.Theaters.Get(theaterId) == null)
+                throw new TheaterNotFoundException(theaterId);
+
             return UnitOfWork.Stages.Find(x => x.TheaterId == theaterId)
                 .Select(x => new StageDTO(x));
         }
 
-        public StageDTO Get(int stageId)
-        {
-            Stage stage = UnitOfWork.Stages.Get(stageId);
-            return new StageDTO(stage);
-        }
-
         public void Remove(int stageId)
         {
-            IStagePantry pantry = (IStagePantry)UnitOfWork.Stages;
-            pantry.Remove(pantry.Get(stageId));
-            UnitOfWork.SaveChanges();
+            var stage = UnitOfWork.Stages.Get(stageId);
 
+            if (stage == null)
+                throw new StageNotFoundException(stageId);
+
+            UnitOfWork.Stages.Remove(stage);
+
+            UnitOfWork.SaveChanges();
         }
 
         public StageDTO Update(int stageId, Stage stage)
         {
-            // TODO: Throw exception when projections exist for given stage
-            // maybe uneditable?
-            Stage modified = UnitOfWork.Stages.Get(stageId);
+            if (stage == null)
+                throw new BadRequestException("Bad Request");
+
+            var modified = UnitOfWork.Stages.Get(stageId);
+
+            if (modified == null)
+                throw new StageNotFoundException(stageId);
+
+            var projections = modified.Projections.Where(x=>x.StartTime > DateTime.Now).Count();
+
+            if (projections > 0 && (modified.SeatRows != stage.SeatRows || modified.SeatColumns != stage.SeatColumns))
+                throw new BadRequestException("Can't update stage size while projections are active");
+
+            modified.Name = stage.Name;
             modified.SeatRows = stage.SeatRows;
             modified.SeatColumns = stage.SeatColumns;
+
+            UnitOfWork.Modified(modified);
+            UnitOfWork.SaveChanges();
             return new StageDTO(modified);
         }
     }

@@ -22,6 +22,7 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
+            var play1 = _unitOfWork.Plays.Add(new Play() { TheaterId = theater.TheaterId, Name = "Movie 1", Active = false });
             _unitOfWork.SaveChanges();
 
             // Act
@@ -36,7 +37,8 @@ namespace ISofA.Tests.Unit.Student_3.PlayService
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
-            var play1 = _unitOfWork.Plays.Add(new Play() { TheaterId = theater.TheaterId, Name = "Movie 1" });
+            var play1 = _unitOfWork.Plays.Add(new Play() { TheaterId = theater.TheaterId, Name = "Movie 1", Active = true });
+            var play2 = _unitOfWork.Plays.Add(new Play() { TheaterId = theater.TheaterId, Name = "Movie 2", Active = false });
             _unitOfWork.SaveChanges();
 
             // Act

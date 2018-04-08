@@ -18,7 +18,17 @@ namespace ISofA.SL.Implementations
 
         public PlayDTO Add(int theaterId, Play play)
         {
-            // todo exists theaterid?
+            var theater = UnitOfWork.Theaters.Get(theaterId);
+
+            if (play == null)
+                throw new BadRequestException("Bad Request");
+
+            if (theater == null)
+                throw new TheaterNotFoundException(theaterId);            
+
+            play.TheaterId = theaterId;
+            play.Active = true;
+
             play = UnitOfWork.Plays.Add(play);
             UnitOfWork.SaveChanges();
 
@@ -31,7 +41,7 @@ namespace ISofA.SL.Implementations
             if (theater == null)
                 throw new TheaterNotFoundException(theaterId);
 
-            return UnitOfWork.Plays.Find(x => x.TheaterId == theaterId).Select<Play, PlayDTO>(x => x);
+            return UnitOfWork.Plays.Find(x => x.TheaterId == theaterId && x.Active == true).Select<Play, PlayDTO>(x => x);
         }
 
         public PlayDTO Get(int playId)
@@ -46,16 +56,24 @@ namespace ISofA.SL.Implementations
 
         public void Remove(int playId)
         {
-            IPlayPantry pantry = (IPlayPantry)UnitOfWork.Plays;
-            pantry.Remove(pantry.Get(playId));
+            var play = UnitOfWork.Plays.Get(playId);
+
+            if (play == null)
+                throw new PlayNotFoundException(playId);
+
+            play.Active = false;
+
+            UnitOfWork.Modified(play);
             UnitOfWork.SaveChanges();
         }
 
         public PlayDTO Update(int playId, Play play)
         {
-            // todo authorized theaterId
-
             Play modified = UnitOfWork.Plays.Get(playId);
+
+            if (modified == null)
+                throw new PlayNotFoundException(playId);
+
             modified.Name = play.Name;
             modified.Actors = play.Actors;
             modified.Genre = play.Genre;

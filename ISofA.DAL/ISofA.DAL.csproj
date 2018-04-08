@@ -76,9 +76,9 @@
     <Compile Include="Core\Pantries\ITheaterPantry.cs" />
     <Compile Include="Core\Pantries\IUserItemPantry.cs" />
     <Compile Include="Core\Pantries\IUserPantry.cs" />
-    <Compile Include="Migrations\201804070432079_Initial.cs" />
-    <Compile Include="Migrations\201804070432079_Initial.Designer.cs">
-      <DependentUpon>201804070432079_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201804080429584_Initial.cs" />
+    <Compile Include="Migrations\201804080429584_Initial.Designer.cs">
+      <DependentUpon>201804080429584_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
@@ -101,8 +101,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804070432079_Initial.resx">
-      <DependentUpon>201804070432079_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804080429584_Initial.resx">
+      <DependentUpon>201804080429584_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

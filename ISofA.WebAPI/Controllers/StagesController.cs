@@ -22,12 +22,6 @@ namespace ISofA.WebAPI.Controllers
             return _stageService.GetAll(theaterId);
         }
 
-        [Route("api/Stages/{stageId}")]
-        public StageDTO Get(int stageId) // TODO: LOW Da li je potrebno get?
-        {
-            return _stageService.Get(stageId);
-        }
-
         [Route("api/Theaters/{theaterId}/Stages")]
         public StageDTO Post(int theaterId, [FromBody]StageBindingModel stage)
         {

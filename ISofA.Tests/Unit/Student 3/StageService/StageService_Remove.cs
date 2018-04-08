@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ISofA.Tests.Unit.Student_3.StageService
 {
     [TestClass]
-    public class StageService_Add : StageServiceTest
+    public class StageService_Remove : StageServiceTest
     {
 
         [TestInitialize]
@@ -20,36 +20,27 @@ namespace ISofA.Tests.Unit.Student_3.StageService
         }
 
         [TestMethod]
-        public void StageService_Add_Ok()
+        public void StageService_Remove_Ok()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
+            var stage = _unitOfWork.Stages.Add(new Stage() { TheaterId = theater.TheaterId, Name = "A1" });
             _unitOfWork.SaveChanges();
 
             // Act            
-            var stage = new Stage() { Name = "A1" };
-            _stageService.Add(theater.TheaterId, stage);
+            _stageService.Remove(stage.StageId);
             var stages = _stageService.GetAll(theater.TheaterId);
             // Assert
-            Assert.AreEqual(stages.Count(), 1);
+            Assert.AreEqual(stages.Count(), 0);
         }
 
         [TestMethod]
-        public void StageService_Add_TheaterNotFound()
+        public void StageService_Remove_StageNotFound()
         {
             // Arrange
             // Act                        
             // Assert
-            Assert.ThrowsException<TheaterNotFoundException>(() => _stageService.Add(1, new Stage() { Name = "A1" }));
-        }
-
-        [TestMethod]
-        public void StageService_Add_StageNull()
-        {
-            // Arrange
-            // Act                        
-            // Assert
-            Assert.ThrowsException<BadRequestException>(() => _stageService.Add(1, null));
+            Assert.ThrowsException<StageNotFoundException>(() => _stageService.Remove(1));
         }
     }
 }

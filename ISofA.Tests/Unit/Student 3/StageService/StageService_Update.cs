@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ISofA.Tests.Unit.Student_3.StageService
 {
     [TestClass]
-    public class StageService_Add : StageServiceTest
+    public class StageService_Update : StageServiceTest
     {
 
         [TestInitialize]
@@ -20,36 +20,35 @@ namespace ISofA.Tests.Unit.Student_3.StageService
         }
 
         [TestMethod]
-        public void StageService_Add_Ok()
+        public void StageService_Update_Ok()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
+            var stage = _unitOfWork.Stages.Add(new Stage() { TheaterId = theater.TheaterId, Name = "A1" });
             _unitOfWork.SaveChanges();
 
             // Act            
-            var stage = new Stage() { Name = "A1" };
-            _stageService.Add(theater.TheaterId, stage);
-            var stages = _stageService.GetAll(theater.TheaterId);
+            var dto = _stageService.Update(stage.StageId, new Stage() { Name = "A2" });
             // Assert
-            Assert.AreEqual(stages.Count(), 1);
+            Assert.AreEqual(dto.Name, "A2");
         }
 
         [TestMethod]
-        public void StageService_Add_TheaterNotFound()
+        public void StageService_Update_StageNotFound()
         {
             // Arrange
             // Act                        
             // Assert
-            Assert.ThrowsException<TheaterNotFoundException>(() => _stageService.Add(1, new Stage() { Name = "A1" }));
+            Assert.ThrowsException<StageNotFoundException>(() => _stageService.Update(1, new Stage() { Name = "A2" }));
         }
 
         [TestMethod]
-        public void StageService_Add_StageNull()
+        public void StageService_Update_StageNull()
         {
             // Arrange
             // Act                        
             // Assert
-            Assert.ThrowsException<BadRequestException>(() => _stageService.Add(1, null));
+            Assert.ThrowsException<BadRequestException>(() => _stageService.Update(1, null));
         }
     }
 }

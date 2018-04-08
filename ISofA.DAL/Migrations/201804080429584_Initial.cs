@@ -85,6 +85,7 @@ namespace ISofA.DAL.Migrations
                 c => new
                     {
                         PlayId = c.Int(nullable: false, identity: true),
+                        Active = c.Boolean(nullable: false),
                         Name = c.String(),
                         Actors = c.String(),
                         Genre = c.String(),
@@ -123,6 +124,7 @@ namespace ISofA.DAL.Migrations
                         SeatRows = c.Int(nullable: false),
                         SeatColumns = c.Int(nullable: false),
                         TheaterId = c.Int(nullable: false),
+                        Name = c.String(),
                     })
                 .PrimaryKey(t => t.StageId)
                 .ForeignKey("dbo.Theaters", t => t.TheaterId)

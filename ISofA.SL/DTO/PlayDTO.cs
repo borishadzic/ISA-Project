@@ -10,6 +10,7 @@ namespace ISofA.SL.DTO
     public class PlayDTO
     {
 
+        public bool Active { get; set; }
         public int TheaterId { get; set; }
         public int PlayId { get; set; }
         public string Name { get; set; }
@@ -25,6 +26,7 @@ namespace ISofA.SL.DTO
         {
             return new PlayDTO()
             {
+                Active = play.Active,
                 TheaterId = play.TheaterId,
                 PlayId = play.PlayId,
                 Name = play.Name,

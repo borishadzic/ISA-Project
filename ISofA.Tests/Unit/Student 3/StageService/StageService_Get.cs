@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ISofA.Tests.Unit.Student_3.StageService
 {
     [TestClass]
-    public class StageService_Add : StageServiceTest
+    public class StageService_Get : StageServiceTest
     {
 
         [TestInitialize]
@@ -20,36 +20,41 @@ namespace ISofA.Tests.Unit.Student_3.StageService
         }
 
         [TestMethod]
-        public void StageService_Add_Ok()
+        public void StageService_Get_All_0()
         {
             // Arrange
             var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
             _unitOfWork.SaveChanges();
 
-            // Act            
-            var stage = new Stage() { Name = "A1" };
-            _stageService.Add(theater.TheaterId, stage);
+            // Act
             var stages = _stageService.GetAll(theater.TheaterId);
+
             // Assert
-            Assert.AreEqual(stages.Count(), 1);
+            Assert.AreEqual(0, stages.Count());
         }
 
         [TestMethod]
-        public void StageService_Add_TheaterNotFound()
+        public void StageService_Get_All_1()
         {
             // Arrange
-            // Act                        
+            var theater = _unitOfWork.Theaters.Add(new Theater() { Name = "Arena Cineplex" });
+            var stage = _unitOfWork.Stages.Add(new Stage() { TheaterId = theater.TheaterId, Name = "A1" });
+            _unitOfWork.SaveChanges();
+
+            // Act
+            var stages = _stageService.GetAll(theater.TheaterId);
+
             // Assert
-            Assert.ThrowsException<TheaterNotFoundException>(() => _stageService.Add(1, new Stage() { Name = "A1" }));
+            Assert.AreEqual(1, stages.Count());
         }
 
         [TestMethod]
-        public void StageService_Add_StageNull()
+        public void StageService_Get_All_TheaterNotFound()
         {
             // Arrange
-            // Act                        
+            // Act               
             // Assert
-            Assert.ThrowsException<BadRequestException>(() => _stageService.Add(1, null));
+            Assert.ThrowsException<TheaterNotFoundException>(() => _stageService.GetAll(0));
         }
     }
 }

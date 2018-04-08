@@ -15,11 +15,13 @@ namespace ISofA.SL.DTO
             StageId = stage.StageId;
             SeatRows = stage.SeatRows;
             SeatColumns = stage.SeatColumns;
+            Name = stage.Name;
         }
 
         public int TheaterId { get; set; }
         public int StageId { get; set; }
         public int SeatRows { get; set; }
         public int SeatColumns { get; set; }
+        public string Name { get; set; }
     }
 }

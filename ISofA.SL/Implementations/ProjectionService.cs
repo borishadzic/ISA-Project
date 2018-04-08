@@ -2,6 +2,7 @@
 using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
 using ISofA.SL.DTO;
+using ISofA.SL.Exceptions;
 using ISofA.SL.Services;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,30 @@ namespace ISofA.SL.Implementations
 
         public ProjectionDTO Add(int theaterId, Projection projection)
         {
-            // theaterId exists?
-            // Todo: play Id does not belong to theater with stageId
+            if (projection == null)
+                throw new BadRequestException("Bad Request");
+
+            var theater = UnitOfWork.Theaters.Get(theaterId);
+
+            if (theater == null)
+                throw new TheaterNotFoundException(theaterId);
+
+            var play = UnitOfWork.Plays.Get(projection.PlayId);
+
+            if (play == null)
+                throw new PlayNotFoundException(projection.PlayId);
+
+            var stage = UnitOfWork.Stages.Get(projection.StageId);
+
+            if (stage == null)
+                throw new StageNotFoundException(projection.StageId);
+
+            if (play.TheaterId != theaterId)
+                throw new BadRequestException("Bad Request");
+
+            if (stage.TheaterId != theaterId)
+                throw new BadRequestException("Bad Request");
+                        
             projection = UnitOfWork.Projections.Add(projection);
             UnitOfWork.SaveChanges();
 
@@ -32,7 +55,7 @@ namespace ISofA.SL.Implementations
             dateStart = dateStart.Date;
             DateTime dateEnd = dateStart.AddDays(1);
             return UnitOfWork.Projections
-                .Find(x => x.PlayId == playId && x.StartTime >= dateStart && x.StartTime <= dateStart.AddDays(1))
+                .Find(x => x.PlayId == playId && x.StartTime >= dateStart && x.StartTime <= dateEnd)
                 .Select(x => new ProjectionDTO(x));
         }
 

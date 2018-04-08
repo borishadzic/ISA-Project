@@ -92,18 +92,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\ServiceTest.cs" />
     <Compile Include="Unit\Student 3\PlayService\PlayServiceTest.cs" />
+    <Compile Include="Unit\Student 3\PlayService\PlayService_Update.cs" />
+    <Compile Include="Unit\Student 3\PlayService\PlayService_Remove.cs" />
     <Compile Include="Unit\Student 3\PlayService\PlayService_Add.cs" />
     <Compile Include="Unit\Student 3\PlayService\PlayService_Get.cs" />
+    <Compile Include="Unit\Student 3\ProjectionService\ProjectionService_Add.cs" />
+    <Compile Include="Unit\Student 3\ProjectionService\ProjectionServiceTest.cs" />
     <Compile Include="Unit\Student 3\StageService\StageServiceTest.cs" />
+    <Compile Include="Unit\Student 3\StageService\StageService_Update.cs" />
+    <Compile Include="Unit\Student 3\StageService\StageService_Remove.cs" />
     <Compile Include="Unit\Student 3\StageService\StageService_Add.cs" />
+    <Compile Include="Unit\Student 3\StageService\StageService_Get.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Unit\Student 3\ProjectionService\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ISofA.DAL\ISofA.DAL.csproj">
       <Project>{1b26256e-1c35-476c-98e7-8384a3d8bb8a}</Project>
