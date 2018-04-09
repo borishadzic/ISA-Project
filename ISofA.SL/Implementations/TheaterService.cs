@@ -14,14 +14,14 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public TheaterDTO Add(Theater theater)
+        public TheaterListDTO Add(Theater theater)
         {
             UnitOfWork.Theaters.Add(theater);
             UnitOfWork.SaveChanges();
-            return new TheaterDTO(theater);
+            return new TheaterListDTO(theater);
         }
 
-        public TheaterDTO Get(int theaterId)
+        public TheaterDetailDTO Get(int theaterId)
         {
             var theater = UnitOfWork.Theaters.Get(theaterId);
 
@@ -31,22 +31,22 @@ namespace ISofA.SL.Implementations
                 return null;
             }
 
-            return new TheaterDTO(theater);
+            return theater;
         }
 
-        public IEnumerable<TheaterDTO> GetAll()
+        public IEnumerable<TheaterListDTO> GetAll()
         {
-            return UnitOfWork.Theaters.GetAll().Select(t => new TheaterDTO(t));
+            return UnitOfWork.Theaters.GetAll().Select(t => new TheaterListDTO(t));
         }
 
-        public IEnumerable<TheaterDTO> GetAllCinemas()
+        public IEnumerable<TheaterListDTO> GetAllCinemas()
         {
-            return UnitOfWork.Theaters.Find(t => t.Type == TheaterType.Cinema).Select(t => new TheaterDTO(t));
+            return UnitOfWork.Theaters.Find(t => t.Type == TheaterType.Cinema).Select(t => new TheaterListDTO(t));
         }
 
-        public IEnumerable<TheaterDTO> GetAllPlayTheaters()
+        public IEnumerable<TheaterListDTO> GetAllPlayTheaters()
         {
-            return UnitOfWork.Theaters.Find(t => t.Type == TheaterType.Play).Select(t => new TheaterDTO(t));
+            return UnitOfWork.Theaters.Find(t => t.Type == TheaterType.Play).Select(t => new TheaterListDTO(t));
         }
 
         public void Remove(int theaterId)
@@ -60,7 +60,7 @@ namespace ISofA.SL.Implementations
             }
         }
 
-        public TheaterDTO Update(int theaterId, Theater update)
+        public TheaterListDTO Update(int theaterId, Theater update)
         {
             var theater = UnitOfWork.Theaters.Get(theaterId);
 
@@ -75,7 +75,7 @@ namespace ISofA.SL.Implementations
             theater.Longitude = update.Longitude;
             theater.Type = update.Type;
             UnitOfWork.SaveChanges();
-            return new TheaterDTO(theater);
+            return new TheaterListDTO(theater);
         }
     }
 }

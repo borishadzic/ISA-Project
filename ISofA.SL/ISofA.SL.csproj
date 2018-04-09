@@ -63,7 +63,8 @@
     <Compile Include="DTO\SeatDTO.cs" />
     <Compile Include="DTO\ProjectionDTO.cs" />
     <Compile Include="DTO\PlayDTO.cs" />
-    <Compile Include="DTO\TheaterDTO.cs" />
+    <Compile Include="DTO\TheaterDetailDTO.cs" />
+    <Compile Include="DTO\TheaterListDTO.cs" />
     <Compile Include="DTO\UserItemDetailDTO.cs" />
     <Compile Include="DTO\UserItemDTO.cs" />
     <Compile Include="Exceptions\BadRequestException.cs" />

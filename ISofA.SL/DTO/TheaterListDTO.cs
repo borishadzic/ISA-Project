@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ISofA.SL.DTO
 {
-    public class TheaterDTO
+    public class TheaterListDTO
     {
-        public TheaterDTO(Theater theater)
+        public TheaterListDTO(Theater theater)
         {
             TheaterId = theater.TheaterId;
             Name = theater.Name;

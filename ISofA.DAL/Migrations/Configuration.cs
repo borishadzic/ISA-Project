@@ -1,8 +1,5 @@
 namespace ISofA.DAL.Migrations
 {
-    using ISofA.DAL.Core.Domain;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -21,31 +18,6 @@ namespace ISofA.DAL.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-
-            var store = new UserStore<ISofAUser>(context);
-            var manager = new UserManager<ISofAUser>(store);
-
-            if (!context.Users.Any(u => u.UserName == "bokih.95@gmail.com"))
-            {
-                var user = new ISofAUser {
-                    UserName = "bokih.95@gmail.com",
-                    Email = "bokih.95@gmail.com",
-                    EmailConfirmed = true,
-                    ISofAUserRole = ISofAUserRole.SysAdmin
-                };
-                manager.Create(user, "Aa123.");
-            }
-
-            if (!context.Users.Any(u => u.UserName == "test@test.rs"))
-            {
-                var user = new ISofAUser
-                {
-                    UserName = "test@test.rs",
-                    Email = "test@test.rs",
-                    EmailConfirmed = true
-                };
-                manager.Create(user, "Aa123.");
-            }
         }
     }
 }

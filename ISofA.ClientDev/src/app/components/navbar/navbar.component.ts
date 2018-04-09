@@ -7,15 +7,17 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'app-navbar',
   template: `
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" routerLink="">ISofA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-        <ng-container *ngIf="!isLogedIn">
-          <a class="nav-item nav-link" routerLink="/login">Login</a>
-          <a class="nav-item nav-link" routerLink="/register">Register</a>
+          <a class="nav-item nav-link" routerLink="/cinemas">Cinemas</a>
+          <a class="nav-item nav-link" routerLink="/theaters">Theaters</a>
+          <ng-container *ngIf="!isLogedIn">            
+            <a class="nav-item nav-link" routerLink="/login">Login</a>
+            <a class="nav-item nav-link" routerLink="/register">Register</a>
           </ng-container>
         </div>
     </div>

@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="container">
+        <div class="text-center">
+            <h1>{{Header}}</h1>
+        </div>
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let theater of theaters">
+                    <td><a routerLink="./{{theater.TheaterId}}"><h5>{{theater.Name}}</h5></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

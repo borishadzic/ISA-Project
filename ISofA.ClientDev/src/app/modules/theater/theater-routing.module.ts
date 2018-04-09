@@ -3,8 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TheaterNewComponent } from './theater-new/theater-new.component';
 import { AdminRegistrationComponent } from './admin-registration/admin-registration.component';
+import { TheaterListComponent } from './theater-list/theater-list.component';
+import { TheaterDetailComponent } from './theater-detail/theater-detail.component';
 
 const routes: Routes = [
+  { path: 'theaters', component: TheaterListComponent },
+  { path: 'cinemas', component: TheaterListComponent },
+  { path: 'theaters/:id', component: TheaterDetailComponent },
+  { path: 'cinemas/:id', component: TheaterDetailComponent },
   { path: 'theaters/new', component: TheaterNewComponent },
   { path: 'theaters/:id/register', component: AdminRegistrationComponent }
 ];

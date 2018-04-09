@@ -6,12 +6,12 @@ namespace ISofA.SL.Services
 {
     public interface ITheaterService
     {
-        IEnumerable<TheaterDTO> GetAll(); 
-        IEnumerable<TheaterDTO> GetAllCinemas();
-        IEnumerable<TheaterDTO> GetAllPlayTheaters();
-        TheaterDTO Get(int theaterId);
-        TheaterDTO Add(Theater theater);
-        TheaterDTO Update(int theaterId, Theater theater);
+        IEnumerable<TheaterListDTO> GetAll(); 
+        IEnumerable<TheaterListDTO> GetAllCinemas();
+        IEnumerable<TheaterListDTO> GetAllPlayTheaters();
+        TheaterDetailDTO Get(int theaterId);
+        TheaterListDTO Add(Theater theater);
+        TheaterListDTO Update(int theaterId, Theater theater);
         void Remove(int theaterId);
     }
 }

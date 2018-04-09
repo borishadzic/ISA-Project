@@ -234,32 +234,6 @@ namespace ISofA.DAL.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.FanZoneAdmins",
-                c => new
-                    {
-                        TheaterId = c.Int(nullable: false),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.TheaterId, t.UserId })
-                .ForeignKey("dbo.Theaters", t => t.TheaterId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.TheaterId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.TheaterAdmins",
-                c => new
-                    {
-                        TheaterId = c.Int(nullable: false),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.TheaterId, t.UserId })
-                .ForeignKey("dbo.Theaters", t => t.TheaterId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.TheaterId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
                 "dbo.Friends",
                 c => new
                     {
@@ -291,22 +265,14 @@ namespace ISofA.DAL.Migrations
             DropForeignKey("dbo.Items", "BuyerId", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserItems", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.Bids", "UserItemId", "dbo.UserItems");
-            DropForeignKey("dbo.TheaterAdmins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.TheaterAdmins", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.Stages", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.Plays", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.Projections", "PlayId", "dbo.Plays");
             DropForeignKey("dbo.Projections", "StageId", "dbo.Stages");
             DropForeignKey("dbo.Items", "TheaterId", "dbo.Theaters");
-            DropForeignKey("dbo.FanZoneAdmins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.FanZoneAdmins", "TheaterId", "dbo.Theaters");
             DropForeignKey("dbo.AspNetUsers", "AdminOfTheater_TheaterId", "dbo.Theaters");
             DropIndex("dbo.Friends", new[] { "FriendId" });
             DropIndex("dbo.Friends", new[] { "Id" });
-            DropIndex("dbo.TheaterAdmins", new[] { "UserId" });
-            DropIndex("dbo.TheaterAdmins", new[] { "TheaterId" });
-            DropIndex("dbo.FanZoneAdmins", new[] { "UserId" });
-            DropIndex("dbo.FanZoneAdmins", new[] { "TheaterId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -329,8 +295,6 @@ namespace ISofA.DAL.Migrations
             DropIndex("dbo.Bids", new[] { "BidderId" });
             DropIndex("dbo.Bids", new[] { "UserItemId" });
             DropTable("dbo.Friends");
-            DropTable("dbo.TheaterAdmins");
-            DropTable("dbo.FanZoneAdmins");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.Seats");

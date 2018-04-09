@@ -18,7 +18,7 @@ namespace ISofA.WebAPI.Controllers
         }
 
         // api/theaters?type=cinemas
-        public IEnumerable<TheaterDTO> Get(string type = "")
+        public IEnumerable<TheaterListDTO> Get(string type = "")
         {
             if (string.IsNullOrEmpty(type))
             {
@@ -28,7 +28,7 @@ namespace ISofA.WebAPI.Controllers
             {
                 return _theaterService.GetAllCinemas();
             }
-            else if (type == "plays")
+            else if (type == "theaters")
             {
                 return _theaterService.GetAllPlayTheaters();
             } 
@@ -53,7 +53,7 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [ISofAAuthorization(Role = ISofAUserRole.SysAdmin)]
-        public TheaterDTO Post(Theater theater)
+        public TheaterListDTO Post(Theater theater)
         {
             return _theaterService.Add(theater);
         }

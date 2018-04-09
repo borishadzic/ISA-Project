@@ -6,6 +6,8 @@ import { TheaterRoutingModule } from './theater-routing.module';
 import { TheaterNewComponent } from './theater-new/theater-new.component';
 import { TheaterService } from './theater.service';
 import { AdminRegistrationComponent } from './admin-registration/admin-registration.component';
+import { TheaterListComponent } from './theater-list/theater-list.component';
+import { TheaterDetailComponent } from './theater-detail/theater-detail.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { AdminRegistrationComponent } from './admin-registration/admin-registrat
   ],
   declarations: [
     TheaterNewComponent,
-    AdminRegistrationComponent
+    AdminRegistrationComponent,
+    TheaterListComponent,
+    TheaterDetailComponent
   ],
   providers: [
     TheaterService
