@@ -53,5 +53,18 @@ namespace ISofA.WebAPI.Controllers
 
             return userItem;
         }
+
+        [Route("{bidderId}")]
+        public UserItemDTO Post(Guid userItemId, string bidderId)
+        {
+            var userItem = _bidService.SellItem(User.Identity.GetUserId(), userItemId, bidderId);
+
+            if (userItem == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            return userItem;
+        }
     }
 }

@@ -45,9 +45,11 @@ namespace ISofA.SL.Implementations
                 .Select(x => new UserItemDTO(x));
         }
 
-        public UserItemDetailDTO GetItem(Guid userItemId)
+        public UserItemDetailDTO GetItem(int theaterId, Guid userItemId)
         {
-            var userItem = UnitOfWork.UserItems.Get(userItemId);
+            var userItem = UnitOfWork.UserItems
+                .Find(x => x.TheaterId == theaterId && x.UserItemId == userItemId)
+                .FirstOrDefault();
 
             if (userItem == null)
             {
@@ -101,7 +103,7 @@ namespace ISofA.SL.Implementations
             return new UserItemDTO(item);
         }
 
-        public async Task<UserItemDTO> SetImageAsync(string userId, Guid userItemId, HttpPostedFile file)
+        public async Task<UserItemDTO> SetImageAsync(string userId, int theaterId, Guid userItemId, HttpPostedFile file)
         {
             if (file == null || !file.ContentType.Contains("image"))
             {
@@ -109,7 +111,7 @@ namespace ISofA.SL.Implementations
             }
 
             var userItem = UnitOfWork.UserItems
-                .Find(x => x.UserItemId == userItemId && x.ISofAUserId == userId && x.Approved == null)
+                .Find(x => x.TheaterId == theaterId &&  x.UserItemId == userItemId && x.ISofAUserId == userId && x.Approved == null)
                 .FirstOrDefault();
 
             if (userItem == null)
@@ -117,43 +119,10 @@ namespace ISofA.SL.Implementations
                 return null;
             }
 
-            // TODO: Uploadovanje slike
             userItem.ImageUrl = await _uploadService.UploadImageAsync(file);
             UnitOfWork.SaveChanges();
 
             return new UserItemDTO(userItem);
-        }
-
-        public UserItemDTO SellItem(string userId, Guid userItemId, Bid bid)
-        {
-            var userItem = UnitOfWork.UserItems
-                .Find(x => x.UserItemId == userItemId && x.ISofAUserId == userId)
-                .FirstOrDefault();
-
-            if (userItem == null || !CheckCondition(userItem) || !userItem.Bids.Any(x => x.BidderId == bid.BidderId))
-            {
-                return null;
-            }
-
-            userItem.Sold = true;
-            userItem.HighestBid = bid.BidAmount;
-            UnitOfWork.SaveChanges();
-
-            SendMail(userItem, bid);
-
-            return new UserItemDTO(userItem);
-        }
-
-        private void SendMail(UserItem userItem, Bid bid)
-        {
-            IEnumerable<ISofAUser> losers = userItem.Bids
-                .Where(x => x.BidderId != bid.BidderId)
-                .Select(x => x.Bidder);
-
-            ISofAUser winner = userItem.Bids
-                .Where(x => x.BidderId == bid.BidderId)
-                .Select(x => x.Bidder)
-                .First();
         }
 
         private bool CheckCondition(UserItem userItem)

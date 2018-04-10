@@ -64,5 +64,39 @@ namespace ISofA.SL.Implementations
                 && userItem.Sold == false
                 && DateTime.Compare(userItem.ExpirationDate, DateTime.Now) > 0;
         }
+
+        public UserItemDTO SellItem(string userItemOwnerId, Guid userItemId, string bidderId)
+        {
+            var userItem = UnitOfWork.UserItems
+                .Find(x => x.ISofAUserId == userItemOwnerId && x.UserItemId == userItemId)
+                .FirstOrDefault();
+
+            var bid = UnitOfWork.Bids.Get(userItemId, bidderId);
+
+            if (userItem == null || bid == null || !CheckCondition(userItem))
+            {
+                return null;
+            }
+
+            userItem.Sold = true;
+            userItem.HighestBid = bid.BidAmount;
+            UnitOfWork.SaveChanges();
+
+            SendMail(userItem, bid);
+
+            return new UserItemDTO(userItem);
+        }
+
+        private void SendMail(UserItem userItem, Bid bid)
+        {
+            IEnumerable<ISofAUser> losers = userItem.Bids
+                .Where(x => x.BidderId != bid.BidderId)
+                .Select(x => x.Bidder);
+
+            ISofAUser winner = userItem.Bids
+                .Where(x => x.BidderId == bid.BidderId)
+                .Select(x => x.Bidder)
+                .First();
+        }
     }
 }

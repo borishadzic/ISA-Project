@@ -1,17 +1,36 @@
+<ul class="nav nav-pills justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link" 
+      routerLinkActive="active"
+      #home="routerLinkActive" 
+      routerLink="../fanzone" 
+      [routerLinkActiveOptions]="{exact: true}">Official items</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+      routerLinkActive="active" 
+      routerLink="useritems" 
+      [routerLinkActiveOptions]="{exact: true}">User submited items</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" routerLink="new">Add new item</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" routerLink="awaiting">Awaiting approval</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" routerLink="useritems/new">Sell item</a>
+  </li>
+</ul>
+
 <div class="container">
-  <div class="jumbotron">
+  <div class="jumbotron" *ngIf="home.isActive">
     <h1 class="display-4">FanZone</h1>
     <p class="lead">FanZone area where you can buy official theater requisites and buy/sell items.</p>
     <hr class="my-4">
     <p class="lead">
-        <a routerLink="../fanzone" class="btn btn-primary">Official items</a>
-        <a routerLink="new" class="btn btn-primary">Add new item</a>
-        <a routerLink="awaiting" class="btn btn-primary">Awaiting approval</a>
-        <a routerLink="useritems" class="btn btn-primary">Check user added items</a>
     </p>
   </div>
 
-
-  
   <router-outlet></router-outlet>
 </div>

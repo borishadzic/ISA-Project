@@ -30,7 +30,7 @@ namespace ISofA.SL.Implementations
             if (theater != null)
             {
                 user.ISofAUserRole = role;
-                theater.Admins.Add(user);
+                user.AdminOfTheaterId = theater.TheaterId;
                 UnitOfWork.Users.UpdateUser(user);
                 UnitOfWork.SaveChanges();
                 return new ISofAUserDTO(user);

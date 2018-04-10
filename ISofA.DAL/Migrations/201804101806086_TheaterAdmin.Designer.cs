@@ -7,13 +7,13 @@ namespace ISofA.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class TheaterAdmin : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TheaterAdmin));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804091714238_Initial"; }
+            get { return "201804101806086_TheaterAdmin"; }
         }
         
         string IMigrationMetadata.Source

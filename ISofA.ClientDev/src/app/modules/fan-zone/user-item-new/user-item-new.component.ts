@@ -36,7 +36,7 @@ export class UserItemNewComponent implements OnInit {
     if (this.form.valid) {
       this.userItemService.addUserItem(this.theaterId, this.form.value).subscribe(res => {
         if (this.image) {
-          this.userItemService.uploadImage(res.UserItemId, this.image).subscribe(userItem => {
+          this.userItemService.uploadImage(res.TheaterId, res.UserItemId, this.image).subscribe(userItem => {
             alert('User item submitd for review!');
             this.form.reset();
           });

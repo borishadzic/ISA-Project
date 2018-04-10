@@ -11,11 +11,13 @@ namespace ISofA.SL.DTO
     {
         public BidDTO(Bid bid)
         {
+            UserItemId = bid.UserItemId;
             BidderId = bid.BidderId;
             BidAmount = bid.BidAmount;
             BidDate = bid.BidDate;
         }
 
+        public Guid UserItemId { get; set; }
         public string BidderId { get; set; }
         public float BidAmount { get; set; }
         public DateTime BidDate { get; set; }

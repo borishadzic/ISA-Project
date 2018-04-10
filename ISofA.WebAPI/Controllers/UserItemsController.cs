@@ -1,6 +1,7 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using ISofA.WebAPI.Filters;
 using ISofA.WebAPI.Models;
 using Microsoft.AspNet.Identity;
 using System;
@@ -33,10 +34,9 @@ namespace ISofA.WebAPI.Controllers
             return _userItemService.GetItemsForTheater(theaterId);
         }
 
-        // Administrator fan zone
-        // api/theaters/1/useritem?status={ sold, awaiting }
         [Route("")]
-        public IEnumerable<UserItemDTO> Get([FromUri]int theaterId, [FromUri]string status)
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
+        public IEnumerable<UserItemDTO> Get(int theaterId, [FromUri]string status)
         {
             if (status == "awaiting")
             {
@@ -52,42 +52,20 @@ namespace ISofA.WebAPI.Controllers
             }
         }
 
-        [Route("~/api/UserItems/{userItemId:guid}")]
-        [ResponseType(typeof(UserItemDetailDTO))]
-        public IHttpActionResult Get(Guid userItemId)
+        [Route("{userItemId:guid}")]
+        public UserItemDetailDTO Get(int theaterId, Guid userItemId)
         {
-            var userItem = _userItemService.GetItem(userItemId);
+            var userItem = _userItemService.GetItem(theaterId, userItemId);
 
             if (userItem == null)
             {
-                return NotFound();
-            }
-
-            return Ok(userItem);
-        }
-
-        [HttpPost]
-        [Route("~/api/UserItems/{userItemId:guid}")]
-        public async Task<UserItemDTO> UploadImageAsync(Guid userItemId)
-        {
-            if (!Request.Content.IsMimeMultipartContent("form-data"))
-            {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            }
-
-            var userItem = await _userItemService.SetImageAsync(User.Identity.GetUserId(), userItemId, HttpContext.Current.Request.Files["image"]);
-
-            if (userItem == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
             return userItem;
         }
 
-        // Ulogovani korisnici
         [Route("")]
-        [ResponseType(typeof(UserItemDTO))]
         public IHttpActionResult Post(int theaterId, UserItemBindingModel bindingModel)
         {
             if (!ModelState.IsValid)
@@ -104,34 +82,24 @@ namespace ISofA.WebAPI.Controllers
             };
 
             var addedItem = _userItemService.AddItem(theaterId, User.Identity.GetUserId(), userItem);
+
             if (addedItem == null)
             {
-                return BadRequest();
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
             return Ok(addedItem);
         }
 
-        // Administrator fan zone
         [Route("{userItemId:guid}")]
-        [ResponseType(typeof(UserItemDTO))]
-        public IHttpActionResult Put(int theaterId, Guid userItemId)
+        public async Task<UserItemDTO> PostImageAsync(int theaterId, Guid userItemId)
         {
-            var updateItem = _userItemService.ApproveItem(theaterId, userItemId);
-
-            if (updateItem == null)
+            if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
-                return BadRequest();
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            return Ok(updateItem);
-        }
-
-        // Vlasnik itema
-        [Route("~/api/UserItems/{userItemId:guid}")]
-        public UserItemDTO Put(Guid userItemId, Bid bid)
-        {
-            var userItem = _userItemService.SellItem(User.Identity.GetUserId(), userItemId, bid);
+            var userItem = await _userItemService.SetImageAsync(User.Identity.GetUserId(), theaterId, userItemId, HttpContext.Current.Request.Files["image"]);
 
             if (userItem == null)
             {
@@ -141,8 +109,22 @@ namespace ISofA.WebAPI.Controllers
             return userItem;
         }
 
-        // Administrator fan zone
         [Route("{userItemId:guid}")]
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
+        public UserItemDTO Put(int theaterId, Guid userItemId)
+        {
+            var updateItem = _userItemService.ApproveItem(theaterId, userItemId);
+
+            if (updateItem == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            return updateItem;
+        }
+
+        [Route("{userItemId:guid}")]
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
         public void Delete(int theaterId, Guid userItemId)
         {
             _userItemService.RemoveItem(theaterId, userItemId);

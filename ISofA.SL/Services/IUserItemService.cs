@@ -14,11 +14,10 @@ namespace ISofA.SL.Services
         IEnumerable<UserItemDTO> GetItemsForTheater(int theaterId);
         IEnumerable<UserItemDTO> GetSoldItems(int theaterId);
         IEnumerable<UserItemDTO> GetAwaitingItemsForTheater(int theaterId);
-        UserItemDetailDTO GetItem(Guid userItemId);
+        UserItemDetailDTO GetItem(int theaterId, Guid userItemId);
         UserItemDTO AddItem(int theaterId, string userId, UserItem userItem);
-        Task<UserItemDTO> SetImageAsync(string userId, Guid userItemId, HttpPostedFile file);
+        Task<UserItemDTO> SetImageAsync(string userId, int theaterId, Guid userItemId, HttpPostedFile file);
         UserItemDTO ApproveItem(int theaterId, Guid userItemId);
-        UserItemDTO SellItem(string userId, Guid userItemId, Bid bid);
         void RemoveItem(int theaterId, Guid userItemId);
     }
 }

@@ -15,7 +15,7 @@ export class ItemService {
   }
 
   public getItem(theaterId, itemId): Observable<Item> {
-    return this.http.get<Item>(environment.hostUrl + '/api/theaters/' + theaterId + '/items' + itemId);
+    return this.http.get<Item>(environment.hostUrl + '/api/theaters/' + theaterId + '/items/' + itemId);
   }
 
   public addItem(theaterId, item: Item): Observable<Item> {
@@ -26,7 +26,7 @@ export class ItemService {
     const formData = new FormData();
     formData.append('image', image, image.name);
 
-    return this.http.post<Item>(environment.hostUrl + '/api/theaters/' + theaterId + '/items' + itemId, formData);
+    return this.http.post<Item>(environment.hostUrl + '/api/theaters/' + theaterId + '/items/' + itemId, formData);
   }
 
   public updateItem() {

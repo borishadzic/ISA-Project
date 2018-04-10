@@ -7,5 +7,5 @@ export interface UserItem {
     Description: string;
     ImageUrl: string;
     HighestBid: number;
-    Bids: Bid[];
+    Bids?: Bid[];
 }

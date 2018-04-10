@@ -13,11 +13,11 @@ export class UserItemService {
         return this.http.post<UserItem>(environment.hostUrl + '/api/theaters/' + theaterId + '/useritems', userItem);
     }
 
-    public uploadImage(userItemId, image: File): Observable<UserItem> {
+    public uploadImage(theaterId, userItemId, image: File): Observable<UserItem> {
         const formData = new FormData();
         formData.append('image', image, image.name);
 
-        return this.http.post<UserItem>(environment.hostUrl + '/api/useritems/' + userItemId, formData);
+        return this.http.post<UserItem>(environment.hostUrl + '/api/theaters/' +  theaterId + '/useritems/' + userItemId, formData);
     }
 
     public getItems(theaterId): Observable<UserItem[]> {
@@ -26,12 +26,12 @@ export class UserItemService {
 
     public getAwaitingItems(theaterId): Observable<UserItem[]> {
         return this.http.get<UserItem[]>(environment.hostUrl + '/api/theaters/' + theaterId + '/useritems', {
-            params: new HttpParams().append('status', 'awaiting')
+            params: { status: 'awaiting' }
         });
     }
 
-    public getItem(userItemId): Observable<UserItem> {
-        return this.http.get<UserItem>(environment.hostUrl  + '/api/useritems/' + userItemId);
+    public getItem(theaterId, userItemId): Observable<UserItem> {
+        return this.http.get<UserItem>(environment.hostUrl + '/api/theaters/' +  theaterId + '/useritems/' + userItemId);
     }
 
     public approveItem(theaterId, userItemId): Observable<any> {

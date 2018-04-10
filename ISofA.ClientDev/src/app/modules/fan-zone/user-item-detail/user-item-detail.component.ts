@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { combineLatest } from 'rxjs/observable/combineLatest';
+
 import { UserItemService } from '../user-item.service';
-import { UserItem } from '../model/user-item';
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { BidService } from '../bid.service';
+import { UserItem } from '../model/user-item';
 
 @Component({
   selector: 'app-user-item-detail',
@@ -14,8 +15,9 @@ import { BidService } from '../bid.service';
 })
 export class UserItemDetailComponent implements OnInit {
 
-  form: FormGroup;
-  userItem: UserItem;
+  public form: FormGroup;
+  public userItem: UserItem;
+  private theaterId: string;
   private userItemId: string;
 
   constructor(private userItemService: UserItemService,
@@ -24,11 +26,16 @@ export class UserItemDetailComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.userItemId = this.route.snapshot.params['uid'];
+    const parentParams = this.route.parent.params;
+    const childParams = this.route.params;
 
-    this.userItemService.getItem(this.userItemId).subscribe(userItem => {
-      this.userItem = userItem;
-      this.createFormGroup();
+    combineLatest(parentParams, childParams).subscribe(([parent, child]) => {
+      this.userItemId = child['uid'];
+
+      this.userItemService.getItem(parent['id'], child['uid']).subscribe(userItem => {
+        this.userItem = userItem;
+        this.createFormGroup();
+      });
     });
   }
 

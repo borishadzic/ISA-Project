@@ -14,4 +14,16 @@ export class BidService {
     public bid(userItemId, bid: Bid): Observable<UserItem> {
         return this.http.post<UserItem>(environment.hostUrl + '/api/useritems/' + userItemId + '/bids', bid);
     }
+
+    public getBids(userItemId): Observable<Bid[]> {
+        return this.http.get<Bid[]>(environment.hostUrl + '/api/useritems/' + userItemId + '/bids');
+    }
+
+    public getBid(userItemId, bidderId): Observable<Bid> {
+        return this.http.get<Bid>(environment.hostUrl + '/api/useritems/' + userItemId + '/bids/' + bidderId);
+    }
+
+    public sellItem(userItemId, bidderId): Observable<UserItem> {
+        return this.http.post<UserItem>(environment.hostUrl + '/api/useritems/' + userItemId + '/bids/' + bidderId, null);
+    }
 }

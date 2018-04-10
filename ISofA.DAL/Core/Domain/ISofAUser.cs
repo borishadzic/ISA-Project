@@ -30,9 +30,9 @@ namespace ISofA.DAL.Core.Domain
 
         public ISofAUserRole ISofAUserRole { get; set; }
 
-        [ForeignKey("AdminOfTheater")]
-        public int? AdminOfTheaterId;
-        
+        public int? AdminOfTheaterId { get; set; }
+
+        [ForeignKey("AdminOfTheaterId")]
         public virtual Theater AdminOfTheater { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ISofAUser> manager, string authenticationType)
