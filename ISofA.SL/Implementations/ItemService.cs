@@ -14,7 +14,6 @@ namespace ISofA.SL.Implementations
     {
         private readonly IUploadService _uploadService;
 
-        // TODO: Vrati samo one iteme koji nisu prodati
         public ItemService(IUnitOfWork unitOfWork, IUploadService uploadService) : base(unitOfWork)
         {
             _uploadService = uploadService;
@@ -36,9 +35,9 @@ namespace ISofA.SL.Implementations
             }
 
             // find items from db that are contained in sent item list
-            // and don't haven't been bought yet.
-            var filteredItems = UnitOfWork.Items.GetAll()
-                .Where(x => x.BuyerId == null && items.Any(i => i.ItemId == x.ItemId));
+            // and that don't have buyer.
+            var filteredItems = UnitOfWork.Items
+                .Find(x => x.BuyerId == null && items.Any(i => i.ItemId == x.ItemId));
 
             // if sizes don't match that means user is trying to buy
             // something that doesn't exist or has been bought previously
@@ -60,9 +59,9 @@ namespace ISofA.SL.Implementations
             return true;
         }
 
-        public ItemDTO GetItem(Guid itemId)
+        public ItemDTO GetItem(int theaterId, Guid itemId)
         {
-            var item = UnitOfWork.Items.Get(itemId);
+            var item = GetTheaterItem(theaterId, itemId);
 
             if (item == null)
             {
@@ -86,9 +85,9 @@ namespace ISofA.SL.Implementations
                 .Select(i => new ItemDTO(i));
         }
 
-        public void RemoveItem(Guid itemId)
+        public void RemoveItem(int theaterId, Guid itemId)
         {
-            var item = UnitOfWork.Items.Get(itemId);
+            var item = GetTheaterItem(theaterId, itemId);
 
             if (item != null)
             {
@@ -97,9 +96,9 @@ namespace ISofA.SL.Implementations
             }
         }
 
-        public ItemDTO UpdateItem(Guid itemId, Item update)
+        public ItemDTO UpdateItem(int theaterId, Guid itemId, Item update)
         {
-            var item = UnitOfWork.Items.Get(itemId);
+            var item = GetTheaterItem(theaterId, itemId);
 
             if (item == null)
             {
@@ -114,9 +113,9 @@ namespace ISofA.SL.Implementations
             return new ItemDTO(item);
         }
 
-        public async Task<ItemDTO> SetImageAsync(Guid itemId, HttpPostedFile image)
+        public async Task<ItemDTO> SetImageAsync(int theaterId, Guid itemId, HttpPostedFile image)
         {
-            var item = UnitOfWork.Items.Get(itemId);
+            var item = GetTheaterItem(theaterId, itemId);
 
             if (item == null)
             {
@@ -127,6 +126,15 @@ namespace ISofA.SL.Implementations
             UnitOfWork.SaveChanges();
 
             return new ItemDTO(item);
+        }
+
+        private Item GetTheaterItem(int theaterId, Guid itemId)
+        {
+            var item = UnitOfWork.Items
+                .Find(x => x.TheaterId == theaterId && x.ItemId == itemId)
+                .FirstOrDefault();
+
+            return item;
         }
     }
 }

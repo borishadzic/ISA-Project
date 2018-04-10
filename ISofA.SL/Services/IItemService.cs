@@ -9,13 +9,13 @@ namespace ISofA.SL.Services
 {
     public interface IItemService
     {
+        ItemDTO GetItem(int theaterId, Guid itemId);
         IEnumerable<ItemDTO> GetItemsForTheater(int theaterId);
         IEnumerable<ItemDTO> GetBoughtItemsForTheater(int theaterId);
-        ItemDTO GetItem(Guid itemId);
         ItemDTO AddItem(int theaterId, Item item);
-        Task<ItemDTO> SetImageAsync(Guid itemId, HttpPostedFile image);
-        ItemDTO UpdateItem(Guid itemId, Item update);
+        Task<ItemDTO> SetImageAsync(int theaterId, Guid itemId, HttpPostedFile image);
+        ItemDTO UpdateItem(int theaterId, Guid itemId, Item update);
+        void RemoveItem(int theaterId, Guid itemId);
         bool BuyItems(IEnumerable<Item> items, string userId);
-        void RemoveItem(Guid itemId);
     }
 }

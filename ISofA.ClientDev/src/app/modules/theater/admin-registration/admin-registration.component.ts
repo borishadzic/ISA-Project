@@ -36,7 +36,7 @@ export class AdminRegistrationComponent implements OnInit {
 
   onRegister() {
     if (this.form.valid) {
-      this.theaterService.addTheaterAdmin(1, this.form.value).subscribe(() => {
+      this.theaterService.addTheaterAdmin(this.theaterId, this.form.value).subscribe(() => {
         alert('Admin created');
         this.form.reset();
       });

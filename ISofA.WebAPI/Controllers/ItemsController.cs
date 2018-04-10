@@ -1,23 +1,22 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using ISofA.WebAPI.Filters;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/Theaters/{theaterId}/Items")]
     public class ItemsController : ApiController
     {
-        // TODO: Dodaj ogranicenje za odredjene korisnike. FanZoneAdmin i ulogovani korisnik...
         private readonly IItemService _itemService;
 
         public ItemsController(IItemService itemService)
@@ -25,20 +24,27 @@ namespace ISofA.WebAPI.Controllers
             _itemService = itemService;
         }
 
-        [Route("api/Theaters/{theaterId}/Items")]
+        [Route("")]
         public IEnumerable<ItemDTO> Get(int theaterId)
         {
             return _itemService.GetItemsForTheater(theaterId);
         }
 
-        [HttpGet]
-        [Route("api/Theaters/{theaterId}/Items")]
-        public IEnumerable<ItemDTO> GetBought(int theaterId, [FromUri] bool sold)
+        [Route("{itemId}")]
+        public ItemDTO Get(int theaterId, Guid itemId)
+        {
+            return _itemService.GetItem(theaterId, itemId);
+        }
+
+        [Route("")]
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
+        public IEnumerable<ItemDTO> GetSold(int theaterId, [FromUri] bool sold)
         {
             return _itemService.GetBoughtItemsForTheater(theaterId);
         }
 
-        [Route("api/Theaters/{theaterId}/Items")]
+        [Route("")]
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
         public  IHttpActionResult Post(int theaterId, Item item)
         {
             var newItem = _itemService.AddItem(theaterId, item);
@@ -51,16 +57,16 @@ namespace ISofA.WebAPI.Controllers
             return Ok(newItem);
         }
 
-        [HttpPost]
-        [Route("~/api/Items/{itemId}")]
-        public async Task<ItemDTO> UploadImageAsync(Guid itemId)
+        [Route("{itemId}")]
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
+        public async Task<ItemDTO> PostImageAsync(int theaterId, Guid itemId)
         {
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            var item = await _itemService.SetImageAsync(itemId, HttpContext.Current.Request.Files["image"]);
+            var item = await _itemService.SetImageAsync(theaterId, itemId, HttpContext.Current.Request.Files["image"]);
 
             if (item == null)
             {
@@ -70,21 +76,22 @@ namespace ISofA.WebAPI.Controllers
             return item;
         }
 
-        //private string GetImageUrl(String fileName = null)
-        //{
-        //    //string rootUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-        //    return $"{ Url.Content("~/") }Images/{ fileName ?? "default.png" }";
-        //}
-
-        [Route("api/Items/{itemId}")]
-        public ItemDTO Get(Guid itemId)
+        [Route("{itemId}")]
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
+        public ItemDTO Put(int theaterId, Guid itemId, Item item)
         {
-            return _itemService.GetItem(itemId);
+            return _itemService.UpdateItem(theaterId, itemId, item);
+        }
+
+        [Route("{itemId}")]
+        [ISofAAuthorization(Role = ISofAUserRole.FanZoneAdmin)]
+        public void Delete(int theaterId, Guid itemId)
+        {
+            _itemService.RemoveItem(theaterId, itemId);
         }
 
         [HttpPost]
-        [Authorize]
-        [Route("api/Items/Buy")]
+        [Route("~/api/Items")]
         public IHttpActionResult BuyItems(IEnumerable<Item> items)
         {
             var success = _itemService.BuyItems(items, User.Identity.GetUserId());
@@ -98,29 +105,5 @@ namespace ISofA.WebAPI.Controllers
                 return BadRequest();
             }
         }
-
-        [Route("api/Items/{itemId}")]
-        public ItemDTO Put(Guid itemId, Item item)
-        {
-            return _itemService.UpdateItem(itemId, item);
-        }
-
-        [Route("api/Items/{itemId}")]
-        public void Delete(Guid itemId)
-        {
-            _itemService.RemoveItem(itemId);
-        }
     }
-
-    // TODO: Privremeno sam stavio klasu ovde. Ne znam gde drugde da je stavim. Premesti je ako zelis
-    //public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
-    //{
-    //    public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
-
-    //    public override string GetLocalFileName(HttpContentHeaders headers)
-    //    {
-    //        string file = headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-    //        return (Guid.NewGuid().ToString() + Path.GetExtension(file)).Replace("-", "_");
-    //    }
-    //}
 }

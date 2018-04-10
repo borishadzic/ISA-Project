@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/UserItems/{userItemId:guid}/bids")]
     public class BidsController : ApiController
     {

@@ -11,14 +11,15 @@ namespace ISofA.SL.DTO
     {
         public UserItemDTO(UserItem userItem)
         {
+            TheaterId = userItem.TheaterId;
             UserItemId = userItem.UserItemId;
             Name = userItem.Name;
             Description = userItem.Description;
             ImageUrl = userItem.ImageUrl;
             HighestBid = userItem.HighestBid;
-            //Approved = userItem.Approved != null ? userItem.Approved : false;
         }
 
+        public int TheaterId { get; set; }
         public Guid UserItemId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -14,16 +14,27 @@ export class ItemService {
     return this.http.get<Item[]>(environment.hostUrl + '/api/theaters/' + theaterId + '/items');
   }
 
-  public getItem(itemId): Observable<Item> {
-    return this.http.get<Item>(environment.hostUrl + '/api/items/' + itemId);
+  public getItem(theaterId, itemId): Observable<Item> {
+    return this.http.get<Item>(environment.hostUrl + '/api/theaters/' + theaterId + '/items' + itemId);
   }
 
   public addItem(theaterId, item: Item): Observable<Item> {
     return this.http.post<Item>(environment.hostUrl + '/api/theaters/' + theaterId + '/items', item);
   }
 
-  public uploadImage(itemId, formData: FormData): Observable<Item> {
-    return this.http.post<Item>(environment.hostUrl + '/api/items/' + itemId, formData);
+  public uploadImage(theaterId, itemId, image: File): Observable<Item> {
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+
+    return this.http.post<Item>(environment.hostUrl + '/api/theaters/' + theaterId + '/items' + itemId, formData);
+  }
+
+  public updateItem() {
+
+  }
+
+  public deleteItem() {
+
   }
 
 }

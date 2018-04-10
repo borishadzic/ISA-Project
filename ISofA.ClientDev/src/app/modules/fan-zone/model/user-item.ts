@@ -1,6 +1,7 @@
 import { Bid } from './bid';
 
 export interface UserItem {
+    TheaterId: number;
     UserItemId: string;
     Name: string;
     Description: string;

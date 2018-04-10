@@ -37,11 +37,8 @@ export class ItemNewComponent implements OnInit {
 
   public onSubmit() {
     if (this.isValid()) {
-      const formData = new FormData();
-      formData.append('image', this.image, this.image.name);
-
       this.itemService.addItem(this.theaterId, this.form.value).subscribe(item => {
-        this.itemService.uploadImage(item.ItemId, formData).subscribe(newItem => {
+        this.itemService.uploadImage(this.theaterId, item.ItemId, this.image).subscribe(newItem => {
           alert('Item created!');
           this.form.reset();
           console.log(newItem);

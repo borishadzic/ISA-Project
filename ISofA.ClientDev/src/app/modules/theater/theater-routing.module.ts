@@ -9,9 +9,9 @@ import { TheaterDetailComponent } from './theater-detail/theater-detail.componen
 const routes: Routes = [
   { path: 'theaters', component: TheaterListComponent },
   { path: 'cinemas', component: TheaterListComponent },
+  { path: 'theaters/new', component: TheaterNewComponent },
   { path: 'theaters/:id', component: TheaterDetailComponent },
   { path: 'cinemas/:id', component: TheaterDetailComponent },
-  { path: 'theaters/new', component: TheaterNewComponent },
   { path: 'theaters/:id/register', component: AdminRegistrationComponent }
 ];
 
