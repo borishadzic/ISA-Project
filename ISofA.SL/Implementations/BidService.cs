@@ -43,7 +43,7 @@ namespace ISofA.SL.Implementations
 
         public BidDTO Get(Guid userItemId, string userId)
         {
-            var bid = UnitOfWork.Bids.Get(new { userItemId, userId });
+            var bid = UnitOfWork.Bids.Get(userItemId, userId);
 
             if (bid == null)
             {
@@ -56,13 +56,6 @@ namespace ISofA.SL.Implementations
         public IEnumerable<BidDTO> GetAll(Guid userItemId)
         {
             return UnitOfWork.Bids.Find(x => x.UserItemId == userItemId).Select(x => new BidDTO(x));
-        }
-
-        private bool CheckCondition(UserItem userItem)
-        {
-            return userItem.Approved == true
-                && userItem.Sold == false
-                && DateTime.Compare(userItem.ExpirationDate, DateTime.Now) > 0;
         }
 
         public UserItemDTO SellItem(string userItemOwnerId, Guid userItemId, string bidderId)
@@ -85,6 +78,13 @@ namespace ISofA.SL.Implementations
             SendMail(userItem, bid);
 
             return new UserItemDTO(userItem);
+        }
+
+        private bool CheckCondition(UserItem userItem)
+        {
+            return userItem.Approved == true
+                && userItem.Sold == false
+                && DateTime.Compare(userItem.ExpirationDate, DateTime.Now) > 0;
         }
 
         private void SendMail(UserItem userItem, Bid bid)

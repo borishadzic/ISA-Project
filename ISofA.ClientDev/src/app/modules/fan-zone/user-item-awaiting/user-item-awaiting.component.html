@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="card-columns">
-    <div *ngFor="let item of userItems; let i = index;" class="card" style="width: 18rem;">
+<div class="row">
+  <div class="col-4" *ngFor="let item of userItems; let i = index;">
+    <div class="card" style="margin: 1em;">
         <img class="card-img-top" [src]="item.ImageUrl" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ item.Name }}</h5>

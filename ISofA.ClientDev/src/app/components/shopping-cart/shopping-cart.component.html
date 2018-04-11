@@ -1,0 +1,29 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td class="align-middle" style="width: 1px"><img class="rounded" [src]="item.ImageUrl" height="80"></td>
+        <td class="align-middle">{{ item.Name }}</td>
+        <td class="align-middle">{{ item.Description }}</td>
+        <td class="align-middle">{{ item.Price }}$</td>
+        <td class="align-middle"><button class="btn btn-danger btn-sm" (click)="onRemoveFromCart(item)">&#10060;</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-right">
+      <p><b>Total: {{ sum }}$</b>
+        <button (click)="onCheckout()" class="btn btn-primary" [disabled]="items.length === 0">Checkout</button>
+      </p>
+  </div>
+  
+</div>

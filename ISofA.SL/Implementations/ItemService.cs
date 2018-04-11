@@ -37,7 +37,8 @@ namespace ISofA.SL.Implementations
             // find items from db that are contained in sent item list
             // and that don't have buyer.
             var filteredItems = UnitOfWork.Items
-                .Find(x => x.BuyerId == null && items.Any(i => i.ItemId == x.ItemId));
+                .Find(x => x.BuyerId == null)
+                .Where(x => items.Any(i => i.ItemId == x.ItemId));
 
             // if sizes don't match that means user is trying to buy
             // something that doesn't exist or has been bought previously

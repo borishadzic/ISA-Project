@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders  {
     return {
       ngModule: SharedModule,
-      providers: [ AuthService ]
+      providers: [ AuthService, ShoppingCartService ]
     };
   }
 }

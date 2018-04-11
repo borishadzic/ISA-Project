@@ -1,23 +1,25 @@
-<div class="container">
-    <h3>Submit item for review</h3>
+<div class="card border-secondary mb-3" style="margin: 1rem auto; width: 35rem;">
+    <div class="card-header">Submit item for review</div>
+    <div class="card-body">
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label>Name</label>
-            <input class="form-control" formControlName="Name">
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" rows="3" formControlName="Description"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Expiration date</label>
-            <input class="form-control" type="Date" formControlName="ExpirationDate">
-        </div>
-        <div class="form-group">
-            <label>Image</label>
-            <input class="form-control" type="file" (change)="onFileChanged($event)">
-        </div>
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Create</button>
-    </form>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" formControlName="Name">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" rows="3" formControlName="Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Expiration date</label>
+                <input class="form-control" type="datetime-local" formControlName="ExpirationDate">
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input class="form-control" type="file" (change)="onFileChanged($event)">
+            </div>
+            <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Sell</button>
+        </form>
+    </div>
 </div>

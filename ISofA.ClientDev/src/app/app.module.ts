@@ -15,13 +15,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeModule } from './modules/home/home.module';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ShoppingCartIconComponent } from './components/shopping-cart-icon/shopping-cart-icon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    ShoppingCartComponent,
+    ShoppingCartIconComponent
   ],
   imports: [
     BrowserModule,
