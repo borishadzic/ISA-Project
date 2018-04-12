@@ -31,7 +31,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  isLogedIn = true;
+  isLogedIn = false;
   sub: Subscription;
 
   constructor(private authService: AuthService) { }

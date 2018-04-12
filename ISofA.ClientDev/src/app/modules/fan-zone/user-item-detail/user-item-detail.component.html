@@ -22,8 +22,9 @@
   <h2 *ngIf="userItem.Bids.length != 0; else template">Bids</h2>
   <ul class="list-group">
     <li *ngFor="let bid of userItem.Bids" class="list-group-item" 
-      [class.bg-success]="bid.BidAmount == userItem.HighestBid">
+      [class.bg-success]="bid.BidAmount === userItem.HighestBid">
       {{ bid.BidAmount + '$' }} Date {{ bid.BidDate | date}}
+      <button class="btn btn-sm btn-primary" *ngIf="isUserOwner" (click)="onSell(bid)">Sell to</button>
     </li>
   </ul>
 

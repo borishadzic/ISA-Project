@@ -62,7 +62,10 @@ namespace ISofA.SL.Implementations
         public IEnumerable<UserItemDTO> GetItemsForTheater(int theaterId)
         {
             return UnitOfWork.UserItems
-                .Find(x => x.TheaterId == theaterId && x.Approved == true && DateTime.Compare(x.ExpirationDate, DateTime.Now) > 0)
+                .Find(x => x.TheaterId == theaterId
+                        && x.Approved == true 
+                        && x.Sold == false
+                        && DateTime.Compare(x.ExpirationDate, DateTime.Now) > 0)
                 .Select(x => new UserItemDTO(x));
         }
 

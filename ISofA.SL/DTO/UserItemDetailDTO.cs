@@ -11,6 +11,7 @@ namespace ISofA.SL.DTO
         {
             TheaterId = userItem.TheaterId;
             UserItemId = userItem.UserItemId;
+            UserId = userItem.ISofAUserId;
             Name = userItem.Name;
             Description = userItem.Description;
             ImageUrl = userItem.ImageUrl;
@@ -20,11 +21,11 @@ namespace ISofA.SL.DTO
 
         public int TheaterId { get; set; }
         public Guid UserItemId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public float? HighestBid { get; set; }
-        //public bool? Approved { get; set; }
         public IEnumerable<BidDTO> Bids { get; set; }
     }
 }

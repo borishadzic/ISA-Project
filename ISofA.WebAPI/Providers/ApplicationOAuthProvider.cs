@@ -49,7 +49,7 @@ namespace ISofA.WebAPI.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -93,11 +93,15 @@ namespace ISofA.WebAPI.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        // TODO: Ova metoda je promenjena. Ranije je kao parametar primala string userName.
+        public static AuthenticationProperties CreateProperties(ISofAUser user)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "userName", user.UserName },
+                { "adminOfTheater", user.AdminOfTheaterId.GetValueOrDefault().ToString() }, // dodatno
+                { "iSofAUserRole", user.ISofAUserRole.ToString() }, // dodatno
+                { "iSofaUserId", user.Id } // dodatno
             };
             return new AuthenticationProperties(data);
         }

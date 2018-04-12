@@ -91,7 +91,8 @@ namespace ISofA.SL.Implementations
         {
             IEnumerable<ISofAUser> losers = userItem.Bids
                 .Where(x => x.BidderId != bid.BidderId)
-                .Select(x => x.Bidder);
+                .Select(x => x.Bidder)
+                .ToList();
 
             ISofAUser winner = userItem.Bids
                 .Where(x => x.BidderId == bid.BidderId)

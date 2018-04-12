@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { combineLatest } from 'rxjs/observable/combineLatest';
 
-import { UserItemService } from '../user-item.service';
 import { BidService } from '../bid.service';
+import { AuthService } from '../../../services/auth.service';
+import { UserItemService } from '../user-item.service';
+
+import { Bid } from '../model/bid';
 import { UserItem } from '../model/user-item';
 
 @Component({
@@ -17,11 +20,14 @@ export class UserItemDetailComponent implements OnInit {
 
   public form: FormGroup;
   public userItem: UserItem;
+  public isUserOwner = false;
   private theaterId: string;
   private userItemId: string;
 
   constructor(private userItemService: UserItemService,
+              private authService: AuthService,
               private bidService: BidService,
+              private router: Router,
               private route: ActivatedRoute,
               private fb: FormBuilder) { }
 
@@ -34,6 +40,7 @@ export class UserItemDetailComponent implements OnInit {
 
       this.userItemService.getItem(parent['id'], child['uid']).subscribe(userItem => {
         this.userItem = userItem;
+        this.isUserOwner = userItem.UserId === this.authService.UserId;
         this.createFormGroup();
       });
     });
@@ -54,5 +61,12 @@ export class UserItemDetailComponent implements OnInit {
         this.userItem = userItem;
       });
     }
+  }
+
+  onSell(bid: Bid) {
+    this.bidService.sellItem(this.userItemId, bid.BidderId).subscribe(() => {
+      alert('Item sold!');
+      this.router.navigate(['../'], { relativeTo: this.route });
+    });
   }
 }

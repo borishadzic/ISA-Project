@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-fan-zone',
@@ -6,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FanZoneComponent implements OnInit {
 
-  constructor() { }
+  isAuthorized = false;
+
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.isAuthorized = this.authService.hasAccess(params['id'], 'FanZoneAdmin');
+    });
   }
 
 }

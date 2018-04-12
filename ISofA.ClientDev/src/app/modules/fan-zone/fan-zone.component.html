@@ -12,10 +12,10 @@
       routerLink="useritems" 
       [routerLinkActiveOptions]="{exact: true}">User submited items</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="isAuthorized">
     <a class="nav-link" routerLinkActive="active" routerLink="new">Add new item</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="isAuthorized">
     <a class="nav-link" routerLinkActive="active" routerLink="awaiting">Awaiting approval</a>
   </li>
   <li class="nav-item">
