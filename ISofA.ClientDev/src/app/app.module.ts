@@ -17,6 +17,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeModule } from './modules/home/home.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ShoppingCartIconComponent } from './components/shopping-cart-icon/shopping-cart-icon.component';
+import { AdminModule } from './modules/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ShoppingCartIconComponent } from './components/shopping-cart-icon/shopp
     }),
     HomeModule,
     TheaterModule,
-    FanZoneModule
+    FanZoneModule,
+    AdminModule
   ],
   providers: [
     [{

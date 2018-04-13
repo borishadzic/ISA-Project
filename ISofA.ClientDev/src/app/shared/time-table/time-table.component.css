@@ -1,0 +1,53 @@
+.tt-flx-wrpr {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  ul.tt-dates
+  {
+    padding: 0;    
+    margin: 0;
+    margin-top: 40px;  /* 32 + 8 */
+  }
+  
+li.tt-date {
+    list-style: none;
+}
+
+  li.tt-stage {
+    list-style: none;
+    height: 32px;
+    text-align: -webkit-right;
+    text-align: -moz-right;
+    text-align: -o-right;  
+    margin-bottom: 8px;    
+  }
+  
+li.tt-stage > div, .tt-date > .tt-flx-wrpr > .tt-flx-l > div {
+    height:32px;
+    display:table-cell;
+    vertical-align : middle;    
+}
+  
+.tt-flx-r.tt-svg-area {
+    margin-left: 8px;
+    min-width: 350px;
+}
+
+.tt-svg-axis {
+    margin-bottom: 8px;
+    display: block;
+}
+
+.tt-svg-bar {
+    margin-bottom: 8px;
+    display: block;
+}
+
+.tt-flx-wrpr > .tt-flx-r
+{
+    flex: 1; 
+}
+
