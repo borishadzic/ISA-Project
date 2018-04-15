@@ -1,26 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
 import { ExternalLoginModel } from '../../models/external-login-model';
-import { environment } from '../../../environments/environment.prod';
-
-
-
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
-  private sub: Subscription;
   loginForm: FormGroup;
-  googleAuth='http://localhost:49459/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&state=XlwxCG0_Q1WtPZX3iOoc9uaiDRrzzmuPD7tzVhXcPXM1';
-  externalLogins :ExternalLoginModel[];
-  constructor(private fb: FormBuilder, private authService: AuthService,private route:ActivatedRoute) { }
+  externalLogins: ExternalLoginModel[];
+  env = environment;
+
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -28,36 +29,30 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', Validators.required],
       remember: true,
     });
-    this.sub = this.authService.logedInEvent.subscribe(
-      (value) => {
-        if (value == true) {
-          
+
+    this.route.fragment.subscribe(param => {
+      if (param && param.split('access_token=')) {
+        if (param.split('access_token=')[1].split('&')[0]) {
+          this.authService.loginGoogle(param.split('access_token=')[1].split('&')[0]);
         }
       }
-    );
-
-    this.route.fragment.subscribe(param=> {
-      if(param && param.split('access_token='))
-        if(param.split('access_token=')[1].split('&')[0])
-          this.authService.loginGoogle(param.split('access_token=')[1].split('&')[0]);
-          
     });
-    this.authService.getExtrenalLogins().subscribe(x=>{this.externalLogins = x;});
-  }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe(); 
+    this.authService.getExtrenalLogins().subscribe(x => this.externalLogins = x);
   }
 
   onLogin() {
     this.authService.login(this.loginForm.value.username,
-       this.loginForm.value.password, 
-       this.loginForm.value.remember);
+                           this.loginForm.value.password,
+                           this.loginForm.value.remember).subscribe(
+      () => this.router.navigate(['/']),
+      () => alert('Username or password invalid!')
+    );
   }
 
- 
-  isUserRegistered(accessToken){
-    
+
+  isUserRegistered(accessToken) {
+
   }
 
   // getAccessToken(){

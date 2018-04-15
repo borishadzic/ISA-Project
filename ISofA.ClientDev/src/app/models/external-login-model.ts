@@ -1,6 +1,5 @@
-export class ExternalLoginModel
-{
+export class ExternalLoginModel {
     Url: string;
     Name: string;
-    State: string
+    State: string;
 }

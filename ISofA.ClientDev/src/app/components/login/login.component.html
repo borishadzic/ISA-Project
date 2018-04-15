@@ -16,8 +16,8 @@
       </label>
     </div> -->
     <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.valid">Sign in</button>
-    <a [href]="googleAuth" class="btn btn-lg btn-primary btn-block" type="button" id="btnGoogleLogin">Login with Google</a>
-    <a *ngFor="let externalLogin of externalLogins" [href]="'http://localhost:49459' + externalLogin.Url" class = "btn btn-lg btn-primary btn=block" type ="button">Sign in with {{externalLogin.Name}}</a>
+    <!-- <a [href]="googleAuth" class="btn btn-lg btn-primary btn-block" type="button" id="btnGoogleLogin">Login with Google</a> -->
+    <a *ngFor="let externalLogin of externalLogins" [href]="env.hostUrl + externalLogin.Url" class = "btn btn-lg btn-primary btn=block" type ="button">Sign in with {{externalLogin.Name}}</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
   </form>
 </div>
