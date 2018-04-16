@@ -30,6 +30,10 @@ export class TheaterService {
     return this.http.post<any>(environment.hostUrl + '/api/theaters', theater);
   }
 
+  public updateTheater(theaterId: number, theater: any): Observable<any> {
+    return this.http.put<any>(environment.hostUrl + '/api/theaters/' + theaterId, theater);
+  }
+
   public addTheaterAdmin(theaterId, user): Observable<any> {
     return this.http.post<any>(environment.hostUrl + '/api/theaters/' + theaterId + '/admins', user);
   }

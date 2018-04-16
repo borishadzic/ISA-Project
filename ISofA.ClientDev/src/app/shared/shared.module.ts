@@ -11,6 +11,8 @@ import { TimeTableComponent } from './time-table/time-table.component';
 import { MinsFormatterPipe } from './mins-formatter.pipe';
 import { RangePipe } from './range.pipe';
 import { PadPipe } from './pad.pipe';
+import { StageService } from '../services/stage.service';
+import { PlayService } from '../services/play.service';
 
 var componentExports: any[] = [
   TimeTableComponent
@@ -45,7 +47,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, ShoppingCartService]
+      providers: [AuthService, ShoppingCartService, StageService, PlayService]
     };
   }
 }

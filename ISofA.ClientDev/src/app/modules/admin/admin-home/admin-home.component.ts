@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableDataset } from '../../../shared/time-table/time-table-dataset';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditTheaterDialogComponent } from '../edit-theater-dialog/edit-theater-dialog.component';
 import { AuthService } from '../../../services/auth.service';
 import { TheaterService } from '../../theater/theater.service';
@@ -15,6 +15,7 @@ export class AdminHomeComponent implements OnInit {
   theater: any;
 
   constructor(private dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private theaterService: TheaterService,
     private authService: AuthService) { }
 
@@ -26,12 +27,21 @@ export class AdminHomeComponent implements OnInit {
 
   openEditTheaterDialog() {
     let dialogRef = this.dialog.open(EditTheaterDialogComponent, {
-      data: { theater: this.theater }
+      data: this.theater
     });
 
     dialogRef.afterClosed().subscribe(x => {
       if (x) {
-
+        this.theaterService.updateTheater(this.authService.adminOfTheater, x).subscribe(() => {
+          this.theater.Name = x.Name;
+          this.theater.Address = x.Address;
+          this.theater.Description = x.Description;
+          this.theater.WorkStart = x.WorkStart;
+          this.theater.WorkDuration = x.WorkDuration;
+          this.theater.Latitude = x.Latitude;
+          this.theater.Longitude = x.Longitude;
+          this.snackBar.open(`${x.Name} Updated`, undefined, { duration: 1500 });
+        });
       }
     });
   }

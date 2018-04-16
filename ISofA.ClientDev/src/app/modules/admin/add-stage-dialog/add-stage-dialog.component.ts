@@ -8,9 +8,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class AddStageDialogComponent implements OnInit {
 
-  name: string;
-  rows: number;
-  columns: number;
+  stage: any = {};
 
   constructor(public dialogRef: MatDialogRef<AddStageDialogComponent>) { }
 

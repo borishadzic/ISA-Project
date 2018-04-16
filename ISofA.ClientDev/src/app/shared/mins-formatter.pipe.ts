@@ -8,7 +8,8 @@ export class MinsFormatterPipe implements PipeTransform {
   transform(value: number, args?: any): string {
     if (!value)
       return "00:00";
-    return this.pad(Math.floor(value / 60), 2) + ":" + this.pad(value % 60, 2);
+    var x = value % 1440;
+    return this.pad(Math.floor(x / 60), 2) + ":" + this.pad(x % 60, 2);
   }
 
   // number formatting

@@ -1,0 +1,21 @@
+<mat-expansion-panel [hideToggle]="true" (opened)="getStages()">
+  <mat-expansion-panel-header>
+    <h3>Stages</h3>
+  </mat-expansion-panel-header>
+
+  <ng-template matExpansionPanelContent>
+    <ng-template [ngIf]="stages" [ngIfElse]="loadingStages">
+      <ul class="list-inline">
+        <li class="list-inline-item" *ngFor="let stage of stages; let idx = index">
+          <button mat-raised-button (click)="openEditStageDialog(stage, idx)">{{stage.Name}}</button>
+        </li>
+        <li class="list-inline-item">
+          <button mat-raised-button color="primary" (click)="openAddStageDialog()">+</button>
+        </li>
+      </ul>
+    </ng-template>
+    <ng-template #loadingStages>
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </ng-template>
+  </ng-template>
+</mat-expansion-panel>

@@ -8,14 +8,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class EditStageDialogComponent implements OnInit {
 
-  name: string;
+  edit: any = {};
 
   constructor(
     public dialogRef: MatDialogRef<EditStageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.name = this.data.stage;
+    this.edit.Name = this.data.Name;
+    this.edit.SeatRows = this.data.SeatRows;
+    this.edit.SeatColumns = this.data.SeatColumns;
   }
 
 }

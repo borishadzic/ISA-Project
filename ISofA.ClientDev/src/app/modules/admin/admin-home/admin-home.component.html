@@ -1,4 +1,4 @@
-<div class="container fill">
+<div class="container">
   <app-admin-navbar></app-admin-navbar>
   <ng-template [ngIf]="theater" [ngIfElse]="loading">
     <h1>{{theater.Name}}
@@ -7,9 +7,11 @@
     <blockquote class="blockquote">{{theater.Description}}</blockquote>
     <h5>Open from {{theater.WorkStart | minsFormatter }} until {{(theater.WorkStart + theater.WorkDuration) | minsFormatter}}</h5>
     <button mat-raised-button color="primary" (click)="openEditTheaterDialog()">Edit</button>
-    <app-schedule></app-schedule>
-    <app-play-list></app-play-list>
-    <app-stages></app-stages>
+    <div class="spread-em">
+      <app-schedule></app-schedule>
+      <app-play-list></app-play-list>
+      <app-stage-list></app-stage-list>
+    </div>    
   </ng-template>
   <ng-template #loading>
     <mat-grid-list cols="1" rowHeight="400px">

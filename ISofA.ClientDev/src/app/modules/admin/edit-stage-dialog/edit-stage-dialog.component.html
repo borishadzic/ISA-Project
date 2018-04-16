@@ -1,10 +1,18 @@
-<h1 mat-dialog-title>Edit {{data.stage}}</h1>
+<h1 mat-dialog-title>Edit Stage {{data.Name}}</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <input placeholder="Name" matInput [(ngModel)]="name" cdkFocusInitial>
-  </mat-form-field>
+  <div class="example-container">
+    <mat-form-field>
+      <input placeholder="Name" matInput [(ngModel)]="edit.Name" cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Rows" matInput [(ngModel)]="edit.SeatRows">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Columns" matInput [(ngModel)]="edit.SeatColumns">
+    </mat-form-field>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="dialogRef.close()">Cancel</button>
-  <button mat-button [mat-dialog-close]="name" color="primary">Save</button>
+  <button mat-button [mat-dialog-close]="edit" color="primary">Save</button>
 </div>
