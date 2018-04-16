@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableDataset } from '../../../shared/time-table/time-table-dataset';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { EditTheaterDialogComponent } from '../edit-theater-dialog/edit-theater-dialog.component';
+import { AuthService } from '../../../services/auth.service';
+import { TheaterService } from '../../theater/theater.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -8,26 +12,38 @@ import { TimeTableDataset } from '../../../shared/time-table/time-table-dataset'
 })
 export class AdminHomeComponent implements OnInit {
 
-  testData: TimeTableDataset[] = [
-    {
-      startDate: new Date(),
-      groupedData: [
-        { name: "A1", data: [{ name: "Avengers", startMins: 0, durationMins: 120 }] },
-        { name: "A2", data: [{ name: "Avengers", startMins: 253, durationMins: 121 }] }
-      ]
-    },
-    {
-      startDate: new Date(),
-      groupedData: [
-        { name: "A1", data: [{ name: "Avengers", startMins: 1021, durationMins: 122 }] },
-        { name: "A2", data: [{ name: "Avengers", startMins: 0, durationMins: 223 }] }
-      ]
-    }
-  ]
+  theater: any;
 
-  constructor() { }
+  constructor(private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private theaterService: TheaterService,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    this.theaterService.getTheaterDetail("", this.authService.adminOfTheater).subscribe(x => {
+      this.theater = x;
+    })
+  }
+
+  openEditTheaterDialog() {
+    let dialogRef = this.dialog.open(EditTheaterDialogComponent, {
+      data: this.theater
+    });
+
+    dialogRef.afterClosed().subscribe(x => {
+      if (x) {
+        this.theaterService.updateTheater(this.authService.adminOfTheater, x).subscribe(() => {
+          this.theater.Name = x.Name;
+          this.theater.Address = x.Address;
+          this.theater.Description = x.Description;
+          this.theater.WorkStart = x.WorkStart;
+          this.theater.WorkDuration = x.WorkDuration;
+          this.theater.Latitude = x.Latitude;
+          this.theater.Longitude = x.Longitude;
+          this.snackBar.open(`${x.Name} Updated`, undefined, { duration: 1500 });
+        });
+      }
+    });
   }
 
 }

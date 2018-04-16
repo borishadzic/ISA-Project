@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>New Stage</h1>
+<div mat-dialog-content>
+  <div class="example-container">
+    <mat-form-field>
+      <input placeholder="Name" matInput [(ngModel)]="play.Name" cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Genre" matInput [(ngModel)]="play.Genre">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Director" matInput [(ngModel)]="play.Director">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Actors" matInput [(ngModel)]="play.Actors">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Duration" matInput [(ngModel)]="duration">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Poster" matInput [(ngModel)]="play.PosterUrl">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Trailer" matInput [(ngModel)]="play.TrailerUrl">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea placeholder="Description" matInput [(ngModel)]="play.Description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="buildPlay()" color="primary">Create</button>
+</div>

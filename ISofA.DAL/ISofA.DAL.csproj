@@ -76,13 +76,9 @@
     <Compile Include="Core\Pantries\ITheaterPantry.cs" />
     <Compile Include="Core\Pantries\IUserItemPantry.cs" />
     <Compile Include="Core\Pantries\IUserPantry.cs" />
-    <Compile Include="Migrations\201804101612198_Initial.cs" />
-    <Compile Include="Migrations\201804101612198_Initial.Designer.cs">
-      <DependentUpon>201804101612198_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804101806086_TheaterAdmin.cs" />
-    <Compile Include="Migrations\201804101806086_TheaterAdmin.Designer.cs">
-      <DependentUpon>201804101806086_TheaterAdmin.cs</DependentUpon>
+    <Compile Include="Migrations\201804160456400_Initial.cs" />
+    <Compile Include="Migrations\201804160456400_Initial.Designer.cs">
+      <DependentUpon>201804160456400_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
@@ -105,11 +101,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804101612198_Initial.resx">
-      <DependentUpon>201804101612198_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804101806086_TheaterAdmin.resx">
-      <DependentUpon>201804101806086_TheaterAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804160456400_Initial.resx">
+      <DependentUpon>201804160456400_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

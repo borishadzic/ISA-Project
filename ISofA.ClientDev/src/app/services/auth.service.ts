@@ -113,6 +113,10 @@ export class AuthService {
     return this.tokenInfo.adminOfTheater === theaterId && this.tokenInfo.iSofAUserRole === userRole;
   }
 
+  get adminOfTheater(): number {
+    return JSON.parse(this.tokenInfo).adminOfTheater;
+  }
+
   get UserId(): string {
     return this.tokenInfo.iSofaUserId;
   }

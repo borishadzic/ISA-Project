@@ -31,6 +31,7 @@ namespace ISofA.DAL.Migrations
                         Surname = c.String(),
                         City = c.String(),
                         ISofAUserRole = c.Int(nullable: false),
+                        AdminOfTheaterId = c.Int(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -42,12 +43,11 @@ namespace ISofA.DAL.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
-                        AdminOfTheater_TheaterId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Theaters", t => t.AdminOfTheater_TheaterId)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
-                .Index(t => t.AdminOfTheater_TheaterId);
+                .ForeignKey("dbo.Theaters", t => t.AdminOfTheaterId)
+                .Index(t => t.AdminOfTheaterId)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
                 "dbo.Theaters",
@@ -55,6 +55,10 @@ namespace ISofA.DAL.Migrations
                     {
                         TheaterId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        Address = c.String(),
+                        Description = c.String(),
+                        WorkStart = c.Int(nullable: false),
+                        WorkDuration = c.Int(nullable: false),
                         Latitude = c.Single(nullable: false),
                         Longitude = c.Single(nullable: false),
                         Type = c.Int(nullable: false),
@@ -270,7 +274,7 @@ namespace ISofA.DAL.Migrations
             DropForeignKey("dbo.Projections", "PlayId", "dbo.Plays");
             DropForeignKey("dbo.Projections", "StageId", "dbo.Stages");
             DropForeignKey("dbo.Items", "TheaterId", "dbo.Theaters");
-            DropForeignKey("dbo.AspNetUsers", "AdminOfTheater_TheaterId", "dbo.Theaters");
+            DropForeignKey("dbo.AspNetUsers", "AdminOfTheaterId", "dbo.Theaters");
             DropIndex("dbo.Friends", new[] { "FriendId" });
             DropIndex("dbo.Friends", new[] { "Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
@@ -290,8 +294,8 @@ namespace ISofA.DAL.Migrations
             DropIndex("dbo.Plays", new[] { "TheaterId" });
             DropIndex("dbo.Items", new[] { "BuyerId" });
             DropIndex("dbo.Items", new[] { "TheaterId" });
-            DropIndex("dbo.AspNetUsers", new[] { "AdminOfTheater_TheaterId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUsers", new[] { "AdminOfTheaterId" });
             DropIndex("dbo.Bids", new[] { "BidderId" });
             DropIndex("dbo.Bids", new[] { "UserItemId" });
             DropTable("dbo.Friends");
