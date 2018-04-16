@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edit {{data.theater.Name}}</h1>
+<div mat-dialog-content>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="edit.Name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="edit.Address" placeholder="Address">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="edit" cdkFocusInitial>Save</button>
+</div>

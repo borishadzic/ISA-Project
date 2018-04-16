@@ -1,5 +1,21 @@
-<div class="row">
-  <div class="container">
-    <app-time-table [data]="testData"></app-time-table>
-  </div>
+<div class="container fill">
+  <app-admin-navbar></app-admin-navbar>
+  <ng-template [ngIf]="theater" [ngIfElse]="loading">
+    <h1>{{theater.Name}}
+      <small class="text-muted"> {{theater.Address}}</small>
+    </h1>
+    <blockquote class="blockquote">{{theater.Description}}</blockquote>
+    <h5>Open from {{theater.WorkStart | minsFormatter }} until {{(theater.WorkStart + theater.WorkDuration) | minsFormatter}}</h5>
+    <button mat-raised-button color="primary" (click)="openEditTheaterDialog()">Edit</button>
+    <app-schedule></app-schedule>
+    <app-play-list></app-play-list>
+    <app-stages></app-stages>
+  </ng-template>
+  <ng-template #loading>
+    <mat-grid-list cols="1" rowHeight="400px">
+      <mat-grid-tile>
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-template>
 </div>

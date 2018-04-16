@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableDataset } from '../../../shared/time-table/time-table-dataset';
+import { MatDialog } from '@angular/material';
+import { EditTheaterDialogComponent } from '../edit-theater-dialog/edit-theater-dialog.component';
+import { TheaterAdminService } from '../theater-admin.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -8,26 +11,28 @@ import { TimeTableDataset } from '../../../shared/time-table/time-table-dataset'
 })
 export class AdminHomeComponent implements OnInit {
 
-  testData: TimeTableDataset[] = [
-    {
-      startDate: new Date(),
-      groupedData: [
-        { name: "A1", data: [{ name: "Avengers", startMins: 0, durationMins: 120 }] },
-        { name: "A2", data: [{ name: "Avengers", startMins: 253, durationMins: 121 }] }
-      ]
-    },
-    {
-      startDate: new Date(),
-      groupedData: [
-        { name: "A1", data: [{ name: "Avengers", startMins: 1021, durationMins: 122 }] },
-        { name: "A2", data: [{ name: "Avengers", startMins: 0, durationMins: 223 }] }
-      ]
-    }
-  ]
+  theater: any;
 
-  constructor() { }
+  constructor(private dialog: MatDialog,
+    private theaterAdminService: TheaterAdminService) { }
 
   ngOnInit() {
+    this.theaterAdminService.getAdminTheater().subscribe(x => {
+      this.theater = x;
+      console.log(x);
+    })
+  }
+
+  openEditTheaterDialog() {
+    let dialogRef = this.dialog.open(EditTheaterDialogComponent, {
+      data: { theater: this.theater }
+    });
+
+    dialogRef.afterClosed().subscribe(x => {
+      if (x) {
+
+      }
+    });
   }
 
 }

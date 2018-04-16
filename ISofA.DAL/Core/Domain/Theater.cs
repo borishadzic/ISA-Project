@@ -17,6 +17,10 @@ namespace ISofA.DAL.Core.Domain
         [Key]
         public int TheaterId { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
+        public string Description { get; set; }
+        public int WorkStart { get; set; }
+        public int WorkDuration { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
         public TheaterType Type { get; set; }
