@@ -9,5 +9,7 @@ namespace ISofA.DAL.Core.Pantries
 {
     public interface IUserItemPantry : IPantry<UserItem>
     {
+        UserItem GetUserItemWithBids(int theaterId, Guid userItemId);
+        UserItem GetUserItemWithBids(Guid userItemId);
     }
 }
