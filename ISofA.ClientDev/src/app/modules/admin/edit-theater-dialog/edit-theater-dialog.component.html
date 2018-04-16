@@ -7,9 +7,45 @@
     <mat-form-field>
       <input matInput [(ngModel)]="edit.Address" placeholder="Address">
     </mat-form-field>
+    <label>Opens At</label>
+    <span>
+      <mat-form-field>
+        <mat-select placeholder="Hours" [(value)]="startHrs">
+          <mat-option *ngFor="let hr of [] | range: [24]" [value]="hr">
+            {{ hr | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Minutes" [(value)]="startMins">
+          <mat-option *ngFor="let min of [] | range: [60]" [value]="min">
+            {{ min | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>
+    <label>Open For</label>
+    <span>
+      <mat-form-field>
+        <mat-select placeholder="Hours" [(value)]="durHrs">
+          <mat-option *ngFor="let hr of [] | range: [24]" [value]="hr">
+            {{ hr | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Minutes" [(value)]="durMins">
+          <mat-option *ngFor="let min of [] | range: [60]" [value]="min">
+            {{ min | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span style="flex: 1 1 auto;"></span>
+    </span>
   </div>
 </div>
 <div mat-dialog-actions>
+  <span style="flex: 1 1 auto;"></span>
   <button mat-button (click)="dialogRef.close()">Cancel</button>
-  <button mat-button [mat-dialog-close]="edit" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="edit" color="primary" cdkFocusInitial>Save</button>
 </div>

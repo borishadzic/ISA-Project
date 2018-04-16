@@ -9,6 +9,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class EditTheaterDialogComponent implements OnInit {
 
   edit: any = {};
+  startHrs: any;
+  startMins: any;
+  durHrs: any;
+  durMins: any;
 
   constructor(
     public dialogRef: MatDialogRef<EditTheaterDialogComponent>,

@@ -37,13 +37,18 @@ li.tt-stage > div, .tt-date > .tt-flx-wrpr > .tt-flx-l > div {
 }
 
 .tt-svg-axis {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     display: block;
 }
 
-.tt-svg-bar {
-    margin-bottom: 8px;
+.tt-svg-bar, .tt-svg-bar-2 {
+    padding-bottom: 4px;
+    padding-top: 4px;
     display: block;
+}
+
+.tt-svg-bar-2 {
+    background-color: #eaeaea;
 }
 
 .tt-flx-wrpr > .tt-flx-r

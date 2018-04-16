@@ -10,7 +10,6 @@ import { EditTheaterDialogComponent } from './edit-theater-dialog/edit-theater-d
 import { EditStageDialogComponent } from './edit-stage-dialog/edit-stage-dialog.component';
 import { AddStageDialogComponent } from './add-stage-dialog/add-stage-dialog.component';
 import { PlayListComponent } from './play-list/play-list.component';
-import { TheaterAdminService } from './theater-admin.service';
 
 @NgModule({
   imports: [
@@ -22,9 +21,6 @@ import { TheaterAdminService } from './theater-admin.service';
     EditStageDialogComponent,
     AddStageDialogComponent
   ],
-  declarations: [AdminHomeComponent, AdminNavbarComponent, ScheduleComponent, StagesComponent, EditTheaterDialogComponent, EditStageDialogComponent, AddStageDialogComponent, PlayListComponent],
-  providers: [
-    TheaterAdminService
-  ]
+  declarations: [AdminHomeComponent, AdminNavbarComponent, ScheduleComponent, StagesComponent, EditTheaterDialogComponent, EditStageDialogComponent, AddStageDialogComponent, PlayListComponent]
 })
 export class AdminModule { }
