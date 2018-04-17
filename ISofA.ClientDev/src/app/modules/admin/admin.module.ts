@@ -11,6 +11,7 @@ import { AddStageDialogComponent } from './add-stage-dialog/add-stage-dialog.com
 import { PlayListComponent } from './play-list/play-list.component';
 import { StageListComponent } from './stage-list/stage-list.component';
 import { AddPlayDialogComponent } from './add-play-dialog/add-play-dialog.component';
+import { EditPlayDialogComponent } from './edit-play-dialog/edit-play-dialog.component';
 
 @NgModule({
   imports: [
@@ -21,8 +22,9 @@ import { AddPlayDialogComponent } from './add-play-dialog/add-play-dialog.compon
     EditTheaterDialogComponent,
     EditStageDialogComponent,
     AddStageDialogComponent,
-    AddPlayDialogComponent
+    AddPlayDialogComponent,
+    EditPlayDialogComponent
   ],
-  declarations: [AdminHomeComponent, AdminNavbarComponent, ScheduleComponent, EditTheaterDialogComponent, EditStageDialogComponent, AddStageDialogComponent, PlayListComponent, StageListComponent, AddPlayDialogComponent]
+  declarations: [AdminHomeComponent, AdminNavbarComponent, ScheduleComponent, EditTheaterDialogComponent, EditStageDialogComponent, AddStageDialogComponent, PlayListComponent, StageListComponent, AddPlayDialogComponent, EditPlayDialogComponent]
 })
 export class AdminModule { }

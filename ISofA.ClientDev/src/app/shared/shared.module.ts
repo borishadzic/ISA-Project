@@ -13,6 +13,7 @@ import { RangePipe } from './range.pipe';
 import { PadPipe } from './pad.pipe';
 import { StageService } from '../services/stage.service';
 import { PlayService } from '../services/play.service';
+import { NameFilterPipe } from './name-filter.pipe';
 
 var componentExports: any[] = [
   TimeTableComponent
@@ -21,7 +22,8 @@ var componentExports: any[] = [
 var pipeExports: any[] = [
   MinsFormatterPipe,
   PadPipe,
-  RangePipe
+  RangePipe,
+  NameFilterPipe
 ]
 
 @NgModule({
@@ -41,7 +43,7 @@ var pipeExports: any[] = [
     componentExports,
     pipeExports
   ],
-  declarations: [TimeTableComponent, MinsFormatterPipe, RangePipe, PadPipe]
+  declarations: [TimeTableComponent, MinsFormatterPipe, RangePipe, PadPipe, NameFilterPipe]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

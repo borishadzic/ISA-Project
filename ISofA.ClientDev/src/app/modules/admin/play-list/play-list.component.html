@@ -5,12 +5,17 @@
 
   <ng-template matExpansionPanelContent>
     <div style="display: flex; align-items: stretch;">
+      <mat-form-field>
+        <input placeholder="Search" matInput [(ngModel)]="playNameFilter"/>
+      </mat-form-field>
       <span style="flex: 1 1 auto;"></span>
-      <button mat-raised-button color="primary" (click)="openAddPlayDialog()">Add</button>
+      <div>
+        <button mat-raised-button color="primary" (click)="openAddPlayDialog()">New</button>      
+      </div>      
     </div>
     <ng-template [ngIf]="plays" [ngIfElse]="loadingPlays">
       <mat-list>
-        <mat-list-item *ngFor="let play of plays">{{ play.Name }} | {{play.Description}}</mat-list-item>
+        <mat-list-item *ngFor="let play of plays | nameFilter: playNameFilter"><button mat-button (click)="openEditPlayDialog(play)">{{ play.Name }}</button></mat-list-item>
       </mat-list>
     </ng-template>
     <ng-template #loadingPlays>

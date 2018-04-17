@@ -21,4 +21,8 @@ export class PlayService {
     return this.http.put(environment.hostUrl + '/api/theaters/' + theaterId + '/plays/' + playId, play);
   }
 
+  public deletePlay(theaterId: number, playId: number): Observable<any> {
+    return this.http.delete(environment.hostUrl + '/api/theaters/' + theaterId + '/plays/' + playId);
+  }
+
 }
