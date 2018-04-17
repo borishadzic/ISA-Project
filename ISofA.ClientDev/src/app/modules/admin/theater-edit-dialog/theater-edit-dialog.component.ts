@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-edit-theater-dialog',
-  templateUrl: './edit-theater-dialog.component.html',
-  styleUrls: ['./edit-theater-dialog.component.css']
+  selector: 'app-theater-edit-dialog',
+  templateUrl: './theater-edit-dialog.component.html',
+  styleUrls: ['./theater-edit-dialog.component.css']
 })
-export class EditTheaterDialogComponent implements OnInit {
+export class TheaterEditDialogComponent implements OnInit {
 
   edit: any = {};
   startHrs: any;
@@ -15,7 +15,7 @@ export class EditTheaterDialogComponent implements OnInit {
   durMins: any;
 
   constructor(
-    public dialogRef: MatDialogRef<EditTheaterDialogComponent>,
+    public dialogRef: MatDialogRef<TheaterEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 

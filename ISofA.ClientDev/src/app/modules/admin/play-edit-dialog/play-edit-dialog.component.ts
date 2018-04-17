@@ -3,18 +3,18 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { PlayService } from '../../../services/play.service';
 
 @Component({
-  selector: 'app-edit-play-dialog',
-  templateUrl: './edit-play-dialog.component.html',
-  styleUrls: ['./edit-play-dialog.component.css']
+  selector: 'app-play-edit-dialog',
+  templateUrl: './play-edit-dialog.component.html',
+  styleUrls: ['./play-edit-dialog.component.css']
 })
-export class EditPlayDialogComponent implements OnInit {
+export class PlayEditDialogComponent implements OnInit {
 
   public edit: any = {};
   duration: string;
 
   constructor(
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<EditPlayDialogComponent>,
+    public dialogRef: MatDialogRef<PlayEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private playService: PlayService) { }
 

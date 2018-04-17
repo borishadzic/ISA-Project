@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-add-play-dialog',
-  templateUrl: './add-play-dialog.component.html',
-  styleUrls: ['./add-play-dialog.component.css']
+  selector: 'app-play-add-dialog',
+  templateUrl: './play-add-dialog.component.html',
+  styleUrls: ['./play-add-dialog.component.css']
 })
-export class AddPlayDialogComponent implements OnInit {
+export class PlayAddDialogComponent implements OnInit {
 
   play: any = {};
   duration: string;
 
-  constructor(public dialogRef: MatDialogRef<AddPlayDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<PlayAddDialogComponent>) { }
 
   ngOnInit() {
   }

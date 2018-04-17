@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { StageService } from '../../../services/stage.service';
-import { EditStageDialogComponent } from '../edit-stage-dialog/edit-stage-dialog.component';
-import { AddStageDialogComponent } from '../add-stage-dialog/add-stage-dialog.component';
+import { StageEditDialogComponent } from '../stage-edit-dialog/stage-edit-dialog.component';
+import { StageAddDialogComponent } from '../stage-add-dialog/stage-add-dialog.component';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class StageListComponent implements OnInit {
   }
 
   openEditStageDialog(stage, idx) {
-    let dialogRef = this.dialog.open(EditStageDialogComponent, {
+    let dialogRef = this.dialog.open(StageEditDialogComponent, {
       data: stage
     });
 
@@ -48,7 +48,7 @@ export class StageListComponent implements OnInit {
   }
 
   openAddStageDialog() {
-    let dialogRef = this.dialog.open(AddStageDialogComponent);
+    let dialogRef = this.dialog.open(StageAddDialogComponent);
 
     dialogRef.afterClosed().subscribe(x => {
       if (x) {

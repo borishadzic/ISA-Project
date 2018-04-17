@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableDataset } from '../../../shared/time-table/time-table-dataset';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { EditTheaterDialogComponent } from '../edit-theater-dialog/edit-theater-dialog.component';
+import { TheaterEditDialogComponent } from '../theater-edit-dialog/theater-edit-dialog.component';
 import { AuthService } from '../../../services/auth.service';
 import { TheaterService } from '../../theater/theater.service';
 
@@ -26,7 +26,7 @@ export class AdminHomeComponent implements OnInit {
   }
 
   openEditTheaterDialog() {
-    let dialogRef = this.dialog.open(EditTheaterDialogComponent, {
+    let dialogRef = this.dialog.open(TheaterEditDialogComponent, {
       data: this.theater
     });
 

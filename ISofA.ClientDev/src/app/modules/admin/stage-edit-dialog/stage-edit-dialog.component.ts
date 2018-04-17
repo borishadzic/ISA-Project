@@ -2,16 +2,16 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-edit-stage-dialog',
-  templateUrl: './edit-stage-dialog.component.html',
-  styleUrls: ['./edit-stage-dialog.component.css']
+  selector: 'app-stage-edit-dialog',
+  templateUrl: './stage-edit-dialog.component.html',
+  styleUrls: ['./stage-edit-dialog.component.css']
 })
-export class EditStageDialogComponent implements OnInit {
+export class StageEditDialogComponent implements OnInit {
 
   edit: any = {};
 
   constructor(
-    public dialogRef: MatDialogRef<EditStageDialogComponent>,
+    public dialogRef: MatDialogRef<StageEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {

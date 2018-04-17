@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { PlayService } from '../../../services/play.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { AddPlayDialogComponent } from '../add-play-dialog/add-play-dialog.component';
-import { EditPlayDialogComponent } from '../edit-play-dialog/edit-play-dialog.component';
+import { PlayAddDialogComponent } from '../play-add-dialog/play-add-dialog.component';
+import { PlayEditDialogComponent } from '../play-edit-dialog/play-edit-dialog.component';
 
 @Component({
   selector: 'app-play-list',
@@ -33,7 +33,7 @@ export class PlayListComponent implements OnInit {
   }
 
   openAddPlayDialog() {
-    let dialogRef = this.dialog.open(AddPlayDialogComponent);
+    let dialogRef = this.dialog.open(PlayAddDialogComponent);
 
     dialogRef.afterClosed().subscribe(x => {
       if (x) {
@@ -47,7 +47,7 @@ export class PlayListComponent implements OnInit {
   }
 
   openEditPlayDialog(play: any) {
-    let dialogRef = this.dialog.open(EditPlayDialogComponent, { data: play });
+    let dialogRef = this.dialog.open(PlayEditDialogComponent, { data: play });
 
     dialogRef.afterClosed().subscribe(x => {
       if (x) {
