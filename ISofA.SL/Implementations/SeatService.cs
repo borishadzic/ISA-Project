@@ -62,8 +62,46 @@ namespace ISofA.SL.Implementations
             }
             return null;
         }
+		public IEnumerable<SeatDTO> AddMultipleReservations(int theaterId, int projectionId, string userIds, IEnumerable<Seat> seats)
+		{
 
-        public SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat)
+			var proj = UnitOfWork.Projections.Get(projectionId);
+
+
+			foreach (Seat seat in seats)
+			{
+				Seat taken = UnitOfWork.Seats.Find(x => x.ProjectionId == proj.ProjectionId && x.SeatColumn == seat.SeatColumn && x.SeatRow == seat.SeatRow).FirstOrDefault();
+				if (taken != null && (taken.State == SeatState.Reserved || taken.State == SeatState.Bought))
+				{
+					throw new Exception();
+				}
+			}
+			foreach (Seat seat in seats)
+			{
+				seat.TheaterId = theaterId;
+				seat.PlayId = proj.PlayId;
+				seat.StageId = proj.StageId;
+				seat.ProjectionId = projectionId;
+				seat.UserId = userIds;
+				seat.Discount = 0;
+				seat.State = SeatState.Reserved;
+			}
+
+			var seats1 = UnitOfWork.Seats.AddRange(seats);
+			UnitOfWork.SaveChanges();
+
+			return UnitOfWork.Seats
+			   .Find(x => x.TheaterId == theaterId && x.PlayId == proj.PlayId && x.StageId == proj.StageId && x.ProjectionId == projectionId && x.UserId == userIds)
+			   .Select(x => new SeatDTO(x));
+
+		}
+
+		public IEnumerable<SeatDTO> GetUserReservations(string userId)
+		{
+			return UnitOfWork.Seats.Find(x => x.UserId == userId).Select(x => new SeatDTO(x));
+		}
+
+		public SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat)
         {
             if (UnitOfWork.Seats.Get(theaterId, playId, stageId, projectionId, seat.SeatRow, seat.SeatColumn) != null)
                 return null; // TODO: ERROR Throw             

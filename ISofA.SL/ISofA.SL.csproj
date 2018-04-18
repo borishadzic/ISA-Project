@@ -84,6 +84,7 @@
     <Compile Include="Implementations\TheaterService.cs" />
     <Compile Include="Implementations\UploadService.cs" />
     <Compile Include="Implementations\UserItemService.cs" />
+    <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Implementations\VisitService.cs" />
     <Compile Include="Implementations\SeatService.cs" />
     <Compile Include="Implementations\ProjectionService.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Services\ITheaterService.cs" />
     <Compile Include="Services\IUploadService.cs" />
     <Compile Include="Services\IUserItemService.cs" />
+    <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\IVisitService.cs" />
     <Compile Include="Services\IProjectionService.cs" />
     <Compile Include="Services\IStageService.cs" />

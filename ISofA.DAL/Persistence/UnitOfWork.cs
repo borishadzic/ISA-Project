@@ -44,6 +44,7 @@ namespace ISofA.DAL.Persistence
 
         private IBidPantry _bids;
         public IBidPantry Bids { get { return _bids ?? new BidPantry(_context); } }
+		
 
         private IConfigPantry _configs;
         public IConfigPantry Configs { get { return _configs ?? new ConfigPantry(_context); } }

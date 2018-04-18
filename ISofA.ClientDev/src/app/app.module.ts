@@ -18,6 +18,8 @@ import { HomeModule } from './modules/home/home.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ShoppingCartIconComponent } from './components/shopping-cart-icon/shopping-cart-icon.component';
 import { AdminModule } from './modules/admin/admin.module';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FriendsComponent } from './components/profile/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AdminModule } from './modules/admin/admin.module';
     RegisterComponent,
     NavbarComponent,
     ShoppingCartComponent,
-    ShoppingCartIconComponent
+    ShoppingCartIconComponent,
+    ProfileComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

@@ -24,9 +24,21 @@ namespace ISofA.WebAPI.Controllers
             return _seatService.GetSpeedSeats(theaterId);
         }
 
+		[HttpPost]
+		[Route("api/Theaters/{theaterId}/Projections/{projectionId}/ReserveSeats")]
+		public IEnumerable<SeatDTO> AddMultipleReservations(int theaterId, int projectionId, [FromBody]IEnumerable<Seat> seat)
+		{
+			return _seatService.AddMultipleReservations(theaterId, projectionId, User.Identity.GetUserId(), seat);
+		}
 
+		[HttpGet]
+		[Route("api/myReservations")]
+		public IEnumerable<SeatDTO> GetUserReservations()
+		{
+			return _seatService.GetUserReservations(User.Identity.GetUserId());
+		}
 
-        [HttpGet]
+		[HttpGet]
         [Route("api/Theaters/{theaterId}/Visits")]
         public IEnumerable<SpeedSeatListElementDTO> GetUserVisits(int theaterId)
         {

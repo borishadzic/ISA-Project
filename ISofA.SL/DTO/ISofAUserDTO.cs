@@ -11,16 +11,21 @@ namespace ISofA.SL.DTO
 	{
 		public ISofAUserDTO(ISofAUser Isauser)
 		{
-			Email = Isauser.Email;
 			Id = Isauser.Id;
+			Email = Isauser.Email;
 			Name = Isauser.Name;
 			Surname = Isauser.Surname;
+			City = Isauser.City;
+			PhoneNumber = Isauser.PhoneNumber;
 		}
 
-		public string Email { get; set; }
 		public string Id { get; set; }
+		public string Email { get; set; }
 		public string Name { get; set; }
 		public string Surname { get; set; }
+		public string City { get; set; }
+		public string PhoneNumber { get; set; }
+
 
 	}
 }

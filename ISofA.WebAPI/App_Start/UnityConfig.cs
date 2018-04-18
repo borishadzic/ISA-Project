@@ -92,7 +92,7 @@ namespace ISofA.WebAPI
 
         private static void RegisterServices(IUnityContainer container)
         {
-            container.RegisterType<IPlayService, PlayService>();
+			container.RegisterType<IPlayService, PlayService>();
             container.RegisterType<IStageService, StageService>();
             container.RegisterType<ISeatService, SeatService>();
             container.RegisterType<IProjectionService, ProjectionService>();
@@ -104,6 +104,7 @@ namespace ISofA.WebAPI
             container.RegisterType<IUserItemService, UserItemService>();
             container.RegisterType<IBidService, BidService>();
             container.RegisterType<IUploadService, UploadService>();
+			container.RegisterType<IUserService, UserService>();
             container.RegisterType<IEmailService, EmailService>();
             container.RegisterType<IConfigService, ConfigService>();
         }

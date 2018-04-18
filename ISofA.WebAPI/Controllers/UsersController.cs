@@ -1,5 +1,8 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
+using ISofA.SL.DTO;
+using ISofA.SL.Services;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -7,22 +10,37 @@ namespace ISofA.WebAPI.Controllers
 {
     public class UsersController : ApiController
     {
-        private readonly IUserPantry _userPantry;
+        private readonly IUserService _userService;
 
-        public UsersController(IUserPantry userPantry)
+        public UsersController(IUserService _userService)
         {
-            _userPantry = userPantry;
+			this._userService = _userService;
         }
-        
-        public IEnumerable<ISofAUser> Get()
+        [HttpGet]
+		[Route("api/Users")]
+        public IEnumerable<ISofAUserDTO> Get()
         {
-            return _userPantry.GetAll();
+            return _userService.GetNonFriendUsers(User.Identity.GetUserId());
+        }
+		[HttpGet]
+		[Route("api/myProfile")]
+        public ISofAUserDTO GetMyProfile()
+        {
+            return _userService.GetUserProfile(User.Identity.GetUserId());
         }
 
-        public ISofAUser Get(string userId)
-        {
-            return _userPantry.Get(userId);
-        }
+		[HttpGet]
+		[Route("api/{userId}")]
+		public ISofAUserDTO GetUserProfile(string userId)
+		{
+			return _userService.GetUserProfile(userId);
+		}
 
-    }
+		[HttpGet]
+		[Route("api/Users/Search")]
+		public IEnumerable<ISofAUserDTO> GetUserFromSearch(ISofAUser user)
+		{
+			return _userService.GetUsers(User.Identity.GetUserId(), user.Name, user.Surname, user.Email);
+		}
+	}
 }
