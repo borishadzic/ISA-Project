@@ -49,7 +49,7 @@ namespace ISofA.SL.Implementations
 
         public UserItemDetailDTO GetItem(int theaterId, Guid userItemId)
         {
-            var userItem = UnitOfWork.UserItems.GetUserItemWithBids(theaterId, userItemId);
+            var userItem = UnitOfWork.UserItems.GetUserItemWithBids(userItemId, theaterId);
 
             if (userItem == null)
             {
@@ -79,7 +79,7 @@ namespace ISofA.SL.Implementations
         public void RemoveItem(int theaterId, Guid userItemId)
         {
             var userItem = UnitOfWork.UserItems
-                .Find(x => x.TheaterId == theaterId && x.UserItemId == userItemId)
+                .Find(x => x.TheaterId == theaterId && x.UserItemId == userItemId && x.Sold == false && x.Approved == null)
                 .FirstOrDefault();
 
             if (userItem != null)

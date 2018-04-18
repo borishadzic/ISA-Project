@@ -97,6 +97,7 @@
     <Compile Include="Unit\Student 2\BidTest\BidService_Add.cs" />
     <Compile Include="Unit\Student 2\BidTest\BidService_Get.cs" />
     <Compile Include="Unit\Student 2\BidTest\BidService_Sell.cs" />
+    <Compile Include="Unit\Student 2\BidTest\MockEmailService.cs" />
     <Compile Include="Unit\Student 2\ItemTest\ItemService_Add.cs" />
     <Compile Include="Unit\Student 2\ItemTest\ItemService_Buy.cs" />
     <Compile Include="Unit\Student 2\ItemTest\ItemService_Get.cs" />

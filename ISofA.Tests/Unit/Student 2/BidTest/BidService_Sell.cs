@@ -19,7 +19,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
         public BidService_Sell()
         {
             _unitOfWork = new TestUnitOfWork();
-            _bidService = new BidService(_unitOfWork);
+            _bidService = new BidService(_unitOfWork, new MockEmailService());
         }
 
         [TestInitialize]
@@ -29,7 +29,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
         }
 
         [TestMethod]
-        public void UserItem_Sell_Item_Ok()
+        public async Task UserItem_Sell_Item_OkAsync()
         {
             // Arrange
             var theater = new Theater { Name = "Arena" };
@@ -59,7 +59,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
             _unitOfWork.SaveChanges();
 
             // Act
-            var soldItem = _bidService.SellItem(user1.Id, userItem.UserItemId, bid2.BidderId);
+            var soldItem = await _bidService.SellItemAsync(user1.Id, userItem.UserItemId, bid2.BidderId);
 
             // Assert
             var foundItem = _unitOfWork.UserItems.Get(userItem.UserItemId);
@@ -69,7 +69,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
         }
 
         [TestMethod]
-        public void UserItem_Sell_Item_Expired()
+        public async Task UserItem_Sell_Item_ExpiredAsync()
         {
             // Arrange
             var theater = new Theater { Name = "Arena" };
@@ -99,7 +99,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
             _unitOfWork.SaveChanges();
 
             // Act
-            var soldItem = _bidService.SellItem(user1.Id, userItem.UserItemId, bid2.BidderId);
+            var soldItem = await _bidService.SellItemAsync(user1.Id, userItem.UserItemId, bid2.BidderId);
 
             // Assert
             var foundItem = _unitOfWork.UserItems.Get(userItem.UserItemId);
@@ -109,7 +109,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
         }
 
         [TestMethod]
-        public void UserItem_Sell_Item_Sold()
+        public async Task UserItem_Sell_Item_SoldAsync()
         {
             // Arrange
             var theater = new Theater { Name = "Arena" };
@@ -139,7 +139,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
             _unitOfWork.SaveChanges();
 
             // Act
-            var soldItem = _bidService.SellItem(user1.Id, userItem.UserItemId, bid2.BidderId);
+            var soldItem = await _bidService.SellItemAsync(user1.Id, userItem.UserItemId, bid2.BidderId);
 
             // Assert
             var foundItem = _unitOfWork.UserItems.Get(userItem.UserItemId);
@@ -148,7 +148,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
         }
 
         [TestMethod]
-        public void UserItem_Sell_Item_Not_Approved()
+        public async Task UserItem_Sell_Item_Not_ApprovedAsync()
         {
             // Arrange
             var theater = new Theater { Name = "Arena" };
@@ -178,7 +178,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
             _unitOfWork.SaveChanges();
 
             // Act
-            var soldItem = _bidService.SellItem(user1.Id, userItem.UserItemId, bid2.BidderId);
+            var soldItem = await _bidService.SellItemAsync(user1.Id, userItem.UserItemId, bid2.BidderId);
 
             // Assert
             var foundItem = _unitOfWork.UserItems.Get(userItem.UserItemId);

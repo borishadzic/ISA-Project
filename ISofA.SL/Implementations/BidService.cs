@@ -12,8 +12,11 @@ namespace ISofA.SL.Implementations
 {
     public class BidService : Service, IBidService
     {
-        public BidService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IEmailService _emailService;
+
+        public BidService(IUnitOfWork unitOfWork, IEmailService emailService) : base(unitOfWork)
         {
+            _emailService = emailService;
         }
 
         public UserItemDetailDTO AddBid(Guid userItemId, string userId, Bid bid)
@@ -58,13 +61,10 @@ namespace ISofA.SL.Implementations
             return UnitOfWork.Bids.Find(x => x.UserItemId == userItemId).Select(x => new BidDTO(x));
         }
 
-        public UserItemDTO SellItem(string userItemOwnerId, Guid userItemId, string bidderId)
+        public async Task<UserItemDTO> SellItemAsync(string userItemOwnerId, Guid userItemId, string bidderId)
         {
-            var userItem = UnitOfWork.UserItems
-                .Find(x => x.ISofAUserId == userItemOwnerId && x.UserItemId == userItemId)
-                .FirstOrDefault();
-
-            var bid = UnitOfWork.Bids.Get(userItemId, bidderId);
+            var userItem = UnitOfWork.UserItems.GetUserItemWithBids(userItemId, userItemOwnerId);
+            var bid = userItem?.Bids.FirstOrDefault(x => x.BidderId == bidderId);
 
             if (userItem == null || bid == null || !CheckCondition(userItem))
             {
@@ -75,7 +75,7 @@ namespace ISofA.SL.Implementations
             userItem.HighestBid = bid.BidAmount;
             UnitOfWork.SaveChanges();
 
-            SendMail(userItem, bid);
+            await _emailService.UserItemSoldNotification(userItem, bid);
 
             return new UserItemDTO(userItem);
         }
@@ -85,19 +85,6 @@ namespace ISofA.SL.Implementations
             return userItem.Approved == true
                 && userItem.Sold == false
                 && DateTime.Compare(userItem.ExpirationDate, DateTime.Now) > 0;
-        }
-
-        private void SendMail(UserItem userItem, Bid bid)
-        {
-            IEnumerable<ISofAUser> losers = userItem.Bids
-                .Where(x => x.BidderId != bid.BidderId)
-                .Select(x => x.Bidder)
-                .ToList();
-
-            ISofAUser winner = userItem.Bids
-                .Where(x => x.BidderId == bid.BidderId)
-                .Select(x => x.Bidder)
-                .First();
         }
     }
 }

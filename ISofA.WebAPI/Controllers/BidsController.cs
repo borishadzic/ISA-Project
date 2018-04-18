@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
@@ -55,9 +56,9 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("{bidderId}")]
-        public UserItemDTO Post(Guid userItemId, string bidderId)
+        public async Task<UserItemDTO> PostAsync(Guid userItemId, string bidderId)
         {
-            var userItem = _bidService.SellItem(User.Identity.GetUserId(), userItemId, bidderId);
+            var userItem = await _bidService.SellItemAsync(User.Identity.GetUserId(), userItemId, bidderId);
 
             if (userItem == null)
             {

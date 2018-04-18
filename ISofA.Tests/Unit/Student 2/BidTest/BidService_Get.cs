@@ -19,7 +19,7 @@ namespace ISofA.Tests.Unit.Student_2.BidTest
         public BidService_Get()
         {
             _unitOfWork = new TestUnitOfWork();
-            _bidService = new BidService(_unitOfWork);
+            _bidService = new BidService(_unitOfWork, new MockEmailService());
         }
 
         [TestInitialize]

@@ -69,7 +69,7 @@ namespace ISofA.WebAPI.Filters
             int theaterId = Convert.ToInt32(actionContext.ControllerContext.RouteData.Values["theaterId"]);
             int userAdminOf = int.Parse(user.FindFirst(ISofAClaimTypes.ISofAAdminOf).Value);
 
-            if ((int)userRole > (int)_role && userAdminOf == theaterId)
+            if ((int)userRole >= (int)_role && userAdminOf == theaterId)
                 return true;
 
             return false;            

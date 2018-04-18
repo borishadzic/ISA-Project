@@ -15,19 +15,27 @@ namespace ISofA.DAL.Persistence.Pantries
         {
         }
 
-        public UserItem GetUserItemWithBids(int theaterId, Guid userItemId)
-        {
-            return Context.UserItems
-                .Where(x => x.TheaterId == theaterId && x.UserItemId == userItemId)
-                .Include(x => x.Bids)
-                .FirstOrDefault();
-        }
-
         public UserItem GetUserItemWithBids(Guid userItemId)
         {
             return Context.UserItems
                 .Where(x => x.UserItemId == userItemId)
                 .Include(x => x.Bids)
+                .FirstOrDefault();
+        }
+
+        public UserItem GetUserItemWithBids(Guid userItemId, int theaterId)
+        {
+            return Context.UserItems
+                .Where(x => x.UserItemId == userItemId && x.TheaterId == theaterId)
+                .Include(x => x.Bids)
+                .FirstOrDefault();
+        }
+
+        public UserItem GetUserItemWithBids(Guid userItemId, string ISofAUserId)
+        {
+            return Context.UserItems
+                .Where(x => x.UserItemId == userItemId && x.ISofAUserId == ISofAUserId)
+                .Include(x => x.Bids.Select(b => b.Bidder))
                 .FirstOrDefault();
         }
     }
