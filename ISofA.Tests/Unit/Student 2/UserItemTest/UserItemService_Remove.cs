@@ -46,7 +46,7 @@ namespace ISofA.Tests.Unit.Student_2.UserItemTest
                 TheaterId = theater1.TheaterId,
                 ISofAUserId = user1.Id,
                 ExpirationDate = DateTime.Now.AddHours(2),
-                Approved = false,
+                Approved = null,
                 Sold = false
             };
 
@@ -55,7 +55,7 @@ namespace ISofA.Tests.Unit.Student_2.UserItemTest
                 TheaterId = theater1.TheaterId,
                 ISofAUserId = user1.Id,
                 ExpirationDate = DateTime.Now.AddHours(-2),
-                Approved = false,
+                Approved = null,
                 Sold = false
             };
 

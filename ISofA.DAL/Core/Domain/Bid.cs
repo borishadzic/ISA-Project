@@ -14,7 +14,9 @@ namespace ISofA.DAL.Core.Domain
         public Guid UserItemId { get; set; }
         [Key, Column(Order = 1)]
         public string BidderId { get; set; }
+        [ConcurrencyCheck]
         public DateTime BidDate { get; set; }
+        [ConcurrencyCheck]
         public float BidAmount { get; set; }
             
         [ForeignKey("BidderId")]

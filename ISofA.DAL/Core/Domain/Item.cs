@@ -10,11 +10,12 @@ namespace ISofA.DAL.Core.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ItemId { get; set; }
         public int TheaterId { get; set; }
-
         public string Name { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
         public string ImageUrl { get; set; }
+
+        [ConcurrencyCheck]
         public string BuyerId { get; set; }
         
         [ConcurrencyCheck]

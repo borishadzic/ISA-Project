@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Core\Claims\ISofAClaimTypes.cs" />
     <Compile Include="Core\Domain\Bid.cs" />
+    <Compile Include="Core\Domain\Config.cs" />
     <Compile Include="Core\Domain\FriendRequest.cs" />
     <Compile Include="Core\Domain\ISofAUser.cs" />
     <Compile Include="Core\Domain\Item.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Core\Domain\UserItem.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Pantries\IBidPantry.cs" />
+    <Compile Include="Core\Pantries\IConfigPantry.cs" />
     <Compile Include="Core\Pantries\IFriendRequestPantry.cs" />
     <Compile Include="Core\Pantries\IItemPantry.cs" />
     <Compile Include="Core\Pantries\IPantry.cs" />
@@ -80,9 +82,14 @@
     <Compile Include="Migrations\201804160456400_Initial.Designer.cs">
       <DependentUpon>201804160456400_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804181637327_Config.cs" />
+    <Compile Include="Migrations\201804181637327_Config.Designer.cs">
+      <DependentUpon>201804181637327_Config.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
     <Compile Include="Persistence\Pantries\BidPantry.cs" />
+    <Compile Include="Persistence\Pantries\ConfigPantry.cs" />
     <Compile Include="Persistence\Pantries\FriendRequestPantry.cs" />
     <Compile Include="Persistence\Pantries\ItemPantry.cs" />
     <Compile Include="Persistence\Pantries\Pantry.cs" />
@@ -103,6 +110,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804160456400_Initial.resx">
       <DependentUpon>201804160456400_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804181637327_Config.resx">
+      <DependentUpon>201804181637327_Config.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

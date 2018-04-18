@@ -103,12 +103,14 @@ export class AuthService {
     );
   }
 
-  // Posle doradi da bude poput onog na web apiju (ISofAAuthorizationAuthorization...)
-  // PS. Vrednost one enumaracije se salje kao string 'FanZoneAdmin' ne 1
   public hasAccess(theaterId, userRole) {
-    if (this.tokenInfo.iSofAUserRole === 'SysAdmin') {
-      return true;
+    if (this.tokenInfo == null) {
+      return false;
     }
+
+    // if (this.tokenInfo.iSofAUserRole === 'SysAdmin') {
+    //   return true;
+    // }
 
     return this.tokenInfo.adminOfTheater === theaterId && this.tokenInfo.iSofAUserRole === userRole;
   }

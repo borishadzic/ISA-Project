@@ -20,6 +20,7 @@ namespace ISofA.DAL.Core
 		IFriendRequestPantry FriendRequests { get; }
         IUserItemPantry UserItems { get; }
         IBidPantry Bids { get; }
+        IConfigPantry Configs { get; }
 
         void Modified<TEntity>(TEntity entity) where TEntity : class;
 

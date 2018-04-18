@@ -29,6 +29,7 @@ namespace ISofA.DAL.Persistence
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<UserItem> UserItems { get; set; }
         public DbSet<Bid> Bids { get; set; }
+        public DbSet<Config> Configs { get; set; }
 
         public override int SaveChanges()
         {

@@ -105,6 +105,7 @@ namespace ISofA.WebAPI
             container.RegisterType<IBidService, BidService>();
             container.RegisterType<IUploadService, UploadService>();
             container.RegisterType<IEmailService, EmailService>();
+            container.RegisterType<IConfigService, ConfigService>();
         }
     }
 }
