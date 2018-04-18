@@ -19,7 +19,8 @@ namespace ISofA.SL.DTO
             SeatColumn = seat.SeatColumn;
             State = seat.State;
             Discount = seat.Discount;
-        }
+			UserId = seat.UserId;
+		}
 
         public int TheaterId { get; }
         public int PlayId { get; }
@@ -29,5 +30,6 @@ namespace ISofA.SL.DTO
         public int SeatColumn { get; }
         public SeatState State { get; }
         public int Discount { get; }
-    }
+		public string UserId { get; }
+	}
 }

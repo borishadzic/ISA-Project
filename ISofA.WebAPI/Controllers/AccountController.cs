@@ -423,7 +423,7 @@ namespace ISofA.WebAPI.Controllers
         {
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
-                return Redirect(Url.Content("~/"));
+                return Redirect(Url.Content("http://localhost:4200/login"));
             else
                 return BadRequest();
         }

@@ -44,6 +44,7 @@ namespace ISofA.DAL.Persistence
 
         private IBidPantry _bids;
         public IBidPantry Bids { get { return _bids ?? new BidPantry(_context); } }
+		
 
         public void Modified<TEntity>(TEntity entity) where TEntity : class
         {
