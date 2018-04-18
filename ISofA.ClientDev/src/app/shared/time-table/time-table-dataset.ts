@@ -13,6 +13,7 @@ export class TimeTableGroupData
 export class TimeTableData
 {
     name: string;
+    $class: any;
     startMins: number;
     durationMins: number; 
 }

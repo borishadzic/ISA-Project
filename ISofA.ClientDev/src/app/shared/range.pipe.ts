@@ -11,11 +11,11 @@ export class RangePipe implements PipeTransform {
     var min = 0;
     var max = 0;
     if (args.length == 1) {
-      max = args[0];
+      max = Math.floor(args[0]);    
     }
     else if (args.length == 2) {
-      min = args[0];
-      max = args[1];
+      min = Math.floor(args[0]);
+      max = Math.floor(args[1]);
     }
     else
       return value;
