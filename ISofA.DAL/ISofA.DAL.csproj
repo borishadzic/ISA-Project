@@ -79,6 +79,7 @@
     <Compile Include="Migrations\201804171254379_SomeModelChanges.cs" />
     <Compile Include="Migrations\201804171254379_SomeModelChanges.Designer.cs">
       <DependentUpon>201804171254379_SomeModelChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201804160456400_Initial.cs" />
     <Compile Include="Migrations\201804160456400_Initial.Designer.cs">
       <DependentUpon>201804160456400_Initial.cs</DependentUpon>
@@ -106,6 +107,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804171254379_SomeModelChanges.resx">
       <DependentUpon>201804171254379_SomeModelChanges.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804160456400_Initial.resx">
       <DependentUpon>201804160456400_Initial.cs</DependentUpon>
     </EmbeddedResource>
