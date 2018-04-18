@@ -71,6 +71,10 @@ namespace ISofA.SL.Implementations
             }
 
             theater.Name = update.Name;
+            theater.Address = update.Address;
+            theater.Description = update.Description;
+            theater.WorkStart = update.WorkStart;
+            theater.WorkDuration = update.WorkDuration;
             theater.Latitude = update.Latitude;
             theater.Longitude = update.Longitude;
             theater.Type = update.Type;

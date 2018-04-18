@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>New Stage</h1>
+<div mat-dialog-content>
+  <div class="example-container">
+    <mat-form-field>
+      <input placeholder="Name" matInput [(ngModel)]="stage.Name" cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Rows" matInput [(ngModel)]="stage.SeatRows">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Columns" matInput [(ngModel)]="stage.SeatColumns">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="stage" color="primary">Create</button>
+</div>

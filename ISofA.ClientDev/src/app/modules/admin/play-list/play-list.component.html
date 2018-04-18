@@ -1,0 +1,27 @@
+<mat-expansion-panel [hideToggle]="true" (opened)="getPlays()">
+  <mat-expansion-panel-header>
+    <h3>Repertoire</h3>
+  </mat-expansion-panel-header>
+
+  <ng-template matExpansionPanelContent>
+    <div style="display: flex; align-items: stretch;">
+      <mat-form-field>
+        <input placeholder="Search" matInput [(ngModel)]="playNameFilter"/>
+      </mat-form-field>
+      <span style="flex: 1 1 auto;"></span>
+      <div>
+        <button mat-raised-button color="primary" (click)="openAddPlayDialog()">New</button>      
+      </div>      
+    </div>
+    <ng-template [ngIf]="plays" [ngIfElse]="loadingPlays">
+      <mat-list>
+        <mat-list-item *ngFor="let play of plays | nameFilter: playNameFilter"><button mat-button (click)="openEditPlayDialog(play)">{{ play.Name }}</button></mat-list-item>
+      </mat-list>
+    </ng-template>
+    <ng-template #loadingPlays>
+      <div style="margin-top: 20px;">
+          <mat-progress-bar mode="query"></mat-progress-bar>
+      </div>      
+    </ng-template>
+  </ng-template>
+</mat-expansion-panel>

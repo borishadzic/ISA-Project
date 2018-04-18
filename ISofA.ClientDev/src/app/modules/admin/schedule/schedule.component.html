@@ -1,0 +1,28 @@
+<mat-expansion-panel [hideToggle]="true">
+  <mat-expansion-panel-header>
+    <h3>Schedule</h3>
+  </mat-expansion-panel-header>
+
+  <ng-template matExpansionPanelContent>
+    <div style="display: flex; align-items: stretch;">
+      <mat-form-field>
+        <input matInput [matDatepicker]="dp3" placeholder="Starting from" disabled>
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+      </mat-form-field>   
+      <span style="width: 30px;"></span>   
+      <mat-form-field>          
+          <mat-select placeholder="Show schedule for">
+            <mat-option *ngFor="let x of [1,2,3,4,5,6,7]" [value]="x">
+              {{ x }} Days
+            </mat-option>
+          </mat-select>
+        </mat-form-field>        
+      <span style="flex: 1 1 auto;"></span>
+      <div>
+          <a mat-raised-button routerLink="./edit/schedule" color="primary">Edit</a>
+      </div>
+    </div>    
+    <p>Placeholder</p>
+  </ng-template>
+</mat-expansion-panel>

@@ -63,25 +63,15 @@ namespace ISofA.SL.Implementations
 
         public void RemoveAdmin(int theaterId, string theaterAdminId)
         {
-            var theater = UnitOfWork.Theaters.GetTheaterWithAdmins(theaterId);
+            var admin = UnitOfWork.Users
+                .Find(x => x.AdminOfTheaterId == theaterId && x.Id == theaterAdminId)    
+                .FirstOrDefault();
 
-            if (theater != null)
+            if (admin != null)
             {
-                var theaterAdmin = theater.Admins.Where(x => x.Id == theaterAdminId).FirstOrDefault();
-
-                if (theaterAdmin != null)
-                {
-                    theater.Admins.Remove(theaterAdmin);
-                    UnitOfWork.SaveChanges();
-                }
-                else
-                {
-                    // TODO: throw bad request admin not found. Admin not found
-                }
-            }
-            else
-            {
-                // TODO: throw Thater not found exception
+                admin.AdminOfTheaterId = null;
+                admin.ISofAUserRole = ISofAUserRole.User;
+                UnitOfWork.SaveChanges();
             }
         }
     }

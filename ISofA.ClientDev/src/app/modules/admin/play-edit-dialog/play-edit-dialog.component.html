@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Edit {{data.Name}}</h1>
+<div mat-dialog-content>
+  <div class="example-container">
+    <mat-form-field>
+      <input placeholder="Name" matInput [(ngModel)]="edit.Name" cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Genre" matInput [(ngModel)]="edit.Genre">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Director" matInput [(ngModel)]="edit.Director">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Actors" matInput [(ngModel)]="edit.Actors">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Duration" matInput [(ngModel)]="duration">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Poster" matInput [(ngModel)]="edit.PosterUrl">
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="Trailer" matInput [(ngModel)]="edit.TrailerUrl">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea placeholder="Description" matInput [(ngModel)]="edit.Description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="deletePlay()" color="warn">Remove</button>
+    <span style="flex: 1 1 auto;"></span>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>  
+  <button mat-button (click)="savePlay()" color="primary">Save</button>
+</div>

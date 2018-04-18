@@ -1,0 +1,84 @@
+<div class="container">
+  <ng-template [ngIf]="plays && theater && stages" [ngIfElse]="loading">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <mat-form-field>
+          <mat-select placeholder="Select {{ theater.Type == 0 ? 'movie' : 'play' }}" [(ngModel)]="selPlay">
+            <mat-option *ngFor="let play of plays" [value]="play">
+              {{ play.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+      <li class="list-inline-item">
+        <mat-form-field>
+          <mat-select placeholder="Select stage" [(ngModel)]="selStage">
+            <mat-option *ngFor="let stage of stages" [value]="stage">
+              {{ stage.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <mat-form-field>
+          <mat-select placeholder="Days from today" [(ngModel)]="daysOffset">
+            <mat-option *ngFor="let x of [] | range: [1, 7]" [value]="x">
+              {{ x }} Days
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+      <li class="list-inline-item">
+        <mat-form-field>
+          <mat-select placeholder="Repeat for" [(ngModel)]="daysRepeat">
+            <mat-option *ngFor="let x of [] | range: [7]" [value]="x">
+              {{ x }} Days
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <mat-form-field>
+          <mat-select placeholder="Start hours" [(ngModel)]="startHrs">
+            <mat-option *ngFor="let x of [] | range: [theater.WorkStart / 60, (theater.WorkStart+theater.WorkDuration) / 60]" [value]="x % 24">
+              {{ (x % 24) | pad: { width: 2 } }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+      <li class="list-inline-item">
+        <mat-form-field>
+          <mat-select placeholder="Start minutes" [(ngModel)]="startMins">
+            <mat-option *ngFor="let x of [] | range: [60]" [value]="x">
+              {{ x | pad: { width: 2 } }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <button mat-raised-button color="primary" (click)="addProjection()">Add</button>
+      </li>
+    </ul>
+    <mat-divider></mat-divider>
+    &nbsp;
+    <ng-template [ngIf]="ttDatasets.length > 0" [ngIfElse]="noData">
+        <app-time-table [data]="ttDatasets" [ttRangeStart]="theater.WorkStart" [ttRangeDuration]="theater.WorkDuration"></app-time-table>
+    </ng-template>    
+    <ng-template #noData>
+      <h3>Add projections</h3>
+    </ng-template>
+  </ng-template>
+  <ng-template #loading>
+    <mat-grid-list cols="1" rowHeight="400px">
+      <mat-grid-tile>
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-template>
+</div>

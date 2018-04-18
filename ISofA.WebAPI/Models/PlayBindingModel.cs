@@ -26,7 +26,6 @@ namespace ISofA.WebAPI.Models
         public string Director { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 2)]
         public int DurationMins { get; set; }
 
         [Required]

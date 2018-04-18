@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Edit {{data.Name}}</h1>
+<div mat-dialog-content>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="edit.Name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="edit.Address" placeholder="Address">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="edit.Description" placeholder="Description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <label>Opens At</label>
+    <span>
+      <mat-form-field>
+        <mat-select placeholder="Hours" [(value)]="startHrs">
+          <mat-option *ngFor="let hr of [] | range: [24]" [value]="hr">
+            {{ hr | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Minutes" [(value)]="startMins">
+          <mat-option *ngFor="let min of [] | range: [60]" [value]="min">
+            {{ min | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>
+    <label>Open For</label>
+    <span>
+      <mat-form-field>
+        <mat-select placeholder="Hours" [(value)]="durHrs">
+          <mat-option *ngFor="let hr of [] | range: [24]" [value]="hr">
+            {{ hr | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Minutes" [(value)]="durMins">
+          <mat-option *ngFor="let min of [] | range: [60]" [value]="min">
+            {{ min | pad: { width: 2 } }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>    
+  </div>
+</div>
+<div mat-dialog-actions>
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="finishEdit()" color="primary" cdkFocusInitial>Save</button>
+</div>

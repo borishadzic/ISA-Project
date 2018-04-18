@@ -18,32 +18,37 @@
     </ul>
   </div>
   <div class="tt-flx-r tt-svg-area">
-    <svg:svg class="tt-svg-axis" width='100%' height='32px'>
-      <svg:svg preserveAspectRatio="none" viewBox='0 0 1440 32'>
-        <svg:rect fill='#333' y='31' width='100%' height='1'></svg:rect>
-        <svg:rect x='0' y='18' width='2' height='14' fill='#333'></svg:rect>
-        <svg:rect x='360' y='18' width='2' height='14' fill='#333'></svg:rect>
-        <svg:rect x='720' y='18' width='2' height='14' fill='#333'></svg:rect>
-        <svg:rect x='1080' y='18' width='2' height='14' fill='#333'></svg:rect>
-        <svg:rect x='1438' y='18' width='2' height='14' fill='#333'></svg:rect>
+    <svg:svg class="tt-svg-axis" width='100%' height='64px' (mousemove)="mmove($event)">
+      <svg:svg preserveAspectRatio="none" [attr.viewBox]="'0 0 '+rangeDuration+' 64'" #timeAxis>
+        <svg:rect fill='#333' y='47' width='100%' height='1'></svg:rect>
+        <svg:rect [attr.x]="timePreviewLineX" y='18' width='2' height='30' class="tt-svg-text-color"></svg:rect>
+        <svg:rect [attr.x]="markerLineX(0, 4)" y='34' width='2' height='14' class="tt-svg-text-color"></svg:rect>
+        <svg:rect [attr.x]="markerLineX(1, 4)" y='34' width='2' height='14' class="tt-svg-text-color"></svg:rect>
+        <svg:rect [attr.x]="markerLineX(2, 4)" y='34' width='2' height='14' class="tt-svg-text-color"></svg:rect>
+        <svg:rect [attr.x]="markerLineX(3, 4)" y='34' width='2' height='14' class="tt-svg-text-color"></svg:rect>
+        <svg:rect [attr.x]="markerLineX(4, 4)" y='34' width='2' height='14' class="tt-svg-text-color"></svg:rect>
       </svg:svg>
-      <svg:g text-anchor='middle'>
-        <svg:text text-anchor='start' fill='#333' x='0' y='16'>00:00</svg:text>
-        <svg:text fill='#333' x='25%' y='16'>06:00</svg:text>
-        <svg:text fill='#333' x='50%' y='16'>12:00</svg:text>
-        <svg:text fill='#333' x='75%' y='16'>18:00</svg:text>
-        <svg:text text-anchor='end' fill='#333' x='100%' y='16'>23:59</svg:text>
-      </svg:g>
+      <svg:svg [attr.viewBox]="'0 0 '+rangeDuration+' 32'">
+        <svg:g text-anchor='middle'>
+          <svg:text class="tt-svg-time-marker" x='0' y='16' text-anchor='start'>{{range(0, 4)}}</svg:text>
+          <svg:text class="tt-svg-time-marker" [attr.x]='timePreviewLineX' y='0'>{{ timePreviewLineX+rangeStart | minsFormatter}}</svg:text>
+          <svg:text class="tt-svg-time-marker" x='25%' y='16'>{{range(1, 4)}}</svg:text>
+          <svg:text class="tt-svg-time-marker" x='50%' y='16'>{{range(2, 4)}}</svg:text>
+          <svg:text class="tt-svg-time-marker" x='75%' y='16'>{{range(3, 4)}}</svg:text>
+          <svg:text class="tt-svg-time-marker" x='100%' y='16' text-anchor='end'>{{range(4, 4)}}</svg:text>
+        </svg:g>
+      </svg:svg>
     </svg:svg>
     <ng-container *ngFor="let dataset of datasets">
       <ng-container *ngFor="let groupData of dataset.groupedData">
-        <ng-container *ngFor="let data of groupData.data">
-          <svg:svg class="tt-svg-bar" width='100%' height='32px'>
-            <svg:svg preserveAspectRatio="none" viewBox='0 0 1440 32'>
-              <svg:rect matTooltip="{{data.name}}" matTooltipPosition="above" fill='#9c7' [attr.x]="data.startMins" [attr.width]="data.durationMins" height='32'></svg:rect>
+        <svg:svg [ngClass]="evenGroup(dataset, groupData) ? { 'tt-svg-bar': true } : { 'tt-svg-bar-2': true }" width='100%' height='40px'>
+          <ng-container *ngFor="let data of groupData.data">
+            <svg:svg preserveAspectRatio="none" [attr.viewBox]="'0 0 '+rangeDuration+' 32'">
+              <svg:rect class="tt-bar-anim" [ngClass]="data.$class" matTooltip="{{data.name}}" matTooltipPosition="above" [attr.x]="data.startMins"
+                [attr.width]="data.durationMins" height='32'></svg:rect>
             </svg:svg>
-          </svg:svg>
-        </ng-container>
+          </ng-container>
+        </svg:svg>
       </ng-container>
     </ng-container>
   </div>

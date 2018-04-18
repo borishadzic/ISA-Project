@@ -19,10 +19,10 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
     if (sessionStorage.getItem('accessToken')) {
       this.token = sessionStorage.getItem('accessToken');
-      this.tokenInfo = sessionStorage.getItem('tokenInfo');
+      this.tokenInfo = JSON.parse(sessionStorage.getItem('tokenInfo'));
     } else if (localStorage.getItem('accessToken')) {
       this.token = localStorage.getItem('accessToken');
-      this.tokenInfo = localStorage.getItem('tokenInfo');
+      this.tokenInfo = JSON.parse(localStorage.getItem('tokenInfo'));
     }
   }
 
@@ -111,6 +111,10 @@ export class AuthService {
     }
 
     return this.tokenInfo.adminOfTheater === theaterId && this.tokenInfo.iSofAUserRole === userRole;
+  }
+
+  get adminOfTheater(): number {
+    return this.tokenInfo.adminOfTheater;
   }
 
   get UserId(): string {

@@ -1,3 +1,16 @@
+.tt-bar-anim {
+    animation: popup 0.8s;
+}
+
+@keyframes popup {
+    0%{
+      transform: scale(0, 1);
+    }
+    100%{
+      transform: scale(1, 1);
+    }
+  }
+
 .tt-flx-wrpr {
     display: flex;
     flex-direction: row;
@@ -37,13 +50,18 @@ li.tt-stage > div, .tt-date > .tt-flx-wrpr > .tt-flx-l > div {
 }
 
 .tt-svg-axis {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     display: block;
 }
 
-.tt-svg-bar {
-    margin-bottom: 8px;
+.tt-svg-bar, .tt-svg-bar-2 {
+    padding-bottom: 4px;
+    padding-top: 4px;
     display: block;
+}
+
+.tt-svg-bar-2 {
+    background-color: #eaeaea;
 }
 
 .tt-flx-wrpr > .tt-flx-r
@@ -51,3 +69,28 @@ li.tt-stage > div, .tt-date > .tt-flx-wrpr > .tt-flx-l > div {
     flex: 1; 
 }
 
+.tt-svg-time-marker {
+    -webkit-touch-callout: none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    -o-user-select:none;
+    user-select:none;     
+}
+
+.tt-svg-time-marker, .tt-svg-text-color {
+    fill: #333;    
+}
+
+.tt-bar-default {
+    fill: #82cf74;
+}
+
+.tt-bar-primary {
+    fill: #7482cf;
+}
+
+.tt-bar-secondary {
+    fill: #c174cf;
+}
