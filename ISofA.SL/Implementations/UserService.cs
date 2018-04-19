@@ -31,11 +31,11 @@ namespace ISofA.SL.Implementations
 		}
 
 
-		public IEnumerable<ISofAUserDTO> GetUsers(string userId, string name, string surname, string email)
+		public IEnumerable<ISofAUserDTO> GetUsers(string userId, string name)
 		{
 			var friendsId = _friendRequestService.GetFriends(userId).Select(x => x.Id);
 
-			return UnitOfWork.Users.Find(x => !friendsId.Contains(x.Id) && x.Id != userId && x.Name.ToLower().StartsWith(name.ToLower()) && x.Surname.ToLower().StartsWith(surname.ToLower()) && x.Email.ToLower().StartsWith(email.ToLower())).Select(x => new ISofAUserDTO(x));
+			return UnitOfWork.Users.Find(x => !friendsId.Contains(x.Id) && x.Id != userId && (x.Name.ToLower().StartsWith(name.ToLower()) || x.Surname.ToLower().StartsWith(name.ToLower()) || x.Email.ToLower().StartsWith(name.ToLower()))).Select(x => new ISofAUserDTO(x));
 		}
 
 	}

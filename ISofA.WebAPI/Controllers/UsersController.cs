@@ -36,11 +36,13 @@ namespace ISofA.WebAPI.Controllers
 			return _userService.GetUserProfile(userId);
 		}
 
-		[HttpGet]
-		[Route("api/Users/Search")]
+		[HttpPost]
+		[Route("api/Users/SearchAll")]
 		public IEnumerable<ISofAUserDTO> GetUserFromSearch(ISofAUser user)
 		{
-			return _userService.GetUsers(User.Identity.GetUserId(), user.Name, user.Surname, user.Email);
+			return _userService.GetUsers(User.Identity.GetUserId(), user.Name);
 		}
+
+
 	}
 }

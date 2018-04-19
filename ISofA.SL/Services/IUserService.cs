@@ -11,6 +11,6 @@ namespace ISofA.SL.Services
 	{
 		ISofAUserDTO GetUserProfile(string userId);
 		IEnumerable<ISofAUserDTO> GetNonFriendUsers(string userId);
-		IEnumerable<ISofAUserDTO> GetUsers(string userId, string name, string surname, string email);
+		IEnumerable<ISofAUserDTO> GetUsers(string userId, string name);
 	}
 }
