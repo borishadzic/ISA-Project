@@ -7,6 +7,8 @@
             <tbody>
                 <tr *ngFor="let theater of theaters">
                     <td><a routerLink="./{{theater.TheaterId}}"><h5>{{theater.Name}}</h5></a></td>
+                    <td>{{theater.Address}}</td>
+                    <td><button mat-raised-button (click)="openLocationDialog(theater)">Location</button></td>
                 </tr>
             </tbody>
         </table>

@@ -13,12 +13,14 @@ namespace ISofA.SL.DTO
         {
             TheaterId = theater.TheaterId;
             Name = theater.Name;
+            Address = theater.Address;
             Latitude = theater.Latitude;
             Longitude = theater.Longitude;
         }
-
+        
         public int TheaterId { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
     }
