@@ -8,10 +8,12 @@ import { UserItemAwaitingComponent } from './user-item-awaiting/user-item-awaiti
 import { UserItemDetailComponent } from './user-item-detail/user-item-detail.component';
 import { UserItemNewComponent } from './user-item-new/user-item-new.component';
 import { FanZoneComponent } from './fan-zone.component';
+import { SubmitedItemsComponent } from './submited-items/submited-items.component';
 
 const childComponents: Routes = [
   { path: '', component: ItemListComponent },
   { path: 'new', component: ItemNewComponent },
+  { path: 'my-items', component: SubmitedItemsComponent },
   { path: 'useritems', component: UserItemListComponent },
   { path: 'useritems/new', component: UserItemNewComponent },
   { path: 'awaiting', component: UserItemAwaitingComponent },

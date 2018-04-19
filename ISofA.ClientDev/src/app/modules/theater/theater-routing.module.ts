@@ -10,7 +10,8 @@ import { TheaterRepertoireComponent } from './theater-repertoire/theater-reperto
 const routes: Routes = [
   { path: 'theaters', component: TheaterListComponent },
   { path: 'cinemas', component: TheaterListComponent },
-  { path: 'theaters/new', component: TheaterNewComponent },
+  { path: 'theaters/new', component: TheaterNewComponent, data: { type: 'Theater'} },
+  { path: 'cinemas/new', component: TheaterNewComponent, data: { type: 'Cinema'} },
   { path: 'theaters/:id', component: TheaterDetailComponent },
   { path: 'cinemas/:id', component: TheaterDetailComponent },
   { path: 'theaters/:id/repertoire', component: TheaterRepertoireComponent },

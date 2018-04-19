@@ -11,8 +11,9 @@ namespace ISofA.SL.Services
 {
     public interface IUserItemService
     {
-        IEnumerable<UserItemDTO> GetItemsForTheater(int theaterId);
         IEnumerable<UserItemDTO> GetSoldItems(int theaterId);
+        IEnumerable<UserItemDTO> GetItemsForTheater(int theaterId);
+        IEnumerable<UserItemDTO> GetUserItems(string userId);
         IEnumerable<UserItemDTO> GetAwaitingItemsForTheater(int theaterId);
         UserItemDetailDTO GetItem(int theaterId, Guid userItemId);
         UserItemDTO AddItem(int theaterId, string userId, UserItem userItem);

@@ -1,11 +1,12 @@
 import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 
 import { TheaterService } from '../theater.service';
+import { relative } from 'path';
 
 @Component({
   selector: 'app-theater-new',
@@ -14,7 +15,8 @@ import { TheaterService } from '../theater.service';
 })
 export class TheaterNewComponent implements OnInit {
 
-  public theaterType: any[] = [{ display: 'Cinema', value: 0}, { display: 'Play', value: 1}];
+  // public theaterType: any[] = [{ display: 'Cinema', value: 0}, { display: 'Play', value: 1}];
+  public title: string;
   public form: FormGroup;
   public latitude: number;
   public longitude: number;
@@ -28,6 +30,7 @@ export class TheaterNewComponent implements OnInit {
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
               private theaterService: TheaterService,
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
@@ -36,6 +39,16 @@ export class TheaterNewComponent implements OnInit {
       Latitude: [null, Validators.required],
       Longitude: [null, Validators.required],
       Type: [0, Validators.required]
+    });
+
+    this.route.data.subscribe(data => {
+      this.title = data.type;
+
+      if (this.title === 'Theater') {
+        this.form.patchValue({ 'Type': 1});
+      } else {
+        this.form.patchValue({ 'Type': 0});
+      }
     });
 
     // set google maps defaults
@@ -91,7 +104,9 @@ export class TheaterNewComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.theaterService.addTheater(this.form.value).subscribe(theater => {
-        this.router.navigate(['/theaters', theater.TheaterId, 'register']);
+        this.router.navigate(['../', theater.TheaterId], {
+          relativeTo: this.route
+        });
       });
     }
   }

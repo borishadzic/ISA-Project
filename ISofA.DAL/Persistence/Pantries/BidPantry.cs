@@ -25,22 +25,7 @@ namespace ISofA.DAL.Persistence.Pantries
 
         public void SaveOrUpdateBid(Bid bid)
         {
-            bool inMemory = Context.Set<Bid>().Local.Any(x => x.UserItemId == bid.UserItemId);
-
-            Bid foundBid = null;
-
-            if (inMemory)
-            {
-                foundBid = Context.Set<Bid>().Local
-                    .Where(x => x.UserItemId == bid.UserItemId && x.BidderId == bid.BidderId)
-                    .FirstOrDefault();
-            }
-            else
-            {
-                foundBid = Context.Set<Bid>()
-                    .Where(x => x.UserItemId == bid.UserItemId && x.BidderId == bid.BidderId)
-                    .FirstOrDefault();
-            }
+            var foundBid = Context.Set<Bid>().FirstOrDefault(x => x.UserItemId == bid.UserItemId);
 
             if (foundBid != null)
             {
@@ -49,7 +34,7 @@ namespace ISofA.DAL.Persistence.Pantries
             }
             else
             {
-                Context.Entry<Bid>(bid).State = EntityState.Added;
+                Context.Entry(bid).State = EntityState.Added;
             }
         }
     }

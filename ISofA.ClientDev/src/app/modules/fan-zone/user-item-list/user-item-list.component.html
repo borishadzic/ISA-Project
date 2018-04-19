@@ -10,6 +10,9 @@
         <p class="card-text">{{ item.Description }}</p>
         <button [routerLink]="[item.UserItemId]" class="btn btn-primary">More</button>
       </div>
+      <div class="card-footer text-muted">
+        {{ item.ExpirationDate | date }}
+      </div>
     </div>
   </div>
 </div>

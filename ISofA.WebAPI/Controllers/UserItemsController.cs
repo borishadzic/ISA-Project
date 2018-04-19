@@ -27,6 +27,11 @@ namespace ISofA.WebAPI.Controllers
             _userItemService = userItemService;
         }
 
+        [Route("~/api/UserItems")]
+        public IEnumerable<UserItemDTO> GetUserItems()
+        {
+            return _userItemService.GetUserItems(User.Identity.GetUserId());
+        }
 
         [Route("")]
         public IEnumerable<UserItemDTO> Get(int theaterId)

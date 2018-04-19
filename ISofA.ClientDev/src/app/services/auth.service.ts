@@ -115,6 +115,14 @@ export class AuthService {
     return this.tokenInfo.adminOfTheater === theaterId && this.tokenInfo.iSofAUserRole === userRole;
   }
 
+  get isAdmin(): boolean {
+    if (this.tokenInfo) {
+      return this.tokenInfo.iSofAUserRole === 'SysAdmin';
+    } else  {
+      return false;
+    }
+  }
+
   get adminOfTheater(): number {
     return this.tokenInfo.adminOfTheater;
   }

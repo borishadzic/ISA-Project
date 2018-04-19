@@ -1,6 +1,6 @@
-<button routerLink="/shopping-cart" type="button" class="btn btn-sm btn-outline-secondary">
-  Shopping Cart 
+<a class="nav-item nav-link" routerLink="/shopping-cart">
+  Shopping Cart
   <span class="badge badge-secondary badge-pill">
     {{ shopingCartService.NumberOfItems | async }}
   </span>
-</button>
+</a>

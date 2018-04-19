@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { combineLatest } from 'rxjs/observable/combineLatest';
+import { timer } from 'rxjs/observable/timer';
 
 import { BidService } from '../bid.service';
 import { AuthService } from '../../../services/auth.service';
@@ -18,6 +19,7 @@ import { UserItem } from '../model/user-item';
 })
 export class UserItemDetailComponent implements OnInit {
 
+  public error = false;
   public form: FormGroup;
   public userItem: UserItem;
   public isUserOwner = false;
@@ -59,6 +61,9 @@ export class UserItemDetailComponent implements OnInit {
     if (this.form.valid) {
       this.bidService.bid(this.userItemId, this.form.value).subscribe(userItem => {
         this.userItem = userItem;
+      }, () => {
+        this.error = true;
+        timer(3000).subscribe(() => this.error = false);
       });
     }
   }

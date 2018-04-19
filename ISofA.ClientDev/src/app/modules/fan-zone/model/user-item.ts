@@ -8,5 +8,8 @@ export interface UserItem {
     Description: string;
     ImageUrl: string;
     HighestBid: number;
+    Sold: boolean;
+    ExpirationDate: string;
+    Approved: boolean;
     Bids?: Bid[];
 }

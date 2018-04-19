@@ -21,7 +21,7 @@ namespace ISofA.SL.Implementations
 
         public UserItemDetailDTO AddBid(Guid userItemId, string userId, Bid bid)
         {
-            var userItem = UnitOfWork.UserItems.GetUserItemWithBids(userItemId);
+            var userItem = UnitOfWork.UserItems.GetUserItemWithBids (userItemId);
 
             if (userItem == null || !CheckCondition(userItem))
             {

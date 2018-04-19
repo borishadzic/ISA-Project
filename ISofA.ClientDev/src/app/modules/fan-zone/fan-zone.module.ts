@@ -13,6 +13,7 @@ import { UserItemListComponent } from './user-item-list/user-item-list.component
 import { UserItemDetailComponent } from './user-item-detail/user-item-detail.component';
 import { UserItemNewComponent } from './user-item-new/user-item-new.component';
 import { UserItemAwaitingComponent } from './user-item-awaiting/user-item-awaiting.component';
+import { SubmitedItemsComponent } from './submited-items/submited-items.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { UserItemAwaitingComponent } from './user-item-awaiting/user-item-awaiti
     UserItemListComponent,
     UserItemDetailComponent,
     UserItemNewComponent,
-    UserItemAwaitingComponent
+    UserItemAwaitingComponent,
+    SubmitedItemsComponent
   ],
   providers: [
     ItemService,
