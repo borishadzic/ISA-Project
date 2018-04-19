@@ -1,4 +1,4 @@
-<div>
+<div style="width:100%; min-height:500px">
   <div class="container" style="width:30%; float:left">
     <div class="row">
       <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
@@ -11,18 +11,38 @@
         </div>                 
     </div>
     <button (click)="onShowFriends()" class="btn btn-lg btn-primary btn-block" style="width:200px">{{message}}</button>
-  </div>
-  <div *ngIf="show" class="container" style="width:30%; float:center" >
-    <div class="row" *ngFor = "let friend of friends" >
-        <div class="well profile">
-                      <h2>{{friend?.Name}} {{friend?.Surname}}</h2>
-                      <p><strong>Email: </strong> {{friend?.Email}} </p>
-                      <p><strong>City: </strong> {{friend?.City}}</p>
-                      <p><strong>PhoneNumber: </strong>{{friend?.PhoneNumber}}</p>
-          </div>             
+    <div *ngIf="show" class="container"  >
+      <div class="row" *ngFor = "let friend of friends" >
+          <div class="well profile">
+                        <h2>{{friend?.Name}} {{friend?.Surname}}</h2>
+                        <p><strong>Email: </strong> {{friend?.Email}} </p>
+                        <p><strong>City: </strong> {{friend?.City}}</p>
+                        <p><strong>PhoneNumber: </strong>{{friend?.PhoneNumber}}</p>
+                        <button class="btn btn-danger"data-toggle="modal" data-target="#exampleModal" >Remove Friend</button>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to remove friend
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" (click)="onRemoveFriend(friend)" data-dismiss="modal" >Confirm</button>
+                    </div>
+                  </div>
+                </div>
+              </div>             
+      </div>
     </div>
   </div>
-  <div class="container" style="width:30%; float:center">
+  <div class="container" style="width:30%; float:left">
       <div>
         <label>Search people: </label>
         <input type="text" placeholder="Search" id="name" />
@@ -39,5 +59,22 @@
             </div>
         </div>
       </div>
+    </div>
+  <div  style="width:30%; float:right">
+    <h2>Your friend requests: </h2>
+    <div *ngFor="let request of friendRequests">
+      <p><strong>Email: </strong> {{request.Email}}</p>
+      <button (click)="onConfirmRequest(request)" class="btn btn-success">Confirm</button>
+      <button (click)="onDenyRequest(request)" class="btn btn-danger">Decline</button>
+    </div>
+  </div>
+</div>
+<div style="width:100%; float:left">
+  <h2><strong>Reservations: </strong></h2>
+  <div *ngFor="let reservation of myReservations">
+    <p><strong>Theater: </strong>{{reservation.TheaterId}}</p>
+    <p><strong>Stage: </strong>{{reservation.StageId}}</p>
+    <p><strong>Seats: </strong>{{reservation.SeatRow}} {{reservation.SeatColumn}}</p>
+    <p><strong>Play: </strong>{{reservation.PlayId}}</p>
   </div>
 </div>
