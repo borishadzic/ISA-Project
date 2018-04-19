@@ -6,7 +6,6 @@ import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 
 import { TheaterService } from '../theater.service';
-import { relative } from 'path';
 
 @Component({
   selector: 'app-theater-new',
