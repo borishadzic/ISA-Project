@@ -16,6 +16,13 @@ namespace ISofA.WebAPI.Controllers
             _stageService = stageService;
         }
         
+        [HttpGet]
+        [Route("api/Theaters/{theaterId}/Stages/{stageId}")]
+        public StageDTO GetStage(int theaterId, int stageId)
+        {
+            return _stageService.GetStage(theaterId, stageId);
+        }
+
         [Route("api/Theaters/{theaterId}/Stages")]
         public IEnumerable<StageDTO> GetAll(int theaterId) // TODO: LOW Da li je potrebno get sve?
         {

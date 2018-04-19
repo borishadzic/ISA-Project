@@ -10,6 +10,7 @@ namespace ISofA.SL.Services
         StageDTO Add(int theaterId, Stage stage);
         StageDTO Update(int stageId, Stage stage);
         void Remove(int stageId);
+        StageDTO GetStage(int theaterId, int stageId);
 
 
     }

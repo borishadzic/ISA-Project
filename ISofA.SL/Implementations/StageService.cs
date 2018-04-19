@@ -44,6 +44,15 @@ namespace ISofA.SL.Implementations
                 .Select(x => new StageDTO(x));
         }
 
+        public StageDTO GetStage(int theaterId, int stageId)
+        {
+            if (UnitOfWork.Theaters.Get(theaterId) == null)
+                throw new TheaterNotFoundException(theaterId);
+
+            return UnitOfWork.Stages.Find(x => x.TheaterId == theaterId && x.StageId == stageId)
+                .Select(x => new StageDTO(x)).FirstOrDefault();
+        }
+
         public void Remove(int stageId)
         {
             var stage = UnitOfWork.Stages.Get(stageId);
