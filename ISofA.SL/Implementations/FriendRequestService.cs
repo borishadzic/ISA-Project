@@ -87,7 +87,7 @@ namespace ISofA.SL.Implementations
         {
 			var user = UnitOfWork.Users.GetUserWithFriendRequests(UserId);
 			
-            return user.FriendRequestsRecieved.Select(x => x.Sender).Select(x=> new ISofAUserDTO(x));
+            return user.FriendRequestsRecieved.Where(x=> x.Accepted==null).Select(x => x.Sender).Select(x=> new ISofAUserDTO(x));
         }
 
         public bool SendFriendRequest(string RecieverId, string SenderId)

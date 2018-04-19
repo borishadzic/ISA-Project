@@ -32,7 +32,7 @@ namespace ISofA.WebAPI.Controllers
 		}
 
 		[HttpGet]
-		[Route("api/myReservations")]
+		[Route("api/Profile/myReservations")]
 		public IEnumerable<SeatDTO> GetUserReservations()
 		{
 			return _seatService.GetUserReservations(User.Identity.GetUserId());
