@@ -8,6 +8,8 @@ import { TheaterService } from './theater.service';
 import { AdminRegistrationComponent } from './admin-registration/admin-registration.component';
 import { TheaterListComponent } from './theater-list/theater-list.component';
 import { TheaterDetailComponent } from './theater-detail/theater-detail.component';
+import { TheaterContainerService } from '../../services/theater-container.service';
+import { TheaterRepertoireComponent } from './theater-repertoire/theater-repertoire.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,8 @@ import { TheaterDetailComponent } from './theater-detail/theater-detail.componen
     TheaterNewComponent,
     AdminRegistrationComponent,
     TheaterListComponent,
-    TheaterDetailComponent
+    TheaterDetailComponent,
+    TheaterRepertoireComponent
   ],
   providers: [
     TheaterService

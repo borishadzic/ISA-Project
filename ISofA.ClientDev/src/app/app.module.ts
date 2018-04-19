@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { TheaterModule } from './modules/theater/theater.module';
 import { FanZoneModule } from './modules/fan-zone/fan-zone.module';
-import { AgmCoreModule } from '@agm/core';
 
 import { TokenInterceptor } from './services/token.interceptor';
 
@@ -34,10 +33,6 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule.forRoot(),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBNuMGHVcGEkYjEoZQWiHZGJA03GS647Jw',
-      libraries: ['places']
-    }),
     HomeModule,
     TheaterModule,
     FanZoneModule,

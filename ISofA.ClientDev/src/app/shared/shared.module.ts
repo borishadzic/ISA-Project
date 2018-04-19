@@ -15,9 +15,15 @@ import { StageService } from '../services/stage.service';
 import { PlayService } from '../services/play.service';
 import { NameFilterPipe } from './name-filter.pipe';
 import { ProjectionService } from '../services/projection.service';
+import { MapDialogComponent } from './map-dialog/map-dialog.component';
+import { AgmCoreModule } from '@agm/core';
+import { TemplateNavbarComponent } from './template-navbar/template-navbar.component';
+import { RouterModule } from '@angular/router';
+import { TheaterContainerService } from '../services/theater-container.service';
 
 var componentExports: any[] = [
-  TimeTableComponent
+  TimeTableComponent,
+  TemplateNavbarComponent
 ];
 
 var pipeExports: any[] = [
@@ -33,7 +39,12 @@ var pipeExports: any[] = [
     MaterialModule,
     FormsModule, // TODO: Not sure if need
     ReactiveFormsModule,
-    HttpClientModule
+    RouterModule,
+    HttpClientModule,    
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBNuMGHVcGEkYjEoZQWiHZGJA03GS647Jw',
+      libraries: ['places']
+    }),
   ],
   exports: [
     CommonModule,
@@ -41,16 +52,20 @@ var pipeExports: any[] = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AgmCoreModule,
     componentExports,
     pipeExports
   ],
-  declarations: [TimeTableComponent, MinsFormatterPipe, RangePipe, PadPipe, NameFilterPipe]
+  entryComponents: [
+    MapDialogComponent
+  ],
+  declarations: [TimeTableComponent, MinsFormatterPipe, RangePipe, PadPipe, NameFilterPipe, MapDialogComponent, TemplateNavbarComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, ShoppingCartService, StageService, PlayService, ProjectionService]
+      providers: [AuthService, ShoppingCartService, StageService, PlayService, ProjectionService, TheaterContainerService]
     };
   }
 }
