@@ -18,6 +18,7 @@ namespace ISofA.DAL.Core.Domain
         public DateTime StartTime { get; set; }
         public int Price { get; set; }
 
+        public int TheaterId { get; set; }
         public int PlayId { get; set; }
         public int StageId { get; set; }
 
@@ -26,5 +27,8 @@ namespace ISofA.DAL.Core.Domain
         
         [ForeignKey(nameof(StageId))]
         public virtual Stage Stage { get; set; }        
+
+        [ForeignKey(nameof(TheaterId))]
+        public virtual Theater Theater { get; set; }
     }
 }

@@ -52,6 +52,13 @@
       </li>
       <li class="list-inline-item">
         <mat-form-field>
+          <input placeholder="Price" matInput [(ngModel)]="price"/>
+        </mat-form-field>
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <mat-form-field>
           <mat-select placeholder="Start minutes" [(ngModel)]="startMins">
             <mat-option *ngFor="let x of [] | range: [60]" [value]="x">
               {{ x | pad: { width: 2 } }}
@@ -63,6 +70,9 @@
     <ul class="list-inline">
       <li class="list-inline-item">
         <button mat-raised-button color="primary" (click)="addProjection()">Add</button>
+      </li>
+      <li class="list-inline-item">
+        <button mat-raised-button color="primary" [disabled]="ttDatasets.length == 0" (click)="applySchedule()">Apply</button>
       </li>
     </ul>
     <mat-divider></mat-divider>

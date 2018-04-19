@@ -9,6 +9,7 @@ namespace ISofA.SL.DTO
 {
     public class TheaterDetailDTO
     {
+        public int TheaterId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
@@ -22,6 +23,7 @@ namespace ISofA.SL.DTO
         {
             return new TheaterDetailDTO()
             {
+                TheaterId = theater.TheaterId,
                 Name = theater.Name,
                 Address = theater.Address,
                 Description = theater.Description,

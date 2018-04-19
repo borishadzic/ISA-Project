@@ -44,6 +44,9 @@ namespace ISofA.Tests.Persistence
         private IBidPantry _bids;
         public IBidPantry Bids { get { return _bids ?? new BidPantry(_context); } }
 
+        private IConfigPantry _configs;
+        public IConfigPantry Configs { get { return _configs ?? new ConfigPantry(_context); } }
+
         public void Modified<TEntity>(TEntity entity) where TEntity : class
         {
             _context.Entry(entity).State = System.Data.Entity.EntityState.Modified;

@@ -1,4 +1,4 @@
-<mat-expansion-panel [hideToggle]="true">
+<mat-expansion-panel [hideToggle]="true" (opened)="getData()">
   <mat-expansion-panel-header>
     <h3>Schedule</h3>
   </mat-expansion-panel-header>
@@ -6,13 +6,13 @@
   <ng-template matExpansionPanelContent>
     <div style="display: flex; align-items: stretch;">
       <mat-form-field>
-        <input matInput [matDatepicker]="dp3" placeholder="Starting from" disabled>
+        <input matInput [matDatepicker]="dp3" placeholder="Starting from" disabled [(ngModel)]="dayStart" (dateChange)="getProjections()">
         <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
         <mat-datepicker #dp3 disabled="false"></mat-datepicker>
       </mat-form-field>   
       <span style="width: 30px;"></span>   
       <mat-form-field>          
-          <mat-select placeholder="Show schedule for">
+          <mat-select placeholder="Show schedule for" [(ngModel)]="showDays" (selectionChange)="getProjections()">
             <mat-option *ngFor="let x of [1,2,3,4,5,6,7]" [value]="x">
               {{ x }} Days
             </mat-option>
@@ -23,6 +23,17 @@
           <a mat-raised-button routerLink="./edit/schedule" color="primary">Edit</a>
       </div>
     </div>    
-    <p>Placeholder</p>
+    <ng-template [ngIf]="finishedLoading" [ngIfElse]="loadingProjections">
+      <ng-template [ngIf]="ttDatasets.length > 0" [ngIfElse]="noProjections">
+        <app-time-table [data]="ttDatasets" [ttRangeStart]="theater.WorkStart" [ttRangeDuration]="theater.WorkDuration"></app-time-table>
+      </ng-template>
+      <ng-template #noProjections>
+        <h4>No projections for selected dates</h4>
+      </ng-template>
+    </ng-template>
+    <ng-template #loadingProjections>
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </ng-template>
+    
   </ng-template>
 </mat-expansion-panel>

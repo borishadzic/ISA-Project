@@ -18,7 +18,7 @@ namespace ISofA.SL.Implementations
         {
         }
 
-        public ProjectionDTO Add(int theaterId, Projection projection)
+        private Projection AddStep(int theaterId, Projection projection)
         {
             if (projection == null)
                 throw new BadRequestException("Bad Request");
@@ -43,15 +43,56 @@ namespace ISofA.SL.Implementations
 
             if (stage.TheaterId != theaterId)
                 throw new BadRequestException("Bad Request");
-                        
-            projection = UnitOfWork.Projections.Add(projection);
+
+            projection.TheaterId = stage.TheaterId;
+
+            return UnitOfWork.Projections.Add(projection);
+        }
+
+        private IEnumerable<Projection> AddSteps(int theaterId, IEnumerable<Projection> projections)
+        {
+            foreach (var projection in projections)
+                yield return AddStep(theaterId, projection);
+        }
+
+        public ProjectionDTO Add(int theaterId, Projection projection)
+        {
+            projection = AddStep(theaterId, projection);
             UnitOfWork.SaveChanges();
 
             return new ProjectionDTO(projection);
         }
 
-        public IEnumerable<ProjectionDTO> GetProjectionsForPlay(int playId, DateTime dateStart)
+        public IEnumerable<ProjectionDTO> Add(int theaterId, IEnumerable<Projection> projections)
         {
+            var x = AddSteps(theaterId, projections).ToList();
+            UnitOfWork.SaveChanges();
+
+            return x.Select<Projection, ProjectionDTO>(y => new ProjectionDTO(y));
+        }
+
+        public IEnumerable<ProjectionDTO> GetProjectionsForTheater(int theaterId, DateTime dateStart, int days)
+        {            
+            var theater = UnitOfWork.Theaters.Get(theaterId);
+
+            if (theater == null)
+                throw new TheaterNotFoundException(theaterId);
+
+            if (days < 0)
+                throw new BadRequestException("BadRequest");
+
+            days = days == 0 ? 0 : days - 1;
+
+            var startTime = dateStart.Date.AddMinutes(theater.WorkStart);
+            var endTime = dateStart.Date.AddDays(days).AddMinutes(theater.WorkStart + theater.WorkDuration);
+
+            return UnitOfWork.Projections
+                .Find(x => x.TheaterId == theaterId && x.StartTime >= startTime && x.StartTime < endTime )
+                .Select(x => new ProjectionDTO(x));
+        }
+
+        public IEnumerable<ProjectionDTO> GetProjectionsForPlay(int playId, DateTime dateStart)
+        {            
             dateStart = dateStart.Date;
             DateTime dateEnd = dateStart.AddDays(1);
             return UnitOfWork.Projections

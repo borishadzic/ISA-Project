@@ -44,7 +44,9 @@
         <svg:svg [ngClass]="evenGroup(dataset, groupData) ? { 'tt-svg-bar': true } : { 'tt-svg-bar-2': true }" width='100%' height='40px'>
           <ng-container *ngFor="let data of groupData.data">
             <svg:svg preserveAspectRatio="none" [attr.viewBox]="'0 0 '+rangeDuration+' 32'">
-              <svg:rect class="tt-bar-anim" [ngClass]="data.$class" matTooltip="{{data.name}}" matTooltipPosition="above" [attr.x]="data.startMins"
+              <svg:rect class="tt-bar-anim" [ngClass]="data.$class"
+               matTooltip="{{data.name}}" matTooltipPosition="above"
+                [attr.x]="data.startMins"
                 [attr.width]="data.durationMins" height='32'></svg:rect>
             </svg:svg>
           </ng-container>

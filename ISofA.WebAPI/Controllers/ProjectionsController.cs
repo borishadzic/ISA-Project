@@ -1,8 +1,10 @@
-﻿using ISofA.SL.DTO;
+﻿using ISofA.DAL.Core.Domain;
+using ISofA.SL.DTO;
 using ISofA.SL.Services;
 using ISofA.WebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
@@ -17,9 +19,9 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("api/Projections")]
-        public IEnumerable<ProjectionDTO> GetProjectionsForPlay(int playId, DateTime dateStart)
+        public IEnumerable<ProjectionDTO> GetProjections(int theaterId, DateTime dateStart, int days)
         {
-            return _projectionService.GetProjectionsForPlay(playId, dateStart.ToUniversalTime());
+            return _projectionService.GetProjectionsForTheater(theaterId, dateStart, days);
         }
 
         [Route("api/Projections/{projectionId}")]
@@ -29,9 +31,9 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [Route("api/Theaters/{theaterId}/Projections")]
-        public ProjectionDTO Post(int theaterId, [FromBody]ProjectionBindingModel projection)
+        public IEnumerable<ProjectionDTO> Post(int theaterId, [FromBody]IEnumerable<ProjectionBindingModel> projections)
         {
-            return _projectionService.Add(theaterId, projection);
+            return _projectionService.Add(theaterId, projections.Select<ProjectionBindingModel, Projection>(x=>x));
         }
 
         [Route("api/Theaters/{theaterId}/Projections/{projectionId}")]

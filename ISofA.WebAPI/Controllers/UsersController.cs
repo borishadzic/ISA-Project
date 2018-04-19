@@ -30,7 +30,7 @@ namespace ISofA.WebAPI.Controllers
         }
 
 		[HttpGet]
-		[Route("api/{userId}")]
+		[Route("api/profile/{userId}")] // TODO: pick a route api/{x:string} blocks every controller
 		public ISofAUserDTO GetUserProfile(string userId)
 		{
 			return _userService.GetUserProfile(userId);

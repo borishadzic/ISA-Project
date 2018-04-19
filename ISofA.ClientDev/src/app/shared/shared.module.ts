@@ -14,6 +14,7 @@ import { PadPipe } from './pad.pipe';
 import { StageService } from '../services/stage.service';
 import { PlayService } from '../services/play.service';
 import { NameFilterPipe } from './name-filter.pipe';
+import { ProjectionService } from '../services/projection.service';
 
 var componentExports: any[] = [
   TimeTableComponent
@@ -49,7 +50,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, ShoppingCartService, StageService, PlayService]
+      providers: [AuthService, ShoppingCartService, StageService, PlayService, ProjectionService]
     };
   }
 }

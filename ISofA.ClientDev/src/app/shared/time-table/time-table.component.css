@@ -22,7 +22,7 @@
   {
     padding: 0;    
     margin: 0;
-    margin-top: 40px;  /* 32 + 8 */
+    margin-top: 72px;  /* 64 + 8 */
   }
   
 li.tt-date {
@@ -93,4 +93,10 @@ li.tt-stage > div, .tt-date > .tt-flx-wrpr > .tt-flx-l > div {
 
 .tt-bar-secondary {
     fill: #c174cf;
+}
+
+::ng-deep .mat-tooltip {
+    word-wrap: break-word !important;
+    white-space: pre !important;
+    background-color: #7482cf;
 }
