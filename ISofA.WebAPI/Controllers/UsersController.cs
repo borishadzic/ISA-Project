@@ -23,14 +23,14 @@ namespace ISofA.WebAPI.Controllers
             return _userService.GetNonFriendUsers(User.Identity.GetUserId());
         }
 		[HttpGet]
-		[Route("api/myProfile")]
+		[Route("api/Users/myProfile")]
         public ISofAUserDTO GetMyProfile()
         {
             return _userService.GetUserProfile(User.Identity.GetUserId());
         }
 
 		[HttpGet]
-		[Route("api/profile/{userId}")] // TODO: pick a route api/{x:string} blocks every controller
+		[Route("api/Users/{userId}")] // TODO: pick a route api/{x:string} blocks every controller
 		public ISofAUserDTO GetUserProfile(string userId)
 		{
 			return _userService.GetUserProfile(userId);
