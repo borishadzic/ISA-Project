@@ -1,23 +1,43 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-    	 <div class="well profile">
-                    <h2>{{User?.Name}} {{User?.Surname}}</h2>
-                    <p><strong>Email: </strong> {{User?.Email}} </p>
-                    <p><strong>City: </strong> {{User?.City}}</p>
-                    <p><strong>PhoneNumber: </strong>{{User?.PhoneNumber}}</p>
-        </div>
-      </div>                 
+<div>
+  <div class="container" style="width:30%; float:left">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        <div class="well profile">
+                      <h2>{{User?.Name}} {{User?.Surname}}</h2>
+                      <p><strong>Email: </strong> {{User?.Email}} </p>
+                      <p><strong>City: </strong> {{User?.City}}</p>
+                      <p><strong>PhoneNumber: </strong>{{User?.PhoneNumber}}</p>
+          </div>
+        </div>                 
+    </div>
+    <button (click)="onShowFriends()" class="btn btn-lg btn-primary btn-block" style="width:200px">{{message}}</button>
   </div>
-</div>
-<button (click)="onShowFriends()" class="btn btn-lg btn-primary btn-block" style="width:200px">{{message}}</button>
-<div *ngIf="show" class="container" >
-	<div class="row" *ngFor = "let friend of friends" >
-    	 <div class="well profile">
-                    <h2>{{friend?.Name}} {{friend?.Surname}}</h2>
-                    <p><strong>Email: </strong> {{friend?.Email}} </p>
-                    <p><strong>City: </strong> {{friend?.City}}</p>
-                    <p><strong>PhoneNumber: </strong>{{friend?.PhoneNumber}}</p>
-        </div>             
+  <div *ngIf="show" class="container" style="width:30%; float:center" >
+    <div class="row" *ngFor = "let friend of friends" >
+        <div class="well profile">
+                      <h2>{{friend?.Name}} {{friend?.Surname}}</h2>
+                      <p><strong>Email: </strong> {{friend?.Email}} </p>
+                      <p><strong>City: </strong> {{friend?.City}}</p>
+                      <p><strong>PhoneNumber: </strong>{{friend?.PhoneNumber}}</p>
+          </div>             
+    </div>
+  </div>
+  <div class="container" style="width:30%; float:center">
+      <div>
+        <label>Search people: </label>
+        <input type="text" placeholder="Search" id="name" />
+        <button (click)="onSearch()">Search</button>
+      </div>
+      <div *ngIf="showResults">
+        <div *ngFor="let result of searchResults" class="container">
+            <div class="well profile">
+                <h2>{{result.Name}} {{result.Surname}}</h2>
+                <p><strong>Email: </strong> {{result.Email}} </p>
+                <p><strong>City: </strong> {{result.City}}</p>
+                <p><strong>PhoneNumber: </strong>{{result.PhoneNumber}}</p>
+                <button (click)="onAddFriend(result)">Add Friend</button>
+            </div>
+        </div>
+      </div>
   </div>
 </div>
