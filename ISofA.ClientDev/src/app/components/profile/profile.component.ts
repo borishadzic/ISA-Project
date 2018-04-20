@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ProfileModel } from '../../models/profile-model';
 import { ReservationModel } from '../../models/reservation-model';
+import { AuthService } from '../../services/auth.service';
+import { ChangePasswordModel } from '../../models/change-password-model';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +16,8 @@ import { ReservationModel } from '../../models/reservation-model';
 })
 export class ProfileComponent implements OnInit {
 
+  public hideModal = false;
+  public form: FormGroup;
   public User: ProfileModel;
   public friends: ProfileModel[];
   public searchResults: ProfileModel[];
@@ -21,13 +28,29 @@ export class ProfileComponent implements OnInit {
   public message = 'Show Friends';
   public message2 = 'Show Reservations';
   public friendRequests: ProfileModel[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService, private fb: FormBuilder, private router: Router ) { 
+    
+  }
 
   ngOnInit() {
     this.http.get<ProfileModel>(environment.hostUrl + '/api/Users/myProfile').subscribe((user) => {this.User = user; }, (error) => alert(error));
     this.onGetMyFrieds();
     this.onGetMyReservations();
     this.http.get<ProfileModel[]>(environment.hostUrl + '/api/FriendRequests/GetFriendRequests').subscribe((requests) => {this.friendRequests=requests;}, (error)=> alert(error));
+    this.form = this.fb.group({
+      'OldPassword': ['', [Validators.required]],
+      'NewPassword':['',Validators.required],
+      'ConfirmPassword':['',Validators.required],
+    }, {
+      validator:this.checkIfEqual
+    });
+  }
+
+  checkIfEqual(group : FormGroup){
+    const pass = group.controls.NewPassword.value;
+    const confirmPass = group.controls.ConfirmPassword.value;
+
+    return pass===confirmPass? null:{notSame:true}; 
   }
 
   onGetMyFrieds(){
@@ -87,6 +110,25 @@ export class ProfileComponent implements OnInit {
         this.friendRequests.splice(index,1);
       }
     );
+  }
+
+  changeUserDetails(user: ProfileModel){
+
+  }
+
+  changePassword(){
+    console.log(this.form.value);
+    this.authService.changePassword(this.form.value).subscribe(
+      () => {
+        this.hideModal=true;
+        this.authService.logout();
+        this.router.navigate(['/login']);
+      },
+      () => {
+        alert('password incorect!');
+        return;
+      }
+    )
   }
 
   onDenyRequest(user: ProfileModel){

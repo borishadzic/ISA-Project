@@ -16,9 +16,11 @@ namespace ISofA.SL.Implementations
 {
     public class SeatService : Service, ISeatService
     {
+        private IEmailService _emailService;
 
-        public SeatService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public SeatService(IUnitOfWork unitOfWork, IEmailService _emailService) : base(unitOfWork)
         {
+            this._emailService = _emailService;
         }
 
 
@@ -171,6 +173,26 @@ namespace ISofA.SL.Implementations
                 return; // TODO: ERROR Throw
             UnitOfWork.Seats.Remove(seat);
             UnitOfWork.SaveChanges();
+        }
+
+        public void ConfirmFriendInvatation(string userId, int projectionId, int SeatRow, int SeatColumn)
+        {
+            
+            Seat seat1 = UnitOfWork.Seats.Find(x => x.ProjectionId == projectionId && x.SeatColumn == SeatColumn && x.SeatRow == SeatRow).FirstOrDefault();
+            seat1.UserId = userId;
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeclineFriendInvatation(int projectionId, int SeatRow, int SeatColumn)
+        {
+            Seat seat1 = UnitOfWork.Seats.Find(x => x.ProjectionId == projectionId && x.SeatColumn == SeatColumn && x.SeatRow == SeatRow).FirstOrDefault();
+            UnitOfWork.Seats.Remove(seat1);
+            UnitOfWork.SaveChanges();
+        }
+
+        public async Task InviteFriendsToMovies(IEnumerable<ISofAUser> users, IEnumerable<int> projectonIds, IEnumerable<int> rows, IEnumerable<int> columns)
+        {
+            await _emailService.SendMovieInvites(users, projectonIds, rows, columns);
         }
     }
 }

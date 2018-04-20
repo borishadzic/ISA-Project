@@ -4,6 +4,8 @@ import { SharedModule } from '../shared/shared.module'
 
 import { UserRoutingModule } from './user-routing.module';
 import { ReservationComponent } from './user/reservation/reservation.component'
+import { SelectUserDialogComponent } from './user/select-user-dialog/select-user-dialog.component';
+
 
 @NgModule({
   imports: [
@@ -11,6 +13,9 @@ import { ReservationComponent } from './user/reservation/reservation.component'
     UserRoutingModule,
     SharedModule
   ],
-  declarations: [ReservationComponent]
+  declarations: [ReservationComponent, SelectUserDialogComponent],
+  entryComponents: [
+    SelectUserDialogComponent
+  ]
 })
 export class UserModule { }
