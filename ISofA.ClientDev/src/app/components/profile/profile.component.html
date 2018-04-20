@@ -7,9 +7,55 @@
                       <p><strong>Email: </strong> {{User?.Email}} </p>
                       <p><strong>City: </strong> {{User?.City}}</p>
                       <p><strong>PhoneNumber: </strong>{{User?.PhoneNumber}}</p>
+                      <button class="btn btn-danger"data-toggle="modal" data-target="#exampleModal1" >Change User Password</button>
+                      <button class="btn btn-danger"data-toggle="modal" data-target="#exampleModal2" >Change User Details</button>
           </div>
         </div>                 
     </div>
+    <!-- CHANGE PASSWORD -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="form" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="!hideModal">
+        <div class="modal-dialog" role="form">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="form" (ngSubmit)="changePassword()" action="/login">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="form-group">
+                          <input type="password" name="OldPassword" id="OldPassword" formControlName = "OldPassword" class="form-control input-sm" placeholder="OldPassword">
+                      </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="form-group">
+                          <input type="password" name="NewPassword" id="NewPassword" formControlName = "NewPassword" class="form-control input-sm" placeholder="Password">
+                      </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="form-group">
+                          <input type="password" name="ConfirmPassword" id="ConfirmPassword" formControlName = "ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password">
+                      </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary"  >Confirm</button>
+              </form>
+            </div>
+            <div class="modal-footer" data-dismiss="modal">
+              
+            </div>
+          </div>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    
+      <!-- CHANGE DETAILS -->
+      
+
+
     <button (click)="onShowFriends()" class="btn btn-lg btn-primary btn-block" style="width:200px">{{message}}</button>
     <div *ngIf="show" class="container"  >
       <div class="row" *ngFor = "let friend of friends" >

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { RegisterModel } from '../models/register-model';
 import { ExternalLoginModel } from '../models/external-login-model';
 import { environment } from '../../environments/environment';
+import { ChangePasswordModel } from '../models/change-password-model';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +32,11 @@ export class AuthService {
   }
 
   register(user: RegisterModel): Observable<any> {
-    return this.http.post('http://localhost:49459/api/account/register', user);
+    return this.http.post(environment.hostUrl+'/api/account/register', user);
+  }
+
+  changePassword(password: ChangePasswordModel){
+    return this.http.post(environment.hostUrl+'/api/account/ChangePassword',password);
   }
 
   getToken() {
