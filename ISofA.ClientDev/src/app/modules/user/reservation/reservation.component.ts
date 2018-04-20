@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router'
 
 import { ReservationModel } from '../../../models/reservation-model';
 import { StageModel } from '../../../models/stage-model';
+import { ProjectionModel } from '../../../models/projection-model';
 
 
 @Component({
@@ -14,31 +15,46 @@ import { StageModel } from '../../../models/stage-model';
 })
 export class ReservationComponent implements OnInit {
   public mySeats: ReservationModel[];
+  public projection: ProjectionModel;
   public stage: StageModel;
   public rows: any;
   public columns: any;
   public theaterId : number;
   public stageId : number;
-  public projectionId : number;
+  public projectionId : any;
 
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params:Params)=>{
-        this.theaterId = params['theaterId'];
-        this.stageId = params['stageId'];
-        this.projectionId = params['projectionId'];
-        this.http.get<StageModel>(environment.hostUrl + '/api/Theaters/'+this.theaterId.toString()+'/Stages/'+this.stageId.toString()).subscribe(
-          (stage)=>{
-            this.stage = stage;
-            this.rows = Array(stage.SeatRows).fill(0).map((x,i)=>i);
-            this.columns = Array(stage.SeatColumns).fill(0).map((x,i)=>i);
+        console.log(params);
+        this.projectionId = params;
+        this.getProjection().subscribe(
+          (proj)=> {
+            this.projection= proj;
+            this.getStage(proj.StageId).subscribe(
+              (stage)=> {
+                this.stage = stage;
+                this.theaterId = stage.TheaterId;
+                this.rows = Array(stage.SeatRows).fill(0).map((x,i)=>i);
+                this.columns = Array(stage.SeatColumns).fill(0).map((x,i)=>i);
+              }
+            );
           }
         )
       }
     );
   }
+
+  getProjection() {
+    return this.http.get<ProjectionModel>(environment.hostUrl+'/api/Projections/'+this.projectionId)
+  }
+
+  getStage(Id){
+    return this.http.get<StageModel>(environment.hostUrl+'/api/Theaters/{theaterId}/Stages/'+ Id)
+  }
+  
 
   onAddSeat(row:number, column:number){
     let seat = this.mySeats.find( x=> x.SeatColumn == column.toString() && x.SeatRow == row.toString());
