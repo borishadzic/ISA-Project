@@ -40,6 +40,11 @@ namespace ISofA.DAL.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Seat>()
+                .HasOptional(x => x.User)
+                .WithMany(x => x.Reservations)
+                .HasForeignKey(x => x.UserId);
+
             modelBuilder.Entity<Theater>()
                 .HasMany(u => u.Admins)
                 .WithOptional(t => t.AdminOfTheater)
@@ -77,7 +82,7 @@ namespace ISofA.DAL.Persistence
 
             modelBuilder.Entity<ISofAUser>()
                 .HasMany(x => x.Reservations)
-                .WithRequired(x => x.User)
+                .WithOptional(x => x.User)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ISofAUser>()
@@ -125,6 +130,12 @@ namespace ISofA.DAL.Persistence
                 .HasMany(x => x.Bids)
                 .WithRequired(x => x.UserItem)
                 .HasForeignKey(x => x.UserItemId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Projection>()
+                .HasMany(x => x.Reservations)
+                .WithRequired(x => x.Projection)
+                .HasForeignKey(x => x.ProjectionId)
                 .WillCascadeOnDelete(false);
         }
 

@@ -10,6 +10,7 @@ import { TheaterListComponent } from './theater-list/theater-list.component';
 import { TheaterDetailComponent } from './theater-detail/theater-detail.component';
 import { TheaterContainerService } from '../../services/theater-container.service';
 import { TheaterRepertoireComponent } from './theater-repertoire/theater-repertoire.component';
+import { DiscountTicketListComponent } from './discount-ticket-list/discount-ticket-list.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { TheaterRepertoireComponent } from './theater-repertoire/theater-reperto
     AdminRegistrationComponent,
     TheaterListComponent,
     TheaterDetailComponent,
-    TheaterRepertoireComponent
+    TheaterRepertoireComponent,
+    DiscountTicketListComponent
   ],
   providers: [
     TheaterService

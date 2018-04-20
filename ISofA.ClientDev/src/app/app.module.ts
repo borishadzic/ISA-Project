@@ -20,6 +20,7 @@ import { ShoppingCartIconComponent } from './components/shopping-cart-icon/shopp
 import { AdminModule } from './modules/admin/admin.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminDialogComponent } from './components/admin-dialog/admin-dialog.component';
+import { AdminTheaterModule } from './modules/admin-theater/admin-theater.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdminDialogComponent } from './components/admin-dialog/admin-dialog.com
     TheaterModule,
     FanZoneModule,
     AdminModule,
+    AdminTheaterModule,
     UserModule
   ],
   entryComponents: [

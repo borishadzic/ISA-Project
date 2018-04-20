@@ -50,13 +50,13 @@
                         <blockquote class="text-muted pre-formatted">{{play.Description}}</blockquote>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-raised-button *ngFor="let projection of play.projections" color="primary">
+                        <a [routerLink]="'/reservations/'+projection.ProjectionId" mat-raised-button *ngFor="let projection of play.projections" color="primary">
                             <span>{{ projection.StartTime | date: 'HH:mm' }}</span>
                             <br/>
                             <span>Price: {{ projection.Price }}</span>
                             <br/>
                             <span>Stage: {{ projection.Stage.Name }}</span>
-                        </button>
+                        </a>
                     </mat-card-actions>
                 </mat-card>
                 <!-- <p>{{ play.Name }}</p>
