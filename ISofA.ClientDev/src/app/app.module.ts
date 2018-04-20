@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { TheaterModule } from './modules/theater/theater.module';
 import { FanZoneModule } from './modules/fan-zone/fan-zone.module';
-import { UserModule } from './modules/user.module'
+import { UserModule } from './modules/user.module';
 
 import { TokenInterceptor } from './services/token.interceptor';
 
@@ -21,6 +21,7 @@ import { AdminModule } from './modules/admin/admin.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminDialogComponent } from './components/admin-dialog/admin-dialog.component';
 import { AdminTheaterModule } from './modules/admin-theater/admin-theater.module';
+import { LevelRequirementsDialogComponent } from './components/level-requirements-dialog/level-requirements-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AdminTheaterModule } from './modules/admin-theater/admin-theater.module
     ShoppingCartComponent,
     ShoppingCartIconComponent,
     ProfileComponent,
-    AdminDialogComponent
+    AdminDialogComponent,
+    LevelRequirementsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { AdminTheaterModule } from './modules/admin-theater/admin-theater.module
     UserModule
   ],
   entryComponents: [
-    AdminDialogComponent
+    AdminDialogComponent,
+    LevelRequirementsDialogComponent
   ],
   providers: [
     [{
