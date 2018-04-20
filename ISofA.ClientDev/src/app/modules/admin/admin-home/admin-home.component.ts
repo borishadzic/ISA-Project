@@ -32,11 +32,12 @@ export class AdminHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(x => {
       if (x) {
+        var start = x.WorkStart;
         this.theaterService.updateTheater(this.authService.adminOfTheater, x).subscribe(() => {
           this.theater.Name = x.Name;
           this.theater.Address = x.Address;
           this.theater.Description = x.Description;
-          this.theater.WorkStart = x.WorkStart;
+          this.theater.WorkStart = start;
           this.theater.WorkDuration = x.WorkDuration;
           this.theater.Latitude = x.Latitude;
           this.theater.Longitude = x.Longitude;

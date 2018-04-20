@@ -1,29 +1,80 @@
-<div class="container">
-    <ng-template [ngIf]="plays" [ngIfElse]="loading">
-        <app-template-navbar [navLinkBase]="navLinkBase" [navLinks]="navLinks"></app-template-navbar>
-        <div class="text-center">
-            <h1>
-                {{ theater.Name }}
-            </h1>
-        </div>
-        <div style="display: flex; align-items: stretch;">
-            <mat-form-field>
-              <input placeholder="Search" matInput [(ngModel)]="playNameFilter"/>
-            </mat-form-field>
-            <span style="flex: 1 1 auto;"></span>
-          </div>
-          <ng-template [ngIf]="plays" [ngIfElse]="loadingPlays">
-            <mat-list>
-              <mat-list-item *ngFor="let play of plays | nameFilter: playNameFilter">{{ play.Name }}</mat-list-item>
-            </mat-list>
-          </ng-template>
-          <ng-template #loadingPlays>
-            <div style="margin-top: 20px;">
-                <mat-progress-bar mode="query"></mat-progress-bar>
-            </div>      
-          </ng-template>
-    </ng-template>
-    <ng-template #loading>
+<div class="bgr">
+    <div class="container spaced">
+        <mat-card>
+            <mat-card-content>
+                <app-template-navbar [navLinkBase]="navLinkBase" [navLinks]="navLinks"></app-template-navbar>
+                <ng-template [ngIf]="theater.evaluated" [ngIfElse]="loading">
+                    <div class="text-center">
+                        <h1>
+                            {{ theater.Name }} Repertoire
+                        </h1>
+                    </div>
+                    <div style="display: flex; align-items: stretch;">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="dp3" placeholder="Select a date" disabled [(ngModel)]="selectedDate" (dateChange)="getProjections()">
+                            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                        </mat-form-field>
+                        <span style="flex: 1 1 auto;"></span>
+                    </div>
+                </ng-template>
+                <ng-template #loading>
+                    <mat-grid-list cols="1" rowHeight="400px">
+                        <mat-grid-tile>
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
 
-    </ng-template>
+        <ng-template [ngIf]="loadedData" [ngIfElse]="loadingPlays">
+
+            <div *ngFor="let play of plays">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <b>{{ play.Name }}</b>
+                        </mat-card-title>
+                        <mat-card-subtitle>{{ play.Genre }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image style="max-height: 400px; object-fit: cover;" [src]="play.PosterUrl" alt="Movie Poster">
+                    <mat-card-content>
+                        <a mat-button color="primary" [href]="play.TrailerUrl">Watch Trailer</a>
+                        <p>Directed by
+                            <small class="text-muted">{{ play.Director }}</small>
+                        </p>
+                        <p>Actors:
+                            <small class="text-muted">{{ play.Actors }}</small>
+                        </p>
+                        <blockquote class="text-muted pre-formatted">{{play.Description}}</blockquote>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button *ngFor="let projection of play.projections" color="primary">
+                            <span>{{ projection.StartTime | date: 'HH:mm' }}</span>
+                            <br/>
+                            <span>Price: {{ projection.Price }}</span>
+                            <br/>
+                            <span>Stage: {{ projection.Stage.Name }}</span>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+                <!-- <p>{{ play.Name }}</p>
+                    <ul class="list-inline">
+                        <li class="list-inline-item" *ngFor="let projection of play.projections">
+                            {{ projection.Stage.Name }}
+                        </li>
+                    </ul> -->
+            </div>
+        </ng-template>
+        <ng-template #loadingPlays>
+            <mat-card>
+                <mat-card-content>
+                    <div style="margin-top: 20px;">
+                        <mat-progress-bar mode="query"></mat-progress-bar>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </ng-template>
+    </div>
 </div>

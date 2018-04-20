@@ -10,3 +10,15 @@
     width: 100%;
   }
   
+  .pre-formatted  {
+    word-wrap: break-word !important;
+    white-space: pre !important;
+  }
+
+  .container.spaced > * {
+    margin: 20px;
+  }
+
+  .bgr {
+    background-color: #7280ce;
+  }

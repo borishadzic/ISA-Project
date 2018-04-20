@@ -2,6 +2,7 @@
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
 using ISofA.WebAPI.Filters;
+using ISofA.WebAPI.Models;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
@@ -59,7 +60,7 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [ISofAAuthorization(Role = ISofAUserRole.SysAdmin)]
-        public IHttpActionResult Put(int id, Theater theater)
+        public IHttpActionResult Put(int id, TheaterBindingModel theater)
         {
             var updatedTheater = _theaterService.Update(id, theater);
 

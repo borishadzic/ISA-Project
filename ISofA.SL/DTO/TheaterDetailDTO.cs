@@ -13,7 +13,7 @@ namespace ISofA.SL.DTO
         public string Name { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
-        public int WorkStart { get; set; }
+        public DateTime WorkStart { get; set; }
         public int WorkDuration { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
@@ -27,7 +27,7 @@ namespace ISofA.SL.DTO
                 Name = theater.Name,
                 Address = theater.Address,
                 Description = theater.Description,
-                WorkStart = theater.WorkStart,
+                WorkStart = DateTime.Today.AddHours(theater.WorkStart / 60).AddMinutes(theater.WorkStart % 60),
                 WorkDuration = theater.WorkDuration,
                 Latitude = theater.Latitude,
                 Longitude = theater.Longitude,                

@@ -466,6 +466,7 @@
     <Compile Include="Models\PlayBindingModel.cs" />
     <Compile Include="Models\ProjectionBindingModel.cs" />
     <Compile Include="Models\StageBindingModel.cs" />
+    <Compile Include="Models\TheaterBindingModel.cs" />
     <Compile Include="Models\UserItemBindingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />

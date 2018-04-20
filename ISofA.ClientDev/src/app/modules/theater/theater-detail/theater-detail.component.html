@@ -1,17 +1,24 @@
-<div class="container">
-    <ng-template [ngIf]="theater.evaluated" [ngIfElse]="loading">
-        <app-template-navbar [navLinkBase]="navLinkBase" [navLinks]="navLinks"></app-template-navbar>
-        <div class="text-center">
-            <h1>
-                {{ theater.Name }}
-                <small class="text-muted"> {{theater.Address}}</small>
-            </h1>
-        </div>
-        <blockquote class="blockquote">{{ theater.Description }}</blockquote>
-        <blockquote class="blockquote">Open from {{theater.WorkStart | minsFormatter }} until {{(theater.WorkStart + theater.WorkDuration) | minsFormatter}}</blockquote>
-        <button mat-raised-button color="primary" (click)="openLocationDialog()">Location</button>
-    </ng-template>
-    <ng-template #loading>
+<div class="bgr">
+    <div class="container spaced">
+        <mat-card>
+            <mat-card-content>
+                <app-template-navbar [navLinkBase]="navLinkBase" [navLinks]="navLinks"></app-template-navbar>
+                <ng-template [ngIf]="theater.evaluated" [ngIfElse]="loading">                    
+                    <div class="text-center">
+                        <h1>
+                            {{ theater.Name }}
+                            <small class="text-muted"> {{theater.Address}}</small>
+                        </h1>
+                    </div>
+                    <blockquote class="blockquote">{{ theater.Description }}</blockquote>
+                    <blockquote class="blockquote">Open from {{theater.WorkStart | minsFormatter }} until {{(theater.WorkStart + theater.WorkDuration) |
+                        minsFormatter}}</blockquote>
+                    <button mat-raised-button color="primary" (click)="openLocationDialog()">Location</button>
+                </ng-template>
+                <ng-template #loading>
 
-    </ng-template>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
