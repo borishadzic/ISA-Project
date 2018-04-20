@@ -16,13 +16,15 @@ namespace ISofA.DAL.Persistence.Pantries
         {
         }
 
-        public IEnumerable<Seat> GetSpeedSeats(int theaterId)
+        public IEnumerable<Seat> GetSpeedSeats(int theaterId, int workStart)
         {
+            var theater = Context.Theaters.Find(theaterId);
+            var startTime = DateTime.Today.AddHours(workStart / 60).AddMinutes(workStart % 60);
             return Context.Seats
                 .Include(x => x.Play)
                 .Include(x => x.Projection)
                 .Include(x => x.Stage)
-                .Where(x => x.TheaterId == theaterId && x.State == SeatState.Speed);
+                .Where(x => x.TheaterId == theaterId && x.State == SeatState.Speed && x.Projection.StartTime >= startTime);
         }
     }
 }

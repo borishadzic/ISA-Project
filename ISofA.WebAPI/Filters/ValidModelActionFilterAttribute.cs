@@ -15,7 +15,8 @@ namespace ISofA.WebAPI.Filters
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var ms = (actionContext.ControllerContext.Controller as ApiController).ModelState;
-            throw new InvalidModelStateException();
+            if (ms.IsValid)
+                throw new InvalidModelStateException();
         }
 
         //public override Task OnActionExecutingAsync(HttpActionContext actionContext, CancellationToken cancellationToken)

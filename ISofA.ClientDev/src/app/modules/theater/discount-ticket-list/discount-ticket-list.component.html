@@ -33,13 +33,13 @@
                     <mat-card-content>
                     </mat-card-content>
                     <mat-card-actions>
-                        <a mat-raised-button color="primary">
+                        <button mat-raised-button color="primary" (click)="reserveDiscountTicket(ticket)">
                             <span>{{ ticket.StartTime | date: 'HH:mm' }}</span>
                             <br/>
                             <span>Price: {{ ticket.Price * (1- ticket.Discount / 100) }}</span>
                             <br/>
                             <span>Stage: {{ ticket.StageName }}</span>
-                        </a>
+                        </button>
                     </mat-card-actions>
                 </mat-card>
             </div>

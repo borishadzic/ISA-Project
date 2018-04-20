@@ -12,6 +12,6 @@ namespace ISofA.SL.Services
     {
         IEnumerable<SpeedSeatListElementDTO> GetDiscountTickets(int theaterId);
         void Create(int projectionId, Seat seat);
-        void ReserveDiscountTicket(int projectionId, Seat seat);
+        void ReserveDiscountTicket(int projectionId, Seat seat, string userId);
     }
 }

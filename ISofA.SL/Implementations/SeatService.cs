@@ -34,7 +34,7 @@ namespace ISofA.SL.Implementations
         public IEnumerable<SpeedSeatListElementDTO> GetSpeedSeats(int theaterId)
         {
             return UnitOfWork.Seats
-                .GetSpeedSeats(theaterId)
+                .GetSpeedSeats(theaterId, 0)
                 .Select(x => new SpeedSeatListElementDTO(x));
         }
 

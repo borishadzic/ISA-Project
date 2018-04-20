@@ -1,5 +1,6 @@
 export class SpeedSeatModel {
     TheaterId: number;
+    ProjectionId: number;
     PlayName: string;
     PlayPosterUrl: number;
     StageName: string;

@@ -15,11 +15,9 @@ namespace ISofA.SL.Implementations
 {
     public class SegmentService : Service, ISegmentService
     {
-        private readonly ClaimsIdentity _identity;
 
-        public SegmentService(IUnitOfWork unitOfWork, IIdentity identity) : base(unitOfWork)
+        public SegmentService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _identity = (ClaimsIdentity)identity;
         }
 
         public void Create(int projectionId, Seat seat)
@@ -43,12 +41,17 @@ namespace ISofA.SL.Implementations
 
         public IEnumerable<SpeedSeatListElementDTO> GetDiscountTickets(int theaterId)
         {
+            var theater = UnitOfWork.Theaters.Get(theaterId);
+
+            if (theater == null)
+                throw new TheaterNotFoundException(theaterId);
+
             return UnitOfWork.Seats
-                .GetSpeedSeats(theaterId)
+                .GetSpeedSeats(theaterId, theater.WorkStart)
                 .Select(x => new SpeedSeatListElementDTO(x));
         }
 
-        public void ReserveDiscountTicket(int projectionId, Seat seat)
+        public void ReserveDiscountTicket(int projectionId, Seat seat, string userId)
         {
             var projection = UnitOfWork.Projections.Get(projectionId);
 
@@ -60,12 +63,13 @@ namespace ISofA.SL.Implementations
                 throw new BadRequestException("Bad Request");
 
             if (discountTicket.State != SeatState.Speed && discountTicket.UserId != null)
-                throw new BadRequestException("BadRequest");
+                throw new BadRequestException("Bad Request");
 
-            discountTicket.UserId = null; // todo identity apply
+            discountTicket.UserId = userId;
+            discountTicket.State = SeatState.Reserved;
 
             UnitOfWork.Modified(discountTicket);
-
+            UnitOfWork.SaveChanges();
         }
     }
 }

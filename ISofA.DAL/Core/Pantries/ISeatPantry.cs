@@ -9,6 +9,6 @@ namespace ISofA.DAL.Core.Pantries
 {
     public interface ISeatPantry : IPantry<Seat>
     {
-        IEnumerable<Seat> GetSpeedSeats(int theaterId);
+        IEnumerable<Seat> GetSpeedSeats(int theaterId, int workStart);
     }
 }

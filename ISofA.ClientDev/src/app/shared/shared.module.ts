@@ -20,8 +20,8 @@ import { AgmCoreModule } from '@agm/core';
 import { TemplateNavbarComponent } from './template-navbar/template-navbar.component';
 import { RouterModule } from '@angular/router';
 import { TheaterContainerService } from '../services/theater-container.service';
-import { SeatService } from '../services/seat.service';
 import { LevelRequirementsService } from '../services/level-requirements.service';
+import { TicketDiscountService } from '../services/ticket-discount.service';
 
 let componentExports: any[] = [
   TimeTableComponent,
@@ -69,7 +69,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [AuthService,
         ShoppingCartService,
-        StageService, PlayService, ProjectionService, TheaterContainerService, SeatService, LevelRequirementsService]
+        StageService, PlayService, ProjectionService, TheaterContainerService, TicketDiscountService, LevelRequirementsService]
     };
   }
 }

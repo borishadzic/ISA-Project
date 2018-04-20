@@ -13,6 +13,7 @@ namespace ISofA.SL.DTO
         public SpeedSeatListElementDTO(Seat x)
         {
             TheaterId = x.TheaterId;
+            ProjectionId = x.Projection.ProjectionId;
             PlayName = x.Play.Name;
             PlayPosterUrl = x.Play.PosterUrl;
             StageName = x.Stage.Name;
@@ -24,6 +25,7 @@ namespace ISofA.SL.DTO
         }
 
         public int TheaterId { get; }
+        public int ProjectionId { get; }
         public String PlayName { get; }
         public String PlayPosterUrl { get; }
         public String StageName { get; }

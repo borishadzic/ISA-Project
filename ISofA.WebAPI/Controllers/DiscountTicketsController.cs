@@ -1,6 +1,7 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,10 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/Theaters/{theaterId}/Projections/{projectionId}/DiscountTickets")]
-        public void ReserveDiscountTicket(int theaterId, int projectionId, [FromBody]Seat seat)
+        [Route("api/Projections/{projectionId}/DiscountTickets")]
+        public void ReserveDiscountTicket(int projectionId, [FromBody]Seat seat)
         {
-            _segmentService.ReserveDiscountTicket(projectionId, seat);
+            _segmentService.ReserveDiscountTicket(projectionId, seat, User.Identity.GetUserId());
         }
     }
 }
