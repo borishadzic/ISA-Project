@@ -4,4 +4,5 @@ export interface ProjectionModel {
     ProjectionId : string;
     TheaterId: string;
     Price : string;
+    TheaterId : string;
 }

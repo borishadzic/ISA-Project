@@ -7,7 +7,7 @@
     <li class="row row--1" *ngFor="let row of rows">
       <ol class="seats" type="A" *ngFor="let column of columns">
         <li class="seat">
-          <input type="checkbox" id="{{row}}{{column}}" />
+          <input type="checkbox" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
           <label for="{{row}}{{column}}">{{row}}:{{column}}</label>
         </li>
       </ol>

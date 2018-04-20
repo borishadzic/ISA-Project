@@ -1,4 +1,4 @@
-export interface ReservationModel{
+export class ReservationModel{
     TheaterId : string;
     PlayId : string;
     StageId : string;

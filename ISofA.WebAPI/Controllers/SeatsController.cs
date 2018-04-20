@@ -46,10 +46,10 @@ namespace ISofA.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/Theaters/{theaterId}/Projections/{projectionId}/Seats")]
-        public IEnumerable<SeatDTO> GetProjectionSeats(int theaterId, int playId, int stageId, int projectionId) // TODO: LOW Da li je potreban getter za sva sedista?
+        [Route("api/Theaters/Projections/{projectionId}/Seats")]
+        public IEnumerable<SeatDTO> GetProjectionSeats(int projectionId) // TODO: LOW Da li je potreban getter za sva sedista?
         {
-            return _seatService.GetProjectionSeats(theaterId, playId, stageId, projectionId);
+            return _seatService.GetProjectionSeats(projectionId);
         }
 
         [HttpPost]
