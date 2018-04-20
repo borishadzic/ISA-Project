@@ -100,13 +100,14 @@ export class ReservationComponent implements OnInit, AfterViewInit {
 
 
   onConfirmReservations(){
+    if (this.mySeats.length==0){
+      alert('No seats selected');
+      return;
+    }
     this.http.post(environment.hostUrl +'/api/Theaters/'+this.theaterId+'/Projections/'+this.projectionId+'/ReserveSeats',this.mySeats)
     .subscribe(
       ()=>{
-        if(this.mySeats==[]){
-          alert('No seats selected');
-        } else
-          alert('Reservations confirmed');
+        alert('Reservations confirmed');
       },
       ()=>alert('An error has occured!')
     )
