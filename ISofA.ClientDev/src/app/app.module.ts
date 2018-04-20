@@ -22,6 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AdminDialogComponent } from './components/admin-dialog/admin-dialog.component';
 import { AdminTheaterModule } from './modules/admin-theater/admin-theater.module';
 import { LevelRequirementsDialogComponent } from './components/level-requirements-dialog/level-requirements-dialog.component';
+import { AdminNewDialogComponent } from './components/admin-new-dialog/admin-new-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LevelRequirementsDialogComponent } from './components/level-requirement
     ShoppingCartIconComponent,
     ProfileComponent,
     AdminDialogComponent,
-    LevelRequirementsDialogComponent
+    LevelRequirementsDialogComponent,
+    AdminNewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { LevelRequirementsDialogComponent } from './components/level-requirement
   ],
   entryComponents: [
     AdminDialogComponent,
+    AdminNewDialogComponent,
     LevelRequirementsDialogComponent
   ],
   providers: [
