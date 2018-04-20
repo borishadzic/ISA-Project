@@ -14,9 +14,10 @@
             <a class="nav-item nav-link" routerLink="/register">Register</a>
           </ng-container>
           <ng-template #template>
+            <a style="cursor: pointer;" class="nav-item nav-link" *ngIf="isAdmin" (click)="onOpenDialog()">Admin</a>
             <a style="cursor: pointer;" class="nav-item nav-link" (click)="onLogout()">Logout</a>
-            <app-shopping-cart-icon></app-shopping-cart-icon>
             <a class="nav-item nav-link" routerLink="/profile">Profile</a>
+            <app-shopping-cart-icon></app-shopping-cart-icon>
           </ng-template>
         </div>
     </div>

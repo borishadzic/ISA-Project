@@ -127,5 +127,12 @@ namespace ISofA.SL.Implementations
 
             return new UserItemDTO(userItem);
         }
+
+        public IEnumerable<UserItemDTO> GetUserItems(string userId)
+        {
+            return UnitOfWork.UserItems
+                .Find(x => x.ISofAUserId == userId)
+                .Select(x => new UserItemDTO(x));
+        }
     }
 }

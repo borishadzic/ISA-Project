@@ -24,6 +24,10 @@ export class UserItemService {
         return this.http.get<UserItem[]>(environment.hostUrl + '/api/theaters/' + theaterId + '/useritems');
     }
 
+    public getUserItems(): Observable<UserItem[]> {
+        return this.http.get<UserItem[]>(environment.hostUrl + '/api/useritems');
+    }
+
     public getAwaitingItems(theaterId): Observable<UserItem[]> {
         return this.http.get<UserItem[]>(environment.hostUrl + '/api/theaters/' + theaterId + '/useritems', {
             params: { status: 'awaiting' }

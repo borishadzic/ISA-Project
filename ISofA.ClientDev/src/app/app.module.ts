@@ -19,6 +19,7 @@ import { ShoppingCartIconComponent } from './components/shopping-cart-icon/shopp
 import { AdminModule } from './modules/admin/admin.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ReservationComponent } from './modules/user/reservation/reservation.component';
+import { AdminDialogComponent } from './components/admin-dialog/admin-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ReservationComponent } from './modules/user/reservation/reservation.com
     ShoppingCartComponent,
     ShoppingCartIconComponent,
     ProfileComponent,
-    ReservationComponent
+    ReservationComponent,
+    AdminDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,9 @@ import { ReservationComponent } from './modules/user/reservation/reservation.com
     TheaterModule,
     FanZoneModule,
     AdminModule
+  ],
+  entryComponents: [
+    AdminDialogComponent
   ],
   providers: [
     [{

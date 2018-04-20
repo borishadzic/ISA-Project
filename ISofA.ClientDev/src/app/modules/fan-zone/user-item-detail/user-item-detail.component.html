@@ -1,13 +1,17 @@
 <ng-container *ngIf="userItem">
+  <h1 *ngIf="userItem.Sold">Sold</h1>
   <div class="card text-center">
     <div class="card-body">
       <img [src]="userItem.ImageUrl" height="250" class="rounded">
       <h5 class="card-title">{{ userItem.Name }}</h5>
       <p class="card-text">{{ userItem.Description }}</p>
     </div>
+    <div class="card-footer text-muted">
+      {{ userItem.ExpirationDate | date }}
+    </div>
   </div>      
   
-  <div style="margin: 2em 0; text-align: center;">
+  <div *ngIf="!userItem.Sold" style="margin: 2em 0; text-align: center;">
     <form [formGroup]="form" class="form-inline" (ngSubmit)="onBid()">
         <input type="number" 
           id="formBid" 
@@ -17,6 +21,10 @@
         >
         <button type="submit" class="btn btn-primary mb-2" [disabled]="!form.valid">Bid</button>
     </form>
+
+    <div class="alert alert-danger" *ngIf="error">
+        <strong>Error!</strong> Bid must me atleast 10$ higher that current highest bid!
+    </div>
   </div>
 
   <h2 *ngIf="userItem.Bids.length != 0; else template">Bids</h2>
@@ -24,7 +32,7 @@
     <li *ngFor="let bid of userItem.Bids" class="list-group-item" 
       [class.bg-success]="bid.BidAmount === userItem.HighestBid">
       {{ bid.BidAmount + '$' }} Date {{ bid.BidDate | date}}
-      <button class="btn btn-sm btn-primary" *ngIf="isUserOwner" (click)="onSell(bid)">Sell to</button>
+      <button class="btn btn-sm btn-primary" *ngIf="isUserOwner && !userItem.Sold" (click)="onSell(bid)">Sell to</button>
     </li>
   </ul>
 

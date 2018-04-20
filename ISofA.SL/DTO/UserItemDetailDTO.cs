@@ -16,6 +16,9 @@ namespace ISofA.SL.DTO
             Description = userItem.Description;
             ImageUrl = userItem.ImageUrl;
             HighestBid = userItem.HighestBid;
+            Sold = userItem.Sold;
+            ExpirationDate = userItem.ExpirationDate;
+            Approved = userItem.Approved;
             Bids = userItem.Bids.Select(x => new BidDTO(x));
         }
 
@@ -26,6 +29,9 @@ namespace ISofA.SL.DTO
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public float? HighestBid { get; set; }
+        public bool Sold{ get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public bool? Approved { get; set; }
         public IEnumerable<BidDTO> Bids { get; set; }
     }
 }
