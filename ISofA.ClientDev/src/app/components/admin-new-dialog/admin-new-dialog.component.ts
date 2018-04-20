@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-admin-new-dialog',
@@ -12,7 +13,9 @@ export class AdminNewDialogComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder,
+              private http: HttpClient,
+              private dialogRef: MatDialogRef<AdminNewDialogComponent>) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -28,7 +31,7 @@ export class AdminNewDialogComponent implements OnInit {
     if (this.form.valid) {
       this.http.post(environment.hostUrl + '/api/sysAdmin', this.form.value).subscribe(() => {
         alert('SysAdmin created!');
-        this.form.reset();
+        this.dialogRef.close();
       }, () => {
         alert('Error while creating account!');
       });

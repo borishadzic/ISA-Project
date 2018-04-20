@@ -23,6 +23,7 @@ import { AdminDialogComponent } from './components/admin-dialog/admin-dialog.com
 import { AdminTheaterModule } from './modules/admin-theater/admin-theater.module';
 import { LevelRequirementsDialogComponent } from './components/level-requirements-dialog/level-requirements-dialog.component';
 import { AdminNewDialogComponent } from './components/admin-new-dialog/admin-new-dialog.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AdminNewDialogComponent } from './components/admin-new-dialog/admin-new
     ProfileComponent,
     AdminDialogComponent,
     LevelRequirementsDialogComponent,
-    AdminNewDialogComponent
+    AdminNewDialogComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

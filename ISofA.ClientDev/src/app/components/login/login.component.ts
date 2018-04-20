@@ -45,7 +45,15 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value.username,
                            this.loginForm.value.password,
                            this.loginForm.value.remember).subscribe(
-      () => this.router.navigate(['/']),
+      (val) => {
+        if (val.redirect === '1') {
+          this.router.navigate(['/change-password'], {
+            queryParams: { 'token': val.access_token}
+          });
+        } else {
+          this.router.navigate(['/']);
+        }
+      },
       () => alert('Username or password invalid!')
     );
   }

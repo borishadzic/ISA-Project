@@ -89,16 +89,18 @@ export class AuthService {
       headers: { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
     }).pipe(
       tap((value) => {
-        if (remember) {
-          localStorage.setItem('tokenInfo', JSON.stringify(value));
-          localStorage.setItem('accessToken', value.access_token);
-        } else {
-          sessionStorage.setItem('tokenInfo', JSON.stringify(value));
-          sessionStorage.setItem('accessToken', value.access_token);
+        if (value.redirect === '0') {
+          if (remember) {
+            localStorage.setItem('tokenInfo', JSON.stringify(value));
+            localStorage.setItem('accessToken', value.access_token);
+          } else {
+            sessionStorage.setItem('tokenInfo', JSON.stringify(value));
+            sessionStorage.setItem('accessToken', value.access_token);
+          }
+          this.token = value.access_token;
+          this.tokenInfo = value;
+          this.logedInEvent.next(true);
         }
-        this.token = value.access_token;
-        this.tokenInfo = value;
-        this.logedInEvent.next(true);
       })
     );
   }

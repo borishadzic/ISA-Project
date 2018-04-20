@@ -44,7 +44,6 @@ namespace ISofA.WebAPI.Controllers
                 Surname = theaterAdmin.Surname,
                 Email = theaterAdmin.Email,
                 City = theaterAdmin.City,
-                EmailConfirmed = true,
                 PhoneNumber = theaterAdmin.PhoneNumber,
                 ISofAUserRole = ISofAUserRole.SysAdmin
             };
