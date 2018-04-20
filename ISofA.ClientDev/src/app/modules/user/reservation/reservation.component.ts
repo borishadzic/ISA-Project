@@ -29,9 +29,13 @@ export class ReservationComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (params:Params)=>{
         console.log(params);
-        this.projectionId = params;
+        this.projectionId = params['projectionId'];
         this.getProjection().subscribe(
           (proj)=> {
+            if (proj==null){
+              alert('No such projection');
+              return
+            }
             this.projection= proj;
             this.getStage(proj.StageId).subscribe(
               (stage)=> {
