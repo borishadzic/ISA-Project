@@ -6,11 +6,12 @@
     font-size: 16px;
   }
   
-  .nekaTvoja{
+  /* .nekaTvoja{
     border-width: 5px;
     border-style: solid;
-    border-color: #5C6AFF
-  }
+    border-color: #5C6AFF;
+    cursor: not-allowed;
+  } */
 
   .plane {
     margin: 20px auto;
@@ -74,12 +75,13 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    border: #F42536 2px;
   }
   
   .seats {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; */
     justify-content: flex-start;
   }
   
@@ -128,12 +130,15 @@
     font-size: 14px;
     font-weight: bold;
     line-height: 1.5rem;
+    width: 1.5rem;
     padding: 4px 0;
     background: #F42536;
     border-radius: 5px;
     animation-duration: 300ms;
     animation-fill-mode: both;
   }
+
+  
   .seat label:before {
     content: "";
     position: absolute;
