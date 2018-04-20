@@ -70,6 +70,7 @@
     <Compile Include="DTO\UserItemDTO.cs" />
     <Compile Include="DTO\UserLevelDTO.cs" />
     <Compile Include="Exceptions\BadRequestException.cs" />
+    <Compile Include="Exceptions\ProjectionNotFoundException.cs" />
     <Compile Include="Exceptions\StageNotFoundException.cs" />
     <Compile Include="Exceptions\UnauthorizedRequestException.cs" />
     <Compile Include="Exceptions\PlayNotFoundException.cs" />

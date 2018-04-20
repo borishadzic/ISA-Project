@@ -20,6 +20,7 @@ namespace ISofA.SL.DTO
             SeatRow = x.SeatRow;
             SeatColumn = x.SeatColumn;
             Discount = x.Discount;
+            Price = x.Projection.Price;
         }
 
         public int TheaterId { get; }
@@ -27,6 +28,7 @@ namespace ISofA.SL.DTO
         public String PlayPosterUrl { get; }
         public String StageName { get; }
         public DateTime StartTime { get; }
+        public int Price { get; }
         public int Discount { get;  }
         public int SeatRow { get; }
         public int SeatColumn { get; }

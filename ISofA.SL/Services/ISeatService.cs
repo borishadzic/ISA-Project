@@ -13,7 +13,7 @@ namespace ISofA.SL.Services
         IEnumerable<SeatDTO> GetProjectionSeats(int theaterId, int playId, int stageId, int projectionId);
         IEnumerable<SpeedSeatListElementDTO> GetSpeedSeats(int theaterId);
 
-        SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat);
+        SeatDTO AddSpeedSeat(int projectionId, Seat seat);
         SeatDTO AddVIPSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat);
         SeatDTO AddReservation(int theaterId, int playId, int stageId, int projectionId, string userId, Seat seat);
 

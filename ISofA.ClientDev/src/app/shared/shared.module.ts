@@ -20,6 +20,7 @@ import { AgmCoreModule } from '@agm/core';
 import { TemplateNavbarComponent } from './template-navbar/template-navbar.component';
 import { RouterModule } from '@angular/router';
 import { TheaterContainerService } from '../services/theater-container.service';
+import { SeatService } from '../services/seat.service';
 
 var componentExports: any[] = [
   TimeTableComponent,
@@ -65,7 +66,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, ShoppingCartService, StageService, PlayService, ProjectionService, TheaterContainerService]
+      providers: [AuthService, ShoppingCartService, StageService, PlayService, ProjectionService, TheaterContainerService, SeatService]
     };
   }
 }
