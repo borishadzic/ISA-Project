@@ -127,11 +127,14 @@ namespace ISofA.WebAPI.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            user.EmailConfirmed = true;
+            UserManager.Update(user);
 
             return Ok();
         }

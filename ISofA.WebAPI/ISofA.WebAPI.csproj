@@ -446,6 +446,7 @@
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\UserItemsController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VisitsController.cs" />
     <Compile Include="Controllers\SeatsController.cs" />
     <Compile Include="Controllers\ProjectionsController.cs" />
@@ -453,7 +454,7 @@
     <Compile Include="Controllers\PlaysController.cs" />
     <Compile Include="Controllers\TheatersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\DiscountTicketsController.cs" />
     <Compile Include="Filters\ISofAAuthorizationAttribute.cs" />
     <Compile Include="Filters\ISofAExceptionFilterAttribute.cs" />
     <Compile Include="Filters\ValidModelActionFilterAttribute.cs" />

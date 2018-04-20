@@ -1,0 +1,23 @@
+<p>
+  Level Requirements
+</p>
+<mat-chip-list *ngIf="requirements">
+    <mat-chip color="primary">Bronze: {{ requirements.BronzeLevel }}</mat-chip>
+    <mat-chip color="primary">Silver: {{ requirements.SilverLevel }}</mat-chip>
+    <mat-chip color="primary">Gold: {{ requirements.GoldLevel }}</mat-chip>
+</mat-chip-list>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" style="margin-top: 1em">
+  <div>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Bronze level" formControlName="BronzeLevel">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Silver level" formControlName="SilverLevel">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Gold level" formControlName="GoldLevel">
+      </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Set</button>
+  <button mat-raised-button color="accent" mat-dialog-close>Close</button>
+</form>

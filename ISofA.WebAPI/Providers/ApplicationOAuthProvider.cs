@@ -38,7 +38,7 @@ namespace ISofA.WebAPI.Providers
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
-            } else if (user.EmailConfirmed == false)
+            } else if (user.EmailConfirmed == false && user.ISofAUserRole == ISofAUserRole.User)
 			{
 				context.SetError("email_not_verified", "Haven't verified account yet");
 				return;
@@ -101,7 +101,8 @@ namespace ISofA.WebAPI.Providers
                 { "userName", user.UserName },
                 { "adminOfTheater", user.AdminOfTheaterId.GetValueOrDefault().ToString() }, // dodatno
                 { "iSofAUserRole", user.ISofAUserRole.ToString() }, // dodatno
-                { "iSofaUserId", user.Id } // dodatno
+                { "iSofaUserId", user.Id }, // dodatno
+                { "redirect", user.EmailConfirmed ? "0" : "1" } // dodatno
             };
             return new AuthenticationProperties(data);
         }

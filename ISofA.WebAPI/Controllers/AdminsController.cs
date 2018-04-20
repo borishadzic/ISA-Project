@@ -34,6 +34,31 @@ namespace ISofA.WebAPI.Controllers
             _adminService = adminService;
         }
 
+        [Route("~/api/SysAdmin")]
+        public async Task<IHttpActionResult> PostSysAdminAsync(AdminBindingModel theaterAdmin)
+        {
+            ISofAUser user = new ISofAUser
+            {
+                UserName = theaterAdmin.Email,
+                Name = theaterAdmin.Name,
+                Surname = theaterAdmin.Surname,
+                Email = theaterAdmin.Email,
+                City = theaterAdmin.City,
+                PhoneNumber = theaterAdmin.PhoneNumber,
+                ISofAUserRole = ISofAUserRole.SysAdmin
+            };
+
+            IdentityResult result = await UserManager.CreateAsync(user, "Admin123!");
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            } else
+            {
+                return Ok();
+            }
+        }
+
         [Route("")]
         public IEnumerable<ISofAUserDTO> Get(int theaterId, [FromUri] String role = "")
         {

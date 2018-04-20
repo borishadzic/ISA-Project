@@ -1,0 +1,28 @@
+<h3>New System admin</h3>
+
+<form [formGroup]="form" (ngSubmit)="onRegister()">
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="Name">
+    </mat-form-field>
+  
+    <mat-form-field>
+        <input matInput placeholder="Surname" formControlName="Surname">
+      </mat-form-field>
+      
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="Email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="City" formControlName="City">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="PhoneNumber" formControlName="PhoneNumber">
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Register</button>
+  <button mat-raised-button color="accent" mat-dialog-close>Close</button>
+</form>

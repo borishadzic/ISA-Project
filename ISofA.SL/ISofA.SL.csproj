@@ -76,6 +76,7 @@
     <Compile Include="Exceptions\PlayNotFoundException.cs" />
     <Compile Include="Implementations\BidService.cs" />
     <Compile Include="Implementations\ConfigService.cs" />
+    <Compile Include="Implementations\SegmentService.cs" />
     <Compile Include="Implementations\EmailService.cs" />
     <Compile Include="Implementations\FriendRequestService.cs" />
     <Compile Include="Implementations\ItemService.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Services\IBidService.cs" />
     <Compile Include="Services\IConfigService.cs" />
     <Compile Include="Services\ICRUDService.cs" />
+    <Compile Include="Services\ISegmentService.cs" />
     <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IFriendRequestService.cs" />
     <Compile Include="Services\ISeatService.cs" />

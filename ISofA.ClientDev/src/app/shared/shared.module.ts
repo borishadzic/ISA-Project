@@ -21,18 +21,19 @@ import { TemplateNavbarComponent } from './template-navbar/template-navbar.compo
 import { RouterModule } from '@angular/router';
 import { TheaterContainerService } from '../services/theater-container.service';
 import { SeatService } from '../services/seat.service';
+import { LevelRequirementsService } from '../services/level-requirements.service';
 
-var componentExports: any[] = [
+let componentExports: any[] = [
   TimeTableComponent,
   TemplateNavbarComponent
 ];
 
-var pipeExports: any[] = [
+let pipeExports: any[] = [
   MinsFormatterPipe,
   PadPipe,
   RangePipe,
   NameFilterPipe
-]
+];
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ var pipeExports: any[] = [
     FormsModule, // TODO: Not sure if need
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule,    
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBNuMGHVcGEkYjEoZQWiHZGJA03GS647Jw',
       libraries: ['places']
@@ -66,7 +67,9 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, ShoppingCartService, StageService, PlayService, ProjectionService, TheaterContainerService, SeatService]
+      providers: [AuthService,
+        ShoppingCartService,
+        StageService, PlayService, ProjectionService, TheaterContainerService, SeatService, LevelRequirementsService]
     };
   }
 }
