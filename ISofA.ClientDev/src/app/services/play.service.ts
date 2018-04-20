@@ -9,6 +9,10 @@ export class PlayService {
 
   constructor(private http: HttpClient) { }
 
+  public getPlay(playId: number): Observable<any> {
+    return this.http.get<any>(environment.hostUrl + `/api/plays/${playId}`);
+  }
+
   public getPlays(theaterId: number): Observable<any[]> {
     return this.http.get<any[]>(environment.hostUrl + '/api/plays', { params: { theaterId: theaterId + '' } });
   }

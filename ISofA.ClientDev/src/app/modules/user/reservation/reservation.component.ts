@@ -98,7 +98,7 @@ export class ReservationComponent implements OnInit, AfterViewInit {
   onCheckState(row: number, column: number) {
     var seat = this.existingSeats.find(x => x.SeatColumn == column.toString() && x.SeatRow == row.toString()); //OVO RADI PRE onInita
 
-    if (seat == null || seat.State == "1" || seat.State == "2") {
+    if (seat == null) {
       return true;
     } else return false;
   }

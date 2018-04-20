@@ -22,6 +22,7 @@ import { RouterModule } from '@angular/router';
 import { TheaterContainerService } from '../services/theater-container.service';
 import { LevelRequirementsService } from '../services/level-requirements.service';
 import { TicketDiscountService } from '../services/ticket-discount.service';
+import { SeatService } from '../services/seat.service';
 
 let componentExports: any[] = [
   TimeTableComponent,
@@ -69,7 +70,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [AuthService,
         ShoppingCartService,
-        StageService, PlayService, ProjectionService, TheaterContainerService, TicketDiscountService, LevelRequirementsService]
+        StageService, PlayService, ProjectionService, TheaterContainerService, TicketDiscountService, LevelRequirementsService, SeatService]
     };
   }
 }

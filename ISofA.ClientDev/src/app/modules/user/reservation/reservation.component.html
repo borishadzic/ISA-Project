@@ -1,22 +1,30 @@
-<div class="plane">
-  <div >
-    <h1>Please select a seat</h1>
-  </div>
+<div>
+    <h1 class="text-center">Please select a seat</h1>
   
-  <ol class="cabin">
+  <!-- <ol class="cabin" style="display: flex">
     <li class="row" *ngFor="let row of rows">
       <ol class="seats" *ngFor="let column of columns">
-        <li class="seat"  > 
+        <li class="seat"> 
           <input [attr.disabled]="onCheckState(row,column) ? null : ''" type="checkbox" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
           <!-- <input type="checkbox" *ngSwitchCase="1" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
           <input type="checkbox" *ngSwitchCase="2" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
           <input type="checkbox" *ngSwitchCase="0" id="{{row}}{{column}}"  />
-          <input type="checkbox" *ngSwitchCase="3" id="{{row}}{{column}}"  /> -->
+          <input type="checkbox" *ngSwitchCase="3" id="{{row}}{{column}}"  /> ->
           <label [class.nekaTvoja]="onCheckState(row, column)" for="{{row}}{{column}}">{{row}}:{{column}}</label>
         </li>
       </ol>
     </li>
-  </ol>
+  </ol> -->
+  <div style="display: flex">
+      <div *ngFor="let column of columns">
+        <ol *ngFor="let row of rows">
+          <li class="seat"> 
+            <input [attr.disabled]="onCheckState(row,column) ? null : ''" type="checkbox" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
+            <label [class.nekaTvoja]="onCheckState(row, column)" for="{{row}}{{column}}">{{row}}:{{column}}</label>
+          </li>
+        </ol>
+      </div>
+    </div>
 </div>
 <div>
   <button (click)="onSendInvitesToFriends()">Invite friends</button>

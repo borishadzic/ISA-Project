@@ -1,0 +1,35 @@
+<div class="spaced">
+  <ng-template [ngIf]="finishedLoading" [ngIfElse]="loading">
+    <div class="text-center">
+      <h1>Projection</h1>
+      <h2>{{ play.Name }}</h2>
+      <h4>{{ projection.StartTime | date: 'dd.MM.y HH:mm' }}</h4>
+      <ng-template [ngIf]="(selRow + 1) && (selCol + 1)">
+        <span>
+          <button mat-button (click)="createVIP()" color="primary">VIP</button>
+          <mat-form-field>
+              <input placeholder="Discount" matInput [(ngModel)]="discount">
+          </mat-form-field>
+          <button mat-button (click)="createDiscount()" color="primary">Discount</button>
+        </span>
+      </ng-template>
+    </div>
+    <div style="display:flex">
+      <div *ngFor="let col of [] | range: [stage.SeatColumns]">
+        <ng-container *ngFor="let row of [] | range: [stage.SeatRows]">
+          <div class="segment-seat" [ngClass]="seats[row*stage.SeatRows + col].$class" (click)="selectSeat(col, row)"> </div>
+        </ng-container>
+        <br/>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #loading>
+    <mat-card>
+      <mat-card-content>
+        <div style="padding-top: 20px">
+          <mat-progress-bar mode="query"></mat-progress-bar>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>

@@ -1,0 +1,38 @@
+.segment-seat {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;    
+}
+
+.seat-none.active {
+    background-color: #77f;
+    cursor: default;
+}
+
+.seat-none.active:hover {
+    background-color: #77f;
+    cursor: default;
+}
+
+.seat-none {
+    background-color: #aaf;
+    cursor: pointer;
+}
+
+.seat-none:hover {
+    background-color: #bbf;
+    cursor: pointer;
+}
+
+.seat-reserved {
+    background-color: #aaa;
+}
+
+.seat-vip {
+    background-color: gold;
+}
+
+.seat-discount {
+    background-color: #afa;
+}

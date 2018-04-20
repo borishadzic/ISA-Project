@@ -1,6 +1,7 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using ISofA.WebAPI.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace ISofA.WebAPI.Controllers
 
         [HttpPost]
         [Route("api/Theaters/{theaterId}/Projections/{projectionId}/DiscountTickets")]
-        public void CreateDiscountTicket(int theaterId, int projectionId, [FromBody]Seat seat)
+        public void CreateDiscountTicket(int theaterId, int projectionId, [FromBody]DiscountTicketBindingModel seat)
         {
             _segmentService.Create(projectionId, seat);
         }

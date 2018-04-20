@@ -86,10 +86,8 @@
   }
   
   .seat {
-    display: flex;
-    flex: 0 0 14.28571428571429%;
     padding: 5px;
-    position: relative;
+    display: inline-block;
   }
   .seat:nth-child(3) {
     margin-right: 14.28571428571429%;

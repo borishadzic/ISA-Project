@@ -20,28 +20,29 @@
             </mat-card-content>
         </mat-card>
         <ng-template [ngIf]="tickets" [ngIfElse]="loadingTickets">
-
-            <div *ngFor="let ticket of tickets">
-                <mat-card class="discount-card">
-                    <mat-card-header>
-                        <mat-card-title>
-                            <b>{{ ticket.PlayName }}</b>
-                        </mat-card-title>
-                        <mat-card-subtitle>{{ ticket.Discount }}% Discount</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image style="max-height: 350px; object-fit: cover;" [src]="ticket.PlayPosterUrl" alt="Movie Poster">
-                    <mat-card-content>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-raised-button color="primary" (click)="reserveDiscountTicket(ticket)">
-                            <span>{{ ticket.StartTime | date: 'HH:mm' }}</span>
-                            <br/>
-                            <span>Price: {{ ticket.Price * (1- ticket.Discount / 100) }}</span>
-                            <br/>
-                            <span>Stage: {{ ticket.StageName }}</span>
-                        </button>
-                    </mat-card-actions>
-                </mat-card>
+            <div class="row spaced">
+                <div *ngFor="let ticket of tickets">
+                    <mat-card class="discount-card">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <b>{{ ticket.PlayName }}</b>
+                            </mat-card-title>
+                            <mat-card-subtitle>{{ ticket.Discount }}% Discount</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image style="max-height: 350px; object-fit: cover;" [src]="ticket.PlayPosterUrl" alt="Movie Poster">
+                        <mat-card-content>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-raised-button color="primary" (click)="reserveDiscountTicket(ticket)">
+                                <span>{{ ticket.StartTime | date: 'dd.MM.y HH:mm' }}</span>
+                                <br/>
+                                <span>Price: {{ ticket.Price * (1- ticket.Discount / 100) }}</span>
+                                <br/>
+                                <span>Stage: {{ ticket.StageName }}</span>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
             </div>
         </ng-template>
         <ng-template #loadingTickets>

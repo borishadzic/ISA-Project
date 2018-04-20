@@ -12,7 +12,7 @@ export class TicketDiscountService {
 
   constructor(private http: HttpClient) { }
 
-  getDiscountTickets(theaterId: number | string): Observable<SpeedSeatModel[]> {
+  public getDiscountTickets(theaterId: number | string): Observable<SpeedSeatModel[]> {
     var tickets = this.http.get<SpeedSeatModel[]>(environment.hostUrl + `/api/theaters/${theaterId}/DiscountTickets`)
 
     return new Observable(sub => {
@@ -24,7 +24,11 @@ export class TicketDiscountService {
     });
   }
 
-  reserveDiscountTicket(seat: SpeedSeatModel):Observable<any> {
+  public reserveDiscountTicket(seat: SpeedSeatModel):Observable<any> {
     return this.http.put<any>(environment.hostUrl + `/api/projections/${seat.ProjectionId}/DiscountTickets`, { SeatRow: seat.SeatRow, SeatColumn: seat.SeatColumn });
+  }
+
+  public createDiscountTicket(theaterId: number | string, projectionId: number | string, seat: any): Observable<any> {
+    return this.http.post<any>(environment.hostUrl + `/api/Theaters/${theaterId}/Projections/${projectionId}/DiscountTickets`, seat);
   }
 }
