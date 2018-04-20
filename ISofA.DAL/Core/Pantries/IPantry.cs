@@ -12,6 +12,7 @@ namespace ISofA.DAL.Core.Pantries
         TEntity Get(params object[] keyValues);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> FindEager(Expression<Func<TEntity, bool>> predicate);
 
         TEntity Add(TEntity entity);
         IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities);

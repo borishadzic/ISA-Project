@@ -33,6 +33,12 @@ namespace ISofA.DAL.Persistence.Pantries
             return Context.Set<TEntity>().Where(predicate);
         }
 
+        public IEnumerable<TEntity> FindEager(Expression<Func<TEntity, bool>> predicate)
+        {
+            Context.Configuration.LazyLoadingEnabled = false;
+            return Context.Set<TEntity>().Where(predicate);
+        }
+
         public TEntity Add(TEntity entity)
         {
             return Context.Set<TEntity>().Add(entity);
@@ -51,6 +57,6 @@ namespace ISofA.DAL.Persistence.Pantries
         public IEnumerable<TEntity> RemoveRange(IEnumerable<TEntity> entities)
         {
             return Context.Set<TEntity>().RemoveRange(entities);
-        }
+        }        
     }
 }

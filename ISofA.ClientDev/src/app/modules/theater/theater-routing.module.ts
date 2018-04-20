@@ -6,6 +6,7 @@ import { AdminRegistrationComponent } from './admin-registration/admin-registrat
 import { TheaterListComponent } from './theater-list/theater-list.component';
 import { TheaterDetailComponent } from './theater-detail/theater-detail.component';
 import { TheaterRepertoireComponent } from './theater-repertoire/theater-repertoire.component';
+import { DiscountTicketListComponent } from './discount-ticket-list/discount-ticket-list.component';
 
 const routes: Routes = [
   { path: 'theaters', component: TheaterListComponent },
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'cinemas/:id', component: TheaterDetailComponent },
   { path: 'theaters/:id/repertoire', component: TheaterRepertoireComponent },
   { path: 'cinemas/:id/repertoire', component: TheaterRepertoireComponent },
+  { path: 'theaters/:id/discount-tickets', component: DiscountTicketListComponent },
+  { path: 'cinemas/:id/discount-tickets', component: DiscountTicketListComponent },
   { path: 'theaters/:id/register', component: AdminRegistrationComponent }
 ];
 

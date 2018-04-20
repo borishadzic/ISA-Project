@@ -1,3 +1,57 @@
-<p>
-  discount-ticket-list works!
-</p>
+<div class="bgr">
+    <div class="container spaced">
+        <mat-card>
+            <mat-card-content>
+                <app-template-navbar [navLinkBase]="navLinkBase" [navLinks]="navLinks"></app-template-navbar>
+                <ng-template [ngIf]="theater.evaluated" [ngIfElse]="loading">
+                    <div class="text-center">
+                        <h1>
+                            {{ theater.Name }} Discount Tickets
+                        </h1>
+                    </div>
+                </ng-template>
+                <ng-template #loading>
+                    <mat-grid-list cols="1" rowHeight="400px">
+                        <mat-grid-tile>
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
+        <ng-template [ngIf]="tickets" [ngIfElse]="loadingTickets">
+
+            <div *ngFor="let ticket of tickets">
+                <mat-card class="discount-card">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <b>{{ ticket.PlayName }}</b>
+                        </mat-card-title>
+                        <mat-card-subtitle>{{ ticket.Discount }}% Discount</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image style="max-height: 350px; object-fit: cover;" [src]="ticket.PlayPosterUrl" alt="Movie Poster">
+                    <mat-card-content>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <a mat-raised-button color="primary">
+                            <span>{{ ticket.StartTime | date: 'HH:mm' }}</span>
+                            <br/>
+                            <span>Price: {{ ticket.Price * (1- ticket.Discount / 100) }}</span>
+                            <br/>
+                            <span>Stage: {{ ticket.StageName }}</span>
+                        </a>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </ng-template>
+        <ng-template #loadingTickets>
+            <mat-card>
+                <mat-card-content>
+                    <div style="margin-top: 20px;">
+                        <mat-progress-bar mode="query"></mat-progress-bar>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </ng-template>
+    </div>
+</div>

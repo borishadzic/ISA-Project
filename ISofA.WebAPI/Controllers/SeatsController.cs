@@ -61,9 +61,9 @@ namespace ISofA.WebAPI.Controllers
 
         [HttpPost]
         [Route("api/Theaters/{theaterId}/Projections/{projectionId}/Seats/Speed")]
-        public SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, [FromBody]Seat seat)
+        public SeatDTO AddSpeedSeat(int theaterId, int projectionId, [FromBody]Seat seat)
         {
-            return _seatService.AddSpeedSeat(theaterId, playId, stageId, projectionId, seat);
+            return _seatService.AddSpeedSeat(projectionId, seat);
         }
 
         [HttpPost]

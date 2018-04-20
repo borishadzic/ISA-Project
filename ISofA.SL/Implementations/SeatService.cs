@@ -2,10 +2,13 @@
 using ISofA.DAL.Core.Domain;
 using ISofA.DAL.Core.Pantries;
 using ISofA.SL.DTO;
+using ISofA.SL.Exceptions;
 using ISofA.SL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +16,7 @@ namespace ISofA.SL.Implementations
 {
     public class SeatService : Service, ISeatService
     {
+
         public SeatService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
@@ -30,7 +34,7 @@ namespace ISofA.SL.Implementations
         public IEnumerable<SpeedSeatListElementDTO> GetSpeedSeats(int theaterId)
         {
             return UnitOfWork.Seats
-                .Find(x => x.TheaterId == theaterId && x.State == SeatState.Speed)
+                .GetSpeedSeats(theaterId)
                 .Select(x => new SpeedSeatListElementDTO(x));
         }
 
@@ -103,13 +107,16 @@ namespace ISofA.SL.Implementations
 			return UnitOfWork.Seats.Find(x => x.UserId == userId).Select(x => new SeatDTO(x));
 		}
 
-		public SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat)
+		public SeatDTO AddSpeedSeat(int projectionId, Seat seat)
         {
-            if (UnitOfWork.Seats.Get(theaterId, playId, stageId, projectionId, seat.SeatRow, seat.SeatColumn) != null)
-                return null; // TODO: ERROR Throw             
-            seat.TheaterId = theaterId;
-            seat.PlayId = playId;
-            seat.StageId = stageId;
+            var projection = UnitOfWork.Projections.Get(projectionId);
+
+            if (projection == null)
+                throw new ProjectionNotFoundException(projectionId);
+
+            seat.TheaterId = projection.TheaterId;
+            seat.PlayId = projection.PlayId;
+            seat.StageId = projection.StageId;
             seat.ProjectionId = projectionId;
             seat.UserId = null;
             seat.State = SeatState.Speed;

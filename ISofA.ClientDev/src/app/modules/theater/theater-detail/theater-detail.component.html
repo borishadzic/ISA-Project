@@ -16,7 +16,11 @@
                     <button mat-raised-button color="primary" (click)="openLocationDialog()">Location</button>
                 </ng-template>
                 <ng-template #loading>
-
+                    <mat-grid-list cols="1" rowHeight="400px">
+                        <mat-grid-tile>
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                        </mat-grid-tile>
+                    </mat-grid-list>
                 </ng-template>
             </mat-card-content>
         </mat-card>
