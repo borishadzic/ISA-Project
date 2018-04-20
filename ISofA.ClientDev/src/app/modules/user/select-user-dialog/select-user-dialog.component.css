@@ -1,0 +1,55 @@
+.align-left {
+    text-align: left;
+}
+
+.sud-flx-wrpr {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    height: 300px;
+    overflow-y: hidden;
+}
+
+.sud-flx-wrpr > * {  
+    overflow-y: auto;    
+}
+
+.sud-flx-l {
+    width: 250px;
+}
+
+.sud-flx-r {    
+    border-left: 3px solid #ccc;
+    width: 150px;
+}
+
+.sud-selected-user-wrpr {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.sud-selected-user {
+    font-weight: 500;
+    font-size: 14px;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+.sud-selected-user-x {
+    display: none;
+}
+
+.sud-selected-user-wrpr:hover > .sud-selected-user-x {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}

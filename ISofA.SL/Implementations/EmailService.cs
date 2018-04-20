@@ -22,6 +22,26 @@ namespace ISofA.SL.Implementations
             _smtpSection = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
         }
 
+        public async Task SendMovieInvites(IEnumerable<ISofAUser> users, IEnumerable<int> projectionIds, IEnumerable<int> rows, IEnumerable<int> columns)
+        {
+            IEnumerable<string> emails = users.Select(x => x.Email).ToList();
+            int i = 0;
+            foreach(string email in emails)
+            {
+                int projectionId = projectionIds.ElementAt(i);
+                int row = rows.ElementAt(i);
+                int column = columns.ElementAt(i);
+                string userId = users.ElementAt(i).Id;
+                await _smtpClient.SendMailAsync(new MailMessage(_smtpSection.From, email)
+                {
+                    Subject = "Movie/Cinema Invite",
+                    Body = $"<p>I invite you to go to the movie/cinema with me. <a href='http://localhost:49459/api/FriendReservations/ConfirmInvite/{userId}/{projectionId}/{row}/{column}'>Accept</a> of <a href='http://localhost:49459/api/FriendReservations/DeclineInvite/{projectionId}/{row}/{column}'>Decline</a></p>",
+                    IsBodyHtml = true
+                });
+                i++;
+            }
+        }
+
         public async Task UserItemSoldNotification(UserItem userItem, Bid winningBid)
         {
             IEnumerable<String> emails = userItem.Bids

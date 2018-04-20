@@ -21,5 +21,9 @@ namespace ISofA.SL.Services
         void RemoveSeat(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn);
 		IEnumerable<SeatDTO> AddMultipleReservations(int theaterId, int projectionId, string userIds, IEnumerable<Seat> seats);
 		IEnumerable<SeatDTO> GetUserReservations(string userId);
+        void ConfirmFriendInvatation(string userId, int ProjectionId, int SeatRow, int SeatColumn);
+        void DeclineFriendInvatation(int ProjectionId, int SeatRow, int SeatColumn);
+        Task InviteFriendsToMovies(IEnumerable<ISofAUser> users, IEnumerable<int> projectonIds, IEnumerable<int> rows, IEnumerable<int> columns);
+
 	}
 }

@@ -1,8 +1,10 @@
 ﻿using ISofA.DAL.Core.Domain;
 using ISofA.SL.DTO;
 using ISofA.SL.Services;
+using ISofA.WebAPI.Models;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ISofA.WebAPI.Controllers
@@ -78,6 +80,30 @@ namespace ISofA.WebAPI.Controllers
         public void CancelReservation(int theaterId, int playId, int stageId, int projectionId, int seatRow, int seatColumn)
         {
             _seatService.CancelReservation(theaterId, playId, stageId, projectionId, User.Identity.GetUserId(), seatRow, seatColumn);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/FriendReservations/ConfirmInvite/{userId}/{ProjectionId}/{SeatRow}/{SeatColumn}")]
+        public void AcceptFriendInvatation(string userId, int ProjectionId, int SeatRow, int SeatColumn)
+        {
+            _seatService.ConfirmFriendInvatation(userId, ProjectionId, SeatRow, SeatColumn);
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/FriendReservations/DeclineInvite/{ProjectionId}/{SeatRow}/{SeatColumn}")]
+        public void DeclineFriendInvatation(int ProjectionId, int SeatRow, int SeatColumn)
+        {
+            _seatService.DeclineFriendInvatation(ProjectionId, SeatRow, SeatColumn);
+        }
+
+        [HttpPost]
+        [Route("api/Seats/SendInvatations")]
+        public async Task SendInvatations(InvatationBindingModel invite)
+        {
+            await _seatService.InviteFriendsToMovies(invite.users, invite.projectionIds, invite.rows, invite.columns);
         }
 
         [HttpDelete]

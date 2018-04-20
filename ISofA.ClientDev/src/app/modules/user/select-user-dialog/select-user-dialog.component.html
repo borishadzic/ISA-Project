@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <div class="example-container">
+    <mat-form-field>
+      <input placeholder="Search..." matInput [ngModel]="nameFilter" (ngModelChange)="nameFilterChange($event)" cdkFocusInitial>
+    </mat-form-field>
+  </div>
+  <div class="sud-flx-wrpr">
+    <div class="sud-flx-l">
+      <ng-template [ngIf]="allUsers" [ngIfElse]="loadingUsers">
+        <ng-template [ngIf]="allUsers.length != 0" [ngIfElse]="emptyUsers">
+          <mat-list>
+            <mat-list-item *ngFor="let user of users">
+              <button class="align-left" mat-button (click)="selectUser(user)">{{ user.Name }}</button>
+            </mat-list-item>
+          </mat-list>
+        </ng-template>
+        <ng-template #emptyUsers>
+          {{data.emptyMsg}}
+        </ng-template>
+      </ng-template>
+      <ng-template #loadingUsers>
+        <div class="sud-selected-user-wrpr" style="height: 100%">
+          <mat-spinner style="margin: auto"></mat-spinner>
+        </div>
+      </ng-template>
+    </div>
+    <div class="sud-flx-r">
+      <mat-list>
+        <mat-list-item>
+              <span class="sud-selected-user text-muted">Selected Users:</span>     
+        </mat-list-item>
+        <mat-list-item *ngFor="let user of selectedUsers">
+          <span class="sud-selected-user-wrpr">
+            <span class="align-left sud-selected-user">
+              {{user.Name}}
+            </span>
+            <span style="flex: 1 1 auto;"></span>
+            <span class="sud-selected-user-x" (click)="unselectUser(user)">&times;</span>
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button (click)="dialogRef.close(selectedUsers)" color="primary">{{data.completeAction}}</button>
+</div>

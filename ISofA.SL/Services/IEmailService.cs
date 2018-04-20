@@ -10,5 +10,6 @@ namespace ISofA.SL.Services
     public interface IEmailService
     {
         Task UserItemSoldNotification(UserItem userItem, Bid winningBid);
+        Task SendMovieInvites(IEnumerable<ISofAUser> users, IEnumerable<int> projectionIds, IEnumerable<int> rows, IEnumerable<int> columns);
     }
 }
