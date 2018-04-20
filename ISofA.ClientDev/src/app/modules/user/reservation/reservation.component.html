@@ -6,9 +6,13 @@
   <ol class="cabin fuselage">
     <li class="row row--1" *ngFor="let row of rows">
       <ol class="seats" type="A" *ngFor="let column of columns">
-        <li class="seat">
-          <input type="checkbox" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
-          <label for="{{row}}{{column}}">{{row}}:{{column}}</label>
+        <li class="seat"  > 
+          <input type="checkbox" [class.nekaTvoja]="onCheckState(row, column)" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
+          <!-- <input type="checkbox" *ngSwitchCase="1" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
+          <input type="checkbox" *ngSwitchCase="2" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
+          <input type="checkbox" *ngSwitchCase="0" id="{{row}}{{column}}"  />
+          <input type="checkbox" *ngSwitchCase="3" id="{{row}}{{column}}"  /> -->
+          <label [class.nekaTvoja]="onCheckState(row, column)" for="{{row}}{{column}}">{{row}}:{{column}}</label>
         </li>
       </ol>
     </li>

@@ -6,6 +6,12 @@
     font-size: 16px;
   }
   
+  .nekaTvoja{
+    border-width: 5px;
+    border-style: solid;
+    border-color: #5C6AFF
+  }
+
   .plane {
     margin: 20px auto;
     max-width: 300px;

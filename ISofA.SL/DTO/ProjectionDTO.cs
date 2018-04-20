@@ -27,6 +27,5 @@ namespace ISofA.SL.DTO
         public int ProjectionId { get; set; }
         public DateTime StartTime { get; set; }
         public int Price { get; set; }
-        public int TheaterId { get; set; }
     }
 }
