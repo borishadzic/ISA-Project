@@ -30,5 +30,7 @@ namespace ISofA.DAL.Core.Domain
 
         [ForeignKey(nameof(TheaterId))]
         public virtual Theater Theater { get; set; }
+
+        public virtual ICollection<Seat> Reservations { get; set; }
     }
 }

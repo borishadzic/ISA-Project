@@ -82,6 +82,14 @@
     <Compile Include="Migrations\201804190559131_Initial.Designer.cs">
       <DependentUpon>201804190559131_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804200636172_Nullable_Seat_UserId.cs" />
+    <Compile Include="Migrations\201804200636172_Nullable_Seat_UserId.Designer.cs">
+      <DependentUpon>201804200636172_Nullable_Seat_UserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804200659465_Seat_Key_Change.cs" />
+    <Compile Include="Migrations\201804200659465_Seat_Key_Change.Designer.cs">
+      <DependentUpon>201804200659465_Seat_Key_Change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ISofADbContext.cs" />
     <Compile Include="Persistence\Pantries\BidPantry.cs" />
@@ -106,6 +114,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804190559131_Initial.resx">
       <DependentUpon>201804190559131_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804200636172_Nullable_Seat_UserId.resx">
+      <DependentUpon>201804200636172_Nullable_Seat_UserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804200659465_Seat_Key_Change.resx">
+      <DependentUpon>201804200659465_Seat_Key_Change.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

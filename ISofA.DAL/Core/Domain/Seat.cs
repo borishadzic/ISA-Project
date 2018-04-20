@@ -15,14 +15,14 @@ namespace ISofA.DAL.Core.Domain
 
     public class Seat
     {
-        [Key]
-        [Column(Order = 1)]
         public int TheaterId { get; set; }
 
         public int PlayId { get; set; }
 
         public int StageId { get; set; } // Properties no longer reflect reality
-        
+
+        [Key]
+        [Column(Order = 1)]
         public int ProjectionId { get; set; }
         [Key]
         [Column(Order = 2)]
@@ -35,8 +35,17 @@ namespace ISofA.DAL.Core.Domain
         public SeatState State { get; set; }
         public int Discount { get; set; }
 
-        [ForeignKey("TheaterId")]
-        public virtual Theater Theater { get; set; }
+        [ForeignKey(nameof(TheaterId))]
+        public virtual Theater Theater { get; set; }        
+
+        [ForeignKey(nameof(ProjectionId))]
+        public virtual Projection Projection { get; set; }
+
+        [ForeignKey(nameof(PlayId))]
+        public virtual Play Play { get; set; }
+
+        [ForeignKey(nameof(StageId))]
+        public virtual Stage Stage { get; set; }
 
         [ForeignKey("UserId")]
         public virtual ISofAUser User { get; set; }
