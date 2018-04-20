@@ -18,10 +18,12 @@ namespace ISofA.SL.Implementations
         }
 
 
-        public IEnumerable<SeatDTO> GetProjectionSeats(int theaterId, int playId, int stageId, int projectionId)
+        public IEnumerable<SeatDTO> GetProjectionSeats(int projectionId)
         {
+            Projection proj = UnitOfWork.Projections.Find(x => x.ProjectionId == projectionId).FirstOrDefault();
+            
             return UnitOfWork.Seats
-                .Find(x => x.TheaterId == theaterId && x.PlayId == playId && x.StageId == stageId && x.ProjectionId == projectionId)
+                .Find(x => x.TheaterId == proj.TheaterId && x.PlayId == proj.PlayId && x.StageId == proj.StageId && x.ProjectionId == projectionId)
                 .Select(x => new SeatDTO(x));
         }
 

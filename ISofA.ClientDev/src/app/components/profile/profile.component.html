@@ -69,12 +69,17 @@
     </div>
   </div>
 </div>
-<div style="width:100%; float:left">
-  <h2><strong>Reservations: </strong></h2>
-  <div *ngFor="let reservation of myReservations">
-    <p><strong>Theater: </strong>{{reservation.TheaterId}}</p>
-    <p><strong>Stage: </strong>{{reservation.StageId}}</p>
-    <p><strong>Seats: </strong>{{reservation.SeatRow}} {{reservation.SeatColumn}}</p>
-    <p><strong>Play: </strong>{{reservation.PlayId}}</p>
+<div style="width:100%; float:left" >
+    <button (click)="onShowReservations()" class="btn btn-lg btn-primary btn-block" style="width:200px">{{message2}}</button>
+  <div *ngIf="show2">
+    <h2><strong>Reservations: </strong></h2>
+    <div *ngFor="let reservation of myReservations">
+      <p><strong>Reservation </strong></p>
+      <p><strong>Theater: </strong>{{reservation.TheaterId}}</p>
+      <p><strong>Stage: </strong>{{reservation.StageId}}</p>
+      <p><strong>Seats: </strong>Row: {{reservation.SeatRow}} Column: {{reservation.SeatColumn}}</p>
+      <p><strong>Play/Movie: </strong>{{reservation.PlayId}}</p>
+      <mat-divider></mat-divider>
+    </div>
   </div>
 </div>

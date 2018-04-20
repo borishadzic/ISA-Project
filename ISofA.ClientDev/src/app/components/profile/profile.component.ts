@@ -16,8 +16,10 @@ export class ProfileComponent implements OnInit {
   public searchResults: ProfileModel[];
   public myReservations: ReservationModel[];
   public show = false;
+  public show2 = false;
   public showResults = false;
   public message = 'Show Friends';
+  public message2 = 'Show Reservations';
   public friendRequests: ProfileModel[];
   constructor(private http: HttpClient) { }
 
@@ -42,6 +44,14 @@ export class ProfileComponent implements OnInit {
     this.show = !this.show;
   }
 
+  onShowReservations(){
+    if (this.message2 === 'Show Reservations'){
+      this.message2 = 'Hide Reservations';
+    } else {
+      this.message2 = 'Show Reservations';
+    }
+    this.show2= !this.show2;
+  }
   onSearch(){
     this.http.post<ProfileModel[]>(environment.hostUrl+'/api/Users/SearchAll', {
       "Name": (document.getElementById("name") as HTMLInputElement).value

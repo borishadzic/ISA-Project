@@ -14,14 +14,16 @@ import { ProjectionModel } from '../../../models/projection-model';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent implements OnInit {
-  public mySeats: ReservationModel[];
+  public mySeats: ReservationModel[]=[];
+  public existingSeats: ReservationModel[];
   public projection: ProjectionModel;
   public stage: StageModel;
   public rows: any;
   public columns: any;
-  public theaterId : number;
+  public theaterId : string;
   public stageId : number;
   public projectionId : any;
+  public tempSeat: ReservationModel;
 
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) { }
 
@@ -37,10 +39,13 @@ export class ReservationComponent implements OnInit {
               return
             }
             this.projection= proj;
+            this.theaterId = proj.TheaterId.toString();
+            this.getExistingSeats(proj.ProjectionId).subscribe(
+              (existing)=>this.existingSeats = existing
+            );
             this.getStage(proj.StageId).subscribe(
               (stage)=> {
                 this.stage = stage;
-                this.theaterId = stage.TheaterId;
                 this.rows = Array(stage.SeatRows).fill(0).map((x,i)=>i);
                 this.columns = Array(stage.SeatColumns).fill(0).map((x,i)=>i);
               }
@@ -56,19 +61,25 @@ export class ReservationComponent implements OnInit {
   }
 
   getStage(Id){
-    return this.http.get<StageModel>(environment.hostUrl+'/api/Theaters/{theaterId}/Stages/'+ Id)
+    return this.http.get<StageModel>(environment.hostUrl+'/api/Theaters/'+this.theaterId+'/Stages/'+ Id)
   }
   
+  getExistingSeats(id){
+    return this.http.get<ReservationModel[]>(environment.hostUrl+'/api/Theaters/projections/'+id+'/Seats' )
+  }
 
   onAddSeat(row:number, column:number){
-    let seat = this.mySeats.find( x=> x.SeatColumn == column.toString() && x.SeatRow == row.toString());
-    if ( seat != null){
+    var seat = this.mySeats.find( x=> x.SeatColumn == column.toString() && x.SeatRow == row.toString());
+    var existing = this.existingSeats.find(x=> x.SeatColumn == column.toString() && x.SeatRow == row.toString());
+    if ( seat == null && existing==null){
+      seat = new ReservationModel;
+      seat.SeatRow=row.toString();
+      seat.SeatColumn=column.toString();
+      console.log(seat);
+      this.mySeats.push(seat);
+    } else {
       var index = this.mySeats.indexOf(seat);
       this.mySeats.splice(index,1);
-    } else {
-      seat.SeatRow=row.toString();
-      seat.SeatColumn = column.toString();
-      this.mySeats.push(seat);
     }
   }
 

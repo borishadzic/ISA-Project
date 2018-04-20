@@ -10,7 +10,7 @@ namespace ISofA.SL.Services
 {
     public interface ISeatService
     {
-        IEnumerable<SeatDTO> GetProjectionSeats(int theaterId, int playId, int stageId, int projectionId);
+        IEnumerable<SeatDTO> GetProjectionSeats(int projectionId);
         IEnumerable<SpeedSeatListElementDTO> GetSpeedSeats(int theaterId);
 
         SeatDTO AddSpeedSeat(int theaterId, int playId, int stageId, int projectionId, Seat seat);
