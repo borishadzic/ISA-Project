@@ -19,7 +19,7 @@
       <div *ngFor="let column of columns">
         <ol *ngFor="let row of rows">
           <li class="seat"> 
-            <input [attr.disabled]="onCheckState(row,column) ? null : ''" type="checkbox" id="{{row}}{{column}}" (click)="onAddSeat(row,column)" />
+            <input [attr.disabled]="onCheckState(row,column) ? null : ''" type="checkbox" id="{{row}}{{column}}" (click)="onAddSeat(column,row)" />
             <label [class.nekaTvoja]="onCheckState(row, column)" for="{{row}}{{column}}">{{row}}:{{column}}</label>
           </li>
         </ol>
