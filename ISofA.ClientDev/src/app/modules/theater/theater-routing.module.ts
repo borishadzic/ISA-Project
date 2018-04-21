@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'cinemas/:id/repertoire', component: TheaterRepertoireComponent },
   { path: 'theaters/:id/discount-tickets', component: DiscountTicketListComponent },
   { path: 'cinemas/:id/discount-tickets', component: DiscountTicketListComponent },
-  { path: 'theaters/:id/register', component: AdminRegistrationComponent }
+  { path: 'theaters/:id/register', component: AdminRegistrationComponent },
+  { path: 'cinemas/:id/register', component: AdminRegistrationComponent }
 ];
 
 @NgModule({

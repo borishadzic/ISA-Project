@@ -25,7 +25,7 @@ namespace ISofA.DAL.Persistence.Pantries
 
         public void SaveOrUpdateBid(Bid bid)
         {
-            var foundBid = Context.Set<Bid>().FirstOrDefault(x => x.UserItemId == bid.UserItemId);
+            var foundBid = Context.Set<Bid>().FirstOrDefault(x => x.UserItemId == bid.UserItemId && x.BidderId == bid.BidderId);
 
             if (foundBid != null)
             {
