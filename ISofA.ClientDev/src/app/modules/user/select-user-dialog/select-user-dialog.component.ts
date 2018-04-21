@@ -65,4 +65,8 @@ export class SelectUserDialogComponent implements OnInit {
       .sort((a, b) => a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0);
   }
 
+  changeUserDetails(){
+    
+  }
+
 }

@@ -8,6 +8,8 @@ import { ChangePasswordModel } from '../../models/change-password-model';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 import { LoginComponent } from '../login/login.component';
+import { ChangeDetailsModel } from '../../models/change-details-model';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +19,8 @@ import { LoginComponent } from '../login/login.component';
 export class ProfileComponent implements OnInit {
 
   public hideModal = false;
+  public detailchange=false;
+  public changeProfile : ChangeDetailsModel;
   public form: FormGroup;
   public User: ProfileModel;
   public friends: ProfileModel[];
@@ -28,11 +32,13 @@ export class ProfileComponent implements OnInit {
   public message = 'Show Friends';
   public message2 = 'Show Reservations';
   public friendRequests: ProfileModel[];
+
   constructor(private http: HttpClient, private authService: AuthService, private fb: FormBuilder, private router: Router ) { 
     
   }
 
   ngOnInit() {
+    this.changeProfile=new ChangeDetailsModel;
     this.http.get<ProfileModel>(environment.hostUrl + '/api/Users/myProfile').subscribe((user) => {this.User = user; }, (error) => alert(error));
     this.onGetMyFrieds();
     this.onGetMyReservations();
@@ -56,6 +62,10 @@ export class ProfileComponent implements OnInit {
   onGetMyFrieds(){
     this.http.get<any>(environment.hostUrl + '/api/FriendRequests/GetMyFriends').subscribe((friends) => { this.friends = friends; } );
     
+  }
+
+  detailChange(){
+    this.detailchange = !this.detailchange;
   }
 
   onShowFriends() {
@@ -112,17 +122,33 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  changeUserDetails(user: ProfileModel){
+  changeUserDetails(){
+    
+    var name = (<HTMLInputElement>document.getElementById("changeName")).value; 
+    var surname = (<HTMLInputElement>document.getElementById("changeSurname")).value; 
+    var city = (<HTMLInputElement>document.getElementById("changeCity")).value; 
+    var phonenumber = (<HTMLInputElement>document.getElementById("changePhoneNumber")).value;
+    this.changeProfile.Name=name;
+    this.changeProfile.Surname=surname;
+    this.changeProfile.City=city;
+    this.changeProfile.PhoneNumber=phonenumber;
 
+    this.http.post(environment.hostUrl+'/api/Users/ChangeDetails',this.changeProfile).subscribe(
+      ()=> {
+        this.changeProfile= new ChangeDetailsModel;
+        window.location.reload();
+      }
+    )
   }
 
   changePassword(){
-    console.log(this.form.value);
+     
     this.authService.changePassword(this.form.value).subscribe(
       () => {
         this.hideModal=true;
         this.authService.logout();
         this.router.navigate(['/login']);
+        window.location.reload();
       },
       () => {
         alert('password incorect!');
@@ -153,5 +179,6 @@ export class ProfileComponent implements OnInit {
       }
     )
   }
+
 
 }

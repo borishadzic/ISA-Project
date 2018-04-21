@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ISofA.SL.DTO;
 using ISofA.DAL.Core;
+using ISofA.DAL.Core.Domain;
 
 namespace ISofA.SL.Implementations
 {
@@ -38,5 +39,18 @@ namespace ISofA.SL.Implementations
 			return UnitOfWork.Users.Find(x => !friendsId.Contains(x.Id) && x.Id != userId && (x.Name.ToLower().StartsWith(name.ToLower()) || x.Surname.ToLower().StartsWith(name.ToLower()) || x.Email.ToLower().StartsWith(name.ToLower()))).Select(x => new ISofAUserDTO(x));
 		}
 
-	}
+        public void ChangeUserDetails(string userId, string Name, string Surname, string City, string PhoneNumber)
+        {
+            ISofAUser user = UnitOfWork.Users.Get(userId);
+            if (!Name.Equals("") && Name!=null)
+                user.Name = Name;
+            if (!Surname.Equals("") && Surname!=null)
+                user.Surname = Surname;
+            if (!City.Equals("") && City != null)
+                user.City = City;
+            if (!PhoneNumber.Equals("") && PhoneNumber!=null)
+                user.PhoneNumber = PhoneNumber;
+            UnitOfWork.SaveChanges();
+        }
+    }
 }

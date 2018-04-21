@@ -7,17 +7,24 @@
                       <p><strong>Email: </strong> {{User?.Email}} </p>
                       <p><strong>City: </strong> {{User?.City}}</p>
                       <p><strong>PhoneNumber: </strong>{{User?.PhoneNumber}}</p>
-                      <button class="btn btn-danger"data-toggle="modal" data-target="#exampleModal1" >Change User Password</button>
-                      <button class="btn btn-danger"data-toggle="modal" data-target="#exampleModal2" >Change User Details</button>
+                      <button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1" >Change User Password</button>
+                      <button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal2" >Change User Details</button>
+          </div>
+          <div *ngIf="detailchange">
+            <input type="text" id="changeName" placeholder="Change Name"/>
+            <input type="text" id="changeSurname" placeholder="Change Surname"/>
+            <input type="text" id="changeCity" placeholder="Change City"/>
+            <input type="text" id="changePhoneNumber" placeholder="Change PhoneNumber"/>
+            <button (click)="changeUserDetails()" >Change</button>
           </div>
         </div>                 
     </div>
     <!-- CHANGE PASSWORD -->
-    <div class="modal fade" id="exampleModal1" tabindex="-1" role="form" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="!hideModal">
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="form" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="form">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel1">Change Password</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -53,7 +60,39 @@
       </div>
     
       <!-- CHANGE DETAILS -->
-      
+      <div class="modal fade" id="exampleModal2" tabindex="-1" role="form" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="form">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Change Your Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                
+              </div>
+              <div style="width: 100%; float:left">
+                  <div class="form-group"style="align-content: center">
+                    <input type="text" id="changeName" placeholder="Change Name"/>
+                  </div>
+                  <div class="form-group"style="align-content: center">
+                    <input type="text" id="changeSurname" placeholder="Change Surname"/>
+                  </div>
+                  <div class="form-group"style="align-content: center">
+                    <input type="text" id="changeCity" placeholder="Change City"/>
+                  </div>
+                  <div class="form-group"style="align-content: center">
+                    <input type="text" id="changePhoneNumber" placeholder="Change PhoneNumber"/>
+                  </div>
+                  <button (click)="changeUserDetails()" class="btn btn-primary" style="align-self: center;" >Change</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
 
     <button (click)="onShowFriends()" class="btn btn-lg btn-primary btn-block" style="width:200px">{{message}}</button>
